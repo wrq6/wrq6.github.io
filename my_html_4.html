@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>井字棋</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(80px, 1fr));
+      grid-gap: 6px;
+      margin-top: 20px;
+      width: max-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cell {
+      width: 80px;
+      height: 80px;
+      border: 1px solid #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .cell:hover {
+      background-color: #f2f2f2;
+    }
+
+    .cell[data-value="X"] {
+      color: #ff0000;
+    }
+
+    .cell[data-value="O"] {
+      color: #0000ff;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 14px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+
+    @media (max-width: 600px) {
+      .board {
+        grid-template-columns: repeat(3, minmax(50px, 1fr));
+        grid-gap: 4px;
+        width: 160px;
+      }
+
+      .cell {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=2045946501&auto=1&height=66"></iframe>
+
+  <h1>井字棋</h1>
+
+  <div>
+    <button onclick="startGame('human')">人人对战</button>
+    <button onclick="startGame('computer')">人机对战</button>
+  </div>
+
+  <div id="boardContainer" style="display: none;">
+    <div class="board">
+      <div class="cell" onclick="makeMove(0, 0)" data-value=""></div>
+      <div class="cell" onclick="makeMove(0, 1)" data-value=""></div>
+      <div class="cell" onclick="makeMove(0, 2)" data-value=""></div>
+      <div class="cell" onclick="makeMove(1, 0)" data-value=""></div>
+      <div class="cell" onclick="makeMove(1, 1)" data-value=""></div>
+      <div class="cell" onclick="makeMove(1, 2)" data-value=""></div>
+      <div class="cell" onclick="makeMove(2, 0)" data-value=""></div>
+      <div class="cell" onclick="makeMove(2, 1)" data-value=""></div>
+      <div class="cell" onclick="makeMove(2, 2)" data-value=""></div>
+    </div>
+    <button onclick="resetBoard()">重置</button>
+  </div>
+
+  <script>
+    var currentPlayer = "X";
+    var board = [
+      ["", "", ""],
+      ["", "", ""],
+      ["", "", ""]
+    ];
+    var gameMode = "";
+
+    function startGame(mode) {
+      gameMode = mode;
+      document.getElementById("boardContainer").style.display = "block";
+      resetBoard();
+    }
+
+    function makeMove(row, col) {
+      if (board[row][col] === "" && (gameMode === "human" || (gameMode === "computer" && currentPlayer === "X"))) {
+        board[row][col] = currentPlayer;
+        var cell = document.getElementsByClassName("cell")[row * 3 + col];
+        cell.setAttribute("data-value", currentPlayer);
+        cell.innerText = currentPlayer;
+
+        if (checkWin()) {
+          alert(currentPlayer + " 赢");
+          resetBoard();
+        } else if (checkDraw()) {
+          alert("死局");
+          resetBoard();
+        } else {
+          currentPlayer = currentPlayer === "X" ? "O" : "X";
+
+          if (gameMode === "computer" && currentPlayer === "O") {
+            makeComputerMove();
+          }
+        }
+      }
+    }
+
+ function makeComputerMove() {
+    var bestScore = -Infinity;
+    var bestMove;
+
+    for (var i = 0; i < 3; i++) {
+        for (var j = 0; j < 3; j++) {
+            if (board[i][j] === "") {
+                board[i][j] = "O";
+                var score = minimax(board, 0, false);
+                board[i][j] = "";
+
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestMove = [i, j];
+                }
+            }
+        }
+    }
+
+    var row = bestMove[0];
+    var col = bestMove[1];
+
+    board[row][col] = "O";
+    currentPlayer = "X"; // 更新当前玩家为 "X"
+
+    var cell = document.getElementsByClassName("cell")[row * 3 + col];
+    cell.setAttribute("data-value", "O");
+    cell.innerText = "O";
+
+    if (checkWin()) {
+        alert("电脑赢");
+        resetBoard();
+    } else if (checkDraw()) {
+        alert("死局");
+        resetBoard();
+    } else {
+        // 玩家可以继续下棋
+        enablePlayerMove();
+    }
+}
+
+function minimax(board, depth, isMaximizing) {
+    if (checkWin()) {
+        return isMaximizing ? -1 : 1;
+    }
+
+    if (checkDraw()) {
+        return 0;
+    }
+
+    if (isMaximizing) {
+        var bestScore = -Infinity;
+
+        for (var i = 0; i < 3; i++) {
+            for (var j = 0; j < 3; j++) {
+                if (board[i][j] === "") {
+                    board[i][j] = "O";
+                    var score = minimax(board, depth + 1, false);
+                    board[i][j] = "";
+                    bestScore = Math.max(score, bestScore);
+                }
+            }
+        }
+
+        return bestScore;
+    } else {
+        var bestScore = Infinity;
+
+        for (var i = 0; i < 3; i++) {
+            for (var j = 0; j < 3; j++) {
+                if (board[i][j] === "") {
+                    board[i][j] = "X";
+                    var score = minimax(board, depth + 1, true);
+                    board[i][j] = "";
+                    bestScore = Math.min(score, bestScore);
+                }
+            }
+        }
+
+        return bestScore;
+    }
+}
+
+
+    function checkWin() {
+      var winningConditions = [
+        [[0, 0], [0, 1], [0, 2]], // Check rows
+        [[1, 0], [1, 1], [1, 2]],
+        [[2, 0], [2, 1], [2, 2]],
+        [[0, 0], [1, 0], [2, 0]], // Check columns
+        [[0, 1], [1, 1], [2, 1]],
+        [[0, 2], [1, 2], [2, 2]],
+        [[0, 0], [1, 1], [2, 2]], // Check diagonals
+        [[0, 2], [1, 1], [2, 0]]
+      ];
+
+      for (var i = 0; i < winningConditions.length; i++) {
+        var condition = winningConditions[i];
+        if (
+          board[condition[0][0]][condition[0][1]] !== "" &&
+          board[condition[0][0]][condition[0][1]] ===
+            board[condition[1][0]][condition[1][1]] &&
+          board[condition[1][0]][condition[1][1]] ===
+            board[condition[2][0]][condition[2][1]]
+        ) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    function checkDraw() {
+      for (var i = 0; i < 3; i++) {
+        for (var j = 0; j < 3; j++) {
+          if (board[i][j] === "") {
+            return false;
+          }
+        }
+      }
+
+      return true;
+    }
+
+    function resetBoard() {
+      currentPlayer = "X";
+      board = [
+        ["", "", ""],
+        ["", "", ""],
+        ["", "", ""]
+      ];
+
+      var cells = document.getElementsByClassName("cell");
+      for (var k = 0; k < cells.length; k++) {
+        cells[k].setAttribute("data-value", "");
+        cells[k].innerText = "";
+      }
+    }
+  </script>
+</body>
+</html>

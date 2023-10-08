@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>线性代数笔记</title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .note-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+			border-bottom: 1px solid #ccc;
+        }
+		.note-container:not(:last-child) {
+            margin-bottom: 40px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            overflow: auto;
+        }
+
+        .math-symbol {
+            font-family: "Times New Roman", serif;
+            font-size: 18px;
+        }
+
+	  .division-line {
+    border-top: 1px solid black;
+    display: inline-block;
+    width: 1em;
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+ 	 }
+	 .determinant {
+            display: inline-block;
+            font-size: 24px;
+            line-height: 1.5em;
+            padding: 10px;
+            border-left: 1px solid #000;
+            border-right: 1px solid #000;
+        }
+
+        .matrix-row {
+            display: flex;
+            justify-content: center;
+        }
+
+        .matrix-row::after {
+            content: '';
+            display: table;
+            clear: both;
+        }
+
+        .matrix-cell {
+            width: 40px;
+            text-align: center;
+            margin-right: 15px;
+        }
+    </style>
+
+</head>
+<body>
+	<!-- 静态公共库 -->
+	<script src="https://cdn.bytedance.com/mathjax/2.7.7/MathJax.js?config=TeX-AMS_HTML-full"></script>
+	<script src="https://cdn.staticfile.org/polyfill/3.52.1/polyfill.min.js"></script>
+	<script src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js?config=TeX-AMS_HTML-full"></script>
+	<!-- ------------------------------------------------------------------------------- -->
+ <div class="note-container">
+        <h1>线性代数笔记</h1>
+<!-- -------------------------------start------------------------------------------------ -->
+
+     <h2 style="color: green;">行列式</h2>
+        <p style="color :#FA8072">
+			行列式<br>
+			二阶与三阶行列式
+		</p>
+	<div class="determinant">
+        <div class="matrix-row">
+            <div class="matrix-cell">a</div>
+            <div class="matrix-cell">b</div>
+            <div class="matrix-cell">c</div>
+        </div>
+        <div class="matrix-row">
+            <div class="matrix-cell">d</div>
+            <div class="matrix-cell">e</div>
+            <div class="matrix-cell">f</div>
+        </div>
+        <div class="matrix-row">
+            <div class="matrix-cell">g</div>
+            <div class="matrix-cell">h</div>
+            <div class="matrix-cell">i</div>
+        </div>
+	
+    </div>
+	<p style="color: #556B2F">上面这个就是个三阶行列式，别问为什么是三阶，因为有三行三列</p>
+<pre>
+<div>
+以下是一个二元线性方程组<span style="color: #556B2F">（为什么是二元，单纯就是两个未知数x和y）（为什么是线性，单纯就是未知数的次幂是一次，在xoy坐标轴画出来是一条直线）</span>
+	<script type="math/tex">
+\begin{cases}
+  a_{11}x_{1} + a_{12}x_{2} = b_{1}     ①\\
+  a_{21}x_{1} + a_{22}x_{2} = b_{2}     ②\\
+\end{cases}
+	</script>
+<p style="color: #556B2F">为啥<script type="math/tex">a_{11}</script>,<script type="math/tex">a_{12}</script>,<script type="math/tex">a_{21}</script>,<script type="math/tex">a_{22}</script>这样取下标啊，这人是不是有毛病，跟Oracle为jdk版本取名有的一比啊（行吧，知道你看不懂这个笑话）</p>
+<p style="color: #556B2F">仔细看，<script type="math/tex">a_{11}</script>是说第一行第一个未知数的系数所以就是11，<script type="math/tex">a_{22}</script>就是第二行的第二个未知数的系数，其他的类比</p>
+<p style="color: #556B2F">行了，我们随便选择一个未知数消去，当一个方程只有一个未知数时便很好求出未知数的值</p>
+<p style="color: #556B2F">这样吧，知道你很2，我们就消去<script type="math/tex">x_{2}</script>,第一步就是用<script type="math/tex">a_{22}</script>和<script type="math/tex">a_{12}</script>分别乘上①和②方程的两端</p>
+<script type="math/tex">
+\begin{cases}
+  a_{11}a_{22}x_{1} + a_{12}a_{22}x_{2} = a_{22}b_{1}     ①\\
+  a_{12}a_{21}x_{1} + a_{12}a_{22}x_{2} = a_{12}b_{2}     ②\\
+\end{cases}
+</script>
+<p style="color:#556B2F">这个时候，上下方程的<script type="math/tex">x_{2}</script>前的系数一样就可以上下相减,于是乎：</p> 
+<script type="math/tex">
+  a_{11}a_{22}x_{1} - a_{12}a_{21}x_{1}= a_{22}b_{1} - a_{12}b_{2}
+</script>
+<p style="color:#556B2F">当然，也可以是：</p> 
+<script type="math/tex">
+  (a_{11}a_{22} - a_{12}a_{21})x_{1}= a_{22}b_{1} - a_{12}b_{2}
+</script>
+<p style="color:#556B2F">同理得出<script type="math/tex">x_{2}</script>：</p> 
+<script type="math/tex">
+  (a_{11}a_{22} - a_{12}a_{21})x_{2}= a_{11}b_{2} - a_{21}b_{1}
+</script>
+<p style="color:#556B2F">这样一来，轻轻松松拿捏<script type="math/tex">x_{1}</script>的解：</p>
+ <script type="math/tex">
+  x_{1}=\frac{a_{22}b_{1} - a_{12}b_{2}}{a_{11}a_{22} - a_{12}a_{21}},x_{2}=\frac{a_{11}b_{2} - a_{21}b_{1}}{a_{11}a_{22} - a_{12}a_{21}}
+</script>
+<p>注意看方程的分子和分母都是四个数两两相乘再相减，其中分母是有四个未知数的<span style="color:red">系数</span>确定，把四个系数，按在方程组中的位置放置<span style="color:#556B2F">（反正这段话我是看晕了，我最头疼的就是这种，我说太阳好晒，你来给我讲太阳主要由氢组成，氢占质量的70%以上。 在太阳内部高温 (在1000万k以上)、高压 (约为2500亿大气压力)的条件下，氢原子会发生“热核反应”........）</span></p>
+<script type="math/tex">
+\begin{matrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{matrix}
+</script>
+<p style="color:#556B2F">上面就是个单纯的数表，伟大的数学家们在它的两旁加上竖线就成了行列式</p>
+	<div class="determinant" style="line-height:10px">
+        <div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">a_{11}</script></div>
+            <div class="matrix-cell"><script type="math/tex">a_{12}</script></div>
+        </div>
+        <div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">a_{21}</script></div>
+            <div class="matrix-cell"><script type="math/tex">a_{22}</script></div>
+        </div>
+    </div>
+<p>上面这个就是<span style="color:red">二阶行列式</span>,数<span style="color:red"><script type="math/tex">a_{ij}</script></span>就是行列式的<span style="color:red">元素</span>或<span style="color:red">元</span>，i是<span style="color:red">行标</span>，j是<span style="color:red">列标</span>，表示元素位于第i行第j列，位于第i行第j列的元素称为行列式的<span style="color:red">(i,j)元</span></p>
+<p>-----------------------------------------------------------------------------</p>
+<img src="img/f.jpg" width="170px" height="120px"/>
+<p>图中的实线是<span style="color:red">主对角线</span>,虚线是<span style="color:red">副对角线</span></p>
+<p>因此我们的分母也就是主对角线之积<span style="color:blue">减去</span>副对角线之积</p>
+<p>-----------------------------------------------------------------------------</p>
+<p style="color:#556B2F">你讲这么多分母，那分子呢？分子又臭又长，毫无规律，怎么来的啊？</p>
+<img src="img/g.jpg" width="200px" height="150px"/>
+<p style="color:#556B2F">我滴妈，分子怎么就等于这个行列式了啊，你是不是随便凑的啊？</p>
+<p>-----------------------------------------------------------------------------</p>
+<p>其实不是，细看下面</p>
+<img src="img/h.jpg" width="200px" height="250px"/>
+<p>把方程组的系数，以及常数项提出来，就会发现左边两列是行列式</p>
+<p>右边一列就是常数项(<span style="color:#556B2F">你这不是废话？</span>)</p>
+<p>-----------------------------------------------------------------------------</p>
+<p>别急，我们分别用常数列替换行列式的第一列与第二列</p>
+<img src="img/i.jpg" width="300px" height="150px"/><img src="img/g.jpg" width="200px" height="150px"/>
+<p>这不就是分子的行列式了？嘿嘿</p>
+<p>-----------------------------------------------------------------------------</p>
+<p>目前为止只需要知道，怎么计算行列式就可以了（对角线法则）</p>
+<img src="img/j.jpg" width="400px" height="300px"/>
+<p style="color:#556B2F">对角线法则也就是凑对角线，并且将<span style="color:red">主</span>对角线冠<span style="color:red">正</span>号，<span style="color:red">副</span>对角冠<span style="color:red">负</span>号以后<span style="color:red">相加</span></p>
+<p>-----------------------------------------------------------------------------</p>
+</div>
+</pre>
+ </div>
+<!-- ----------------------------------end--------------------------------------------- -->
+
+<!-- -------------------------------start------------------------------------------------ -->
+
+ <div class="note-container">
+     <h2 style="color: green;">全排列和对换</h2>
+        <pre><code>
+           <p style="color:#FF6347">把n个不同的元素排成一列，称为这n个元素的全排列</p>
+		   <script type="math/tex">P_{3}</script> = 1,2,3
+			
+即有    
+1  2  3	<span style="color:#F08080">自然数从小到大为标准次序</span>
+2  3  1	<span style="color:#F08080">而2 3 1 这种1在3后面即为一个逆序，且1在2后面又是一个逆序(23是按顺序来的),即231存在2个逆序</span>
+3  1  2	<span style="color:#F08080">3存在0个逆序，1存在1个逆序，2存在1个逆序，即312存在0+1+1=2个逆序</span>
+1  3  2	<span style="color:#F08080">1存在0个逆序，3存在0个逆序，2存在1个逆序，即132存在0+0+1=1个逆序</span>
+2  1  3	<span style="color:#F08080">2存在0个逆序，1存在1个逆序，3存在0个逆序，即213存在0+1+0=1个逆序</span>
+3  2  1	<span style="color:#F08080">3存在0个逆序，2存在1个逆序，1存在2个逆序，即321存在0+1+2=3个逆序</span>
+	<p style="color:#FF6347">逆序数<span style="color:red">奇数</span>的排列叫做<span style="color:red">奇排列</span</p>
+	<p style="color:#FF6347">逆序数为<span style="color:red">偶数</span>的排列叫做<span style="color:red">偶排列</span</p>
+	<p style="font-size:25px;color:green">对换</p>
+	<p style="color:red">定理一：一个排列中的任意两个元素对换，排列改变奇偶性</p>
+	<p>推论：</br>
+	奇排列对换成标准排列的对换次数为奇数</br>
+	偶排列对换成标准排列的对换次数为偶数
+	</p>
+		</code></pre>
+ </div>
+ <!-- ----------------------------------end--------------------------------------------- -->
+<!-- -------------------------------start------------------------------------------------ -->
+
+ <div class="note-container">
+     <h2 style="color: green;">n阶行列式</h2>
+ <pre><code>
+	<p>还记得这个行列式吧</p>
+	<div class="determinant" style="line-height:10px">
+        <div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">a_{11}</script></div>
+            <div class="matrix-cell"><script type="math/tex">a_{12}</script></div>
+			<div class="matrix-cell"><script type="math/tex">a_{13}</script></div>
+        </div>
+        <div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">a_{21}</script></div>
+            <div class="matrix-cell"><script type="math/tex">a_{22}</script></div>
+			<div class="matrix-cell"><script type="math/tex">a_{23}</script></div>
+        </div>
+		<div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">a_{31}</script></div>
+            <div class="matrix-cell"><script type="math/tex">a_{32}</script></div>
+			<div class="matrix-cell"><script type="math/tex">a_{33}</script></div>
+        </div>
+    </div>
+	<p>行列式的值很容易得：<script type="math/tex">a_{11}a_{22}a_{33}+a_{12}a_{23}a_{31}+a_{13}a_{21}a_{32}-a_{11}a_{23}a_{32}-a_{12}a_{21}a_{33}-a_{13}a_{22}a_{31}</script></br>
+毕竟就是对角线法则嘛，可是为什么副对角线的值要冠负号呢？细看，主与副下标的第一个数，都是123开头的行标，后面是列标（没有规律）</br>
+主：123，231，312 副：132，213，321</br>
+也就是123的逆序数为0（偶排列），231逆序数为2（偶排列），312的逆序数为2（偶排列）</br>
+也就是132的逆序数为1（奇排列），213逆序数为1（奇排列），321的逆序数为3（奇排列）</br>
+	</p>
+D=	<div class="determinant" style="line-height:5px">
+        <div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">a_{11}</script></div>
+            <div class="matrix-cell"><script type="math/tex">a_{12}</script></div>
+			<div class="matrix-cell"><script type="math/tex">┈</script></div>
+			<div class="matrix-cell"><script type="math/tex">a_{1n}</script></div>
+        </div>
+        <div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">a_{21}</script></div>
+            <div class="matrix-cell"><script type="math/tex">a_{22}</script></div>
+			<div class="matrix-cell"><script type="math/tex">┈</script></div>
+			<div class="matrix-cell"><script type="math/tex">a_{2n}</script></div>
+        </div>
+		<div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">﹕</script></div>
+            <div class="matrix-cell"><script type="math/tex">﹕</script></div>
+			<div class="matrix-cell"><script type="math/tex">﹕</script></div>
+			<div class="matrix-cell"><script type="math/tex">﹕</script></div>
+        </div>
+			<div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">a_{n1}</script></div>
+            <div class="matrix-cell"><script type="math/tex">a_{n2}</script></div>
+			<div class="matrix-cell"><script type="math/tex">┈</script></div>
+			<div class="matrix-cell"><script type="math/tex">a_{n3}</script></div>
+        </div>
+    </div>
+<p>以上是n阶行列式，以下是上（下）三角形行列式</p>
+<div class="determinant" style="line-height:5px;">
+        <div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">a_{11}</script></div>
+            <div class="matrix-cell"><script type="math/tex">a_{12}</script></div>
+			<div class="matrix-cell"><script type="math/tex">a_{13}</script></div>
+        </div>
+        <div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">0</script></div>
+            <div class="matrix-cell"><script type="math/tex">a_{22}</script></div>
+			<div class="matrix-cell"><script type="math/tex">a_{23}</script></div>
+        </div>
+			<div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">0</script></div>
+            <div class="matrix-cell"><script type="math/tex">0</script></div>
+			<div class="matrix-cell"><script type="math/tex">a_{33}</script></div>
+        </div>
+    </div>
+	</br>
+<div class="determinant" style="line-height:5px;">
+        <div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">a_{11}</script></div>
+            <div class="matrix-cell"><script type="math/tex">0</script></div>
+			<div class="matrix-cell"><script type="math/tex">0</script></div>
+        </div>
+        <div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">a_{21}</script></div>
+            <div class="matrix-cell"><script type="math/tex">a_{22}</script></div>
+			<div class="matrix-cell"><script type="math/tex">0</script></div>
+        </div>
+			<div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">a_{31}</script></div>
+            <div class="matrix-cell"><script type="math/tex">a_{32}</script></div>
+			<div class="matrix-cell"><script type="math/tex">a_{33}</script></div>
+        </div>
+    </div>
+	<p>主对角线以下（上）的元素都为0的行列式叫做上（下）<span style="color:red">三角形行列式</span></p>
+	<p>特别的，当除主对角线外的元素都为0的行列式叫做<span style="color:red">对角行列式</span></p>
+<div class="determinant" style="line-height:5px;">
+        <div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">a_{11}</script></div>
+            <div class="matrix-cell"><script type="math/tex">0</script></div>
+			<div class="matrix-cell"><script type="math/tex">0</script></div>
+        </div>
+        <div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">0</script></div>
+            <div class="matrix-cell"><script type="math/tex">a_{22}</script></div>
+			<div class="matrix-cell"><script type="math/tex">0</script></div>
+        </div>
+			<div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">0</script></div>
+            <div class="matrix-cell"><script type="math/tex">0</script></div>
+			<div class="matrix-cell"><script type="math/tex">a_{33}</script></div>
+        </div>
+    </div>
+		<p style="font-size:25px;color:red">三角形行列式的值就是主对角线的乘积</p>
+		<p style="font-size:15px;color:red">如果一个n阶行列式中等于0的元素比<script type="math/tex">n_{2}-n</script>还多，则此行列式值为0</p>
+	</code></pre>
+
+
+<!-- ----------------------------------end--------------------------------------------- -->
+<!-- -------------------------------start------------------------------------------------ -->
+
+
+<!-- ----------------------------------end--------------------------------------------- -->
+<!-- ------------------------------------------------------------------------------- -->
+
+
+
+    <div class="note-container">
+        <h1>笔记 2</h1>
+        <p>这是第二个笔记的内容。</p>
+    </div>
+
+    <div class="note-container">
+        <h1>笔记 3</h1>
+        <p>这是第三个笔记的内容。</p>
+    </div>
+</body>
+</html>

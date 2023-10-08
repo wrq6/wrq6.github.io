@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>你想学习吗？</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 48px;
+      margin-top: 200px;
+    }
+
+    .btn {
+      position: absolute;
+      font-size: 24px;
+      padding: 10px 20px;
+    }
+
+    #btn1 {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #btn2 {
+      top: 0;
+      left: 0;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="title">你想学习吗？</h1>
+  <button id="btn1" class="btn">想！</button>
+  <button id="btn2" class="btn">不想</button>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const btn1 = document.getElementById('btn1');
+
+      btn1.addEventListener('click', function() {
+        alert('你真的，哭了，好孩子');
+      });
+
+      const btn2 = document.getElementById('btn2');
+
+      btn2.addEventListener('mouseover', function() {
+        btn2.classList.add('hidden');
+        const randomX = Math.random() * (window.innerWidth - btn2.offsetWidth);
+        const randomY = Math.random() * (window.innerHeight - btn2.offsetHeight);
+        btn2.style.top = randomY + 'px';
+        btn2.style.left = randomX + 'px';
+        btn2.classList.remove('hidden');
+      });
+    });
+  </script>
+</body>
+</html>

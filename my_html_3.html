@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>SQL数据库操作</title>
+  <style>
+    body {
+      font-family: Consolas, monospace;
+      background-color: #f5f5f5;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: #666;
+      font-size: 20px;
+      margin-top: 40px;
+      margin-bottom: 10px;
+    }
+
+    pre {
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    code {
+      display: block;
+      color: #000;
+    }
+
+    .hljs {
+      display: block;
+      overflow-x: auto;
+      padding: 0.5em;
+      color: #abb2bf;
+      background: #282c34;
+    }
+
+    .hljs-keyword,
+    .hljs-selector-tag,
+    .hljs-section,
+    .hljs-title,
+    .hljs-built_in,
+    .hljs-literal,
+    .hljs-template-tag,
+    .hljs-template-variable,
+    .hljs-type,
+    .hljs-addition {
+      color: #e06c75;
+    }
+
+    .hljs-string,
+    .hljs-quote,
+    .hljs-meta,
+    .hljs-tag .hljs-value .hljs-string,
+    .hljs-regexp,
+    .hljs-symbol,
+    .hljs-bullet,
+    .hljs-link,
+    .hljs-deletion {
+      color: #98c379;
+    }
+
+    .hljs-number,
+    .hljs-selector-class,
+    .hljs-selector-attr,
+    .hljs-selector-pseudo,
+    .hljs-template-tag,
+    .hljs-template-variable,
+    .hljs-variable,
+    .hljs-type .hljs-tag,
+    .hljs-typename {
+      color: #d19a66;
+    }
+
+    .hljs-comment,
+    .hljs-quote {
+      color: #5c6370;
+      font-style: italic;
+    }
+
+    .hljs-doctag,
+    .hljs-meta .hljs-keyword,
+    .hljs-meta .hljs-string {
+      color: #c678dd;
+    }
+
+    .hljs-attribute {
+      color: #56b6c2;
+    }
+
+    .hljs-keyword {
+      font-weight: bold;
+    }
+
+    .hljs-selector-tag,
+    .hljs-title,
+    .hljs-section,
+    .hljs-selector-id {
+      font-weight: 700;
+    }
+    .audio-wrapper {
+      display: flex;
+      justify-content: center;
+  </style>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</head>
+<body>
+<div class="location">
+      <span class="location-icon animate-slide-in-up">
+      </span>
+  <span class="location-text animate-slide-in-down"> </span>
+</div>
+<div class="location">
+      <span class="location-icon animate-slide-in-up">
+      </span>
+  <span class="location-text animate-slide-in-down"> </span>
+</div>
+<div class="audio-wrapper">
+  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=2013678511&auto=1&height=66"></iframe>
+</div>
+<h1>SQL数据库操作</h1>
+
+<h2>创建表格</h2>
+<pre><code class="hljs">create table if not exists user_info (
+    _id integer primary key autoincrement not null,
+    name varchar not null,
+    age integer not null,
+    height float not null
+  );</code></pre>
+
+<h2>删除表格</h2>
+<pre><code class="hljs">drop table if exists user_info;</code></pre>
+
+<h2>添加数据</h2>
+<pre><code class="hljs">insert into user_info (name, age, height, phone)
+  values ('张三', 20, 183, '13367238474');</code></pre>
+
+<h2>删除数据</h2>
+<pre><code class="hljs">delete from user_info where name = '张三';</code></pre>
+
+<h2>修改数据</h2>
+<pre><code class="hljs">update user_info set name = '王五' where name = '张三';</code></pre>
+
+<h2>查询数据</h2>
+<pre><code class="hljs">select name from user_info where name = '李四';</code></pre>
+
+<pre><code class="hljs">select * from user_info order by age asc;</code></pre>
+
+<h2>Android中创建数据库</h2>
+<h3>SQLiteHelper类</h3>
+<pre><code class="hljs">public class userDBhelp extends SQLiteOpenHelper {
+  private static final String DB_NAME = "user.db";
+  private static final Integer DB_VERSION = 1;
+
+  private userDBhelp(Context context) {
+    super(context, DB_NAME, null, DB_VERSION);
+  }
+
+  @Override
+  public void onCreate(SQLiteDatabase sqLiteDatabase) {
+    String sql = "create table if not exists user_info ( " +
+      "_id integer primary key autoincrement not null, " +
+      "name varchar not null, " +
+      "age integer not null, " +
+      "height float not null " +
+      ");";
+    sqLiteDatabase.execSQL(sql);
+  }
+
+  @Override
+  public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    // Upgrade database version here
+  }
+}</code></pre>
+
+<h3>数据库操作方法</h3>
+<pre><code class="hljs">public class userDBhelp {
+  private static userDBhelp mHelper = null;
+  private SQLiteDatabase mRDB = null;
+  private SQLiteDatabase WRDB = null;
+
+  public static userDBhelp getInstance(Context context) {
+    if (mHelper == null) {
+      mHelper = new userDBhelp(context);
+    }
+    return mHelper;
+  }
+
+  public SQLiteDatabase openReadLink() {
+    if (mRDB == null || !mRDB.isOpen()) {
+      mRDB = mHelper.getReadableDatabase();
+    }
+    return mRDB;
+  }
+
+  public SQLiteDatabase openWriteLink() {
+    if (WRDB == null || !WRDB.isOpen()) {
+      WRDB = mHelper.getWritableDatabase();
+    }
+    return WRDB;
+  }
+
+  public void closeLink() {
+    if (mRDB != null && mRDB.isOpen()) {
+      mRDB.close();
+      mRDB = null;
+    }
+    if (WRDB != null && WRDB.isOpen()) {
+      WRDB.close();
+      WRDB = null;
+    }
+  }
+}</code></pre>
+</body>
+</html>

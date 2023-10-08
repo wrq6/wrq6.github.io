@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>许愿树</title>
+	<style>
+		body {
+			background-color: #888;
+			font-family: Arial, sans-serif;
+			text-align: center;
+			color: #fff;
+			margin: 0;
+			padding: 20px;
+			overflow: hidden;
+		}
+
+		.falling-star {
+			position: absolute;
+			top: -50px;
+			left: 0;
+			width: 30px;
+			height: 30px;
+			background-color: #fff;
+			border-radius: 50%;
+			opacity: 0;
+			pointer-events: none;
+			animation: fallingStarAnimation linear infinite;
+		}
+
+		@keyframes fallingStarAnimation {
+			0% {
+				transform: translate(0, -100px);
+				opacity: 1;
+			}
+			100% {
+				transform: translate(calc(100vw - 30px), 100vh);
+				opacity: 0;
+			}
+		}
+
+		.snowflake {
+			position: absolute;
+			top: -10px;
+			z-index: 1;
+			user-select: none;
+			pointer-events: none;
+			font-size: 20px;
+			color: #fff;
+			animation-name: fall;
+			animation-duration: 10s;
+			animation-timing-function: linear;
+			animation-iteration-count: infinite;
+		}
+
+		@keyframes fall {
+			0% {
+				transform: translateY(-100vh);
+			}
+			100% {
+				transform: translateY(100vh);
+			}
+		}
+		.wish-input,
+		.wish-btn {
+			position: relative;
+			z-index: 1;
+		}
+
+		.snowflake {
+			pointer-events: none; /* 雪花元素不响应鼠标事件 */
+		}
+		.wish-input {
+			width: 300px; /* 调整输入框的宽度 */
+			height: auto;
+			min-height: 40px; /* 设置最小高度 */
+			resize: vertical; /* 允许垂直调整大小 */
+		}
+		.wish-btn {
+			animation: pulse 1s infinite;
+		}
+
+		@keyframes pulse {
+			0% {
+				transform: scale(1);
+			}
+			50% {
+				transform: scale(1.1);
+			}
+			100% {
+				transform: scale(1);
+			}
+		}
+		/* 省略其他样式 */
+
+		.wish-container {
+			height: 300px;
+			overflow-y: scroll; /* 添加滚动条 */
+			margin-top: 20px;
+		}
+
+		.hide {
+			display: none; /* 隐藏框 */
+		}
+	</style>
+</head>
+<body>
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1807381939&auto=1&height=66"></iframe>
+<h1>许愿树</h1>
+<input type="text" class="wish-input" id="wishInput" placeholder="输入你的愿望">
+<button class="wish-btn" onclick="makeWish()">许愿</button>
+
+<div class="wish-container">
+	<ul class="wish-list" id="wishList">
+		<!-- 这里将会动态插入愿望 -->
+	</ul>
+</div>
+
+<button onclick="toggleWishContainer()">隐藏/显示愿望框</button>
+
+<script src="https://unpkg.com/cos-js-sdk-v5"></script>
+<script>
+	var cos = new COS({
+		SecretId: 'AKIDpaq5mO1Y9lS7m1Ol6NbkjU2OmCvdCAA2',
+		SecretKey: 'raBlLrIWcWPNOQUp9LYdggYEmBP3azFK',
+	});
+
+	// 将愿望列表保存到云存储服务
+	function saveWishesToCloud() {
+		var wishList = document.getElementById("wishList").innerHTML;
+		var params = {
+			Bucket: 'xiaohuji-1319605017',
+			Region: 'ap-nanjing',
+			Key: 'wish-list.html',
+			Body: wishList,
+		};
+
+		cos.putObject(params, function (err, data) {
+			if (err) {
+				console.error(err);
+			} else {
+				console.log(data);
+			}
+		});
+	}
+
+	// 从云存储服务加载愿望列表
+	function loadWishesFromCloud() {
+		var params = {
+			Bucket: 'xiaohuji-1319605017',
+			Region: 'ap-nanjing',
+			Key: 'wish-list.html',
+		};
+
+		cos.getObject(params, function (err, data) {
+			if (err) {
+				console.error(err);
+			} else {
+				var wishListContainer = document.getElementById("wishList");
+				wishListContainer.innerHTML = data.Body || '';
+			}
+		});
+	}
+
+	// 在许愿方法中调用保存到云存储的函数
+	function makeWish() {
+		var wishInput = document.getElementById("wishInput");
+		var wish = wishInput.value.trim();
+
+		if (wish !== "") {
+			// 创建新的愿望项
+			var wishItem = document.createElement("li");
+			wishItem.textContent = wish;
+
+			// 将愿望项添加到愿望清单中
+			var wishList = document.getElementById("wishList");
+			wishList.appendChild(wishItem);
+
+			// 清空输入框
+			wishInput.value = "";
+
+			// 保存愿望列表到本地存储
+			saveWishesToCloud();
+
+			// 添加流星效果
+			createFallingStar();
+		}
+	}
+
+	function createSnowflakes() {
+		var numberOfSnowflakes = 50; // 雪花数量
+		var container = document.body; // 雪花容器
+
+		for (var i = 0; i < numberOfSnowflakes; i++) {
+			var snowflake = document.createElement("div");
+			snowflake.classList.add("snowflake");
+			snowflake.innerHTML = "❄";
+			snowflake.style.left = Math.random() * 100 + "vw";
+			snowflake.style.animationDelay = Math.random() * 10 + "s";
+			container.appendChild(snowflake);
+		}
+	}
+
+	// 创建流星
+	function createFallingStar() {
+		// 省略代码
+	}
+
+	// 获取随机位置
+	function getRandomPosition() {
+		// 省略代码
+	}
+
+	// 动画效果
+	function animateFallingStar(star) {
+		// 省略代码
+	}
+
+	// 切换隐藏/显示愿望框
+	function toggleWishContainer() {
+		var wishContainer = document.querySelector(".wish-container");
+		wishContainer.classList.toggle("hide");
+	}
+
+	document.addEventListener("DOMContentLoaded", function (event) {
+		loadWishesFromCloud();
+		createSnowflakes();
+
+		var wishBtn = document.querySelector(".wish-btn");
+		wishBtn.addEventListener("click", makeWish);
+	});
+</script>
+</body>
+</html>

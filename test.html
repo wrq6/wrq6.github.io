@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>emotional</title>
+	<meta charset="utf-8">
+    <!-- 引入CSS文件 -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- 引入JavaScript文件 -->
+    <script src="js/main.js"></script>
+	<style>
+		.iframe-container {
+  			display: flex;
+ 		 	justify-content: center;
+ 			align-items: center;
+ 			margin-top: 60px; /* 调整与导航栏的距离 */
+		}
+		nav {
+    		position: fixed;
+    		top: 0;
+    		left: 0;
+    		width: 100%;
+    		padding: 16px;
+    		z-index: 999; /* 确保导航栏在其他元素之上 */
+			background-color: transparent;
+    		border: none;
+    		outline: none;
+    		border-radius: 20px; /* 添加圆角边框 */
+			text-align: center;/* <nav> 元素的 text-align 属性设置为 center，这样导航栏内容将会水平居中对齐 */
+  			}
+
+		.animate-slide-in-down {
+							color: #890680;
+								}
+		 /* 设置导航链接的字体样式 */
+		  nav a {
+		    font-family: Arial, sans-serif;
+		    font-size: 10px;
+		    color: #333;
+		    text-decoration: none;
+		  }
+
+		  /* 设置悬停时链接的字体样式 */
+		  nav a:hover {
+		    color: #890680;
+		    text-decoration: underline;
+		  }
+
+		  @media (max-width: 600px) 
+		  {
+ 				/* 当视口宽度小于 600px 时，应用以下 CSS 样式 */
+ 				nav {
+ 				  width: 100%;
+ 				  margin: 0;
+ 				}
+			
+		}
+
+		}
+      .music-button {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        background-color: transparent;
+        color: #f44336;
+        border: 2px solid #f44336;
+        border-radius: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .music-info {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px;
+        height: 300px;
+        background-color: white;
+        border: 2px solid #f44336;
+        padding: 20px;
+        display: none;
+      }
+      .close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #f44336;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+			progress {
+			  width: 100%;
+			  height: 10px;
+			  margin-top: 10px;
+			}
+
+			progress::-webkit-progress-bar {
+			  background-color: #ccc;
+			  border-radius: 5px;
+			}
+
+			progress::-webkit-progress-value {
+			  background-color: #f44336;
+			  border-radius: 5px;
+			}
+       .audio-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0);
+            width: 300px;
+            height: 250px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+            padding: 20px;
+            display: none;
+            z-index: 9999;
+        }
+
+        .audio-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .audio-container audio {
+            width: 100%;
+        }
+
+        .audio-container span {
+            font-size: 18px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+.close-button{
+ position: absolute;
+    top: 100px; /* 改为合适的值 */
+    right: 5px;
+   	border-radius: 10px;
+    border: none;
+    color: #000;
+    cursor: pointer;
+	font-size:20px;
+}
+        .minimize-button {
+            right: 40px;
+        }
+
+        .close-button:focus,
+        .minimize-button:focus {
+            outline: none;
+        }
+	</style>
+
+</head>
+<body>
+<nav>
+<!-- 导航内容 -->
+<a href="linear_algebra.html" class="animate-slide-in-down" target="_blank">线性代数</a>
+<a href="linear_algebra.html" class="animate-slide-in-down" target="_blank">离散数学</a>
+<a href="grad_student.html" class="animate-slide-in-down" target="_blank">研校</a>
+<a href="linear_algebra.html" class="animate-slide-in-down" target="_blank">文学</a>
+<a href="linear_algebra.html" class="animate-slide-in-down" target="_blank">英语</a>
+<a href="linear_algebra.html" class="animate-slide-in-down" target="_blank">数据结构</a>
+<a href="linear_algebra.html" class="animate-slide-in-down" target="_blank">android</a>		
+</nav>
+<div class="iframe-container">
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86"
+src="//music.163.com/outchain/player?type=2&id=38576323&auto=1&height=66"></iframe>
+<button class="music-button" onclick="playMusic('music/d.mp3', '起风了')">
+起风了
+</button>
+<button class="music-button" onclick="playMusic('music/c.mp3', '兰亭序')">
+兰亭序
+</button>
+</div>
+
+<div class="audio-popup" id="popup">
+<button class="minimize-button" onclick="minimizeMusicInfo()"></button>
+<button class="close-button" onclick="hideMusicInfo()">关闭</button>
+<button class="huanyuan-button" onclick="huanyuanMusicInfo()"></button>
+</div>
+
+<script>
+function playMusic(musicPath, musicName) {
+    var audioContainer = document.createElement("div");
+    audioContainer.classList.add("audio-container");
+
+    var closeButton = document.createElement("button");
+    closeButton.classList.add("close-button");
+    closeButton.textContent = "关闭";
+    closeButton.onclick = hideMusicInfo;
+
+ var huanyuanButton = document.createElement("button");
+    huanyuanButton.classList.add("huanyuan-button");
+    huanyuanButton.textContent = "还原";
+    huanyuanButton.onclick = huanyuanMusicInfo;
+
+    var minimizeButton = document.createElement("button");
+    minimizeButton.classList.add("minimize-button");
+    minimizeButton.textContent = "缩小";
+    minimizeButton.onclick = minimizeMusicInfo;
+
+    var audioElement = document.createElement("audio");
+    audioElement.controls = true;
+
+    var sourceElement = document.createElement("source");
+    sourceElement.src = musicPath;
+    sourceElement.type = "audio/mpeg";
+
+    var musicNameElement = document.createElement("span");
+    musicNameElement.textContent = musicName;
+
+    audioElement.appendChild(sourceElement);
+
+    audioContainer.appendChild(closeButton); // 添加关闭按钮
+    audioContainer.appendChild(minimizeButton); // 添加缩小按钮
+	audioContainer.appendChild(huanyuanButton); // 添加还原按钮
+    audioContainer.appendChild(audioElement);
+    // audioContainer.appendChild(musicNameElement);
+
+    var popup = document.getElementById("popup");
+    popup.innerHTML = "";
+    popup.appendChild(audioContainer);
+    popup.style.display = "block";
+
+    // 添加 'show' 类以显示悬浮窗口
+    setTimeout(function () {
+        popup.classList.add("show");
+    }, 10);
+}
+
+
+function showMusicInfo() {
+    var musicInfo = document.getElementById("popup");
+    musicInfo.style.display = "block";
+    var closeButton = document.querySelector(".close-btn");
+    closeButton.style.display = "block";
+}
+
+function hideMusicInfo() {
+    var audioPlayer = document.querySelector(".audio-container audio");
+    audioPlayer.pause();
+    audioPlayer.currentTime = 0;
+    var musicInfo = document.getElementById("popup");
+    musicInfo.style.display = "none";
+    var closeButton = document.querySelector(".close-btn");
+    closeButton.style.display = "none";
+}
+
+function minimizeMusicInfo() {
+    var musicInfo = document.getElementById("popup");
+    musicInfo.style.height = "150px";
+	musicInfo.style.width = "150px";
+}
+
+function huanyuanMusicInfo() {
+    var musicInfo = document.getElementById("popup");
+    musicInfo.style.height = "250px";
+	musicInfo.style.width = "300px";
+}
+// 拖动事件-------------------------------------
+var popup = document.getElementById("popup");
+var isDragging = false;
+var offsetX = 0;
+var offsetY = 0;
+var transformX = 0;
+var transformY = 0;
+
+popup.addEventListener("mousedown", startDragging);
+popup.addEventListener("touchstart", startDragging);
+
+document.addEventListener("mousemove", dragElement);
+document.addEventListener("touchmove", dragElement);
+
+document.addEventListener("mouseup", stopDragging);
+document.addEventListener("touchend", stopDragging);
+
+
+
+
+function dragElement(e) {
+            if (isDragging) {
+                e.preventDefault();
+                var clientX, clientY;
+
+                if (e.type === "mousemove") {
+                    clientX = e.clientX;
+                    clientY = e.clientY;
+                } else if (e.type === "touchmove") {
+                    var touch = e.touches[0];
+                    clientX = touch.clientX;
+                    clientY = touch.clientY;
+                }
+
+                var left = clientX - offsetX;
+                var top = clientY - offsetY;
+
+                if (left <= 0) {
+                    left = 0;
+                } else if (left + popup.offsetWidth >= document.documentElement.clientWidth) {
+                    left = document.documentElement.clientWidth - popup.offsetWidth;
+                }
+
+                if (top <= 0) {
+                    top = 0;
+                } else if (top + popup.offsetHeight >= document.documentElement.clientHeight) {
+                    top = document.documentElement.clientHeight - popup.offsetHeight;
+                }
+
+                popup.style.left = clientX + "px";
+                popup.style.top = top + "px";
+            }
+        }
+
+
+
+function startDragging(e) {
+    e.preventDefault();
+    var bottomBlankHeight = 200; // 悬浮窗底部空白处的高度
+
+    var eventX, eventY;
+    if (e.type === "mousedown") {
+        eventX = e.clientX;
+        eventY = e.clientY;
+    } else if (e.type === "touchstart") {
+        var touch = e.touches[0];
+        eventX = touch.clientX;
+        eventY = touch.clientY;
+    }
+
+    var target = e.target;
+    var rect = target.getBoundingClientRect();
+
+    if (eventY > rect.bottom - bottomBlankHeight) {
+        if (target.classList.contains("close-button")) {
+            isDragging = false;
+        } else {
+            isDragging = true;
+            offsetX = eventX - popup.getBoundingClientRect().left;
+            offsetY = eventY - popup.getBoundingClientRect().top;
+        }
+    }
+}
+
+function stopDragging() {
+    isDragging = false;
+}
+
+function movePopup(e) {
+    if (!isDragging) {
+        return;
+    }
+    e.preventDefault();
+
+    var eventX, eventY;
+    if (e.type === "mousemove") {
+        eventX = e.clientX;
+        eventY = e.clientY;
+    } else if (e.type === "touchmove") {
+        var touch = e.touches[0];
+        eventX = touch.clientX;
+        eventY = touch.clientY;
+    }
+
+    var left = eventX - offsetX;
+    var top = eventY - offsetY;
+   		popup.style.left = clientX + "px";
+        popup.style.top = top + "px";
+}
+
+document.addEventListener("mousemove", movePopup);
+document.addEventListener("touchmove", movePopup);
+
+document.addEventListener("mouseup", stopDragging);
+document.addEventListener("touchend", stopDragging);
+
+
+
+
+</script>
+</body>
+
+
+	<!-- -------------------------------------------------------------------------------------- -->
+    <!-- 网页主体内容 -->
+    <div class="container">
+        <div class="left-column">
+            <!-- 空出一侧 -->
+			
+        </div>
+
+        <div class="main-content">
+            <!-- 日常分享区域 -->
+
+<!-- --------------------------------------------------------------------------------------			 -->
+            <div id="daily-sharing">
+                <!-- 分享标题 -->
+                <h2>角落</h2>
+                <!-- 文本内容 -->
+                <p id="text-content"></p>
+                <!-- 图片内容 -->
+                <div id="image-container"></div>
+            </div>
+<!-- -----------------------------------start---------------------------------------------------			 -->
+			<div id="daily-sharing">
+				<div class="audio-container">
+  					<audio controls>
+    					<source src="music/b.mp3" type="audio/mpeg">
+    						不露声色 -Jam
+  					</audio>
+				</div>
+  					<!-- 分享标题 -->
+  					<h3>青木下黄土旧叶，落日里长路新人。</h3>
+  					<!-- 图片内容 -->
+  					<div id="image-container">
+  					  <img src="img/d.jpg" alt="从图书馆回来的路上">
+  					</div>
+
+  					<div class="horizontal-line">
+  					  <!-- 时间容器 -->
+  					  <div id="time-container">
+  					    <p>2023年9月28日</p>
+  					  </div>
+  					</div>
+			</div>
+<!-- ------------------------------------start--------------------------------------------------			 -->
+       <div id="daily-sharing">
+				<div class="audio-container">
+  					<audio controls>
+    					<source src="music/a.mp3" type="audio/mpeg">
+    						一程山路 -毛不易
+  					</audio>
+				</div>
+                <!-- 分享标题 -->
+                <h2>天下第一洞</h2>
+                <!-- 文本内容 -->
+                <p id="text-content">
+					当初无意间拍到的，后来每每一看<br>
+					真的绝了
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/e.jpg" alt="天下第一洞">
+  				</div>
+				<div class="horizontal-line">
+  					  <!-- 时间容器 -->
+  					<div id="time-container">
+  					   <p>2023年9月29日</p>
+  					</div>
+  				</div>
+            </div>
+<!-- --------------------------------------------------------------------------------------			 -->	
+<!-- -----------------------------------start---------------------------------------------------			 -->
+       <div id="daily-sharing">
+				<div class="audio-container">
+  					<audio controls>
+    					<source src="music/a.mp3" type="audio/mpeg">
+    						一程山路 -毛不易
+  					</audio>
+				</div>
+                <!-- 分享标题 -->
+                <h2>邓奇龙来天津</h2>
+                <!-- 文本内容 -->
+                <p id="text-content">
+					天津的鼓楼<br>
+					一楼二楼免费，二楼展厅收费<br>
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/k.jpg" alt="天津小鼓楼">
+  				</div>
+				<!-- 文本内容 -->
+                <p id="text-content">
+					我拍的照片</br>
+					唉，几个好朋友之前都说我<br>
+					拍照不好看，我也不知道咋拍<br>
+					说我以后找女朋友不会拍照会被嫌弃<br>
+					害，我这呆瓜
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/l.jpg" alt="呆瓜拍的照">
+  				</div>
+				<!-- 文本内容 -->
+                <p id="text-content">
+					滨江道的炸串，味道还可以<br>
+					不过你敢信，一串22<br>
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/m.jpg" alt="鱿鱼刺客">
+  				</div>
+				<!-- 文本内容 -->
+                <p id="text-content">
+					天津劝业场</br>
+					我第一次见到还是高三那年在宿舍<br>
+					当时吃泡面，打开一个b站视频<br>
+					《航拍中国》 -天津<br>
+					里面有一幕我记得很深刻，就是劝业场 <br>
+					当时还以为是劝别人就业的<br>
+					后来才知道是一个金融的那个啥
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/n.jpg" alt="天津劝业场">
+  				</div>
+				<!-- 文本内容 -->
+                <p id="text-content">
+					天津的天津之眼<br>
+					夜晚海河真的很美<br>
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/o.jpg" alt="天津之眼">
+  				</div>
+				<div class="horizontal-line">
+  					  <!-- 时间容器 -->
+  					<div id="time-container">
+						 <p>2023年10月5日</p>
+  					</div>
+  				</div>
+
+            </div>
+<!-- ------------------------------------start--------------------------------------------------			 -->
+       <div id="daily-sharing">
+				<div class="audio-container">
+  					<audio controls>
+    					<source src="music/a.mp3" type="audio/mpeg">
+    						一程山路 -毛不易
+  					</audio>
+				</div>
+                <!-- 分享标题 -->
+                <h2>北京</h2>
+                <!-- 文本内容 -->
+                <p id="text-content">
+					早晨6点的学校确实别有一番风味哈<br>
+					（困死）
+				</p>
+                <!-- 图片内容 -->
+			<div id="video">
+			<video src="video/b.mp4"  controls autoplay="false">
+			</video>
+			</div>
+			<!-- 文本内容 -->
+                <p id="text-content">
+					学校门口的天桥上感受被第一缕阳光，<br>
+					洒下的煦煦生辉。<br>
+					（继续困死）
+				</p>
+                <!-- 图片内容 -->
+			<div id="video">
+			<video src="video/a.mp4"  controls autoplay="false">
+			</video>
+			</div>
+				<!-- 文本内容 -->
+                <p id="text-content">
+					于条条框框中抬头<br>
+					似落日，更是日出<br>
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/q.jpg" alt="工大旁天桥">
+  				</div>
+				<!-- 文本内容 -->
+                <p id="text-content">
+					这张我觉得自己拍的挺不错的<br>
+					（我拍风景的水平是不是不错哈）<br>
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/p.jpg" alt="大学城地铁站">
+  				</div>
+				<!-- 文本内容 -->
+                <p id="text-content">
+					高铁出发咯<br>
+					天津南到北京南，半个小时<br>
+					挺快，挺酷✌
+				</p>
+                <!-- 图片内容 -->
+			<div id="video">
+			<video src="video/c.mp4"  controls autoplay="false">
+			</video>
+			</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					到了，第一件事！<br>
+					吃早饭嘿嘿<br>
+					来学校一个月了 <br>
+					早上起不来，一个月没吃过早饭🥲<br>
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/r.jpg" alt="早饭">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					这是豆汁<br>
+					我第一口就忍不住想吐 <br>
+					我真的，我室友哐哐喝<br>
+					北京爷爷说这家很地道，好喝<br>
+					我：(▔﹏▔)
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/s.jpg" alt="我不喜欢的豆汁">
+  				</div>
+			<!-- 文本内容 -->
+                <p id="text-content">
+					炸酱面有点贵，18<br>
+					我开始怀念我的热干面了<br>
+					北京大爷说你一看就是外地的：咱北京大早上的一般不吃面<br>
+					啊这，我从小真的早餐不是吃面就是粥<br>
+					
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/t.jpg" alt="昂贵滴炸酱面">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					来北京当然是天安门走起
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/u.jpg" alt="城墙">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					跟我小时候在课本上看到的一模一样嘿
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/v.jpg" alt="天安门">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					一模一样嘿
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/w.jpg" alt="图腾">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					从天安门正门进去就是博物院（不是馆哦）
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/x.jpg" alt="故宫博物院">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					午门
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/y.jpg" alt="午门">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					行，遥远的路程走完了<br> 
+					该去国家博物馆了
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/z.jpg" alt="国家博物馆1">
+  				</div>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/aa.jpg" alt="国家博物馆2">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					听说这个是全瓷！
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/ab.jpg" alt="全瓷花花">
+  				</div>
+				
+				<!-- 文本内容 -->
+                <p id="text-content">
+					这手，这可是全陶瓷啊，绝啦😮
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/ac.jpg" alt="全瓷花花">
+  				</div>
+				
+				<!-- 文本内容 -->
+                <p id="text-content">
+					这让我想起来自己某些时刻
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/ad.jpg" alt="全瓷花花">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					哈哈哈哈
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/ae.jpg" alt="全瓷花花">
+  				</div>
+				<!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/af.jpg" alt="全瓷花花">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					真的好美啊🤔
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/ag.jpg" alt="仙舞">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					这个也好好看
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/ah.jpg" alt="巧夺天工">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					这个单纯觉得有喜感哈哈
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/ai.jpg" alt="喜感">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					 这个也是，我怎么喜欢这些奇奇怪怪的😎
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/aj.jpg" alt="6">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					这个是毛爷爷用过的耶
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/ak.jpg" alt="毛爷爷用过的话筒">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					这个挺威严的
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/al.jpg" alt="中央人民政府">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					我觉得都一样，不过这里面可都是<br>
+					无价之宝
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/am.jpg" alt="陶瓷">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					这几个字普普通通<br>
+					但是看起来（感觉）很霸气
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/an.jpg" alt="青花瓷">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					梳子还不错
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/ao.jpg" alt="梳子">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					骨头
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/ap.jpg" alt="骨头">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					像抖音爆火的五条悟
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/aq.jpg" alt="五条悟">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					莫名其妙的喜欢这种剑🗡
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/ar.jpg" alt="青铜剑">
+  				</div>
+
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					可是我看不懂啊啊 啊啊啊 啊 
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/as.jpg" alt="卦">
+  				</div>
+
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					哈哈哈哈哈，那么多的展品<br>
+					我第一眼就看到这个了，我也不知道为什么想笑哈哈哈🫢🫣
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/at.jpg" alt="哈哈">
+  				</div>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/au.jpg" alt="哈哈哈">
+  				</div>
+
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					这个确实像出土的🫤
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/av.jpg" alt="真的">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					清华大学<br>
+					第一眼真的厚重的历史感<br>
+					我小时候好像没说过要上清华大学🤔
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/aw.jpg" alt="清华大学校门">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					清华的池塘竟然是鸳鸯<br>
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/ax.jpg" alt="清华鸳鸯">
+  				</div>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/ay.jpg" alt="清华鸳鸯">
+  				</div>
+
+               	<div id="image-container">
+  					  <img src="img/az.jpg" alt="清华鸳鸯">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					清华的建筑墙外真的绝<br>
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/aaa.jpg" alt="建筑">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					清华的宿舍也确实挺有年代感<br>
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/aab.jpg" alt="宿舍">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					这个宿舍还比较新<br>
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/aac.jpg" alt="宿舍">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					这个不知道是啥<br>
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/aad.jpg" alt="不知道">
+  				</div>
+
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					大草坪<br>
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/aae.jpg" alt="大草坪">
+  				</div>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/aaf.jpg" alt="大草坪">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					好看<br>
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/aak.jpg" alt="未知">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					清华学堂<br>
+
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/aal.jpg" alt="清华学堂">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					清华园，这个看起来很有味道<br>
+
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/aag.jpg" alt="清华园">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					学校食堂吃饭需要本校卡<br>
+					而且食堂真的超便宜，整猪脚，羊排<br>
+					真的就是几块钱<br>
+					出了这个校门我就不是清华大学的学生咯
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/aah.jpg" alt="清华大学校门">
+  				</div>
+
+				<!-- 文本内容 -->
+                <p id="text-content">
+					以前我看见这种建筑真的不感冒<br>
+					现在见到会有一种神圣的感觉嘿
+				</p>
+                <!-- 图片内容 -->
+               	<div id="image-container">
+  					  <img src="img/aai.jpg" alt="天主">
+  				</div>
+
+
+				<div class="horizontal-line">
+  					  <!-- 时间容器 -->
+  					<div id="time-container">
+  					   <p>2023年10月6日</p>
+  					</div>
+  				</div>
+            </div>
+<!-- --------------------------------------------------------------------------------------			 -->	
+
+<!-- --------------------------------------------------------------------------------------			 -->	
+
+            <!-- 留言板 -->
+            <div id="message-board">
+                <!-- 留言标题 -->
+                <h2>留言板</h2>
+                <!-- 留言内容展示区域 -->
+                <div id="message-list">
+                    <!-- 留言列表 -->
+                </div>
+                <!-- 留言表单 -->
+                <form id="message-form">
+                    <textarea id="message-input" placeholder="停停！！别留言，还没有写处理事件"></textarea>
+                    <button type="submit">发布</button>
+                </form>
+            </div>
+        </div>
+<!-- --------------------------------------------------------------------------------------			 -->
+        <div class="right-column">
+            <!-- 空出一侧 -->
+			<!-- "回到顶部"按钮 -->
+			<button id="back-to-top-btn" class="transparent-button" onclick="scrollToTop()">回到顶部</button>
+        </div>
+<!-- --------------------------------------------------------------------------------------			 -->
+    </div>
+<!-- --------------------------------------------------------------------------------------			 -->
+    <!-- JavaScript中的滚动事件监听 -->
+    <script>
+        window.addEventListener('scroll', function() {
+            // 检查页面是否需要滚动
+            checkScroll();
+        });
+    </script>
+</body>
+</html>
