@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html>
 <head>
     <title>线性代数笔记</title>
     <meta charset="utf-8">
@@ -12,9 +11,9 @@
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-			border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
         }
-		.note-container:not(:last-child) {
+        .note-container:not(:last-child) {
             margin-bottom: 40px;
         }
         h1 {
@@ -42,14 +41,14 @@
             font-size: 18px;
         }
 
-	  .division-line {
-    border-top: 1px solid black;
-    display: inline-block;
-    width: 1em;
-    margin-top: 0.2em;
-    margin-bottom: 0.2em;
- 	 }
-	 .determinant {
+        .division-line {
+            border-top: 1px solid black;
+            display: inline-block;
+            width: 1em;
+            margin-top: 0.2em;
+            margin-bottom: 0.2em;
+        }
+        .determinant {
             display: inline-block;
             font-size: 24px;
             line-height: 1.5em;
@@ -77,22 +76,21 @@
     </style>
 
 </head>
-<body>
-	<!-- 静态公共库 -->
-	<script src="https://cdn.bytedance.com/mathjax/2.7.7/MathJax.js?config=TeX-AMS_HTML-full"></script>
-	<script src="https://cdn.staticfile.org/polyfill/3.52.1/polyfill.min.js"></script>
-	<script src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js?config=TeX-AMS_HTML-full"></script>
-	<!-- ------------------------------------------------------------------------------- -->
- <div class="note-container">
-        <h1>线性代数笔记</h1>
-<!-- -------------------------------start------------------------------------------------ -->
+<!-- 静态公共库 -->
+<script src="https://cdn.bytedance.com/mathjax/2.7.7/MathJax.js?config=TeX-AMS_HTML-full"></script>
+<script src="https://cdn.staticfile.org/polyfill/3.52.1/polyfill.min.js"></script>
+<script src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js?config=TeX-AMS_HTML-full"></script>
+<!-- ------------------------------------------------------------------------------- -->
+<div class="note-container">
+    <h1>线性代数笔记</h1>
+    <!-- -------------------------------start------------------------------------------------ -->
 
-     <h2 style="color: green;">行列式</h2>
-        <p style="color :#FA8072">
-			行列式<br>
-			二阶与三阶行列式
-		</p>
-	<div class="determinant">
+    <h2 style="color: green;">行列式</h2>
+    <p style="color :#FA8072">
+        行列式<br>
+        二阶与三阶行列式
+    </p>
+    <div class="determinant">
         <div class="matrix-row">
             <div class="matrix-cell">a</div>
             <div class="matrix-cell">b</div>
@@ -108,10 +106,10 @@
             <div class="matrix-cell">h</div>
             <div class="matrix-cell">i</div>
         </div>
-	
+
     </div>
-	<p style="color: #556B2F">上面这个就是个三阶行列式，别问为什么是三阶，因为有三行三列</p>
-<pre>
+    <p style="color: #556B2F">上面这个就是个三阶行列式，别问为什么是三阶，因为有三行三列</p>
+    <pre>
 <div>
 以下是一个二元线性方程组<span style="color: #556B2F">（为什么是二元，单纯就是两个未知数x和y）（为什么是线性，单纯就是未知数的次幂是一次，在xoy坐标轴画出来是一条直线）</span>
 	<script type="math/tex">
@@ -186,14 +184,14 @@
 <p>-----------------------------------------------------------------------------</p>
 </div>
 </pre>
- </div>
+</div>
 <!-- ----------------------------------end--------------------------------------------- -->
 
 <!-- -------------------------------start------------------------------------------------ -->
 
- <div class="note-container">
-     <h2 style="color: green;">全排列和对换</h2>
-        <pre><code>
+<div class="note-container">
+    <h2 style="color: green;">全排列和对换</h2>
+    <pre><code>
            <p style="color:#FF6347">把n个不同的元素排成一列，称为这n个元素的全排列</p>
 		   <script type="math/tex">P_{3}</script> = 1,2,3
 			
@@ -204,22 +202,22 @@
 1  3  2	<span style="color:#F08080">1存在0个逆序，3存在0个逆序，2存在1个逆序，即132存在0+0+1=1个逆序</span>
 2  1  3	<span style="color:#F08080">2存在0个逆序，1存在1个逆序，3存在0个逆序，即213存在0+1+0=1个逆序</span>
 3  2  1	<span style="color:#F08080">3存在0个逆序，2存在1个逆序，1存在2个逆序，即321存在0+1+2=3个逆序</span>
-	<p style="color:#FF6347">逆序数<span style="color:red">奇数</span>的排列叫做<span style="color:red">奇排列</span</p>
-	<p style="color:#FF6347">逆序数为<span style="color:red">偶数</span>的排列叫做<span style="color:red">偶排列</span</p>
+	<p style="color:#FF6347">逆序数<span style="color:red">奇数</span>的排列叫做<span style="color:red">奇排列</span></p>
+	<p style="color:#FF6347">逆序数为<span style="color:red">偶数</span>的排列叫做<span style="color:red">偶排列</span></p>
 	<p style="font-size:25px;color:green">对换</p>
 	<p style="color:red">定理一：一个排列中的任意两个元素对换，排列改变奇偶性</p>
 	<p>推论：</br>
-	奇排列对换成标准排列的对换次数为奇数</br>
-	偶排列对换成标准排列的对换次数为偶数
+        奇排列对换成标准排列的对换次数为奇数</br>
+        偶排列对换成标准排列的对换次数为偶数
 	</p>
 		</code></pre>
- </div>
- <!-- ----------------------------------end--------------------------------------------- -->
+</div>
+<!-- ----------------------------------end--------------------------------------------- -->
 <!-- -------------------------------start------------------------------------------------ -->
 
- <div class="note-container">
-     <h2 style="color: green;">n阶行列式</h2>
- <pre><code>
+<div class="note-container">
+    <h2 style="color: green;">n阶行列式</h2>
+    <pre><code>
 	<p>还记得这个行列式吧</p>
 	<div class="determinant" style="line-height:10px">
         <div class="matrix-row">
@@ -239,10 +237,10 @@
         </div>
     </div>
 	<p>行列式的值很容易得：<script type="math/tex">a_{11}a_{22}a_{33}+a_{12}a_{23}a_{31}+a_{13}a_{21}a_{32}-a_{11}a_{23}a_{32}-a_{12}a_{21}a_{33}-a_{13}a_{22}a_{31}</script></br>
-毕竟就是对角线法则嘛，可是为什么副对角线的值要冠负号呢？细看，主与副下标的第一个数，都是123开头的行标，后面是列标（没有规律）</br>
-主：123，231，312 副：132，213，321</br>
-也就是123的逆序数为0（偶排列），231逆序数为2（偶排列），312的逆序数为2（偶排列）</br>
-也就是132的逆序数为1（奇排列），213逆序数为1（奇排列），321的逆序数为3（奇排列）</br>
+        毕竟就是对角线法则嘛，可是为什么副对角线的值要冠负号呢？细看，主与副下标的第一个数，都是123开头的行标，后面是列标（没有规律）</br>
+        主：123，231，312 副：132，213，321</br>
+        也就是123的逆序数为0（偶排列），231逆序数为2（偶排列），312的逆序数为2（偶排列）</br>
+        也就是132的逆序数为1（奇排列），213逆序数为1（奇排列），321的逆序数为3（奇排列）</br>
 	</p>
 D=	<div class="determinant" style="line-height:5px">
         <div class="matrix-row">
@@ -288,8 +286,8 @@ D=	<div class="determinant" style="line-height:5px">
 			<div class="matrix-cell"><script type="math/tex">a_{33}</script></div>
         </div>
     </div>
-	</br>
-<div class="determinant" style="line-height:5px;">
+        </br>
+        <div class="determinant" style="line-height:5px;">
         <div class="matrix-row">
             <div class="matrix-cell"><script type="math/tex">a_{11}</script></div>
             <div class="matrix-cell"><script type="math/tex">0</script></div>
@@ -330,23 +328,35 @@ D=	<div class="determinant" style="line-height:5px">
 	</code></pre>
 
 
-<!-- ----------------------------------end--------------------------------------------- -->
-<!-- -------------------------------start------------------------------------------------ -->
+    <!-- ----------------------------------end--------------------------------------------- -->
+    <!-- -------------------------------start------------------------------------------------ -->
 
 
-<!-- ----------------------------------end--------------------------------------------- -->
-<!-- ------------------------------------------------------------------------------- -->
+    <!-- ----------------------------------end--------------------------------------------- -->
+    <!-- ------------------------------------------------------------------------------- -->
 
 
 
     <div class="note-container">
-        <h1>笔记 2</h1>
-        <p>这是第二个笔记的内容。</p>
+        <h2 style="color: green;">行列式的性质</h2>
+        <pre>
+            <code>
+                <p style="font-size: 18px"><span style="color: #3a8ee6">性质一：</span>行列式与它的转置行列式相等</p>
+                <p style="font-size: 14px"><script type="math/tex">D^{T}</script>称为行列式D的<span style="color: #dd6161">转置行列式</span>(行变列，列变行)</p>
+<img src="img/aao.jpg" width="600px" height="200px">
+
+                 <p><span style="color: #3a8ee6">性质二：</span>对换行列式的两行(列)，行列式变号</p>
+                 <p><span style="color: #3a8ee6">性质三：</span>行列式的某一行(列)中所有的元素都乘以同一个倍数k，等于用数k乘以此行列式</p>
+                 <p><span style="color: #3a8ee6">性质四：</span>行列式中如果有两行(列)元素成比例，则此行列式为零</p>
+                 <p><span style="color: #3a8ee6">性质五：</span>若行列式的某一行(列)的元素都是两数之和</p>
+                 <p><span style="color: #3a8ee6">性质五：</span>把行列式的某一行(列)的个元素乘以同一个倍数，然后加到另一行(列)对应的元素上去，行列式不变</p>
+            </code>
+        </pre>
     </div>
 
     <div class="note-container">
         <h1>笔记 3</h1>
         <p>这是第三个笔记的内容。</p>
     </div>
-</body>
+</div>
 </html>
