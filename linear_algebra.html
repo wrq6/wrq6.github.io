@@ -341,15 +341,177 @@ D=	<div class="determinant" style="line-height:5px">
         <h2 style="color: green;">行列式的性质</h2>
         <pre>
             <code>
-                <p style="font-size: 18px"><span style="color: #3a8ee6">性质一：</span>行列式与它的转置行列式相等</p>
+                <p style="font-size: 18px"><span style="color:red">性质一：</span>行列式与它的转置行列式相等</p>
                 <p style="font-size: 14px"><script type="math/tex">D^{T}</script>称为行列式D的<span style="color: #dd6161">转置行列式</span>(行变列，列变行)</p>
 <img src="img/aao.jpg" width="600px" height="200px">
-
-                 <p><span style="color: #3a8ee6">性质二：</span>对换行列式的两行(列)，行列式变号</p>
-                 <p><span style="color: #3a8ee6">性质三：</span>行列式的某一行(列)中所有的元素都乘以同一个倍数k，等于用数k乘以此行列式</p>
-                 <p><span style="color: #3a8ee6">性质四：</span>行列式中如果有两行(列)元素成比例，则此行列式为零</p>
-                 <p><span style="color: #3a8ee6">性质五：</span>若行列式的某一行(列)的元素都是两数之和</p>
-                 <p><span style="color: #3a8ee6">性质五：</span>把行列式的某一行(列)的个元素乘以同一个倍数，然后加到另一行(列)对应的元素上去，行列式不变</p>
+                 <p  style="font-size: 18px"><span style="color:red">性质二：</span>对换行列式的两行(列)，行列式变号</p>
+                <p style="font-size: 14px">交换第i行(列)和第j行(列),记作<span style="color: #3a8ee6"><script type="math/tex">r_{i} ↔ r_{j}</script></span>(列：<script type="math/tex">C_{i} ↔ C_{j}</script> )</p>
+                <div class="determinant" style="line-height:5px;">
+                 <div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">1</script></div>
+            <div class="matrix-cell"><script type="math/tex">7</script></div>
+			<div class="matrix-cell"><script type="math/tex">5</script></div>
+                </div>
+                    <div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">6</script></div>
+            <div class="matrix-cell"><script type="math/tex">6</script></div>
+			<div class="matrix-cell"><script type="math/tex">2</script></div>
+                    </div>
+			<div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">3</script></div>
+            <div class="matrix-cell"><script type="math/tex">5</script></div>
+			<div class="matrix-cell"><script type="math/tex">8</script></div>
+                    </div>
+                </div>=-196                    <div class="determinant" style="line-height:5px;">
+                 <div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">1</script></div>
+            <div class="matrix-cell"><script type="math/tex">7</script></div>
+			<div class="matrix-cell"><script type="math/tex">5</script></div>
+                </div>
+                    <div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">3</script></div>
+            <div class="matrix-cell"><script type="math/tex">5</script></div>
+			<div class="matrix-cell"><script type="math/tex">8</script></div>
+                    </div>
+			<div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">6</script></div>
+            <div class="matrix-cell"><script type="math/tex">6</script></div>
+			<div class="matrix-cell"><script type="math/tex">2</script></div>
+                    </div>
+                </div>=196
+                <p style="font-size: 14px;color: #3a8ee6">推导出：如果行列式有两行(列)完全相同，则此行列式为零(行列式本质是个值)</p>
+                <p style="font-size: 14px">证：两行相同，交换两行行列式什么都不变，得到D=-D，移项得2D=0，得出D=0，证毕。</p>
+                 <p style="font-size: 18px"><span style="color:red">性质三：</span>行列式的某一行(列)中所有的元素都乘以同一个倍数k，等于用数k乘以此行列式</p>
+                <p style="font-size: 14px;color: #3a8ee6">第i行(列)乘以k，记作<script type="math/tex">r_{i} \times k (C_{i}  k)</script></p>
+                k<div class="determinant" style="line-height:5px;">
+                 <div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">1</script></div>
+            <div class="matrix-cell"><script type="math/tex">7</script></div>
+			<div class="matrix-cell"><script type="math/tex">5</script></div>
+                </div>
+                    <div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">3</script></div>
+            <div class="matrix-cell"><script type="math/tex">5</script></div>
+			<div class="matrix-cell"><script type="math/tex">8</script></div>
+                    </div>
+			<div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">6</script></div>
+            <div class="matrix-cell"><script type="math/tex">6</script></div>
+			<div class="matrix-cell"><script type="math/tex">2</script></div>
+                    </div>
+            </div>=<div class="determinant" style="line-height:5px;">
+                 <div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">1</script></div>
+            <div class="matrix-cell"><script type="math/tex">7</script></div>
+			<div class="matrix-cell"><script type="math/tex">5</script></div>
+                </div>
+                    <div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">3k</script></div>
+            <div class="matrix-cell"><script type="math/tex">5k</script></div>
+			<div class="matrix-cell"><script type="math/tex">8k</script></div>
+                    </div>
+			<div class="matrix-row">
+            <div class="matrix-cell"><script type="math/tex">6</script></div>
+            <div class="matrix-cell"><script type="math/tex">6</script></div>
+			<div class="matrix-cell"><script type="math/tex">2</script></div>
+                    </div>
+            </div>
+                 <p style="font-size: 18px"><span style="color:red">性质四：</span>行列式中如果有两行(列)元素成比例，则此行列式为零</p>
+                <p style="font-size: 14px;color: rgba(100,24,206,0.92)">我觉得与性质2相铺相成</p>
+                 <p style="font-size: 18px"><span style="color: red">性质五：</span>若行列式的某一行(列)的元素都是两数之和</p>
+                D =<div class="determinant" style="line-height:5px;"><!--==========================================================================================-->
+                 <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{11}</script></div>
+                     <div class="matrix-cell" style="width: 80px">...</div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{1j}+b_{1j}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{1n}</script></div>
+                </div>
+                 <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{21}</script></div>
+                     <div class="matrix-cell" style="width: 80px">...</div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{2j}+b_{2j}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{2n}</script></div>
+                </div>
+                 <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                </div>
+                 <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{n1}</script></div>
+                     <div class="matrix-cell" style="width: 80px">...</div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{nj}+b_{nj}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{nn}</script></div>
+                </div>
+            </div>
+                =<div class="determinant" style="line-height:5px;"><!--==========================================================================================-->
+                 <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{11}</script></div>
+                     <div class="matrix-cell" style="width: 80px">...</div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{1j}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{1n}</script></div>
+                </div>
+                 <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{21}</script></div>
+                     <div class="matrix-cell" style="width: 80px">...</div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{2j}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{2n}</script></div>
+                </div>
+                 <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                </div>
+                 <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{n1}</script></div>
+                     <div class="matrix-cell" style="width: 80px">...</div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{nj}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{nn}</script></div>
+                </div>
+            </div>+<div class="determinant" style="line-height:5px;"><!--==========================================================================================-->
+                 <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{11}</script></div>
+                     <div class="matrix-cell" style="width: 80px">...</div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">b_{1j}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{1n}</script></div>
+                </div>
+                 <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{21}</script></div>
+                     <div class="matrix-cell" style="width: 80px">...</div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">b_{2j}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{2n}</script></div>
+                </div>
+                 <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                </div>
+                 <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{n1}</script></div>
+                     <div class="matrix-cell" style="width: 80px">...</div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">b_{nj}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">...</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{nn}</script></div>
+                </div>
+            </div><!--==========================================================================================-->
+                <p style="font-size: 14px;color: #3a8ee6">拆成两个其他项不变，单拆其一列(行)</p>
+                <p style="font-size: 18px"><span style="color:red">性质六：</span>把行列式的某一行(列)的个元素乘以同一个倍数，然后加到另一行(列)对应的元素上去，行列式不变</p>
+                <p style="font-size: 14px;color: #3a8ee6">以数k乘j行(列)加到第i行(列)上，记<script type="math/tex">r_{i} + kr_{j}(C_{i}+kC_{j})</script> </p>
+                <p style="color: red">敲黑板！后面的加到前面去，儿子在后面，爸爸在前面（我是乱说的，我不会举例🫤）</p>
             </code>
         </pre>
     </div>
