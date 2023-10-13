@@ -104,7 +104,7 @@
 	</style>
 </head>
 <body>
-<!--	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1807381939&auto=1&height=66"></iframe>-->
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1807381939&auto=1&height=66"></iframe>
 <h1>许愿树</h1>
 <input type="text" class="wish-input" id="wishInput" placeholder="输入你的愿望">
 <button class="wish-btn" onclick="makeWish()">许愿</button>
@@ -127,39 +127,82 @@
 	// 将愿望列表保存到云存储服务
 	function saveWishesToCloud() {
 		var wishList = document.getElementById("wishList").innerHTML;
-		var params = {
-			Bucket: 'xiaohuji-1319605017',
-			Region: 'ap-nanjing',
-			Key: 'wish-list.html',
-			Body: wishList,
-		};
+		var token = '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'; // 替换为你的GitHub Personal Access Token
+		var repoOwner = 'wrq6'; // 替换为你的仓库所属用户或组织的用户名
+		var repoName = 'wrq6.github.io'; // 替换为你的仓库名称
+			var issueNumber = '1'; // 替换为你的issue编号（可选，用于更新已存在的issue）
 
-		cos.putObject(params, function (err, data) {
-			if (err) {
-				console.error(err);
-			} else {
-				console.log(data);
-			}
-		});
+		var issueTitle = 'Wish List'; // issue的标题
+		var issueBody = '<ul>' + wishList + '</ul>'; // issue的内容，包含愿望列表
+
+		// 如果issue编号存在，则使用GitHub API更新已存在的issue
+		if (issueNumber) {
+			var updateIssueUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/issues/${issueNumber}`;
+			fetch(updateIssueUrl, {
+				method: 'PATCH',
+				headers: {
+					'Authorization': 'token ' + token,
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					title: issueTitle,
+					body: issueBody
+				})
+			})
+					.then(response => {
+						console.log(response);
+					})
+					.catch(error => {
+						console.error(error);
+					});
+		} else {
+			// 否则，使用GitHub API创建新的issue
+			var createIssueUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/issues`;
+			fetch(createIssueUrl, {
+				method: 'POST',
+				headers: {
+					'Authorization': 'token ' + token,
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					title: issueTitle,
+					body: issueBody
+				})
+			})
+					.then(response => response.json())
+					.then(data => {
+						console.log(data);
+						// 将新创建的issue编号保存起来，以便之后更新使用
+						var newIssueNumber = data.number;
+						// 将issue编号存储到本地（可使用localStorage等方式）
+					})
+					.catch(error => {
+						console.error(error);
+					});
+		}
 	}
+
 
 	// 从云存储服务加载愿望列表
 	function loadWishesFromCloud() {
-		var params = {
-			Bucket: 'xiaohuji-1319605017',
-			Region: 'ap-nanjing',
-			Key: 'wish-list.html',
-		};
+		var token = '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'; // 替换为你的GitHub Personal Access Token
+		var repoOwner = 'wrq6'; // 替换为你的仓库所属用户或组织的用户名
+		var repoName = 'wrq6.github.io'; // 替换为你的仓库名称
+		var issueNumber = '1'; // 替换为你的issue编号
 
-		cos.getObject(params, function (err, data) {
-			if (err) {
-				console.error(err);
-			} else {
-				var wishListContainer = document.getElementById("wishList");
-				wishListContainer.innerHTML = data.Body || '';
-			}
-		});
+		var getIssueUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/issues/${issueNumber}`;
+		fetch(getIssueUrl)
+				.then(response => response.json())
+				.then(data => {
+					var issueBody = data.body;
+					var wishListContainer = document.getElementById("wishList");
+					wishListContainer.innerHTML = issueBody || '';
+				})
+				.catch(error => {
+					console.error(error);
+				});
 	}
+
 
 	// 在许愿方法中调用保存到云存储的函数
 	function makeWish() {
