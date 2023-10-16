@@ -1035,15 +1035,10 @@ document.addEventListener("touchend", stopDragging);
                     <button class="wish-btn" onclick="makeWish()">我就是要</button>
             </div>
 			<script>
-				var cos = new COS({
-					SecretId: 'AKIDpaq5mO1Y9lS7m1Ol6NbkjU2OmCvdCAA2',
-					SecretKey: 'raBlLrIWcWPNOQUp9LYdggYEmBP3azFK',
-				});
-
 				// 将愿望列表保存到云存储服务
 				function saveWishesToCloud() {
 					var wishList = document.getElementById("message-list").innerHTML;
-					var token = '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'; // 替换为你的GitHub Personal Access Token
+					var token = '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'; // 替换为你的GitHub Personal Access Token
 					var repoOwner = 'wrq6'; // 替换为你的仓库所属用户或组织的用户名
 					var repoName = 'wrq6.github.io'; // 替换为你的仓库名称
 					var issueNumber = '2'; // 替换为你的issue编号（可选，用于更新已存在的issue）
@@ -1101,7 +1096,7 @@ document.addEventListener("touchend", stopDragging);
 
 				// 从云存储服务加载愿望列表
 				function loadWishesFromCloud() {
-					var token = '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'; // 替换为你的GitHub Personal Access Token
+					var token = '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'; // 替换为你的GitHub Personal Access Token
 					var repoOwner = 'wrq6'; // 替换为你的仓库所属用户或组织的用户名
 					var repoName = 'wrq6.github.io'; // 替换为你的仓库名称
 					var issueNumber = '2'; // 替换为你的issue编号
@@ -1142,6 +1137,13 @@ document.addEventListener("touchend", stopDragging);
 
 					}
 				}
+				document.addEventListener("DOMContentLoaded", function (event) {
+					loadWishesFromCloud();
+					createSnowflakes();
+
+					var wishBtn = document.querySelector(".wish-btn");
+					wishBtn.addEventListener("click", makeWish);
+				});
 			</script>
         </div>
 <!-- --------------------------------------------------------------------------------------			 -->
