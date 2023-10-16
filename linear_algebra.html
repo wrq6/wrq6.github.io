@@ -553,6 +553,65 @@ D=	<div class="determinant" style="line-height:5px">
         </pre>
     </div>
     <div class="note-container">
+        <h2 style="color: green;">计算行列式常用的方法</h2>
+        <pre>
+            <code>
+                <P>在n阶行列式中，把（i，j）元<script type="math/tex">a_{ij}</script>所在的第i行和第j列划去后，留下的n-1阶行列式叫做（i，j）元<script type="math/tex">a_{ij}</script>的<span style="color:red">余子式</span>,记作<script type="math/tex">M_{ij}</script></script></P>
+                <script type="math/tex">A_{ij} = (-1)^{i+j} M_{ij}</script><br>
+                ↑代数余子式  ↑余子式
+                <p>例如下面的这个行列式</p>
+ D=<div class="determinant" style="line-height:5px;"><!--==========================================================================================-->
+                <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{11}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{12}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{13}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{14}</script></div>
+                </div>
+                 <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{21}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{22}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{23}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{24}</script></div>
+                </div>
+                 <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{31}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{32}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{33}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{34}</script></div>
+                </div>
+                 <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{41}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{42}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{43}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{44}</script></div>
+                </div>
+            </div>
+                <p>在D中（3，2）元 <script type="math/tex">a_{23}</script>的余子式和代数余子式分别为：</p>
+                <p>余子式（去掉第三行以及第二列）                                      代数余子式</p>
+ <div class="determinant" style="line-height:5px;"><!--==========================================================================================-->
+                <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{11}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{13}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{14}</script></div>
+                </div>
+                 <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{21}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{23}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{24}</script></div>
+                </div>
+                 <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{41}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{43}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{44}</script></div>
+                </div>
+ </div>                      <script type="math/tex">A_{32} = (-1)^{3+2} M_{32} = -M_{32}</script>
+                <p style="color: #1f4037">你如果不蠢，就看出来了，代数余子式就是余子式加了个代数罢了，也就是个符号问题</p>
+                <p style="color: red">引理： <script type="math/tex">一个n阶行列式，如果其中第i行所有元素除（i，j）元a_{ij}外都为零，那么这行列式等于a_{ij}与它的代数余子式的乘积</script> </p>
+                <p><script type="math/tex">即：   D = a_{ij} A_{ij}</script></p>
+            </code>
+        </pre>
+    </div>
+    <div class="note-container">
         <h1>笔记 3</h1>
         <p>这是第三个笔记的内容。</p>
     </div>
