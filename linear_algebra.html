@@ -553,7 +553,7 @@ D=	<div class="determinant" style="line-height:5px">
         </pre>
     </div>
     <div class="note-container">
-        <h2 style="color: green;">计算行列式常用的方法</h2>
+        <h2 style="color: green;">行列式按行（列）展开 </h2>
         <pre>
             <code>
                 <P>在n阶行列式中，把（i，j）元<script type="math/tex">a_{ij}</script>所在的第i行和第j列划去后，留下的n-1阶行列式叫做（i，j）元<script type="math/tex">a_{ij}</script>的<span style="color:red">余子式</span>,记作<script type="math/tex">M_{ij}</script></script></P>
@@ -608,12 +608,71 @@ D=	<div class="determinant" style="line-height:5px">
                 <p style="color: #1f4037">你如果不蠢，就看出来了，代数余子式就是余子式加了个代数罢了，也就是个符号问题</p>
                 <p style="color: red">引理： <script type="math/tex">一个n阶行列式，如果其中第i行所有元素除（i，j）元a_{ij}外都为零，那么这行列式等于a_{ij}与它的代数余子式的乘积</script> </p>
                 <p><script type="math/tex">即：   D = a_{ij} A_{ij}</script></p>
+                <p>举个例子</p>
+                 D=<div class="determinant" style="line-height:5px;"><!--==========================================================================================-->
+                <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{11}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{12}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{13}</script></div>
+                    <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{14}</script></div>
+                </div>
+                 <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{21}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{22}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{23}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{24}</script></div>
+                </div>
+                 <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">0</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">0</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{33}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">0</script></div>
+                </div>
+                     <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{41}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{42}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{43}</script></div>
+                         <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{44}</script></div>
+                </div>
+ </div>
+                <p>在行列式所示，在n阶行列式中，第3行除（3，3）元<script type="math/tex">a_{33}外都为零</script></p>
+                <p><script type="math/tex">即：   D = a_{33} A_{33}</script></p>
+                <p><script type="math/tex">而A_{33} = (-1)^{3+3} M_{33}</script></p>
+                <script type="math/tex">而M_{33} = </script></script><div class="determinant" style="line-height:5px;"><!--==========================================================================================-->
+                <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{11}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{12}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{14}</script></div>
+                </div>
+                 <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{21}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{22}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{24}</script></div>
+                </div>
+                 <div class="matrix-row">
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{41}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{42}</script></div>
+                     <div class="matrix-cell" style="width: 80px"><script type="math/tex">a_{44}</script></div>
+                </div>
+            </div>
+            </code>
+        </pre>
+    </div>
+
+
+    <div class="note-container">
+        <h2 style="color: green;">Laplace展开定理</h2>
+        <pre>
+            <code>
+                <p><script type="math/tex">行列式等于它的任一行(列)的各元素与其对应的代数余子式乘积之和</script></p>
+                <p><script type="math/tex">即某一行：D = a_{i1}A_{i1} + a_{i2}A_{i2} + ... + a_{in}A_{in}</script></p>
+                <p><script type="math/tex">即某一列：D = a_{1j}A_{1j} + a_{2j}A_{2j} + ... + a_{nj}A_{nj}</script></p>
             </code>
         </pre>
     </div>
     <div class="note-container">
         <h1>笔记 3</h1>
         <p>这是第三个笔记的内容。</p>
-    </div>
+    </div>+
 </div>
 </html>
