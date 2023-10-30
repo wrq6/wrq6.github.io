@@ -1016,138 +1016,79 @@ document.addEventListener("touchend", stopDragging);
   					</div>
   				</div>
             </div>
-<!-- --------------------------------------------------------------------------------------			 -->	
+<!-- --------------------------------------------------------------------------------------			 -->
+<!-- --------------------------------------------------------------------------------------			 -->
+			<!-- 表单用于提交留言 -->
+			<form id="commentForm">
+				<label for="content">内容：</label><br>
+				<textarea id="content" name="content" rows="5" cols="50"></textarea><br><br>
+				<input type="submit" value="发表留言">
+			</form>
 
-<!-- --------------------------------------------------------------------------------------			 -->	
+			<!-- 展示留言 -->
+			<div id="comments"></div>
 
-            <!-- 留言板 -->
-            <div id="message-board">
-                <!-- 留言标题 -->
-                <h2>留言板</h2>
-                <!-- 留言内容展示区域 -->
-                <div id="message-list1">
-                    <!-- 留言列表 -->
-					<ul class="wish-list" id="message-list">
-						<!-- 这里将会动态插入留言 -->
-					</ul>
-                </div>
-                <!-- 留言 -->
-                    <input type="text" class="input" id="message-input" placeholder="你不会真的想来评论吧？">
-                    <button class="wish-btn" onclick="makeWish()">我就是要</button>
-            </div>
 			<script>
-				// 将愿望列表保存到云存储服务
-				function saveWishesToCloud() {
-					var wishList = document.getElementById("message-list").innerHTML;
-					var token = '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'; // 替换为你的GitHub Personal Access Token
-					var repoOwner = 'wrq6'; // 替换为你的仓库所属用户或组织的用户名
-					var repoName = 'wrq6.github.io'; // 替换为你的仓库名称
-					var issueNumber = '2'; // 替换为你的issue编号（可选，用于更新已存在的issue）
+				var repoOwner = 'wrq6'; // 替换为你的用户名
+				var repoName = 'wrq6'; // 替换为你的仓库名
+				var issueNumber = 'I8C4JZ'; // 替换为你要用于保存留言的Issue编号
 
-					var issueTitle = 'criticize is beneficial'; // issue的标题
-					var issueBody = '<ul>' + wishList + '</ul>'; // issue的内容，包含愿望列表
+				// 加载现有的留言
+				fetchComments();
 
-					// 如果issue编号存在，则使用GitHub API更新已存在的issue
-					if (issueNumber) {
-						var updateIssueUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/issues/${issueNumber}`;
-						fetch(updateIssueUrl, {
-							method: 'PATCH',
-							headers: {
-								'Authorization': 'token ' + token,
-								'Content-Type': 'application/json'
-							},
-							body: JSON.stringify({
-								title: issueTitle,
-								body: issueBody
+				// 表单提交事件
+				document.getElementById('commentForm').addEventListener('submit', function(event) {
+					event.preventDefault(); // 阻止表单默认提交行为
+
+					var content = document.getElementById('content').value;
+
+					createComment(content)
+							.then(function() {
+								document.getElementById('content').value = ''; // 清空留言内容
+								fetchComments(); // 重新加载留言
 							})
-						})
-								.then(response => {
-									console.log(response);
-								})
-								.catch(error => {
-									console.error(error);
+							.catch(function(error) {
+								console.error('提交留言时出错:', error);
+							});
+				});
+
+				// 使用Gitee API获取留言
+				function fetchComments() {
+					fetch('https://gitee.com/api/v5/repos/' + repoOwner + '/' + repoName + '/issues/' + issueNumber + '/comments')
+							.then(function(response) {
+								return response.json();
+							})
+							.then(function(comments) {
+								var commentsElement = document.getElementById('comments');
+								commentsElement.innerHTML = ''; // 清空现有留言
+
+								comments.forEach(function(comment) {
+									var commentElement = document.createElement('div');
+									commentElement.innerText = comment.body;
+									commentsElement.appendChild(commentElement);
 								});
-					} else {
-						// 否则，使用GitHub API创建新的issue
-						var createIssueUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/issues`;
-						fetch(createIssueUrl, {
-							method: 'POST',
-							headers: {
-								'Authorization': 'token ' + token,
-								'Content-Type': 'application/json'
-							},
-							body: JSON.stringify({
-								title: issueTitle,
-								body: issueBody
 							})
-						})
-								.then(response => response.json())
-								.then(data => {
-									console.log(data);
-									// 将新创建的issue编号保存起来，以便之后更新使用
-									var newIssueNumber = data.number;
-									// 将issue编号存储到本地（可使用localStorage等方式）
-								})
-								.catch(error => {
-									console.error(error);
-								});
-					}
-				}
-
-
-				// 从云存储服务加载愿望列表
-				function loadWishesFromCloud() {
-					var token = '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'; // 替换为你的GitHub Personal Access Token
-					var repoOwner = 'wrq6'; // 替换为你的仓库所属用户或组织的用户名
-					var repoName = 'wrq6.github.io'; // 替换为你的仓库名称
-					var issueNumber = '2'; // 替换为你的issue编号
-
-					var getIssueUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/issues/${issueNumber}`;
-					fetch(getIssueUrl)
-							.then(response => response.json())
-							.then(data => {
-								var issueBody = data.body;
-								var wishListContainer = document.getElementById("message-list");
-								wishListContainer.innerHTML = issueBody || '';
-							})
-							.catch(error => {
-								console.error(error);
+							.catch(function(error) {
+								console.error('获取留言时出错:', error);
 							});
 				}
 
+				// 使用Gitee API创建新评论
+				function createComment(content) {
+					var accessToken = 'bd05e71d5885839b05bff7c0fdc8d8d8'; // 替换为你的Gitee访问令牌
 
-				// 在留言方法中调用保存到云存储的函数
-				function makeWish() {
-					var wishInput = document.getElementById("message-input");
-					var wish = wishInput.value.trim();
+					var formData = new FormData();
+					formData.append('access_token', accessToken);
+					formData.append('body', content);
 
-					if (wish !== "") {
-						// 创建新的愿望项
-						var wishItem = document.createElement("li");
-						wishItem.textContent = wish;
-
-						// 将愿望项添加到愿望清单中
-						var wishList = document.getElementById("message-list");
-						wishList.appendChild(wishItem);
-
-						// 清空输入框
-						wishInput.value = "";
-
-						// 保存留言列表到本地存储
-						saveWishesToCloud();
-
-					}
+					return fetch('https://gitee.com/api/v5/repos/' + repoOwner + '/' + repoName + '/issues/' + issueNumber + '/comments', {
+						method: 'POST',
+						body: formData
+					});
 				}
-				document.addEventListener("DOMContentLoaded", function (event) {
-					loadWishesFromCloud();
-					createSnowflakes();
-
-					var wishBtn = document.querySelector(".wish-btn");
-					wishBtn.addEventListener("click", makeWish);
-				});
 			</script>
-        </div>
-<!-- --------------------------------------------------------------------------------------			 -->
+
+			<!-- --------------------------------------------------------------------------------------			 -->
         <div class="right-column">
             <!-- 空出一侧 -->
 			<!-- "回到顶部"按钮 -->
