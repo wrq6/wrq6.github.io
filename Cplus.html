@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>C++</title>
+    <style>
+    body {
+    font-family: Consolas, monospace;
+    background-color: #f5f5f5;
+    padding: 20px;
+    }
+
+    h1 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+    }
+
+    h2 {
+    color: #666;
+    font-size: 20px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+    }
+
+    pre {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    }
+
+    code {
+    display: block;
+    color: #000;
+    }
+
+    .hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    color: #abb2bf;
+    background: #282c34;
+    }
+
+    .hljs-keyword,
+    .hljs-selector-tag,
+    .hljs-section,
+    .hljs-title,
+    .hljs-built_in,
+    .hljs-literal,
+    .hljs-template-tag,
+    .hljs-template-variable,
+    .hljs-type,
+    .hljs-addition {
+    color: #e06c75;
+    }
+
+    .hljs-string,
+    .hljs-quote,
+    .hljs-meta,
+    .hljs-tag .hljs-value .hljs-string,
+    .hljs-regexp,
+    .hljs-symbol,
+    .hljs-bullet,
+    .hljs-link,
+    .hljs-deletion {
+    color: #98c379;
+    }
+
+    .hljs-number,
+    .hljs-selector-class,
+    .hljs-selector-attr,
+    .hljs-selector-pseudo,
+    .hljs-template-tag,
+    .hljs-template-variable,
+    .hljs-variable,
+    .hljs-type .hljs-tag,
+    .hljs-typename {
+    color: #d19a66;
+    }
+
+    .hljs-comment,
+    .hljs-quote {
+    color: #5c6370;
+    font-style: italic;
+    }
+
+    .hljs-doctag,
+    .hljs-meta .hljs-keyword,
+    .hljs-meta .hljs-string {
+    color: #c678dd;
+    }
+
+    .hljs-attribute {
+    color: #56b6c2;
+    }
+
+    .hljs-keyword {
+    font-weight: bold;
+    }
+
+    .hljs-selector-tag,
+    .hljs-title,
+    .hljs-section,
+    .hljs-selector-id {
+    font-weight: 700;
+    }
+    .audio-wrapper {
+    display: flex;
+    justify-content: center;
+    }
+    </style>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<body>
+<pre>
+    <span style="color: red">C++:中级语言</span>
+	<code>
+            ------------直接与计算机内部硬件交互的代码
+            ------------面向对象
+            ------------1997年在贝尔实验室开始设计开发
+    </code>
+</pre>
+<!------------------------------------------------------------------------------------------------------------------->
+<pre>
+    <span style="color: red">C++的特性</span>
+	<code>
+            ------------速度
+            ------------静态类型
+            ------------多范式编程语言
+            ------------面向对象
+            ------------标准库
+    </code>
+</pre>
+<!------------------------------------------------------------------------------------------------------------------->
+<pre>
+    <span style="color: red">C++的变量</span>
+	<code>
+        命名规则
+            ------------只能由大小写字母与数字与下划线组成
+            ------------变量名不能以数字开头，第一个必为字母或下划线
+            ------------变量名区分大小写
+            ------------变量名不能是关键字
+            ------------变量名可以用下划线开头，但这并不好
+        --------------------------------------------------
+        #include< iostream >
+        int main()
+        {
+            int a;//可以
+            int _a;//可以
+            int A;//可以
+            int 1a;//不行，不能以非字母或下划线以外的开头
+            int int;//不行，不能把关键字当变量名
+        }
+    </code>
+</pre>
+<!------------------------------------------------------------------------------------------------------------------->
+<pre>
+    <span style="color: red">C++的字面量</span>
+	<code>
+            ------------用来表示固定的数值
+        1>整数字面量（具有分数形式或指数）
+        2>字符字面量（单引号）
+        3>转义符
+        '\b' -退格
+        '\n' -换行
+        '\t' -水平制表
+        '\\' -反斜杠
+        '\0' -空字符
+        '\f' -换页
+        '\r' -回车
+        '\v' -垂直制表
+        '\'' -单引号
+        '\"' -双引号
+        '\?' -问号
+        3>字符串字面量（双引号）
+    </code>
+</pre>
+<!------------------------------------------------------------------------------------------------------------------->
+<pre>
+    <span style="color: red">C++常量</span>
+	<code>
+        Const int a = 298;//声明a为常量（即不可更改的）
+    </code>
+</pre>
+<!------------------------------------------------------------------------------------------------------------------->
+<pre>
+    <span style="color: red">C++基本数据类型</span>
+	<code>
+                                字节
+        布尔          bool        1
+        字符          char        1
+        整型          int         2或4
+        浮点          float       4
+        双浮点         double      8
+        无类型         void        0
+        宽字符         wchat_t      2
+        --------------------------------------------------
+        int a = 1;
+        float b = 64.74;
+        double c = 134.6473;
+        char d = 'h';
+        wchar_t e = L'a'//此a是阿尔法，我打不出来😭
+        bool f = false;
+    </code>
+</pre>
+<!------------------------------------------------------------------------------------------------------------------->
+<pre>
+    <span style="color: red">C++类型修饰符</span>
+	<code>
+            ------------signed
+            ------------unsigned
+            ------------short
+            ------------long
+        -------------------------------------------------------------
+                                字节
+        char                    1       -128~127或0~255
+        unsigned char           1       0~255
+        signed char             1       -128~127
+        int                     4       -2147483648~2147483647
+        unsigned int            4       0~4294967295
+        signed int              4       -2147483648~2147483647
+        unsigned short int      2       0~65535
+        signed short int        2       -32768~32757
+        long int                4       -9223372036854775808~9223372036854775807
+        signed long int         8       -9223372036854775808~9223372036854775807
+        unsigned long int       8       0~18446744073709551615
+        float                   4       ~
+        double                  8       ~
+        long double             16      ~
+        wchat_t                 2或4     ~(这些不想写了，根本写不完太大了，我反正懒得写)
+    </code>
+</pre>
+<!------------------------------------------------------------------------------------------------------------------->
+<pre>
+    <span style="color: red">C++输出</span>
+	<code>
+        #include< iostream >
+        using namespace std;
+        int main()
+        {
+            cout<<"你好，世界";//不是我不想打英文版的，是我不会拼啊，hollw word？
+            return 0;
+        }
+        //你也看出来了，cout用于输出，并且<< 运算符你可以想象成右边的数据流，流向左边，左边的cout输出数据流
+        //--(如何工作)
+        1>包含允许输出的iostream头文件
+        2>cout对象在std命名空间内定义
+        3>每个C++程序都以main函数开始
+        4>cout是一个在引号“”内打印字符串的对象<<  是运算符
+        5>return是main函数的退出，程序以此结束，不是强制需要return的
+    </code>
+</pre>
+</body>
+</html>
