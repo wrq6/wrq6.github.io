@@ -132,6 +132,81 @@
         USE 数据库名;
     </code></pre>
     <p class="comment">USE语句后可以不加分号‘;’，但是我建议加，因为他们都说建议加</p>
+    <p><strong class="highlight">操作数据库</strong></p>
+    <h6>创建数据库表</h6>
+    <pre class="code"><code class="sql">
+        CREATE TABLE 表名称(列声明);
+        ------------如下所见----------------
+        CREATE TABLE Stidents(
+            Id INT NOT NULL AUTO_INCREMENT,
+            Num INT NOT NULL UNIQUE,
+            Name VARCHAR(20) NOT NULL,
+            Sex VARCHAR(4) NOT NULL,
+            Birthday DATE NULL,
+            Address VARCHAR(50) NULL,
+            PRIMARY KEY(Id)
+        );
+    </code></pre>
+    <p class="comment">1>你当然可以在一行写，这样子是为了好看，你不喜欢好看的things？<br>2>习惯字段第一个字母大写，当然MYSQL不区分大小写<br>3>我可没有说关键字不区分，所以最好关键字全大写<br>4>最后的primary key（xxx）是设置主键的语句，什么？你想问主键是什么东西？啊呀，都快速入门你还想学那么细，你想干嘛啊？不知道就去百度啊<br>5>AUTO_INCREMENT是自动递增，只能在整数列中使用</p>
+
+    <h6>查看表</h6>
+    <pre class="code"><code class="sql">
+        SHOW TABLES;//查看自己创建的表-------什么报错了？你能不能把S加上？
+        DESCRIBE 表名;//可查看已创建表的详细信息
+    </code></pre>
+
+    <h6>向表中插入数据</h6>
+    <pre class="code"><code class="sql">
+        INSERT INTO 表名 [(列名1,列名2,列名3,...)]values(值1,值2,值3,...);
+        ----------------------------以下是举例------i-----------------------------------
+        INSERT INTO Students VALUES(NULL,"小武","男",21,"13367238474");
+        如果只插入部分数据
+        INSERT INTO Students(Name,Sex,Age) VALUES("小胡","女",21);
+    </code></pre>
+
+    <h6>查询表中数据</h6>
+    <pre class="code"><code class="sql">
+        select 列名称 from 表名称 [查询条件];
+        ----------------------------以下是举例-----------------------------------------
+        SELECT Name,Age FROM Students;
+        使用通配符也可以
+        SELECT *FROM Students;
+        -----------------------------按特定条件查询-------------------------------------
+        SELECT 列名称 FROM 表名称 where 条件;
+        ----------------------------以下是举例-----------------------------------------
+        SELECT * FROM Students WHERE Sex="女";
+        //一般运算符也可以 =  >= <= < > !=
+        //以及更复杂的 is[not] null ,in,like,or,and
+        例如查询名字带’武‘的所有人信息
+        SELECT *FROM Students WHERE Name LIKE "%武%";//解释一下两个%是什么意思，就是类似占位符，前面一个代表武不一定是第一个，后面代表武不一定是最后一个
+        再例如查询Id小于5，并且年龄大于20的所有人信息
+         SELECT * FROM Students WHERE Id < 5 AND Age>20;
+    </code></pre>
+
+
+    <p class="comment"></p>
+
+    <h6>更新表中的数据</h6>
+    <pre class="code"><code class="sql">
+        update 表名称 set 列名称=新值 where 更新条件;
+        ----------------------------以下是举例-----------------------------------------
+         将手机号为123的姓名改为"武"，年龄改为19
+         UPDATE Students SET Name = "武",Age = 19 WHERE Tel = "123";
+    </code></pre>
+
+    <h6>删除表中的数据</h6>
+    <pre class="code"><code class="sql">
+        delete from 表名称 where 删除条件;
+        ----------------------------以下是举例------------------------------------------
+        删除Id为2的行
+        DELETE FROM Students WHERE Id = 2;
+        删除表中所有数据
+        DELETE FROM Students;
+        删除表中的外键约束
+        ALTER TABLE 表名 DROP FOREIGN KEY 拥有外键的字段名;
+    </code></pre>
+
+
 </section>
 <hr><hr>
 <section id="advanced">
