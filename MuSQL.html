@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>MYSQL急速入门笔记</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        pre {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        code {
+            display: block;
+            color: #000;
+        }
+
+        .hljs {
+            display: block;
+            overflow-x: auto;
+            padding: 0.5em;
+            color: #abb2bf;
+            background: #282c34;
+        }
+        .highlight {
+            background-color: yellow;
+        }
+        .comment {
+            color: green;
+        }
+        #table-of-contents {
+            margin-top: 20px;
+        }
+        #table-of-contents ul {
+            list-style-type: none;
+            padding-left: 10px;
+        }
+    </style>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<body>
+<header>
+    <h1>MYSQL笔记</h1>
+    <nav>
+        <ul id="table-of-contents">
+            <li><a href="#introduction">介绍</a></li>
+            <li><a href="#installation">安装</a></li>
+            <li><a href="#前言">MySQL的先前言</a></li>
+            <li><a href="#basics">基础</a></li>
+            <li><a href="#advanced">高级</a></li>
+            <li><a href="#各种实例以及遇到的各种问题">各种实例以及遇到的各种问题</a></li>
+        </ul>
+    </nav>
+</header>
+<hr><hr>
+<section id="introduction">
+    <h2>介绍</h2>
+    <hr>
+    <p>MYSQL是一种流行的关系型数据库管理系统，广泛应用于各种业务场景。</p>
+</section>
+<hr><hr>
+<section id="installation">
+    <h2>安装</h2>
+    <hr>
+    <p><strong>注意：</strong> 确保已安装MySQL并设置好环境变量。(控制台输入)</p>
+    <pre class="code"><code class="sql">
+        MYSQL --version;
+    </code></pre>
+</section>
+<hr><hr>
+<section id="前言">
+    <h2>前言</h2>
+    <hr>
+    <p><strong>MySQL大小写敏感吗：</strong> <br>1>在windows下不区分大小写 <br> 2>在Linux下默认是区分大小写的</p>
+    <p>MySQL的大小写敏感是由参数控制的</p>
+    <pre class="code"><code class="sql">
+        show global variables like'%lower_case%';//这个是登录到MYSQL后才能执行的语句，等学到后面就知道了，先看下面的
+        ------------我的系统输出---------------------
+                            +------------------------+-------+
+                            | Variable_name          | Value |
+                            +------------------------+-------+
+                            | lower_case_file_system | ON    |
+                            | lower_case_table_names | 1     |
+                            +------------------------+-------+
+                            2 rows in set, 1 warning (0.01 sec)
+
+    </code></pre>
+    <p class="comment">system是☞系统：NO->大小写不敏感   OFF->大小写敏感</p>
+    <p class="comment">name是☞命名：0->大小写敏感   1->大小写不敏感   2->大小写不敏感</p>
+    <strong>数字类型：</strong> <br>
+    <p class="comment">整数:tingint、smallint、mediumint、int、bigint</p>
+    <p class="comment">浮点:float、double、real、decimal</p>
+    <p class="comment">日期和时间:date、time、datetime、timestamp、year</p>
+    <strong>字符串类型：</strong> <br>
+    <p class="comment">字符串：char、varchar</p>
+    <p class="comment">文本：tinytext、text、mediumtext、longtext</p>
+    <p class="comment">二进制（可存储音乐、图片）：tinyblob、blob、mediumblob、longblob</p>
+
+</section>
+<hr><hr>
+<section id="basics">
+    <h2>基础</h2>
+    <hr>
+    <p><strong class="highlight">数据库层面</strong></p>
+    <h6>登录数据库</h6>
+    <pre class="code"><code class="sql">
+        MYSQL -h 主机名 -u 用户名 -p;
+    </code></pre>
+    <p class="comment">1>当前机器可忽略-h 主机名<br>2>用户名一般是root<br>3>输入完回车就是输入密码就行</p>
+    <h6>创建数据库</h6>
+    <pre class="code"><code class="sql">
+        CREATE DATABASE 数据库名[其他选项];
+    </code></pre>
+    <p class="comment">1>[]只是我为了区分，别傻乎乎也打进去了<br>2>关键词我都是大写的，这是因为，保险起见，大写总没有错<br>3>其他选项可以是：character set gbk（指定数据库字符编码）</p>
+    <h6>查看数据库</h6>
+    <pre class="code"><code class="sql">
+        SHOW DATABASES;
+    </code></pre>
+    <p class="comment">注意是DATABASES，有S</p>
+    <h6>选择/使用数据库</h6>
+    <pre class="code"><code class="sql">
+        USE 数据库名;
+    </code></pre>
+    <p class="comment">USE语句后可以不加分号‘;’，但是我建议加，因为他们都说建议加</p>
+</section>
+<hr><hr>
+<section id="advanced">
+    <h2>高级</h2>
+    <hr>
+    <p><strong class="highlight">JOIN</strong> 用于将多个表连接在一起。</p>
+    <pre class="code"><code class="sql">
+        SELECT * FROM table1 JOIN table2 ON table1.id = table2.id;
+    </code></pre>
+</section>
+<hr><hr>
+<section id="各种实例以及遇到的各种问题">
+    <h2>各种实例以及遇到的各种问题</h2>
+    <hr>
+<pre><code class="hljs">insert into user_info (name, age, height, phone)
+  values ('张三', 20, 183, '13367238474');</code></pre>
+</section>
+<hr><hr>
+
+</body>
+</html>
