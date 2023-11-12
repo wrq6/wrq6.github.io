@@ -130,7 +130,24 @@
 	  <a href="my_html_4.html" class="animate-slide-in-down" target="_blank">井字棋</a>
 	  <a href="my_html_5.html" class="animate-slide-in-down" target="_blank">许愿树(匿名)</a>
 	   <a href="my_html_7.html" class="animate-slide-in-down" target="_blank">你想学习吗？</a>
-      <a href="https://wrq6.lanzoue.com/ilmgd1eo8l5e" class="animate-slide-in-down" target="_blank">APP下载</a>
+      <script>
+        function openNewPage() {
+          // 打开新窗口
+          var newWindow = window.open('https://wrq6.lanzoue.com/ilmgd1eo8l5e', '_blank');
+
+          // 显示弹窗
+          var popupMsg = "哈哈哈，是不是要开会员？电脑打开不用哦<br>什么？你就要用手机打开？行！";
+          var confirmation = confirm(popupMsg);
+          if (confirmation) {
+            // 用户点击了确认，跳转到下载链接
+            window.open('https://gitee.com/wrq6/wrq6/blob/main/app-debug.apk');
+          } else {
+            // 用户点击了取消
+            alert("滚呐我靠");
+          }
+        }
+      </script>
+      <a href="javascript:void(0)" onclick="openNewPage('yourPassword')" class="animate-slide-in-down" target="_blank">APP下载</a>
       <a href="index2.html" class="animate-slide-in-down" target="_blank">来跑步？</a>
     </div>
     <div class="location">
