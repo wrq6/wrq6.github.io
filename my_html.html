@@ -20,11 +20,50 @@
       background-image: url("img/a.png");
     }
   }
-
+  .overlay {
+      display: none;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+      z-index: 9998; /* 确保在弹窗之下 */
+  }
+  .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #000;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      z-index: 9999; /* 确保弹窗在顶层显示 */
+  }
 </style>
 </head>
 
 <body>
+<div class="overlay" id="overlay"></div>
+
+<div id="popup" class="popup">
+    <p>好消息！我推出了APP，网页不稳定的问题彻底不想搞啦！<br>点击下方APP下载链接进行下载吧<br>目前仅支持android</p>
+    <button onclick="closePopup()">弹窗给我滚啊！</button>
+</div>
+
+<script>
+    // 显示遮罩和弹窗
+    document.getElementById('overlay').style.display = 'block';
+    document.getElementById('popup').style.display = 'block';
+
+    function closePopup() {
+        // 关闭弹窗
+        document.getElementById('overlay').style.display = 'none';
+        document.getElementById('popup').style.display = 'none';
+    }
+</script>
 	<div class="location">
       <span class="location-icon animate-slide-in-up">
       </span>
@@ -91,6 +130,7 @@
 	  <a href="my_html_4.html" class="animate-slide-in-down" target="_blank">井字棋</a>
 	  <a href="my_html_5.html" class="animate-slide-in-down" target="_blank">许愿树(匿名)</a>
 	   <a href="my_html_7.html" class="animate-slide-in-down" target="_blank">你想学习吗？</a>
+        <a href="my_html_7.html" class="animate-slide-in-down" target="_blank">APP下载</a>
       <a href="index2.html" class="animate-slide-in-down" target="_blank">来跑步？</a>
     </div>
     <div class="location">
