@@ -206,15 +206,91 @@
         ALTER TABLE 表名 DROP FOREIGN KEY 拥有外键的字段名;
     </code></pre>
 
+    <p><strong class="highlight">创建表后的修改---(关键字:alter table)</strong></p>
 
+    <h6>添加列</h6>
+    <pre class="code"><code class="sql">
+        alter table 表名 add 列名 列数据类型[after 位置];--//还是那句话'[]'这个中括号是为了给你举例是可供选择的
+        ----------------------------以下是举例------------------------------------------
+        在表的最后添加名为address的列
+        alter table Students add address char(60);
+        在名为age的列后插入名为birthday的列
+        alter table Students add birthday date after age;
+    </code></pre>
+
+    <h6>修改列</h6>
+    <pre class="code"><code class="sql">
+        alter table 表名 change 列名 列新名 新数据类型;
+        ----------------------------以下是举例------------------------------------------
+        将tel列改为telphone
+        alter table Students change tel telphone char(13) default "_";
+        将name列的数据类型改为char(16)
+        alter table Students change name name char(16) not null;
+    </code></pre>
+
+    <h6>删除列</h6>
+    <pre class="code"><code class="sql">
+        alter table 表名 drop 列名称;
+        ----------------------------以下是举例------------------------------------------
+        删除birthday列
+        alter table Students drop birthday;
+    </code></pre>
+
+    <h6>重命名表</h6>
+    <pre class="code"><code class="sql">
+        alter table 表名 rename 新表名;
+        ----------------------------以下是举例------------------------------------------
+        重命名 Students表为workmates
+        alter table Students rename workmates;
+    </code></pre>
+
+    <h6>删除整张表</h6>
+    <pre class="code"><code class="sql">
+        drop table 表名;
+        ----------------------------以下是举例------------------------------------------
+        删除workmates表
+        drop table workmates;
+    </code></pre>
+
+    <h6>删除整个数据库</h6>
+    <pre class="code"><code class="sql">
+        drop database 数据库名;
+        ----------------------------以下是举例------------------------------------------
+        删除same_db 数据库
+        drop database samp_db;
+    </code></pre>
+
+    <h6>更换字段的顺序</h6>
+    <pre class="code"><code class="sql">
+        alter table 表名 modify 字段名 varchar(10) after 字段名;
+        ----------------------------以下是举例------------------------------------------
+        放在第一名
+        alter table 表名 modify 字段 字段属性 first;
+    </code></pre>
 </section>
 <hr><hr>
 <section id="advanced">
     <h2>高级</h2>
     <hr>
-    <p><strong class="highlight">JOIN</strong> 用于将多个表连接在一起。</p>
+    <p><strong class="highlight">JOIN</strong>用于将多个表连接在一起。</p>
     <pre class="code"><code class="sql">
         SELECT * FROM table1 JOIN table2 ON table1.id = table2.id;
+    </code></pre>
+
+    <p><strong class="highlight">修改root用户密码</strong></p>
+    <pre class="code"><code class="sql">
+        mysqsladmin -a root -p password 新密码<-
+        >输入旧密码就行
+    </code></pre>
+
+    <p><strong class="highlight">MYSQL不同命令清屏的方式</strong></p>
+    <pre class="code"><code class="sql">
+        1>Powershell
+        system cls;
+        2>navicat使用命令列工具
+        clear;
+        3>Mycli和Linux
+        Ctrl + L;
     </code></pre>
 </section>
 <hr><hr>
