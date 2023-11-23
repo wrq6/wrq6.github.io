@@ -164,6 +164,21 @@
         .minimize-button:focus {
             outline: none;
         }
+		#lyric-container {
+			text-align: center; /* 水平居中 */
+			height: 4em; /* 设置高度为4行 */
+			overflow: hidden; /* 超出部分隐藏 */
+			line-height: 1em; /* 行高 */
+			position: relative; /* 相对定位 */
+		}
+
+		#lyric-wrapper {
+			position: absolute; /* 绝对定位 */
+			top: 50%; /* 上边距居中 */
+			transform: translateY(-50%); /* 垂直居中 */
+			width: 100%; /* 宽度100% */
+		}
+
 	</style>
 </head>
 <body>
@@ -184,218 +199,7 @@
 <div class="iframe-container">
 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86"
 src="//music.163.com/outchain/player?type=2&id=38576323&auto=1&height=66"></iframe>
-<button class="music-button" onclick="playMusic('music/d.mp3', '起风了')">
-起风了
-</button>
-<button class="music-button" onclick="playMusic('music/c.mp3', '兰亭序')">
-兰亭序
-</button>
 </div>
-
-<div class="audio-popup" id="popup">
-<button class="minimize-button" onclick="minimizeMusicInfo()"></button>
-<button class="close-button" onclick="hideMusicInfo()">关闭</button>
-<button class="huanyuan-button" onclick="huanyuanMusicInfo()"></button>
-</div>
-
-<script>
-function playMusic(musicPath, musicName) {
-    var audioContainer = document.createElement("div");
-    audioContainer.classList.add("audio-container");
-
-    var closeButton = document.createElement("button");
-    closeButton.classList.add("close-button");
-    closeButton.textContent = "关闭";
-    closeButton.onclick = hideMusicInfo;
-
- var huanyuanButton = document.createElement("button");
-    huanyuanButton.classList.add("huanyuan-button");
-    huanyuanButton.textContent = "还原";
-    huanyuanButton.onclick = huanyuanMusicInfo;
-
-    var minimizeButton = document.createElement("button");
-    minimizeButton.classList.add("minimize-button");
-    minimizeButton.textContent = "缩小";
-    minimizeButton.onclick = minimizeMusicInfo;
-
-    var audioElement = document.createElement("audio");
-    audioElement.controls = true;
-
-    var sourceElement = document.createElement("source");
-    sourceElement.src = musicPath;
-    sourceElement.type = "audio/mpeg";
-
-    var musicNameElement = document.createElement("span");
-    musicNameElement.textContent = musicName;
-
-    audioElement.appendChild(sourceElement);
-
-    audioContainer.appendChild(closeButton); // 添加关闭按钮
-    audioContainer.appendChild(minimizeButton); // 添加缩小按钮
-	audioContainer.appendChild(huanyuanButton); // 添加还原按钮
-    audioContainer.appendChild(audioElement);
-    // audioContainer.appendChild(musicNameElement);
-
-    var popup = document.getElementById("popup");
-    popup.innerHTML = "";
-    popup.appendChild(audioContainer);
-    popup.style.display = "block";
-
-    // 添加 'show' 类以显示悬浮窗口
-    setTimeout(function () {
-        popup.classList.add("show");
-    }, 10);
-}
-
-
-function showMusicInfo() {
-    var musicInfo = document.getElementById("popup");
-    musicInfo.style.display = "block";
-    var closeButton = document.querySelector(".close-btn");
-    closeButton.style.display = "block";
-}
-
-function hideMusicInfo() {
-    var audioPlayer = document.querySelector(".audio-container audio");
-    audioPlayer.pause();
-    audioPlayer.currentTime = 0;
-    var musicInfo = document.getElementById("popup");
-    musicInfo.style.display = "none";
-    var closeButton = document.querySelector(".close-btn");
-    closeButton.style.display = "none";
-}
-
-function minimizeMusicInfo() {
-    var musicInfo = document.getElementById("popup");
-    musicInfo.style.height = "150px";
-	musicInfo.style.width = "150px";
-}
-
-function huanyuanMusicInfo() {
-    var musicInfo = document.getElementById("popup");
-    musicInfo.style.height = "250px";
-	musicInfo.style.width = "300px";
-}
-// 拖动事件-------------------------------------
-var popup = document.getElementById("popup");
-var isDragging = false;
-var offsetX = 0;
-var offsetY = 0;
-var transformX = 0;
-var transformY = 0;
-
-popup.addEventListener("mousedown", startDragging);
-popup.addEventListener("touchstart", startDragging);
-
-document.addEventListener("mousemove", dragElement);
-document.addEventListener("touchmove", dragElement);
-
-document.addEventListener("mouseup", stopDragging);
-document.addEventListener("touchend", stopDragging);
-
-
-
-
-function dragElement(e) {
-            if (isDragging) {
-                e.preventDefault();
-                var clientX, clientY;
-
-                if (e.type === "mousemove") {
-                    clientX = e.clientX;
-                    clientY = e.clientY;
-                } else if (e.type === "touchmove") {
-                    var touch = e.touches[0];
-                    clientX = touch.clientX;
-                    clientY = touch.clientY;
-                }
-
-                var left = clientX - offsetX;
-                var top = clientY - offsetY;
-
-                if (left <= 0) {
-                    left = 0;
-                } else if (left + popup.offsetWidth >= document.documentElement.clientWidth) {
-                    left = document.documentElement.clientWidth - popup.offsetWidth;
-                }
-
-                if (top <= 0) {
-                    top = 0;
-                } else if (top + popup.offsetHeight >= document.documentElement.clientHeight) {
-                    top = document.documentElement.clientHeight - popup.offsetHeight;
-                }
-
-                popup.style.left = clientX + "px";
-                popup.style.top = top + "px";
-            }
-        }
-
-
-
-function startDragging(e) {
-    e.preventDefault();
-    var bottomBlankHeight = 200; // 悬浮窗底部空白处的高度
-
-    var eventX, eventY;
-    if (e.type === "mousedown") {
-        eventX = e.clientX;
-        eventY = e.clientY;
-    } else if (e.type === "touchstart") {
-        var touch = e.touches[0];
-        eventX = touch.clientX;
-        eventY = touch.clientY;
-    }
-
-    var target = e.target;
-    var rect = target.getBoundingClientRect();
-
-    if (eventY > rect.bottom - bottomBlankHeight) {
-        if (target.classList.contains("close-button")) {
-            isDragging = false;
-        } else {
-            isDragging = true;
-            offsetX = eventX - popup.getBoundingClientRect().left;
-            offsetY = eventY - popup.getBoundingClientRect().top;
-        }
-    }
-}
-
-function stopDragging() {
-    isDragging = false;
-}
-
-function movePopup(e) {
-    if (!isDragging) {
-        return;
-    }
-    e.preventDefault();
-
-    var eventX, eventY;
-    if (e.type === "mousemove") {
-        eventX = e.clientX;
-        eventY = e.clientY;
-    } else if (e.type === "touchmove") {
-        var touch = e.touches[0];
-        eventX = touch.clientX;
-        eventY = touch.clientY;
-    }
-
-    var left = eventX - offsetX;
-    var top = eventY - offsetY;
-   		popup.style.left = clientX + "px";
-        popup.style.top = top + "px";
-}
-
-document.addEventListener("mousemove", movePopup);
-document.addEventListener("touchmove", movePopup);
-
-document.addEventListener("mouseup", stopDragging);
-document.addEventListener("touchend", stopDragging);
-
-
-
-
-</script>
 </body>
 
 
@@ -404,7 +208,7 @@ document.addEventListener("touchend", stopDragging);
     <div class="container">
         <div class="left-column">
             <!-- 空出一侧 -->
-			
+
         </div>
 
         <div class="main-content">
@@ -421,12 +225,80 @@ document.addEventListener("touchend", stopDragging);
             </div>
 <!-- -----------------------------------start---------------------------------------------------			 -->
 			<div id="daily-sharing">
+				<div id="lyric-container"></div>
 				<div class="audio-container">
-  					<audio controls>
-    					<source src="music/b.mp3" type="audio/mpeg">
-    						不露声色 -Jam
-  					</audio>
+					<audio controls ontimeupdate="showLyrics()">
+						<source src="music/a.mp3" type="audio/mpeg">
+						反方向的钟-周杰伦
+					</audio>
 				</div>
+				<script>
+					var lyricContainer = document.getElementById("lyric-container");
+					var audio = document.getElementsByTagName("audio")[0];
+					var lyrics = []; // 存储所有歌词的数组
+
+					function loadLyrics() {
+						// 获取歌曲名称，用于加载对应的歌词文件
+						var songName = audio.getElementsByTagName("source")[0].src.split("/").pop().replace(".mp3", "");
+						var xhttp = new XMLHttpRequest();
+						xhttp.onreadystatechange = function () {
+							if (this.readyState == 4 && this.status == 200) {
+								var lyricText = this.responseText;
+								lyrics = parseLyrics(lyricText); // 解析歌词文本并存储到数组中
+								console.log("已加载 " + lyrics.length + " 行歌词。");
+							}
+						};
+						xhttp.open("GET", "geci/" + songName + ".lrc", true); // 修改为您存放歌词文件的路径
+						xhttp.send();
+					}
+
+					function parseLyrics(lyricText) {
+						var lines = lyricText.split("\n");
+						var result = [];
+						for (var i = 0; i < lines.length; i++) {
+							var line = lines[i];
+							var timeRegex = /\[(\d{2}):(\d{2})\.(\d{2})\]/; // 匹配时间标签的正则表达式
+							var matches = line.match(timeRegex);
+							if (matches) {
+								var minutes = parseInt(matches[1]);
+								var seconds = parseInt(matches[2]);
+								var milliseconds = parseInt(matches[3]);
+								var text = line.replace(timeRegex, "").trim();
+								var time = minutes * 60 + seconds + milliseconds / 100;
+								result.push({ time: time, text: text });
+							}
+						}
+						return result;
+					}
+
+					function showLyrics() {
+						loadLyrics(); // 加载歌词
+						var currentTime = audio.currentTime;
+						var displayedLyrics = []; // 存储要显示的歌词行
+						for (var i = 0; i < lyrics.length; i++) {
+							if (currentTime >= lyrics[i].time) {
+								displayedLyrics.push(lyrics[i]);
+							}
+						}
+						if (displayedLyrics.length > 0) {
+							var lyricsHTML = '';
+							for (var j = 0; j < displayedLyrics.length; j++) {
+								lyricsHTML += '<p>' + displayedLyrics[j].text + '</p>';
+							}
+							lyricContainer.innerHTML = lyricsHTML;
+							lyricContainer.scrollTop = (displayedLyrics.length - 1) * 25; // 滚动到最后一行歌词
+							lyrics.splice(0, displayedLyrics.length); // 删除已经显示的歌词行
+						}
+					}
+
+
+					// 在音频播放时调用 showLyrics 函数
+					audio.addEventListener("timeupdate", function () {
+						showLyrics();
+					});
+
+				</script>
+
   					<!-- 分享标题 -->
   					<h3>青木下黄土旧叶，落日里长路新人。</h3>
   					<!-- 图片内容 -->
@@ -473,7 +345,7 @@ document.addEventListener("touchend", stopDragging);
 				<div class="audio-container">
   					<audio controls>
     					<source src="music/a.mp3" type="audio/mpeg">
-    						一程山路 -毛不易
+						反方向的钟-周杰伦
   					</audio>
 				</div>
                 <!-- 分享标题 -->
