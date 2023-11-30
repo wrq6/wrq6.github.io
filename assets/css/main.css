@@ -69,7 +69,7 @@ ul, ol { list-style: none; }
   opacity: 0;
 }
 
-.animate-slide-in-down { top: -10px; }
+.animate-slide-in-down { top: -10px; color: #6dd5ed}
 
 .animate-slide-in-up { bottom: -10px; }
 
