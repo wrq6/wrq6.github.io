@@ -76,7 +76,7 @@ h2 .cpd_icon {
 
 .cpd_icon {
 	display: inline-block;
-	background: url(../image/cpd_sprites.png) no-repeat top left;
+	background: url(../image/product.png) no-repeat top left;
 	width: 16px;
 	height: 16px;
 	vertical-align: middle;
