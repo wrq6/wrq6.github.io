@@ -2,95 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>3D翻页效果</title>
-    <style>
-        #my3dspace{
-            perspective: 800px;
-            perspective-origin: 50% 50%;
-
-
-            overflow: hidden;
-        }
-        #pagegroup{
-            width: 400px;
-            height: 400px;
-            margin: 0 auto;
-
-            transform-style: preserve-3d;
-
-            position: relative;
-        }
-        .page{
-            width: 360px;
-            height: 360px;
-            padding: 20px;
-            background-color: black;
-
-            color: white;
-
-            font-weight: bold;
-            font-size: 360px;
-            line-height: 360px;
-            text-align: center;
-
-
-            position: absolute;
-        }
-        #page1{
-            transform-origin: bottom;
-            transition:transform 1s linear;
-        }
-        #page2,#page3,#page4,#page5,#page6{
-            transform-origin: bottom;
-            transition:transform 1s linear;
-            transform: rotateX(90deg);
-        }
-        #op{
-            text-align: center;
-            margin: 40px auto;
-        }
-    </style>
-
-    <script type="text/javascript">
-        var curIndex = 1;
-        function next(){
-            if( curIndex == 6 )
-                return;
-            var curPage = document.getElementById("page"+curIndex);
-            curPage.style.transform = "rotateX(-90deg)";
-
-            curIndex ++;
-            var nextPage = document.getElementById("page"+curIndex);
-            nextPage.style.transform = "rotateX(0deg)";
-        }
-
-        function prev(){
-            if(curIndex == 1)
-                return;
-
-            var curPage = document.getElementById("page"+curIndex);
-            curPage.style.transform = "rotateX(90deg)";
-
-            curIndex --;
-            var prevPage = document.getElementById("page"+curIndex);
-            prevPage.style.transform = "rotateX(0deg)";
-        }
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP地址追踪示例</title>
 </head>
 <body>
-<div id="my3dspace">
-    <div id="pagegroup">
-        <div class="page" id="page1">1</div>
-        <div class="page" id="page2">2</div>
-        <div class="page" id="page3">3</div>
-        <div class="page" id="page4">4</div>
-        <div class="page" id="page5">5</div>
-        <div class="page" id="page6">6</div>
-    </div>
-</div>
 
-<div id="op">
-    <a href="javascript:next()">next</a>&nbsp;<a href="javascript:prev()">previout</a>
-</div>
+<h1>IP地址追踪</h1>
+
+<div id="ipInfo"></div>
+
+<script>
+    // 使用免费的IP地址信息查询服务，替换 YOUR_ACCESS_KEY 为你的 API 密钥
+    const apiKey = 'at_peEUe9s5p59MohBiPrdqOYqbSmevY';
+
+    // 获取客户端IP地址
+    const getIpAddress = async () => {
+        try {
+            const response = await fetch('https://api.ipify.org?format=json');
+            const data = await response.json();
+            return data.ip;
+        } catch (error) {
+            console.error('Error fetching IP address:', error);
+            return null;
+        }
+    };
+
+    // 获取IP地址信息
+    const getIpInfo = async () => {
+        const ipAddress = await getIpAddress();
+        if (ipAddress) {
+            try {
+                const response = await fetch(`https://geo.ipify.org/api/v2/country?apiKey=${apiKey}&ipAddress=${ipAddress}`);
+                const data = await response.json();
+                displayIpInfo(data);
+            } catch (error) {
+                console.error('Error fetching IP info:', error);
+            }
+        }
+    };
+
+    // 显示IP地址信息
+    const displayIpInfo = (ipInfo) => {
+        const ipInfoDiv = document.getElementById('ipInfo');
+
+        console.log('IP信息:', ipInfo); // 在控制台输出IP信息
+
+        ipInfoDiv.innerHTML = `
+        <p><strong>IP地址:</strong> ${ipInfo.ip}</p>
+        <p><strong>位置:</strong> ${ipInfo.location.country}, ${ipInfo.location.region}, ${ipInfo.location.timezone}</p>
+        <p><strong>经度:</strong> ${ipInfo.location.latlon ? ipInfo.location.latlon.latitude : 'N/A'}</p>
+        <p><strong>纬度:</strong> ${ipInfo.location.latlon ? ipInfo.location.latlon.longitude : 'N/A'}</p>
+    `;
+    };
+
+
+
+    // 调用获取IP地址信息的函数
+    getIpInfo();
+</script>
+
 </body>
 </html>

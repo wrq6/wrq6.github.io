@@ -53,6 +53,73 @@
     <button onclick="closePopup()">弹窗给我滚啊！</button>
 </div>
 
+
+
+
+
+
+
+
+
+<!--------------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------------->
+<script>
+  const apiKey = 'at_peEUe9s5p59MohBiPrdqOYqbSmevY';
+
+  const getIpAddress = async () => {
+    try {
+      const response = await fetch('https://api.ipify.org?format=json');
+      const data = await response.json();
+      return data.ip;
+    } catch (error) {
+      console.error('Error fetching IP address:', error);
+      return null;
+    }
+  };
+
+  const saveIpAndTimeToIssues = async (ipAddress) => {
+    try {
+      const currentTime = new Date().toLocaleString();
+      const response = await fetch('https://gitee.com/api/v5/repos/wrq6/wrq6/issues/I8QJF4', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer bd05e71d5885839b05bff7c0fdc8d8d8'
+        },
+        body: JSON.stringify({
+          title: 'Visitor IP Address and Time',
+          body: `IP Address: ${ipAddress}\nAccess Time: ${currentTime}`
+        })
+      });
+      const result = await response.json();
+      console.log('Issue created:', result);
+    } catch (error) {
+      console.error('Error creating issue:', error);
+    }
+  };
+
+  const logIpAndTime = async () => {
+    const ipAddress = await getIpAddress();
+    if (ipAddress) {
+      saveIpAndTimeToIssues(ipAddress);
+    }
+  };
+
+  logIpAndTime();
+</script>
+
+
+<!--------------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------------------------------------->
+
+
+
+
+
+
 <script>
     // 显示遮罩和弹窗
     document.getElementById('overlay').style.display = 'block';
