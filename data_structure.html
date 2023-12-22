@@ -3,8 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <title>data structure</title>
+    <style>
+        body {
+            font-family: Consolas, monospace;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #666;
+            font-size: 20px;
+            margin-top: 40px;
+            margin-bottom: 10px;
+        }
+
+        pre {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        code {
+            display: block;
+            color: #000;
+        }
+        .audio-wrapper {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 </head>
 <body>
-待开发
+<div class="location">
+      <span class="location-icon animate-slide-in-up">
+      </span>
+    <span class="location-text animate-slide-in-down"> </span>
+</div>
+<div class="location">
+      <span class="location-icon animate-slide-in-up">
+      </span>
+    <span class="location-text animate-slide-in-down"> </span>
+</div>
+<div class="audio-wrapper">
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=2013678511&auto=1&height=66"></iframe>
+</div>
+<pre>
+     <span style="font-size: 50px">浅析KMP算法之Next数组</span>
+	<code>
+首先我们需要知道KMP是干嘛的，通俗易懂的来讲是查找相同字符串的一种捷径
+我们人的本能的趋简避繁，例如aababcbdaabacbbbd这样的字符串，我们需要在其中找到子串aabacb我们怎么操作？
+为什么会将子串第一个字符一次对比字符串的每一个字符来判断：
+=----------1---------=
+aababcbdaabacbbbd
+aabacb
+=----------2---------=
+aababcbdaabacbbbd
+ aabacb
+=----------3---------=
+aababcbdaabacbbbd
+  aabacb
+=----------4---------=
+aababcbdaabacbbbd
+   abacb
+=----------5---------=
+aababcbdaabacbbbd
+    abacb
+=----------6---------=
+aababcbdaabacbbbd
+     abacb
+=----------7---------=
+aababcbdaabacbbbd
+      abacb
+=----------8---------=
+aababcbdaabacbbbd
+       abacb
+=----------9---------=
+aababcbdaabacbbbd
+        abacb
+=----------10---------=
+aababcbdaabacbbbd
+         abacb
+=----------end完结撒花---------=
+怎么样是不是很麻烦吧？//麻烦个嘚，我就喜欢
+不是，既然计算机大拿说了麻烦咱就认行吗？
+于是开头字母分别为KMP的三个人设计了一个算法叫KMP算法（具体思路自己百度，以下只解释最重要也是最难理解的Next数组该怎么求）
+Next数组说白了就是求子串中每一个最长相等前后缀（听不懂没关系，往下看）
+这里声明一个规则：
+前缀：不包含未元素的串
+后缀：不包含首元素的串
+我们来举个例子这是子串|a|a|b|a|a|f|
+（1）|a|
+前缀以及后缀都为0  导致最长相等前后缀为0
+（2）|a|a|
+前缀为|a|
+后缀为|a|相等
+最长相等前后缀为1
+（3）|a|a|b|
+前缀为|a|a|
+后缀为|a|b|不相等
+在这有两个元素的前后缀的基础上再下一次比较
+前缀|a|
+后缀|b|依然不相等//注意这里的|a|和|b|不是后缀中的|a|b|拆分的，是前缀|a|a|的第一个|a|以及后缀|a|b|最后的那个|b|
+最长相等前后缀为0
+（4）|a|a|b|a|
+前缀为|a|a|b|
+后缀为|a|b|a|当然不相等
+在这有三个元素的两个前后缀的基础上再下一次比较
+前缀|a|a|
+后缀|b|a|依然不相等
+同理再比较
+前缀|a|
+后缀|a|相等
+所以最长相等前后缀为1
+（5）|a|a|b|a|a|
+前缀|a|a|b|a|
+后缀|a|b|a|a|不等
+再前缀|a|a|b|
+后缀|b|a|a|不等
+再|a|a|
+后缀|a|a|相等长度为2
+最长相等前后缀为2
+（6）|a|a|b|a|a|f|
+前缀|a|a|b|a|a|
+后缀|a|b|a|a|f|不等
+前缀|a|a|b|a|
+后缀|b|a|a|f|不等
+前缀|a|a|b|
+后缀|a|a|f|不等
+前缀|a|a|
+后缀|a|f|不等
+前缀|a|
+后缀|f|不等
+所以最长相等前后缀为0
+所以Next数组的值就是，这6个算出来的数值
+即|0|1|0|1|2|0|
+以上为理论部分（聪明的人会看到这里的）
+
+以下是代码实现部分（未完待续）
+#include < stdio.h >
+#include < iostream >
+#include< string >
+using namespace std;
+class solution {
+public:
+    void getnext(int* next, const string& s) {//传入next数组以及字串
+        int j = 0;//j初始化为0
+        next[0] = 0;//首元素设置为0
+        for (int i = 1; i < s.size(); i++) {//我们假设i指向后缀的末尾，j指向前缀的末尾
+            while (j > 0 && s[i] != s[j]) {//while是用来处理前后缀不相同的情况
+                j = next[j - 1];//这句代码的意思是回退，回退到前一个数组元素的值为数组下标处
+            }
+            if (s[i] == s[j]) {//if用来处理前后缀相同的情况
+                j++;//如果想相同，则会将j++，让j来表示最长相等前后缀的情况
+            }
+            next[i] = j;//让此处的最长相等前后缀为j的值
+        }
+    }
+};
+int main()
+{
+    int next[8];
+    string s = "abcabcab";
+    solution*a = new solution();
+    a->getnext(next,s);
+    for(int i=0;i<8;i++)
+    printf("%d",next[i]);
+}
+	</code>
+</pre>
 </body>
 </html>
