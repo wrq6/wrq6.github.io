@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your English Notes</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* 使内容至少占满一屏高度 */
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        footer {
+            margin-top: auto; /* 将 footer 推到页面底部 */
+            text-align: center;
+            color: #666;
+        }
+        section {
+            position: relative;
+        }
+
+        /* 添加伪元素，模拟竖线 */
+        .with-line::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 5px; /* 竖线的宽度 */
+            background-color: #ddd; /* 淡灰色 */
+        }
+
+        h2, p {
+            margin-left: 10px; /* 确保文本不挨着竖线 */
+        }
+
+        p {
+            margin-bottom: 10px; /* 添加底部间距 */
+        }
+
+        /* 其他样式，可根据需要修改 */
+        h2 {
+            color: #333;
+        }
+
+        p {
+            line-height: 1.5;
+            color: #666;
+        }
+
+        /* 添加样式以适应移动设备 */
+        @media (max-width: 767px) {
+            .with-line::before {
+                display: none; /* 在小屏幕上隐藏竖线 */
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>英语笔记</h1>
+</header>
+
+<section>
+    <h2>一、主谓宾句型</h2>
+    <p style="color: #1abc9c">1.1 用主谓宾句型来翻译句子</p>
+    <section class="with-line">
+        <p>我<span style="color: #1da1f2">爱</span>你 </p>
+        <p>I + <span style="color: #1da1f2">love</span> + you</p>
+    </section>
+    <section class="with-line">
+        <p>他<span style="color: #1da1f2">爱</span>你 </p>
+        <p>He + <span style="color: #1da1f2">love<span style="color: red">s</span></span> + you</p>
+    </section>
+    <section class="with-line">
+        <p>你<span style="color: #1da1f2">吃</span>米饭 </p>
+        <p>You + <span style="color: #1da1f2">eat(吃)</span> + rice(米饭)</p>
+    </section>
+    <section class="with-line">
+        <p>这个人<span style="color: #1da1f2">吃</span>面条 </p>
+        <p>This person(人) + <span style="color: #1da1f2">eats<span style="color: red">s</span></span> + noodles(面条)</p>
+    </section>
+    <section class="with-line">
+        <p>我<span style="color: #1da1f2">跑步</span></p>
+        <p>I + <span style="color: #1da1f2">run</span></p>
+    </section>
+    <section class="with-line">
+        <p>他们<span style="color: #1da1f2">跑步</span> </p>
+        <p>They + <span style="color: #1da1f2">run</span></p>
+    </section>
+    <section class="with-line">
+        <p>她<span style="color: #1da1f2">跑步</span> </p>
+        <p>She + <span style="color: #1da1f2">run<span style="color: red">s</span></span></p>
+    </section>
+    <p style="color: #00aa44;">1.2 谓语动词是否变形原则</p>
+    <section class="with-line">
+    <pre>
+        <span style="color: red">主语</span>                  <span style="color: red">谓语动词</span>
+        我                      不变
+        你                      不变
+        他/她/它                变+s
+        数量为1                 变+s
+        数量大于1               不变
+    </pre>
+
+    </section>
+    <p style="color: #6f42c1;">1.3 宾语存在动词需变形</p>
+    <section class="with-line">
+        <p>规则:</p>
+        <p>发生过----->动词<span style="color: red">后</span>加<span style="color: red">ing</span></p>
+        <p>未发生过----->动词<span style="color: red">前</span>加<span style="color: red">to</span></p>
+    </section>
+    <section class="with-line">
+        <p>我<span style="color: #1da1f2">爱</span><span style="color: black">吃</span>面条</p>
+        <p>I love eat noodles</p>
+        <p>当还没有吃过面条在前面加to</p>
+        <p>也就是I love <span style="color: red">to</span> eat noodles</p>
+        <p>如果面条被吃过了</p>
+        <p>也就是I love eat<span style="color: red">ing</span> noodles</p>
+    </section>
+    <section class="with-line">
+        <p>这个人<span style="color: #1da1f2">喜欢</span><span style="color: black">睡觉</span></p>
+        <p>This guy + likes + sleeping</p>
+        <p><span style="color: #0a3d2e">This guy 也可以写成This person，其次一个人是数量为1，谓词要变+s，喜欢睡觉肯定是睡过了，所以加ing</span></p>
+    </section>
+    <section class="with-line">
+        <p>我<span style="color: #1da1f2">想</span><span style="color: black">离开</span>这里</p>
+        <p>I want to leave here</p>
+        <p><span style="color: #0a3d2e">想离开说明还没有离开，在前面加to</span></p>
+    </section>
+    <section class="with-line">
+        <p>他们<span style="color: #1da1f2">决定</span><span style="color: black">乘坐</span>大巴</p>
+        <p>They + decide + to take a bus</p>
+        <p><span style="color: #0a3d2e">决定说明还没有坐，所以在前面加to</span></p>
+    </section>
+</section>
+
+
+<footer>
+    <p>&copy; 2023 Your English Notes</p>
+</footer>
+</body>
+</html>
