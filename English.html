@@ -3,7 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your English Notes</title>
+    <title>小白英语笔记</title>
+<!--    &lt;!&ndash; 引入 jsPDF &ndash;&gt;-->
+<script src="js/html2canvas.min.js"></script>
+<script src="js/html2pdf.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+
+    <style>
+            @font-face {
+                font-family: 'Source Han Serif CN';
+                src: url('fonts/element-icons.732389de.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+    </style>
+
     <style>
         body {
             display: flex;
@@ -54,16 +69,16 @@
         /* 添加样式以适应移动设备 */
         @media (max-width: 767px) {
             .with-line::before {
-                display: none; /* 在小屏幕上隐藏竖线 */
+                /*display: none; !* 在小屏幕上隐藏竖线 *!*/
             }
         }
     </style>
 </head>
 <body>
+<section id="pdf">
 <header>
     <h1>英语笔记</h1>
 </header>
-
 <section>
     <h2>一、主谓宾句型</h2>
     <p style="color: #1abc9c">1.1 用主谓宾句型来翻译句子</p>
@@ -81,7 +96,7 @@
     </section>
     <section class="with-line">
         <p>这个人<span style="color: #1da1f2">吃</span>面条 </p>
-        <p>This person(人) + <span style="color: #1da1f2">eats<span style="color: red">s</span></span> + noodles(面条)</p>
+        <p>This person(人) + <span style="color: #1da1f2">eat<span style="color: red">s</span></span> + noodles(面条)</p>
     </section>
     <section class="with-line">
         <p>我<span style="color: #1da1f2">跑步</span></p>
@@ -137,10 +152,87 @@
         <p><span style="color: #0a3d2e">决定说明还没有坐，所以在前面加to</span></p>
     </section>
 </section>
+<section>
+    <h2>二、主系表句型(当系动词为：是/很/在)</h2>
+    <p style="color: #1abc9c">1.1 规则：先找主，再找表，再用系动词连接起来</p>
+    <section class="with-line">
 
+    </section>
+</section>
+</section>
+
+<!-- 添加下载本网页内容的pdf按钮以及逻辑代码 -->
+<button id="downloadBtn">下载 本页面PDF</button>
+
+<script>
+    var downloadBtn = document.getElementById('downloadBtn');
+    downloadBtn.addEventListener('click', function () {
+        var element = document.getElementById('pdf');
+        var pageHeight = 800; // 页面高度，根据需求进行调整
+
+        // 显式设置要捕获元素的高度
+        element.style.height = element.scrollHeight + 'px';
+
+        html2canvas(element).then(function (canvas) {
+            var imgData = canvas.toDataURL('image/png');
+            var pages = [{
+                image: imgData,
+                width: 500
+            }];
+
+            // 循环处理每个部分
+            var remainingParts = Array.from(element.children);
+            var currentPage = 0;
+            var currentHeight = pageHeight;
+
+            while (remainingParts.length > 0) {
+                var part = remainingParts.shift();
+
+                html2canvas(part).then(function (canvas) {
+                    var imgData = canvas.toDataURL('image/png');
+                    var partHeight = part.scrollHeight;
+
+                    if (currentHeight + partHeight > pageHeight) {
+                        // 当前页面已满，创建新页面
+                        currentPage++;
+                        currentHeight = partHeight;
+
+                        pages.push({
+                            image: imgData,
+                            width: 500
+                        });
+                    } else {
+                        // 在当前页面上继续添加内容
+                        currentHeight += partHeight;
+
+                        pages[currentPage].height = currentHeight;
+                        pages[currentPage].fit = [500, currentHeight];
+
+                        pages.push({
+                            image: imgData,
+                            width: 500
+                        });
+                    }
+
+                    // 如果还有剩余部分，继续循环
+                    if (remainingParts.length === 0) {
+                        var docDefinition = { content: pages };
+                        var pdfDocGenerator = pdfMake.createPdf(docDefinition);
+                        pdfDocGenerator.download('document.pdf');
+                    }
+                });
+
+                // 移除已添加的部分
+                part.parentNode.removeChild(part);
+            }
+        });
+    });
+
+</script>
 
 <footer>
-    <p>&copy; 2023 Your English Notes</p>
+    <p>&copy; 2023 English Notes</p>
 </footer>
+
 </body>
 </html>
