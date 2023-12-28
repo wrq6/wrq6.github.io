@@ -48,19 +48,80 @@
     <script>hljs.highlightAll();</script>
 </head>
 <body>
-<div class="location">
-      <span class="location-icon animate-slide-in-up">
-      </span>
-    <span class="location-text animate-slide-in-down"> </span>
+
+<div id="lyric-container"></div>
+<div class="audio-container">
+    <audio controls ontimeupdate="showLyrics()">
+        <source src="music/b.mp3" type="audio/mpeg">
+        是妈妈是女儿 - 黄绮珊,希林娜依高
+    </audio>
 </div>
-<div class="location">
-      <span class="location-icon animate-slide-in-up">
-      </span>
-    <span class="location-text animate-slide-in-down"> </span>
-</div>
-<div class="audio-wrapper">
-    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=2013678511&auto=1&height=66"></iframe>
-</div>
+<script>
+    var lyricContainer = document.getElementById("lyric-container");
+    var audio = document.getElementsByTagName("audio")[0];
+    var lyrics = []; // 存储所有歌词的数组
+
+    function loadLyrics() {
+        // 获取歌曲名称，用于加载对应的歌词文件
+        var songName = audio.getElementsByTagName("source")[0].src.split("/").pop().replace(".mp3", "");
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var lyricText = this.responseText;
+                lyrics = parseLyrics(lyricText); // 解析歌词文本并存储到数组中
+                console.log("已加载 " + lyrics.length + " 行歌词。");
+            }
+        };
+        xhttp.open("GET", "geci/" + songName + ".lrc", true); // 修改为您存放歌词文件的路径
+        xhttp.send();
+    }
+
+    function parseLyrics(lyricText) {
+        var lines = lyricText.split("\n");
+        var result = [];
+        for (var i = 0; i < lines.length; i++) {
+            var line = lines[i];
+            var timeRegex = /\[(\d{2}):(\d{2})\.(\d{2})\]/; // 匹配时间标签的正则表达式
+            var matches = line.match(timeRegex);
+            if (matches) {
+                var minutes = parseInt(matches[1]);
+                var seconds = parseInt(matches[2]);
+                var milliseconds = parseInt(matches[3]);
+                var text = line.replace(timeRegex, "").trim();
+                var time = minutes * 60 + seconds + milliseconds / 100;
+                result.push({ time: time, text: text });
+            }
+        }
+        return result;
+    }
+
+    function showLyrics() {
+        loadLyrics(); // 加载歌词
+        var currentTime = audio.currentTime;
+        var displayedLyrics = []; // 存储要显示的歌词行
+        for (var i = 0; i < lyrics.length; i++) {
+            if (currentTime >= lyrics[i].time) {
+                displayedLyrics.push(lyrics[i]);
+            }
+        }
+        if (displayedLyrics.length > 0) {
+            var lyricsHTML = '';
+            for (var j = 0; j < displayedLyrics.length; j++) {
+                lyricsHTML += '<p>' + displayedLyrics[j].text + '</p>';
+            }
+            lyricContainer.innerHTML = lyricsHTML;
+            lyricContainer.scrollTop = (displayedLyrics.length - 1) * 25; // 滚动到最后一行歌词
+            lyrics.splice(0, displayedLyrics.length); // 删除已经显示的歌词行
+        }
+    }
+
+
+    // 在音频播放时调用 showLyrics 函数
+    audio.addEventListener("timeupdate", function () {
+        showLyrics();
+    });
+
+</script>
 <pre>
      <span style="font-size: 50px">浅析KMP算法之Next数组</span>
 	<code>
@@ -186,6 +247,542 @@ int main()
         //放心，代码你十有八九看不懂，不过没关系，毕竟你要是自己研究出来了
         //你就是KMP的发明者了，今天看几遍，过几天再来，慢慢的就理解了
 	</code>
+</pre>
+
+<pre>
+     <span style="font-size: 50px">图的最小生成树</span>
+    <p>          给定图，利用<span style="color: red">Kruskal算法（克鲁斯卡算法）</span>生成最小生成树</p>
+
+    <canvas id="myCanvas" width="400" height="200" style="border:1px solid #000;"></canvas>
+    <script>
+    var canvas = document.getElementById('myCanvas');
+    var context = canvas.getContext('2d');
+
+    // 定义图的顶点
+    var vertices = [
+        { x: 50, y: 50, label: 'A' },
+        { x: 50, y: 150, label: 'B' },
+        { x: 250, y: 100, label: 'C' },
+        { x: 150, y: 150, label: 'D' },
+        { x: 150, y: 50, label: 'E' }
+    ];
+
+    // 定义图的边和权重
+    var edges = [
+        { start: vertices[0], end: vertices[4], weight: 10 },
+        { start: vertices[4], end: vertices[2], weight: 7 },
+        { start: vertices[2], end: vertices[3], weight: 15 },
+        { start: vertices[3], end: vertices[1], weight: 40 },
+        { start: vertices[0], end: vertices[3], weight: 8 },
+        { start: vertices[1], end: vertices[0], weight: 50 }
+    ];
+
+    // 绘制顶点
+    vertices.forEach(function(vertex) {
+        context.beginPath();
+        context.arc(vertex.x, vertex.y, 20, 0, 2 * Math.PI);
+        context.fillStyle = 'lightblue';
+        context.fill();
+        context.stroke();
+
+        // 绘制顶点标签
+        context.fillStyle = 'black';
+        context.font = '14px Arial';
+        context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+    });
+
+    // 绘制边和权重
+    edges.forEach(function(edge) {
+        context.beginPath();
+        context.moveTo(edge.start.x, edge.start.y);
+        context.lineTo(edge.end.x, edge.end.y);
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // 绘制边权重标签
+        var weightX = (edge.start.x + edge.end.x) / 2;
+        var weightY = (edge.start.y + edge.end.y) / 2;
+        context.fillStyle = 'red';
+        context.font = '12px Arial';
+        context.fillText(edge.weight, weightX, weightY);
+    });
+</script>
+    (1) 找出最小的边
+    即
+       <canvas id="myCanvas1" width="400" height="200" style="border:1px solid #000;"></canvas>
+        <script>
+            var canvas = document.getElementById('myCanvas1');
+            var context = canvas.getContext('2d');
+            // 定义图的顶点
+            var vertices = [
+                { x: 50, y: 50, label: 'A' },
+                { x: 50, y: 150, label: 'B' },
+                { x: 250, y: 100, label: 'C' },
+                { x: 150, y: 150, label: 'D' },
+                { x: 150, y: 50, label: 'E' }
+            ];
+
+            // 定义图的边和权重
+            var edges = [
+                { start: vertices[4], end: vertices[2], weight: 7 }
+            ];
+            // 绘制顶点
+            vertices.forEach(function(vertex) {
+                context.beginPath();
+                context.arc(vertex.x, vertex.y, 20, 0, 2 * Math.PI);
+                context.fillStyle = 'lightblue';
+                context.fill();
+                context.stroke();
+
+                // 绘制顶点标签
+                context.fillStyle = 'black';
+                context.font = '14px Arial';
+                context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+            });
+
+            // 绘制边和权重
+            edges.forEach(function(edge) {
+                context.beginPath();
+                context.moveTo(edge.start.x, edge.start.y);
+                context.lineTo(edge.end.x, edge.end.y);
+                context.strokeStyle = 'black';
+                context.stroke();
+
+                // 绘制边权重标签
+                var weightX = (edge.start.x + edge.end.x) / 2;
+                var weightY = (edge.start.y + edge.end.y) / 2;
+                context.fillStyle = 'red';
+                context.font = '12px Arial';
+                context.fillText(edge.weight, weightX, weightY);
+            });
+
+        </script>
+    (2) 继续找出最小的边
+    即
+       <canvas id="myCanvas2" width="400" height="200" style="border:1px solid #000;"></canvas>
+        <script>
+            var canvas = document.getElementById('myCanvas2');
+            var context = canvas.getContext('2d');
+            // 定义图的顶点
+            var vertices = [
+                { x: 50, y: 50, label: 'A' },
+                { x: 50, y: 150, label: 'B' },
+                { x: 250, y: 100, label: 'C' },
+                { x: 150, y: 150, label: 'D' },
+                { x: 150, y: 50, label: 'E' }
+            ];
+
+            // 定义图的边和权重
+            var edges = [
+                { start: vertices[0], end: vertices[3], weight: 8 },
+                { start: vertices[4], end: vertices[2], weight: 7 }
+            ];
+            // 绘制顶点
+            vertices.forEach(function(vertex) {
+                context.beginPath();
+                context.arc(vertex.x, vertex.y, 20, 0, 2 * Math.PI);
+                context.fillStyle = 'lightblue';
+                context.fill();
+                context.stroke();
+
+                // 绘制顶点标签
+                context.fillStyle = 'black';
+                context.font = '14px Arial';
+                context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+            });
+
+            // 绘制边和权重
+            edges.forEach(function(edge) {
+                context.beginPath();
+                context.moveTo(edge.start.x, edge.start.y);
+                context.lineTo(edge.end.x, edge.end.y);
+                context.strokeStyle = 'black';
+                context.stroke();
+
+                // 绘制边权重标签
+                var weightX = (edge.start.x + edge.end.x) / 2;
+                var weightY = (edge.start.y + edge.end.y) / 2;
+                context.fillStyle = 'red';
+                context.font = '12px Arial';
+                context.fillText(edge.weight, weightX, weightY);
+            });
+
+        </script>
+(3) 继续找出最小的边
+    即
+       <canvas id="myCanvas3" width="400" height="200" style="border:1px solid #000;"></canvas>
+        <script>
+            var canvas = document.getElementById('myCanvas3');
+            var context = canvas.getContext('2d');
+            // 定义图的顶点
+            var vertices = [
+                { x: 50, y: 50, label: 'A' },
+                { x: 50, y: 150, label: 'B' },
+                { x: 250, y: 100, label: 'C' },
+                { x: 150, y: 150, label: 'D' },
+                { x: 150, y: 50, label: 'E' }
+            ];
+
+            // 定义图的边和权重
+            var edges = [
+                { start: vertices[0], end: vertices[4], weight: 10 },
+                { start: vertices[0], end: vertices[3], weight: 8 },
+                { start: vertices[4], end: vertices[2], weight: 7 }
+            ];
+            // 绘制顶点
+            vertices.forEach(function(vertex) {
+                context.beginPath();
+                context.arc(vertex.x, vertex.y, 20, 0, 2 * Math.PI);
+                context.fillStyle = 'lightblue';
+                context.fill();
+                context.stroke();
+
+                // 绘制顶点标签
+                context.fillStyle = 'black';
+                context.font = '14px Arial';
+                context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+            });
+
+            // 绘制边和权重
+            edges.forEach(function(edge) {
+                context.beginPath();
+                context.moveTo(edge.start.x, edge.start.y);
+                context.lineTo(edge.end.x, edge.end.y);
+                context.strokeStyle = 'black';
+                context.stroke();
+
+                // 绘制边权重标签
+                var weightX = (edge.start.x + edge.end.x) / 2;
+                var weightY = (edge.start.y + edge.end.y) / 2;
+                context.fillStyle = 'red';
+                context.font = '12px Arial';
+                context.fillText(edge.weight, weightX, weightY);
+            });
+
+        </script>
+    (4) 继续找出最小的边<span style="color: red">(注意：这里之所以是选40而不是15的边是因为C和D已经有了通路)</span>
+    即
+       <canvas id="myCanvas4" width="400" height="200" style="border:1px solid #000;"></canvas>
+        <script>
+            var canvas = document.getElementById('myCanvas4');
+            var context = canvas.getContext('2d');
+            // 定义图的顶点
+            var vertices = [
+                { x: 50, y: 50, label: 'A' },
+                { x: 50, y: 150, label: 'B' },
+                { x: 250, y: 100, label: 'C' },
+                { x: 150, y: 150, label: 'D' },
+                { x: 150, y: 50, label: 'E' }
+            ];
+
+            // 定义图的边和权重
+            var edges = [
+                { start: vertices[3], end: vertices[1], weight: 40 },
+                { start: vertices[0], end: vertices[4], weight: 10 },
+                { start: vertices[0], end: vertices[3], weight: 8 },
+                { start: vertices[4], end: vertices[2], weight: 7 }
+            ];
+            // 绘制顶点
+            vertices.forEach(function(vertex) {
+                context.beginPath();
+                context.arc(vertex.x, vertex.y, 20, 0, 2 * Math.PI);
+                context.fillStyle = 'lightblue';
+                context.fill();
+                context.stroke();
+
+                // 绘制顶点标签
+                context.fillStyle = 'black';
+                context.font = '14px Arial';
+                context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+            });
+
+            // 绘制边和权重
+            edges.forEach(function(edge) {
+                context.beginPath();
+                context.moveTo(edge.start.x, edge.start.y);
+                context.lineTo(edge.end.x, edge.end.y);
+                context.strokeStyle = 'black';
+                context.stroke();
+
+                // 绘制边权重标签
+                var weightX = (edge.start.x + edge.end.x) / 2;
+                var weightY = (edge.start.y + edge.end.y) / 2;
+                context.fillStyle = 'red';
+                context.font = '12px Arial';
+                context.fillText(edge.weight, weightX, weightY);
+            });
+
+        </script>
+    <br style="border: #6f42c1">
+    <br style="border: #6f42c1">
+    <br style="border: #6f42c1">
+   <p>          给定图，利用<span style="color: red">Prim算法（普里姆算法）</span>生成最小生成树，给定A为初始点</p>
+
+    <canvas id="myCanvas5" width="400" height="200" style="border:1px solid #000;"></canvas>
+    <script>
+    var canvas = document.getElementById('myCanvas5');
+    var context = canvas.getContext('2d');
+
+    // 定义图的顶点
+    var vertices = [
+        { x: 50, y: 50, label: 'A' },
+        { x: 50, y: 150, label: 'B' },
+        { x: 250, y: 100, label: 'C' },
+        { x: 150, y: 150, label: 'D' },
+        { x: 150, y: 50, label: 'E' }
+    ];
+
+    // 定义图的边和权重
+    var edges = [
+        { start: vertices[0], end: vertices[4], weight: 10 },
+        { start: vertices[4], end: vertices[2], weight: 7 },
+        { start: vertices[2], end: vertices[3], weight: 15 },
+        { start: vertices[3], end: vertices[1], weight: 40 },
+        { start: vertices[0], end: vertices[3], weight: 8 },
+        { start: vertices[1], end: vertices[0], weight: 50 }
+    ];
+
+    // 绘制顶点
+    vertices.forEach(function(vertex) {
+        context.beginPath();
+        context.arc(vertex.x, vertex.y, 20, 0, 2 * Math.PI);
+        context.fillStyle = 'lightblue';
+        context.fill();
+        context.stroke();
+
+        // 绘制顶点标签
+        context.fillStyle = 'black';
+        context.font = '14px Arial';
+        context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+    });
+
+    // 绘制边和权重
+    edges.forEach(function(edge) {
+        context.beginPath();
+        context.moveTo(edge.start.x, edge.start.y);
+        context.lineTo(edge.end.x, edge.end.y);
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // 绘制边权重标签
+        var weightX = (edge.start.x + edge.end.x) / 2;
+        var weightY = (edge.start.y + edge.end.y) / 2;
+        context.fillStyle = 'red';
+        context.font = '12px Arial';
+        context.fillText(edge.weight, weightX, weightY);
+    });
+</script>
+    (1) 选出与A相连的最小权值的边
+    即
+        <canvas id="myCanvas6" width="400" height="200" style="border:1px solid #000;"></canvas>
+    <script>
+    var canvas = document.getElementById('myCanvas6');
+    var context = canvas.getContext('2d');
+
+    // 定义图的顶点
+    var vertices = [
+        { x: 50, y: 50, label: 'A' },
+        { x: 50, y: 150, label: 'B' },
+        { x: 250, y: 100, label: 'C' },
+        { x: 150, y: 150, label: 'D' },
+        { x: 150, y: 50, label: 'E' }
+    ];
+
+    // 定义图的边和权重
+    var edges = [
+        { start: vertices[0], end: vertices[3], weight: 8 }
+    ];
+
+    // 绘制顶点
+    vertices.forEach(function(vertex) {
+        context.beginPath();
+        context.arc(vertex.x, vertex.y, 20, 0, 2 * Math.PI);
+        context.fillStyle = 'lightblue';
+        context.fill();
+        context.stroke();
+
+        // 绘制顶点标签
+        context.fillStyle = 'black';
+        context.font = '14px Arial';
+        context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+    });
+
+    // 绘制边和权重
+    edges.forEach(function(edge) {
+        context.beginPath();
+        context.moveTo(edge.start.x, edge.start.y);
+        context.lineTo(edge.end.x, edge.end.y);
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // 绘制边权重标签
+        var weightX = (edge.start.x + edge.end.x) / 2;
+        var weightY = (edge.start.y + edge.end.y) / 2;
+        context.fillStyle = 'red';
+        context.font = '12px Arial';
+        context.fillText(edge.weight, weightX, weightY);
+    });
+</script>
+        (2) 选出与AD相连的最小权值的边
+    即
+        <canvas id="myCanvas7" width="400" height="200" style="border:1px solid #000;"></canvas>
+    <script>
+    var canvas = document.getElementById('myCanvas7');
+    var context = canvas.getContext('2d');
+
+    // 定义图的顶点
+    var vertices = [
+        { x: 50, y: 50, label: 'A' },
+        { x: 50, y: 150, label: 'B' },
+        { x: 250, y: 100, label: 'C' },
+        { x: 150, y: 150, label: 'D' },
+        { x: 150, y: 50, label: 'E' }
+    ];
+
+    // 定义图的边和权重
+    var edges = [
+        { start: vertices[0], end: vertices[4], weight: 10 },
+        { start: vertices[0], end: vertices[3], weight: 8 }
+    ];
+
+    // 绘制顶点
+    vertices.forEach(function(vertex) {
+        context.beginPath();
+        context.arc(vertex.x, vertex.y, 20, 0, 2 * Math.PI);
+        context.fillStyle = 'lightblue';
+        context.fill();
+        context.stroke();
+
+        // 绘制顶点标签
+        context.fillStyle = 'black';
+        context.font = '14px Arial';
+        context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+    });
+
+    // 绘制边和权重
+    edges.forEach(function(edge) {
+        context.beginPath();
+        context.moveTo(edge.start.x, edge.start.y);
+        context.lineTo(edge.end.x, edge.end.y);
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // 绘制边权重标签
+        var weightX = (edge.start.x + edge.end.x) / 2;
+        var weightY = (edge.start.y + edge.end.y) / 2;
+        context.fillStyle = 'red';
+        context.font = '12px Arial';
+        context.fillText(edge.weight, weightX, weightY);
+    });
+</script>
+            (3) 选出与ADE相连的最小权值的边
+    即
+        <canvas id="myCanvas8" width="400" height="200" style="border:1px solid #000;"></canvas>
+    <script>
+    var canvas = document.getElementById('myCanvas8');
+    var context = canvas.getContext('2d');
+
+    // 定义图的顶点
+    var vertices = [
+        { x: 50, y: 50, label: 'A' },
+        { x: 50, y: 150, label: 'B' },
+        { x: 250, y: 100, label: 'C' },
+        { x: 150, y: 150, label: 'D' },
+        { x: 150, y: 50, label: 'E' }
+    ];
+
+    // 定义图的边和权重
+    var edges = [
+        { start: vertices[0], end: vertices[4], weight: 10 },
+        { start: vertices[0], end: vertices[3], weight: 8 },
+        { start: vertices[4], end: vertices[2], weight: 7 }
+    ];
+
+    // 绘制顶点
+    vertices.forEach(function(vertex) {
+        context.beginPath();
+        context.arc(vertex.x, vertex.y, 20, 0, 2 * Math.PI);
+        context.fillStyle = 'lightblue';
+        context.fill();
+        context.stroke();
+
+        // 绘制顶点标签
+        context.fillStyle = 'black';
+        context.font = '14px Arial';
+        context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+    });
+
+    // 绘制边和权重
+    edges.forEach(function(edge) {
+        context.beginPath();
+        context.moveTo(edge.start.x, edge.start.y);
+        context.lineTo(edge.end.x, edge.end.y);
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // 绘制边权重标签
+        var weightX = (edge.start.x + edge.end.x) / 2;
+        var weightY = (edge.start.y + edge.end.y) / 2;
+        context.fillStyle = 'red';
+        context.font = '12px Arial';
+        context.fillText(edge.weight, weightX, weightY);
+    });
+</script>
+                (4) 选出与ADEC相连的最小权值的边(注意：不能选择已经用通路的两点的边)
+    即
+        <canvas id="myCanvas9" width="400" height="200" style="border:1px solid #000;"></canvas>
+    <script>
+    var canvas = document.getElementById('myCanvas9');
+    var context = canvas.getContext('2d');
+
+    // 定义图的顶点
+    var vertices = [
+        { x: 50, y: 50, label: 'A' },
+        { x: 50, y: 150, label: 'B' },
+        { x: 250, y: 100, label: 'C' },
+        { x: 150, y: 150, label: 'D' },
+        { x: 150, y: 50, label: 'E' }
+    ];
+
+    // 定义图的边和权重
+    var edges = [
+        { start: vertices[1], end: vertices[3], weight: 40 },
+        { start: vertices[0], end: vertices[4], weight: 10 },
+        { start: vertices[0], end: vertices[3], weight: 8 },
+        { start: vertices[4], end: vertices[2], weight: 7 }
+    ];
+
+    // 绘制顶点
+    vertices.forEach(function(vertex) {
+        context.beginPath();
+        context.arc(vertex.x, vertex.y, 20, 0, 2 * Math.PI);
+        context.fillStyle = 'lightblue';
+        context.fill();
+        context.stroke();
+
+        // 绘制顶点标签
+        context.fillStyle = 'black';
+        context.font = '14px Arial';
+        context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+    });
+
+    // 绘制边和权重
+    edges.forEach(function(edge) {
+        context.beginPath();
+        context.moveTo(edge.start.x, edge.start.y);
+        context.lineTo(edge.end.x, edge.end.y);
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // 绘制边权重标签
+        var weightX = (edge.start.x + edge.end.x) / 2;
+        var weightY = (edge.start.y + edge.end.y) / 2;
+        context.fillStyle = 'red';
+        context.font = '12px Arial';
+        context.fillText(edge.weight, weightX, weightY);
+    });
+</script>
+    <span style="font-size: 20px">总结两种算法的结果是相同的，但是其过程是不同的，解答这类题目的答案就是需要步骤的</span>
 </pre>
 </body>
 </html>

@@ -5,6 +5,78 @@
     <title>operating system</title>
 </head>
 <body>
-待开发
+<div id="lyric-container"></div>
+<div class="audio-container">
+    <audio controls ontimeupdate="showLyrics()">
+        <source src="music/e.mp3" type="audio/mpeg">
+        疑心病 - 任然
+    </audio>
+</div>
+<script>
+    var lyricContainer = document.getElementById("lyric-container");
+    var audio = document.getElementsByTagName("audio")[0];
+    var lyrics = []; // 存储所有歌词的数组
+
+    function loadLyrics() {
+        // 获取歌曲名称，用于加载对应的歌词文件
+        var songName = audio.getElementsByTagName("source")[0].src.split("/").pop().replace(".mp3", "");
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var lyricText = this.responseText;
+                lyrics = parseLyrics(lyricText); // 解析歌词文本并存储到数组中
+                console.log("已加载 " + lyrics.length + " 行歌词。");
+            }
+        };
+        xhttp.open("GET", "geci/" + songName + ".lrc", true); // 修改为您存放歌词文件的路径
+        xhttp.send();
+    }
+
+    function parseLyrics(lyricText) {
+        var lines = lyricText.split("\n");
+        var result = [];
+        for (var i = 0; i < lines.length; i++) {
+            var line = lines[i];
+            var timeRegex = /\[(\d{2}):(\d{2})\.(\d{2})\]/; // 匹配时间标签的正则表达式
+            var matches = line.match(timeRegex);
+            if (matches) {
+                var minutes = parseInt(matches[1]);
+                var seconds = parseInt(matches[2]);
+                var milliseconds = parseInt(matches[3]);
+                var text = line.replace(timeRegex, "").trim();
+                var time = minutes * 60 + seconds + milliseconds / 100;
+                result.push({ time: time, text: text });
+            }
+        }
+        return result;
+    }
+
+    function showLyrics() {
+        loadLyrics(); // 加载歌词
+        var currentTime = audio.currentTime;
+        var displayedLyrics = []; // 存储要显示的歌词行
+        for (var i = 0; i < lyrics.length; i++) {
+            if (currentTime >= lyrics[i].time) {
+                displayedLyrics.push(lyrics[i]);
+            }
+        }
+        if (displayedLyrics.length > 0) {
+            var lyricsHTML = '';
+            for (var j = 0; j < displayedLyrics.length; j++) {
+                lyricsHTML += '<p>' + displayedLyrics[j].text + '</p>';
+            }
+            lyricContainer.innerHTML = lyricsHTML;
+            lyricContainer.scrollTop = (displayedLyrics.length - 1) * 25; // 滚动到最后一行歌词
+            lyrics.splice(0, displayedLyrics.length); // 删除已经显示的歌词行
+        }
+    }
+
+
+    // 在音频播放时调用 showLyrics 函数
+    audio.addEventListener("timeupdate", function () {
+        showLyrics();
+    });
+
+</script>
 </body>
 </html>
