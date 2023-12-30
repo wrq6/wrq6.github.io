@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        #board {
+            display: grid;
+            grid-template-columns: repeat(8, 50px);
+            grid-template-rows: repeat(8, 50px);
+        }
+
+        .square {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #333;
+        }
+
+        .white {
+            background-color: #fff;
+        }
+
+        .black {
+            background-color: #000;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<div id="board"></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const board = document.getElementById("board");
+
+        // Create chessboard
+        for (let row = 0; row < 8; row++) {
+            for (let col = 0; col < 8; col++) {
+                const square = document.createElement("div");
+                square.className = `square ${((row + col) % 2 === 0) ? 'white' : 'black'}`;
+                square.dataset.row = row;
+                square.dataset.col = col;
+                square.textContent = getInitialPiece(row, col);
+                board.appendChild(square);
+            }
+        }
+
+        function getInitialPiece(row, col) {
+            // Implement your logic to set up the initial chess pieces
+            // You can use this function to set up the initial placement of pieces on the board
+            // Return the piece symbol or an empty string for an empty square
+            return "";
+        }
+
+        // Add event listener for square click
+        board.addEventListener("click", handleSquareClick);
+
+        function handleSquareClick(event) {
+            const square = event.target;
+            const row = square.dataset.row;
+            const col = square.dataset.col;
+
+            // Implement your chess move logic here
+            console.log(`Clicked on square (${row}, ${col})`);
+        }
+    });
+</script>
+
+</body>
+</html>

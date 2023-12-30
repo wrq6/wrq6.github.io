@@ -1,0 +1,53 @@
+#board {
+    width: 90vw; /* 使用视口宽度的百分比，而不是固定的像素值 */
+    height: 90vw;
+    max-width: 500px; /* 设置最大宽度，避免棋盘过大 */
+    max-height: 500px;
+    margin: 20px auto;
+    border: 5px solid black;
+    /* background: url("board.png"); */ /* 不再需要背景图片 */
+    position: relative;
+    box-sizing: border-box; /* 设置盒模型，使得边框和内边距包含在宽度和高度内 */
+}
+
+#info {
+    width: 90vw;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 20px;
+    color: blue;
+}
+
+.piece {
+    width: 10vw; /* 使用视口宽度的百分比，而不是固定的像素值 */
+    height: 10vw;
+    max-width: 50px; /* 设置最大宽度，避免棋子过大 */
+    max-height: 50px;
+    position: absolute;
+    cursor: pointer;
+    font-size: 8vw; /* 使用视口宽度的百分比，而不是固定的像素值 */
+    max-font-size: 40px; /* 设置最大字号，避免文字过大 */
+    line-height: 10vw; /* 设置行高，使得文字垂直居中 */
+    text-align: center; /* 设置文本对齐，使得文字水平居中 */
+}
+
+.red {
+    color: red;
+}
+
+.black {
+    color: black;
+}
+
+.selected {
+    border: 2px solid yellow;
+}
+
+.moveable {
+    border: 2px solid green;
+}
+
+.capturable {
+    border: 2px solid red;
+}
