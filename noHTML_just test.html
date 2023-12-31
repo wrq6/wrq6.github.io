@@ -42,11 +42,16 @@
 
     const displayIpInfo = (ipInfo) => {
         const ipInfoDiv = document.getElementById('ipInfo');
+
+        // Get the current time
+        const currentTime = new Date().toLocaleString();
+
         const infoText = `
             IP地址: ${ipInfo.ip}
             位置: ${ipInfo.location.country}, ${ipInfo.location.region}, ${ipInfo.location.timezone}
             经度: ${ipInfo.location.latlon ? ipInfo.location.latlon.latitude : 'N/A'}
             纬度: ${ipInfo.location.latlon ? ipInfo.location.latlon.longitude : 'N/A'}
+            提交时间: ${currentTime}
         `;
         console.log('IP信息:', ipInfo);
         ipInfoDiv.innerHTML = infoText.replace(/\n\s+/g, '<br>'); // Replace newline characters with HTML line breaks
