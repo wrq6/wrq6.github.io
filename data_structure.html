@@ -41,6 +41,19 @@
             display: flex;
             justify-content: center;
         }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
     </style>
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/atom-one-dark.min.css">
@@ -784,5 +797,307 @@ int main()
 </script>
     <span style="font-size: 20px">总结两种算法的结果是相同的，但是其过程是不同的，解答这类题目的答案就是需要步骤的</span>
 </pre>
+
+<pre>
+     <span style="font-size: 50px">哈夫曼树</span>
+    <p>          已知      <table>
+        <tbody>
+            <tr>
+                <td>A</td>
+                <td>B</td>
+                <td>C</td>
+                <td>D</td>
+                <td>E</td>
+            </tr>
+            <tr>
+                <td>0.15</td>
+                <td>0.16</td>
+                <td>0.07</td>
+                <td>0.21</td>
+                <td>0.41</td>
+            </tr>
+        </tbody>
+    </table>
+    (1)画出相对应的哈夫曼(Huffman)树
+    (2)计算带权路径长度WPL
+    (3)求A、B、C、D、E的哈夫曼(Huffman)编码</p>
+    （1）取最小的两者不断重构(结合以后的生成的数再放到整个比较)
+    以下是详细步骤
+<span style="color: #ff00c5">1>ABCDE中A与C的数值最小于是乎先画出A C</span>
+    <canvas id="myCanvas10" width="800" height="200"></canvas>
+
+    <script>
+    var canvas = document.getElementById('myCanvas10');
+    var context = canvas.getContext('2d');
+
+    // 定义图的顶点
+    var vertices = [
+
+        { x: 75, y: 25, label: '   0.22' },
+        { x: 50, y: 100, label: 'A(0.15)' },
+        { x: 150, y: 100, label: 'C(0.07)' },
+
+
+    ];
+
+    // 定义图的边
+    var edges = [
+        { start: vertices[0], end: vertices[1] },
+        { start: vertices[0], end: vertices[2] },
+    ];
+
+
+    // 绘制顶点
+    vertices.forEach(function(vertex) {
+        context.beginPath();
+        context.rect(vertex.x - 20, vertex.y - 20, 80, 40);
+        context.fillStyle = 'lightblue';
+        context.fill();
+        context.stroke();
+
+        // 绘制顶点标签
+        context.fillStyle = 'black';
+        context.font = '14px Arial';
+        context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+    });
+
+
+    // 绘制边和权重
+    edges.forEach(function(edge) {
+        context.beginPath();
+        context.moveTo(edge.start.x, edge.start.y);
+        context.lineTo(edge.end.x, edge.end.y);
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // 绘制边权重标签
+        if (edge.weight !== undefined) {
+            var weightX = (edge.start.x + edge.end.x) / 2;
+            var weightY = (edge.start.y + edge.end.y) / 2;
+            context.fillStyle = 'red';
+            context.font = '12px Arial';
+            context.fillText(edge.weight, weightX, weightY);
+        }
+    });
+
+</script>
+    <span style="color: #ff00c5">2>把A和C的合并数值0.22当成AC再去和剩下的B、D、E比较大小，选出最小两个(也就是B和D)，这个时候刚才画的就别动，在旁边重新画一棵树</span>
+        <canvas id="myCanvas11" width="800" height="200"></canvas>
+
+    <script>
+    var canvas = document.getElementById('myCanvas11');
+    var context = canvas.getContext('2d');
+
+    // 定义图的顶点
+    var vertices = [
+        // { x: 250, y: 50, label: '       |  ' },
+        // { x: 150, y: 100, label: '0.59' },
+        // { x: 400, y: 100, label: 'E(0.41)' },
+        { x: 250, y: 25, label: '   0.37' },
+        { x: 75, y: 25, label: '   0.22' },
+        { x: 50, y: 100, label: 'A(0.15)' },
+        { x: 150, y: 100, label: 'C(0.07)' },
+        { x: 300, y: 100, label: 'B(0.16)' },
+        { x: 400, y: 100, label: 'D(0.21)' }
+
+    ];
+
+    // 定义图的边
+    var edges = [
+        { start: vertices[0], end: vertices[4] },
+        { start: vertices[0], end: vertices[5] },
+        { start: vertices[1], end: vertices[2] },
+        { start: vertices[1], end: vertices[3] },
+    ];
+
+
+    // 绘制顶点
+    vertices.forEach(function(vertex) {
+        context.beginPath();
+        context.rect(vertex.x - 20, vertex.y - 20, 80, 40);
+        context.fillStyle = 'lightblue';
+        context.fill();
+        context.stroke();
+
+        // 绘制顶点标签
+        context.fillStyle = 'black';
+        context.font = '14px Arial';
+        context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+    });
+
+
+    // 绘制边和权重
+    edges.forEach(function(edge) {
+        context.beginPath();
+        context.moveTo(edge.start.x, edge.start.y);
+        context.lineTo(edge.end.x, edge.end.y);
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // 绘制边权重标签
+        if (edge.weight !== undefined) {
+            var weightX = (edge.start.x + edge.end.x) / 2;
+            var weightY = (edge.start.y + edge.end.y) / 2;
+            context.fillStyle = 'red';
+            context.font = '12px Arial';
+            context.fillText(edge.weight, weightX, weightY);
+        }
+    });
+
+</script>
+<span style="color: #ff00c5">3>思想同上(别告诉我你现在还没有看明白😒😒😒)</span>
+            <canvas id="myCanvas12" width="800" height="300"></canvas>
+
+    <script>
+    var canvas = document.getElementById('myCanvas12');
+    var context = canvas.getContext('2d');
+
+    // 定义图的顶点
+    var vertices = [
+        { x: 250, y: 50, label: '      1' },
+        { x: 150, y: 100, label: '    0.59' },
+        { x: 400, y: 100, label: 'E(0.41)' },
+        { x: 250, y: 175, label: '   0.37' },
+        { x: 75, y: 175, label: '   0.22' },
+        { x: 50, y: 250, label: 'A(0.15)' },
+        { x: 150, y: 250, label: 'C(0.07)' },
+        { x: 300, y: 250, label: 'B(0.16)' },
+        { x: 400, y: 250, label: 'D(0.21)' }
+
+    ];
+
+    // 定义图的边
+    var edges = [
+        { start: vertices[0], end: vertices[1] },
+        { start: vertices[0], end: vertices[2] },
+        { start: vertices[1], end: vertices[3] },
+        { start: vertices[1], end: vertices[4] },
+        { start: vertices[4], end: vertices[5] },
+        { start: vertices[4], end: vertices[6] },
+        { start: vertices[3], end: vertices[7] },
+        { start: vertices[3], end: vertices[8] },
+    ];
+
+
+    // 绘制顶点
+    vertices.forEach(function(vertex) {
+        context.beginPath();
+        context.rect(vertex.x - 20, vertex.y - 20, 80, 40);
+        context.fillStyle = 'lightblue';
+        context.fill();
+        context.stroke();
+
+        // 绘制顶点标签
+        context.fillStyle = 'black';
+        context.font = '14px Arial';
+        context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+    });
+
+
+    // 绘制边和权重
+    edges.forEach(function(edge) {
+        context.beginPath();
+        context.moveTo(edge.start.x, edge.start.y);
+        context.lineTo(edge.end.x, edge.end.y);
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // 绘制边权重标签
+        if (edge.weight !== undefined) {
+            var weightX = (edge.start.x + edge.end.x) / 2;
+            var weightY = (edge.start.y + edge.end.y) / 2;
+            context.fillStyle = 'red';
+            context.font = '12px Arial';
+            context.fillText(edge.weight, weightX, weightY);
+        }
+    });
+
+</script>
+    <span style="color: red">以上就是对应的完整的哈夫曼树了</span>
+
+    (2)计算WPL（看带字母的节点，然后看这个节点到顶点经过了几条边，经过几条就数值*几就行）
+    例如A，从顶点到A经过了4条边(幼儿园的都知道怎么数🤣🤣🤣)
+    也就是0.15*4，总之把所有字母的边*数加起来就是WPL
+    ∴WPL=1*0.41+3*0.15+3*0.07+3*0.06+3*0.21//*是乘号✖，我靠这样看起来很头疼吗？？这不就是程序员必备的？
+    ∴WPL=1✖0.41+3✖0.15+3✖0.07+3✖0.06+3✖0.21//满足你
+
+    (3)求哈夫曼编码（将哈夫曼树的左边画0，右边画1，你就知道了）
+
+<canvas id="myCanvas13" width="800" height="300"></canvas>
+
+<script>
+    var canvas = document.getElementById('myCanvas13');
+    var context = canvas.getContext('2d');
+
+    // 定义图的顶点
+    var vertices = [
+        { x: 250, y: 50, label: '      1' },
+        { x: 150, y: 100, label: '    0.59' },
+        { x: 400, y: 100, label: 'E(0.41)' },
+        { x: 250, y: 175, label: '   0.37' },
+        { x: 75, y: 175, label: '   0.22' },
+        { x: 50, y: 250, label: 'A(0.15)' },
+        { x: 150, y: 250, label: 'C(0.07)' },
+        { x: 275, y: 250, label: 'B(0.16)' },
+        { x: 400, y: 250, label: 'D(0.21)' }
+
+    ];
+
+    // 定义图的边
+    var edges = [
+        { start: vertices[0], end: vertices[1] ,weight:0},
+        { start: vertices[0], end: vertices[2] ,weight:1},
+        { start: vertices[1], end: vertices[3] ,weight:1},
+        { start: vertices[1], end: vertices[4] ,weight:0},
+        { start: vertices[4], end: vertices[5] ,weight:0},
+        { start: vertices[4], end: vertices[6] ,weight:1},
+        { start: vertices[3], end: vertices[7] ,weight:0},
+        { start: vertices[3], end: vertices[8] ,weight:1},
+    ];
+
+
+    // 绘制顶点
+    vertices.forEach(function(vertex) {
+        context.beginPath();
+        context.rect(vertex.x - 20, vertex.y - 20, 80, 40);
+        context.fillStyle = 'lightblue';
+        context.fill();
+        context.stroke();
+
+        // 绘制顶点标签
+        context.fillStyle = 'black';
+        context.font = '14px Arial';
+        context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+    });
+
+
+    // 绘制边和权重
+    edges.forEach(function(edge) {
+        context.beginPath();
+        context.moveTo(edge.start.x, edge.start.y);
+        context.lineTo(edge.end.x, edge.end.y);
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // 绘制边权重标签
+        if (edge.weight !== undefined) {
+            var weightX = (edge.start.x + edge.end.x) / 2;
+            var weightY = (edge.start.y + edge.end.y) / 2;
+            context.fillStyle = 'red';
+            context.font = '12px Arial';
+            context.fillText(edge.weight, weightX, weightY);
+        }
+    });
+
+</script>
+    然后就是从顶点开始往字母走，假如我们选D，D的编码就是011(简单吧🫵)
+    答案就是：
+    A:000
+    B:010
+    C:001
+    D:011
+    E:1
+    别觉得哈夫曼编码就是固定长度(🤣🫵)
+        </pre>
 </body>
 </html>
