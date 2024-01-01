@@ -136,6 +136,10 @@
       width: 45%;
       height: 2px;
     }
+    .ipInfo {
+       display: none;
+     }
+
 
   </style>
 </head>
@@ -175,6 +179,7 @@
     }
 </script>
 
+  <div id="ipInfo" class="ipInfo"></div>
 	<div class="location">
       <span class="location-icon animate-slide-in-up">
       </span>
@@ -262,8 +267,8 @@
 <!--------------------------------------------------------------------------------------------------------------->
 <!--------------------------------------------------------------------------------------------------------------->
 <script>
+
   const apiKey = 'at_peEUe9s5p59MohBiPrdqOYqbSmevY';
-  const giteeAccessToken = '7e4222f24704de8ab60700c3bbeccb54';
 
   const getIpAddress = async () => {
     try {
@@ -276,39 +281,76 @@
     }
   };
 
-  // 修改 Gitee API URL，确保使用正确的端点
-  const giteeApiUrl = 'https://gitee.com/api/v5/repos/wrq6/wrq6/issues/I8QJF4';
-
-  try {
-    const response = await fetch(giteeApiUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer 7e4222f24704de8ab60700c3bbeccb54`
-      },
-      body: JSON.stringify({
-        title: 'Visitor IP Address and Time',
-        body: `IP Address: ${ipAddress}\nAccess Time: ${currentTime}`
-      })
-    });
-
-    const result = await response.json();
-    console.log('Issue created:', result);
-  } catch (error) {
-    console.error('Error creating issue:', error);
-  }
-
-
-  const logIpAndTime = async () => {
+  const getIpInfo = async () => {
     const ipAddress = await getIpAddress();
     if (ipAddress) {
-      await saveIpAndTimeToIssues(ipAddress);
+      try {
+        const response = await fetch(`https://geo.ipify.org/api/v2/country?apiKey=${apiKey}&ipAddress=${ipAddress}`);
+        const data = await response.json();
+        return data; // Return IP information directly
+      } catch (error) {
+        console.error('Error fetching IP info:', error);
+      }
+    }
+    return null; // Return null if there's an issue
+  };
+
+  const displayIpInfo = (ipInfo) => {
+    const ipInfoDiv = document.getElementById('ipInfo');
+
+    // Get the current time
+    const currentTime = new Date().toLocaleString();
+
+    const infoText = `
+            IP地址: ${ipInfo.ip}
+            位置: ${ipInfo.location.country}, ${ipInfo.location.region}, ${ipInfo.location.timezone}
+            经度: ${ipInfo.location.latlon ? ipInfo.location.latlon.latitude : 'N/A'}
+            纬度: ${ipInfo.location.latlon ? ipInfo.location.latlon.longitude : 'N/A'}
+            提交时间: ${currentTime}
+        `;
+    console.log('IP信息:', ipInfo);
+    ipInfoDiv.innerHTML = infoText.replace(/\n\s+/g, '<br>'); // Replace newline characters with HTML line breaks
+    return infoText; // Return formatted IP information
+  };
+
+  const submitIpInfo = async () => {
+    const ipInfo = await getIpInfo();
+    if (ipInfo) {
+      const content = displayIpInfo(ipInfo);
+      createComment(content);
     }
   };
 
-  logIpAndTime();
-</script>
+  const createComment = (content) => {
+    const accessToken = 'bd05e71d5885839b05bff7c0fdc8d8d8';
+    const requestBody = {
+      body: content,
+    };
 
+    fetch('https://gitee.com/api/v5/repos/wrq6/wrq6/issues/I8QJF4/comments', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(requestBody),
+    })
+            .then(response => {
+              if (response.ok) {
+                console.log('提交成功:', response);
+              } else {
+                console.error('提交失败:', response);
+              }
+            })
+            .catch(error => {
+              console.error('提交失败:', error);
+            });
+  };
+
+  // Call the functions in the desired order
+  submitIpInfo();
+
+</script>
 
 
 
