@@ -1629,5 +1629,286 @@ int main()
     求ASL，就是1*第一列的个数+2*第二列的个数+3*第三列的个数...
     此题就是ASL=1*6+2*4+3*1
 </pre>
+<pre>
+     <span style="font-size: 50px">图的深度优先与广度优先</span>
+            <table style="width: auto">
+        <tbody>
+            <tr style="">
+                <td>1</td>
+                <td>-></td>
+                <td>3</td>
+                <td>-></td>
+                <td>2</td>
+                <td>-></td>
+                <td>4</td>
+                <td>^</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                 <td>^</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>-></td>
+                 <td>4</td>
+                 <td>-></td>
+                 <td>5</td>
+                 <td>^</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>^</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>-></td>
+                   <td>2</td>
+                <td>-></td>
+                   <td>4</td>
+                <td>^</td>
+            </tr>
+        </tbody>
+        </table>
+我们来分析一下深度优先
+    第一步    我们给1标上了①，接下来给3表上了②，于是这时候跳到了
+                <table style="width: auto">
+        <tbody>
+            <tr style="">
+                <td><span style="color: red">①</span>1</td>
+                <td>-></td>
+                <td><span style="color: red">②</span>3</td>
+                <td>-></td>
+                <td>2</td>
+                <td>-></td>
+                <td>4</td>
+                <td>^</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                 <td>^</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>-></td>
+                 <td>4</td>
+                 <td>-></td>
+                 <td>5</td>
+                 <td>^</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>^</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>-></td>
+                   <td>2</td>
+                <td>-></td>
+                   <td>4</td>
+                <td>^</td>
+            </tr>
+        </tbody>
+        </table>
+跳到了3处，往后给4表上③，这时候跳到
+                    <table style="width: auto">
+        <tbody>
+            <tr style="">
+                <td><span style="color: red">①</span>1</td>
+                <td>-></td>
+                <td><span style="color: red">②</span>3</td>
+                <td>-></td>
+                <td>2</td>
+                <td>-></td>
+                <td>4</td>
+                <td>^</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                 <td>^</td>
+            </tr>
+            <tr>
+                <td><span style="color: red">②</span>3</td>
+                <td>-></td>
+                 <td><span style="color: red">③</span>4</td>
+                 <td>-></td>
+                 <td>5</td>
+                 <td>^</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>^</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>-></td>
+                   <td>2</td>
+                <td>-></td>
+                   <td>4</td>
+                <td>^</td>
+            </tr>
+        </tbody>
+        </table>
+这时候跳到了
+                     <table style="width: auto">
+        <tbody>
+            <tr style="">
+                <td><span style="color: red">①</span>1</td>
+                <td>-></td>
+                <td><span style="color: red">②</span>3</td>
+                <td>-></td>
+                <td>2</td>
+                <td>-></td>
+                <td>4</td>
+                <td>^</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                 <td>^</td>
+            </tr>
+            <tr>
+                <td><span style="color: red">②</span>3</td>
+                <td>-></td>
+                 <td><span style="color: red">③</span>4</td>
+                 <td>-></td>
+                 <td>5</td>
+                 <td>^</td>
+            </tr>
+            <tr>
+                <td><span style="color: red">③</span>4</td>
+                <td>^</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>-></td>
+                   <td>2</td>
+                <td>-></td>
+                   <td>4</td>
+                <td>^</td>
+            </tr>
+        </tbody>
+        </table>
+    注意这时候，4后面没有任何东西，于是回退到上一个的最后继续标
+                         <table style="width: auto">
+        <tbody>
+            <tr style="">
+                <td><span style="color: red">①</span>1</td>
+                <td>-></td>
+                <td><span style="color: red">②</span>3</td>
+                <td>-></td>
+                <td>2</td>
+                <td>-></td>
+                <td>4</td>
+                <td>^</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                 <td>^</td>
+            </tr>
+            <tr>
+                <td><span style="color: red">②</span>3</td>
+                <td>-></td>
+                 <td><span style="color: red">③</span>4</td>
+                 <td>-></td>
+                 <td><span style="color: red">④</span>5</td>
+                 <td>^</td>
+            </tr>
+            <tr>
+                <td><span style="color: red">③</span>4</td>
+                <td>^</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>-></td>
+                   <td>2</td>
+                <td>-></td>
+                   <td>4</td>
+                <td>^</td>
+            </tr>
+        </tbody>
+        </table>
+    标了于是跳到5处，给5的下一个2标上
+                            <table style="width: auto">
+        <tbody>
+            <tr style="">
+                <td><span style="color: red">①</span>1</td>
+                <td>-></td>
+                <td><span style="color: red">②</span>3</td>
+                <td>-></td>
+                <td>2</td>
+                <td>-></td>
+                <td>4</td>
+                <td>^</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                 <td>^</td>
+            </tr>
+            <tr>
+                <td><span style="color: red">②</span>3</td>
+                <td>-></td>
+                 <td><span style="color: red">③</span>4</td>
+                 <td>-></td>
+                 <td><span style="color: red">④</span>5</td>
+                 <td>^</td>
+            </tr>
+            <tr>
+                <td><span style="color: red">③</span>4</td>
+                <td>^</td>
+            </tr>
+            <tr>
+                <td><span style="color: red">④</span>5</td>
+                <td>-></td>
+                   <td><span style="color: red">⑤</span>2</td>
+                <td>-></td>
+                   <td>4</td>
+                <td>^</td>
+            </tr>
+        </tbody>
+        </table>
+    到此为止全部的数都标完了
+    于是<span style="color: #022fec"> 深度优先遍历</span>就是：1、3、4、5、2
+
+
+接下来我们讨论一下<span style="color: #022fec">广度优先遍历</span>(简单的一批，就是从上到下，从左到右)
+     <table style="width: auto">
+        <tbody>
+            <tr style="">
+                <td>1</td>
+                <td>-></td>
+                <td>3</td>
+                <td>-></td>
+                <td>2</td>
+                <td>-></td>
+                <td>4</td>
+                <td>^</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                 <td>^</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>-></td>
+                 <td>4</td>
+                 <td>-></td>
+                 <td>5</td>
+                 <td>^</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>^</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>-></td>
+                   <td>2</td>
+                <td>-></td>
+                   <td>4</td>
+                <td>^</td>
+            </tr>
+        </tbody>
+        </table>
+    就是1、3、2、4、5
+</pre>
 </body>
 </html>
