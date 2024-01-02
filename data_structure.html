@@ -58,7 +58,6 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/atom-one-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
 </head>
 <body>
 
@@ -1099,5 +1098,536 @@ int main()
     E:1
     别觉得哈夫曼编码就是固定长度(🤣🫵)
         </pre>
+<pre>
+     <span style="font-size: 50px">哈希函数</span>
+    设散列表长为11，记录关键字集合为{15，17，28，41，37，31，56，23，45，51，73}，散列函数：H(Key) = key MOD 11，冲突处理采用线性探测法，请给出散列表的构造过程，再求平均查找程度ASL
+(1)先看散列函数，H(Key) = Key MOD 11.(对每个数都取余，与11相除，取余)
+    <table>
+        <tbody>
+            <tr>
+                <td>余数</td>
+                <td><span style="color: #6d02af">4</span></td>
+                <td><span style="color: #6d02af">6</span></td>
+                <td><span style="color: #6d02af">6</span></td>
+                <td><span style="color: #6d02af">8</span></td>
+                <td><span style="color: #6d02af">4</span></td>
+                <td><span style="color: #6d02af">9</span></td>
+                <td><span style="color: #6d02af">1</span></td>
+                <td><span style="color: #6d02af">1</span></td>
+                <td><span style="color: #6d02af">1</span></td>
+                <td><span style="color: #6d02af">7</span></td>
+                <td><span style="color: #6d02af">7</span></td>
+            </tr>
+            <tr>
+                <td>原数</td>
+                <td>15</td>
+                <td>17</td>
+                <td>28</td>
+                <td>41</td>
+                <td>37</td>
+                <td>31</td>
+                <td>56</td>
+                <td>23</td>
+                <td>45</td>
+                <td>51</td>
+                <td>73</td>
+            </tr>
+        </tbody>
+    </table>
+(2)我们先写出一个0-10（11个）
+        <table>
+        <tbody>
+            <tr>
+                <td><span style="color: #6d02af">0</span></td>
+                <td><span style="color: #6d02af">1</span></td>
+                <td><span style="color: #6d02af">2</span></td>
+                <td><span style="color: #6d02af">3</span></td>
+                <td><span style="color: #6d02af">4</span></td>
+                <td><span style="color: #6d02af">5</span></td>
+                <td><span style="color: #6d02af">6</span></td>
+                <td><span style="color: #6d02af">7</span></td>
+                <td><span style="color: #6d02af">8</span></td>
+                <td><span style="color: #6d02af">9</span></td>
+                <td><span style="color: #6d02af">10</span></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+我们规定，按照余数，放进这个表格中，如果冲突线性探测就是往后顺延一位（如果一位不行就再继续顺）
+我们一步步来，把余数4对应的15放到4处
+            <table>
+        <tbody>
+            <tr>
+                <td><span style="color: #6d02af">0</span></td>
+                <td><span style="color: #6d02af">1</span></td>
+                <td><span style="color: #6d02af">2</span></td>
+                <td><span style="color: #6d02af">3</span></td>
+                <td><span style="color: #6d02af">4</span></td>
+                <td><span style="color: #6d02af">5</span></td>
+                <td><span style="color: #6d02af">6</span></td>
+                <td><span style="color: #6d02af">7</span></td>
+                <td><span style="color: #6d02af">8</span></td>
+                <td><span style="color: #6d02af">9</span></td>
+                <td><span style="color: #6d02af">10</span></td>
+            </tr>
+            <tr>
+                <td><span style="color: red"></span></td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red">15</span> </td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red"></span> </td>
+            </tr>
+        </tbody>
+    </table>
+此时记录15到位4处动了（1）次，接着把17放到6处
+                <table>
+        <tbody>
+            <tr>
+                <td><span style="color: #6d02af">0</span></td>
+                <td><span style="color: #6d02af">1</span></td>
+                <td><span style="color: #6d02af">2</span></td>
+                <td><span style="color: #6d02af">3</span></td>
+                <td><span style="color: #6d02af">4</span></td>
+                <td><span style="color: #6d02af">5</span></td>
+                <td><span style="color: #6d02af">6</span></td>
+                <td><span style="color: #6d02af">7</span></td>
+                <td><span style="color: #6d02af">8</span></td>
+                <td><span style="color: #6d02af">9</span></td>
+                <td><span style="color: #6d02af">10</span></td>
+            </tr>
+            <tr>
+                <td><span style="color: red"></span></td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red">15</span> </td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red">17</span> </td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red"></span> </td>
+            </tr>
+        </tbody>
+    </table>
+记录17动了（1）次，接着放28，因为28是6，和之前的17冲突了，采用线性探测就是往后顺延一位
+                    <table>
+        <tbody>
+            <tr>
+                <td><span style="color: #6d02af">0</span></td>
+                <td><span style="color: #6d02af">1</span></td>
+                <td><span style="color: #6d02af">2</span></td>
+                <td><span style="color: #6d02af">3</span></td>
+                <td><span style="color: #6d02af">4</span></td>
+                <td><span style="color: #6d02af">5</span></td>
+                <td><span style="color: #6d02af">6</span></td>
+                <td><span style="color: #6d02af">7</span></td>
+                <td><span style="color: #6d02af">8</span></td>
+                <td><span style="color: #6d02af">9</span></td>
+                <td><span style="color: #6d02af">10</span></td>
+            </tr>
+            <tr>
+                <td><span style="color: red"></span></td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red">15</span> </td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red">17</span> </td>
+                <td><span style="color: red">28</span> </td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red"></span> </td>
+            </tr>
+        </tbody>
+    </table>
+记录28动了（2）次，接着41放8处
+                        <table>
+        <tbody>
+            <tr>
+                <td><span style="color: #6d02af">0</span></td>
+                <td><span style="color: #6d02af">1</span></td>
+                <td><span style="color: #6d02af">2</span></td>
+                <td><span style="color: #6d02af">3</span></td>
+                <td><span style="color: #6d02af">4</span></td>
+                <td><span style="color: #6d02af">5</span></td>
+                <td><span style="color: #6d02af">6</span></td>
+                <td><span style="color: #6d02af">7</span></td>
+                <td><span style="color: #6d02af">8</span></td>
+                <td><span style="color: #6d02af">9</span></td>
+                <td><span style="color: #6d02af">10</span></td>
+            </tr>
+            <tr>
+                <td><span style="color: red"></span></td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red">15</span> </td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red">17</span> </td>
+                <td><span style="color: red">28</span> </td>
+                <td><span style="color: red">41</span> </td>
+                <td><span style="color: red"></span> </td>
+                <td><span style="color: red"></span> </td>
+            </tr>
+        </tbody>
+    </table>
+记录41动了（1）次，接着37，与15冲突了往后顺延1位
+                            <table>
+        <tbody>
+            <tr>
+                <td><span style="color: #6d02af">0</span></td>
+                <td><span style="color: #6d02af">1</span></td>
+                <td><span style="color: #6d02af">2</span></td>
+                <td><span style="color: #6d02af">3</span></td>
+                <td><span style="color: #6d02af">4</span></td>
+                <td><span style="color: #6d02af">5</span></td>
+                <td><span style="color: #6d02af">6</span></td>
+                <td><span style="color: #6d02af">7</span></td>
+                <td><span style="color: #6d02af">8</span></td>
+                <td><span style="color: #6d02af">9</span></td>
+                <td><span style="color: #6d02af">10</span></td>
+            </tr>
+            <tr>
+                <td><span style="color: red"></span></td>
+                <td><span style="color: red"></span></td>
+                <td><span style="color: red"></span></td>
+                <td><span style="color: red"></span></td>
+                <td><span style="color: red">15</span></td>
+                <td><span style="color: red">37</span></td>
+                <td><span style="color: red">17</span></td>
+                <td><span style="color: red">28</span></td>
+                <td><span style="color: red">41</span></td>
+                <td><span style="color: red"></span></td>
+                <td><span style="color: red"></span></td>
+            </tr>
+        </tbody>
+    </table>
+记录37动了（2）次，接着31，放9处
+                                <table>
+        <tbody>
+            <tr>
+                <td><span style="color: #6d02af">0</span></td>
+                <td><span style="color: #6d02af">1</span></td>
+                <td><span style="color: #6d02af">2</span></td>
+                <td><span style="color: #6d02af">3</span></td>
+                <td><span style="color: #6d02af">4</span></td>
+                <td><span style="color: #6d02af">5</span></td>
+                <td><span style="color: #6d02af">6</span></td>
+                <td><span style="color: #6d02af">7</span></td>
+                <td><span style="color: #6d02af">8</span></td>
+                <td><span style="color: #6d02af">9</span></td>
+                <td><span style="color: #6d02af">10</span></td>
+            </tr>
+            <tr>
+                <td><span style="color: red"></span></td>
+                <td><span style="color: red"></span></td>
+                <td><span style="color: red"></span></td>
+                <td><span style="color: red"></span></td>
+                <td><span style="color: red">15</span></td>
+                <td><span style="color: red">37</span></td>
+                <td><span style="color: red">17</span></td>
+                <td><span style="color: red">28</span></td>
+                <td><span style="color: red">41</span></td>
+                <td><span style="color: red">31</span></td>
+                <td><span style="color: red"></span></td>
+            </tr>
+        </tbody>
+    </table>
+记录31动了（1）次，接着56放1处
+                                    <table>
+        <tbody>
+            <tr>
+                <td><span style="color: #6d02af">0</span></td>
+                <td><span style="color: #6d02af">1</span></td>
+                <td><span style="color: #6d02af">2</span></td>
+                <td><span style="color: #6d02af">3</span></td>
+                <td><span style="color: #6d02af">4</span></td>
+                <td><span style="color: #6d02af">5</span></td>
+                <td><span style="color: #6d02af">6</span></td>
+                <td><span style="color: #6d02af">7</span></td>
+                <td><span style="color: #6d02af">8</span></td>
+                <td><span style="color: #6d02af">9</span></td>
+                <td><span style="color: #6d02af">10</span></td>
+            </tr>
+            <tr>
+                <td><span style="color: red">56</span></td>
+                <td><span style="color: red"></span></td>
+                <td><span style="color: red"></span></td>
+                <td><span style="color: red"></span></td>
+                <td><span style="color: red">15</span></td>
+                <td><span style="color: red">37</span></td>
+                <td><span style="color: red">17</span></td>
+                <td><span style="color: red">28</span></td>
+                <td><span style="color: red">41</span></td>
+                <td><span style="color: red">31</span></td>
+                <td><span style="color: red"></span></td>
+            </tr>
+        </tbody>
+    </table>
+记录56动了（1）次，接着23放1处冲突顺延到2处
+                                        <table>
+        <tbody>
+            <tr>
+                <td><span style="color: #6d02af">0</span></td>
+                <td><span style="color: #6d02af">1</span></td>
+                <td><span style="color: #6d02af">2</span></td>
+                <td><span style="color: #6d02af">3</span></td>
+                <td><span style="color: #6d02af">4</span></td>
+                <td><span style="color: #6d02af">5</span></td>
+                <td><span style="color: #6d02af">6</span></td>
+                <td><span style="color: #6d02af">7</span></td>
+                <td><span style="color: #6d02af">8</span></td>
+                <td><span style="color: #6d02af">9</span></td>
+                <td><span style="color: #6d02af">10</span></td>
+            </tr>
+            <tr>
+                <td><span style="color: red"></span></td>
+                <td><span style="color: red">56</span></td>
+                <td><span style="color: red">23</span></td>
+                <td><span style="color: red"></span></td>
+                <td><span style="color: red">15</span></td>
+                <td><span style="color: red">37</span></td>
+                <td><span style="color: red">17</span></td>
+                <td><span style="color: red">28</span></td>
+                <td><span style="color: red">41</span></td>
+                <td><span style="color: red">31</span></td>
+                <td><span style="color: red"></span></td>
+            </tr>
+        </tbody>
+    </table>
+记录23动了（2）次，接着45放1处冲突顺延到2处再冲突再顺延3处
+                                            <table>
+        <tbody>
+            <tr>
+                <td><span style="color: #6d02af">0</span></td>
+                <td><span style="color: #6d02af">1</span></td>
+                <td><span style="color: #6d02af">2</span></td>
+                <td><span style="color: #6d02af">3</span></td>
+                <td><span style="color: #6d02af">4</span></td>
+                <td><span style="color: #6d02af">5</span></td>
+                <td><span style="color: #6d02af">6</span></td>
+                <td><span style="color: #6d02af">7</span></td>
+                <td><span style="color: #6d02af">8</span></td>
+                <td><span style="color: #6d02af">9</span></td>
+                <td><span style="color: #6d02af">10</span></td>
+            </tr>
+            <tr>
+                <td><span style="color: red"></span></td>
+                <td><span style="color: red">56</span></td>
+                <td><span style="color: red">23</span></td>
+                <td><span style="color: red">45</span></td>
+                <td><span style="color: red">15</span></td>
+                <td><span style="color: red">37</span></td>
+                <td><span style="color: red">17</span></td>
+                <td><span style="color: red">28</span></td>
+                <td><span style="color: red">41</span></td>
+                <td><span style="color: red">31</span></td>
+                <td><span style="color: red"></span></td>
+            </tr>
+        </tbody>
+    </table>
+记录了45动了（3）次，接着把51放7处与28冲突顺延到8冲突到9冲突于是放到10
+                                                <table>
+        <tbody>
+            <tr>
+                <td><span style="color: #6d02af">0</span></td>
+                <td><span style="color: #6d02af">1</span></td>
+                <td><span style="color: #6d02af">2</span></td>
+                <td><span style="color: #6d02af">3</span></td>
+                <td><span style="color: #6d02af">4</span></td>
+                <td><span style="color: #6d02af">5</span></td>
+                <td><span style="color: #6d02af">6</span></td>
+                <td><span style="color: #6d02af">7</span></td>
+                <td><span style="color: #6d02af">8</span></td>
+                <td><span style="color: #6d02af">9</span></td>
+                <td><span style="color: #6d02af">10</span></td>
+            </tr>
+            <tr>
+                <td><span style="color: red"></span></td>
+                <td><span style="color: red">56</span></td>
+                <td><span style="color: red">23</span></td>
+                <td><span style="color: red">45</span></td>
+                <td><span style="color: red">15</span></td>
+                <td><span style="color: red">37</span></td>
+                <td><span style="color: red">17</span></td>
+                <td><span style="color: red">28</span></td>
+                <td><span style="color: red">41</span></td>
+                <td><span style="color: red">31</span></td>
+                <td><span style="color: red">51</span></td>
+            </tr>
+        </tbody>
+    </table>
+记录51动力4次，接着73放7处冲突，再8冲突，再9冲突，再10冲突，再0放
+                                                    <table>
+        <tbody>
+            <tr>
+                <td><span style="color: #6d02af">0</span></td>
+                <td><span style="color: #6d02af">1</span></td>
+                <td><span style="color: #6d02af">2</span></td>
+                <td><span style="color: #6d02af">3</span></td>
+                <td><span style="color: #6d02af">4</span></td>
+                <td><span style="color: #6d02af">5</span></td>
+                <td><span style="color: #6d02af">6</span></td>
+                <td><span style="color: #6d02af">7</span></td>
+                <td><span style="color: #6d02af">8</span></td>
+                <td><span style="color: #6d02af">9</span></td>
+                <td><span style="color: #6d02af">10</span></td>
+            </tr>
+            <tr>
+                <td><span style="color: red">73</span></td>
+                <td><span style="color: red">56</span></td>
+                <td><span style="color: red">23</span></td>
+                <td><span style="color: red">45</span></td>
+                <td><span style="color: red">15</span></td>
+                <td><span style="color: red">37</span></td>
+                <td><span style="color: red">17</span></td>
+                <td><span style="color: red">28</span></td>
+                <td><span style="color: red">41</span></td>
+                <td><span style="color: red">31</span></td>
+                <td><span style="color: red">51</span></td>
+            </tr>
+        </tbody>
+    </table>
+以上就是表的构造过程了
+    15：1次
+    17：1次
+    28：2次
+    41：1次
+    37：2次
+    31：1次
+    56：1次
+    23：2次
+    45：3次
+    51：4次
+    73：5次
+    求ASL(平均查找程度就是将以上数加起来再除他们的总个数)
+    <p>ASL= <math xmlns='http://www.w3.org/1998/Math/MathML'> <mfrac> <mrow> <mn> 1 </mn> <mo> + </mo> <mn> 1 </mn> <mo> + </mo> <mn> 2 </mn> <mo> + </mo> <mn> 1 </mn> <mo> + </mo> <mn> 2 </mn> <mo> + </mo> <mn> 1 </mn> <mo> + </mo> <mn> 1 </mn> <mo> + </mo> <mn> 2 </mn> <mo> + </mo> <mn> 3 </mn> <mo> + </mo> <mn> 4 </mn> <mo> + </mo> <mn> 5 </mn> </mrow> <mrow> <mn> 10 </mn> </mrow> </mfrac> <mo> = </mo> <mn> 2.3 </mn> </math></p>
+    <span style="color: red;font-size: 25px">还有一种题目是冲突采用链地址表示法</span>
+    前面求余数的步骤一样就是构造的时候采用链表的思想
+
+    <table>
+        <tbody>
+            <tr>
+                <td>余数</td>
+                <td><span style="color: #6d02af">4</span></td>
+                <td><span style="color: #6d02af">6</span></td>
+                <td><span style="color: #6d02af">6</span></td>
+                <td><span style="color: #6d02af">8</span></td>
+                <td><span style="color: #6d02af">4</span></td>
+                <td><span style="color: #6d02af">9</span></td>
+                <td><span style="color: #6d02af">1</span></td>
+                <td><span style="color: #6d02af">1</span></td>
+                <td><span style="color: #6d02af">1</span></td>
+                <td><span style="color: #6d02af">7</span></td>
+                <td><span style="color: #6d02af">7</span></td>
+            </tr>
+            <tr>
+                <td>原数</td>
+                <td>15</td>
+                <td>17</td>
+                <td>28</td>
+                <td>41</td>
+                <td>37</td>
+                <td>31</td>
+                <td>56</td>
+                <td>23</td>
+                <td>45</td>
+                <td>51</td>
+                <td>73</td>
+            </tr>
+        </tbody>
+    </table>
+    就是构造以下基表竖着的
+        <table style="width: auto">
+        <tbody>
+            <tr style="">
+                <td>0</td>
+                <td>^</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>-></td>
+                <td>56</td>
+                <td>-></td>
+                <td>23</td>
+                <td>-></td>
+                <td>45</td>
+                <td>^</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>^</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>^</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>-></td>
+                   <td>15</td>
+                <td>-></td>
+                   <td>37</td>
+                <td>^</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>^</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>-></td>
+                <td>17</td>
+                <td>-></td>
+                <td>28</td>
+                <td>^</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>-></td>
+                <td>51</td>
+                <td>-></td>
+                <td>73</td>
+                <td>^</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>-></td>
+                <td>41</td>
+                <td>^</td>
+            </tr>
+              <tr>
+                <td>9</td>
+                <td>-></td>
+                  <td>31</td>
+                  <td>^</td>
+            </tr>
+              <tr>
+                <td>10</td>
+                <td>^</td>
+            </tr>
+        </tbody>
+        </table>
+    求ASL，就是1*第一列的个数+2*第二列的个数+3*第三列的个数...
+    此题就是ASL=1*6+2*4+3*1
+</pre>
 </body>
 </html>

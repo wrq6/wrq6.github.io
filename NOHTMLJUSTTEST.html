@@ -1,73 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <style>
-        #board {
-            display: grid;
-            grid-template-columns: repeat(8, 50px);
-            grid-template-rows: repeat(8, 50px);
-        }
+    <title>WebGL Demo</title>
+    <script type="text/javascript">
+        var gl;
 
-        .square {
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #333;
-        }
+        function init() {
+            var canvas = document.getElementById('myCanvas');
+            gl = canvas.getContext('webgl');
 
-        .white {
-            background-color: #fff;
-        }
+            // 定义顶点位置
+            var vertices = [
+                -0.5, -0.5,
+                0.5, -0.5,
+                0.0,  0.5
+            ];
 
-        .black {
-            background-color: #000;
-            color: #fff;
+            // 创建缓冲区对象
+            var vertexBuffer = gl.createBuffer();
+
+            // 绑定缓冲区对象
+            gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+
+            // 向缓冲区对象中写入数据
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+
+            // 获取顶点着色器代码
+            var vsSource = document.getElementById('vsSource').textContent;
+
+            // 创建顶点着色器对象
+            var vertexShader = gl.createShader(gl.VERTEX_SHADER);
+
+            // 编译顶点着色器代码
+            gl.shaderSource(vertexShader, vsSource);
+            gl.compileShader(vertexShader);
+
+            // 获取片元着色器代码
+            var fsSource = document.getElementById('fsSource').textContent;
+
+            // 创建片元着色器对象
+            var fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+
+            // 编译片元着色器代码
+            gl.shaderSource(fragmentShader, fsSource);
+            gl.compileShader(fragmentShader);
+
+            // 创建程序对象
+            var program = gl.createProgram();
+
+            // 将顶点着色器和片元着色器附加到程序对象上
+            gl.attachShader(program, vertexShader);
+            gl.attachShader(program, fragmentShader);
+
+            // 链接程序对象
+            gl.linkProgram(program);
+
+            // 使用程序对象
+            gl.useProgram(program);
+
+            // 获取顶点位置变量的位置
+            var positionLocation = gl.getAttribLocation(program, 'a_position');
+
+            // 启用顶点属性数组
+            gl.enableVertexAttribArray(positionLocation);
+
+            // 设置顶点属性指针
+            gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+            // 清空画布并绘制三角形
+            gl.clearColor(1.0, 1.0, 1.0, 1.0);
+            gl.clear(gl.COLOR_BUFFER_BIT);
+            gl.drawArrays(gl.TRIANGLES, 0, 3);
         }
-    </style>
+    </script>
 </head>
-<body>
+<body onload="init()">
+<canvas id="myCanvas" width="400" height="300"></canvas>
 
-<div id="board"></div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const board = document.getElementById("board");
-
-        // Create chessboard
-        for (let row = 0; row < 8; row++) {
-            for (let col = 0; col < 8; col++) {
-                const square = document.createElement("div");
-                square.className = `square ${((row + col) % 2 === 0) ? 'white' : 'black'}`;
-                square.dataset.row = row;
-                square.dataset.col = col;
-                square.textContent = getInitialPiece(row, col);
-                board.appendChild(square);
-            }
-        }
-
-        function getInitialPiece(row, col) {
-            // Implement your logic to set up the initial chess pieces
-            // You can use this function to set up the initial placement of pieces on the board
-            // Return the piece symbol or an empty string for an empty square
-            return "";
-        }
-
-        // Add event listener for square click
-        board.addEventListener("click", handleSquareClick);
-
-        function handleSquareClick(event) {
-            const square = event.target;
-            const row = square.dataset.row;
-            const col = square.dataset.col;
-
-            // Implement your chess move logic here
-            console.log(`Clicked on square (${row}, ${col})`);
-        }
-    });
+<script type="x-shader/x-vertex" id="vsSource">
+    attribute vec4 a_position;
+    void main() {
+        gl_Position = a_position;
+    }
 </script>
 
+<script type="x-shader/x-fragment" id="fsSource">
+    precision mediump float;
+    void main() {
+        gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+    }
+</script>
 </body>
 </html>
