@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>你好呀，登录吧</title>
+    <style>
+        * {margin: 0;padding: 0;}
+
+        html {height: 100%;}
+
+        body { height: 100%; margin: 0; font-family: 'KaiTi', sans-serif; overflow: hidden; }
+
+        .container {
+            height: 100%;
+            background-image: linear-gradient(110deg, #2193b0, #6dd5ed);
+        }
+
+        .login-wrapper {
+            background-image: linear-gradient(110deg, #1f4037, #99f2c8);
+            width: 400px;
+            height: 388px;
+            border-radius: 50px;
+            padding: 0 50px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .header {
+            font-size: 60px;
+            font-weight: 900;
+            text-align: center;
+            line-height: 120px;
+        }
+
+        .form-wrapper {
+            margin-top: 20px;
+        }
+
+        .input-item {
+            display: block;
+            width: 100%;
+            margin-bottom: 20px;
+            border: 0;
+            padding: 10px;
+            border-bottom: 1px solid rgb(128, 125, 125);
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-item::placeholder {
+            text-transform: uppercase;
+        }
+
+        .input-item:focus {
+            border-color: green;
+        }
+
+        .login_btn {
+            text-align: center;
+            background-color: rgba(245,222,179);
+            border: 1px solid rgb(190, 225, 255);
+            padding: 10px;
+            width: 100%;
+            border-radius: 30px;
+            font-size: 35px;
+            color: green;
+            font-weight: 100;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .login_btn:hover {
+            box-shadow: 2px 2px 15px 2px rgb(190, 225, 255);
+            background-color: transparent;
+            animation: login_mation 0.5s;
+        }
+
+        .msg {
+            text-align: center;
+            line-height: 88px;
+        }
+
+        a {
+            text-decoration-line: none;
+            color: #abc1ee;
+        }
+
+        .audio-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .fadeInOut {
+            opacity: 0;
+            animation: fadeIn 2s forwards, fadeOut 2s 4s forwards;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="audio-wrapper">
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1974443815&auto=1&height=66"></iframe>
+    </div>
+    <div class="login-wrapper">
+        <div class="header">登&nbsp;录</div>
+        <div class="form-wrapper">
+            <input type="text" name="输入用户名" placeholder="随便输吧" class="input-item">
+            <input type="password" name="输入密码" placeholder="别注册/直接点登录" class="input-item">
+            <div class="btn">
+                <button class="login_btn" onclick="showAlertAndRedirect()">登 &nbsp;&nbsp;录</button>
+            </div>
+        </div>
+        <div class="msg fadeInOut">
+            没有什么过不去的坎
+        </div>
+    </div>
+</div>
+
+<script>
+    function showAlertAndRedirect() {
+        alert('完蛋了，我还没有开发后面的页面');
+        window.location.href = "my_html.html";
+    }
+
+    // Delay the animation to show the message
+    setTimeout(function() {
+        document.querySelector('.msg').classList.remove('fadeInOut');
+    }, 1000);
+</script>
+</body>
+</html>

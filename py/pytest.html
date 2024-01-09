@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>PyScript Hello World</title>
+
+    <link rel="stylesheet" href="css/pyscript.css" />
+    <!-- Include Pyodide separately -->
+    <script type="text/javascript" src="js/pyodide.js"></script>
+</head>
+
+<body>
+Hello world! <br>
+This is the current date and time, as computed by Python:
+<!-- Separate script tag for Python code -->
+<script type="text/javascript">
+    window.pyodideReady = new Promise((resolve) => {
+        // Ensure that window.languagePluginLoader is defined before accessing its 'then' method
+        if (window.languagePluginLoader && typeof window.languagePluginLoader.then === 'function') {
+            window.languagePluginLoader.then(() => {
+                resolve(window.pyodide);
+            });
+        } else {
+            console.error('Error: Pyodide languagePluginLoader is not available or does not have a "then" method.');
+            resolve(null);  // Resolve with null to indicate an issue
+        }
+    });
+
+    // Use pyodideReady to ensure Pyodide is ready
+    window.pyodideReady.then((pyodide) => {
+        if (pyodide) {
+            pyodide.runPython(`
+                from datetime import datetime
+                now = datetime.now()
+                print(now.strftime("%m/%d/%Y, %H:%M:%S"))
+            `);
+        } else {
+            console.error('错误：Pyodide 尚未准备好。请检查控制台获取更多详细信息。');
+        }
+    });
+</script>
+
+
+
+</body>
+</html>

@@ -67,8 +67,16 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/atom-one-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
+    <script src="js/html2canvas.min.js"></script>
+    <script src="js/html2pdf.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+
+
 </head>
-<body>
+<body id="pdf">
 
 <div id="lyric-container"></div>
 <div class="audio-container">
@@ -2512,6 +2520,19 @@ int main()
     18，20，24，39，40，43，70，80，90
     完成
 </pre>
+<button id="downloadBtn">下载 本页面PDF</button>
+
+<script>
+    var downloadBtn = document.getElementById('downloadBtn');
+    downloadBtn.addEventListener('click', function () {
+        var element = document.getElementById('pdf');
+
+        html2pdf(element);
+    });
+</script>
+
+
+
 
 </body>
 </html>
