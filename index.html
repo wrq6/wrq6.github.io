@@ -16,7 +16,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh; /* 这里改成min-height，避免内容过少时无法占满整个屏幕 */
     }
 
     #chineseText {
@@ -44,6 +44,7 @@
       cursor: pointer;
       background-color: #4fd784;
       color: #fff;
+      text-transform: uppercase;
       transition: background 0.3s ease;
     }
 
@@ -51,6 +52,21 @@
       background-color: #fff;
       color: #4fd784;
       animation: pulse 1s ease-in-out infinite;
+    }
+
+    /* 在这里添加了@media规则 */
+    @media (max-width: 768px) {
+      #chineseText {
+        font-size: 2em;
+      }
+      #englishText {
+        font-size: 1em;
+      }
+      #dynamicButton {
+        margin-top: 20px;
+        padding: 10px 30px;
+        font-size: 1em;
+      }
     }
 
     @keyframes flicker {
@@ -82,7 +98,7 @@
 <div>
   <p id="chineseText">我太急切地想要所有的答案了，<br>想要风光的学位，瞬间的博学，<br>想要意气风发，想闪着金光走向喜欢的人。<br>可它让我等, 要我耐得住不断延长的时间线,<br>要我交付出足够的努力堆砌在沉闷、晦涩又漫长短暂的时光里,<br>才肯将一切一点一点的递送于我的手里.</p>
   <p id="englishText">But it makes me wait, <br>requires me to endure the continuously extending timeline, <br>put in enough effort, stacking in the dull, obscure, and both long and short moments, <br>only then will it be willing to deliver everything bit by bit into my hands.</p>
-  <button id="dynamicButton" onclick="showAlertAndRedirect()" >进 入</button>
+  <button id="dynamicButton" onclick="showAlertAndRedirect()">进 入</button>
 </div>
 </body>
 <script>
@@ -90,10 +106,5 @@
     alert('完蛋了，我还没有开发后面的页面');
     window.location.href = "my_html.html";
   }
-
-  // Delay the animation to show the message
-  setTimeout(function() {
-    document.querySelector('.msg').classList.remove('fadeInOut');
-  }, 1000);
 </script>
 </html>
