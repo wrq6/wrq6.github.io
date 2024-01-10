@@ -1,250 +1,99 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>jquery 旋转木马3D文字效果</title>
-<style type="text/css" media="screen">
-  body {
-    background-color: #111;
-    color: #69c;
-    font-family: Arial, "MS Trebuchet", sans-serif;
-    font-weight: bold;
-    font-size: 1em;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HI.</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: #141e30;
+      background: linear-gradient(to right, #243b55, #141e30);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
 
-  #item {
-    width: 150px;
-    height: 150px;
-    margin: 0 auto;
-    top: 200px;
-    left: 100px;
-    position: relative;
-  }
+    #chineseText {
+      font-size: 3em;
+      text-align: center;
+      animation: flicker 3s ease-in-out infinite;
+    }
 
-  ul {
-    list-style-type: none;
-  }
+    #englishText {
+      font-size: 1.5em;
+      margin-top: 20px;
+      text-align: center;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
 
-  .btn {
-    text-align: center;
-    margin-top: 50px;
-  }
+    #dynamicButton {
+      margin-top: 50px;
+      padding: 15px 45px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      background-color: #4fd784;
+      color: #fff;
+      transition: background 0.3s ease;
+    }
 
-  .login_btn {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    text-align: center;
-    text-decoration: none;
-    background-color: #4CAF50;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
+    #dynamicButton:hover {
+      background-color: #fff;
+      color: #4fd784;
+      animation: pulse 1s ease-in-out infinite;
+    }
 
-  .login_btn:hover {
-    background-color: rgba(62, 142, 65, 0.30);
-  }
+    @keyframes flicker {
+      0%, 100% {
+        color: #355C7D;
+        text-shadow: 0px 0px 30px #6C5B7B;
+      }
+      50% {
+        color:#C06C84;
+        text-shadow: 0px 0px 30px #bc4e9c;
+      }
+    }
 
-  .btn {
-    text-align: center;
-    margin-top: 50px;
-  }
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
 
-  .login_btn {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    text-align: center;
-    text-decoration: none;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    transition: opacity 0.3s;
-    opacity: 0.8;
-  }
-
-  .login_btn:hover {
-    opacity: 1;
-  }
-
-</style>
+  </style>
 </head>
 <body>
-<div id="item">
-  <ul>
-    <li>我</li>
-    <li>太</li>
-    <li>急</li>
-    <li>切</li>
-    <li>地</li>
-    <li>想</li>
-    <li>要</li>
-    <li>所</li>
-    <li>有</li>
-    <li>的</li>
-    <li>答</li>
-    <li>案</li>
-    <li>了</li>
-    <li>,</li>
-    <li>想</li>
-    <li>要</li>
-    <li>风</li>
-    <li>光</li>
-    <li>的</li>
-    <li>学</li>
-    <li>位</li>
-    <li>,</li>
-    <li>瞬</li>
-    <li>间</li>
-    <li>的</li>
-    <li>博</li>
-    <li>学</li>
-    <li>,</li>
-    <li>想</li>
-    <li>要</li>
-    <li>意</li>
-    <li>气</li>
-    <li>风</li>
-    <li>发</li>
-    <li>,</li>
-    <li>想</li>
-    <li>闪</li>
-    <li>着</li>
-    <li>金</li>
-    <li>光</li>
-    <li>走</li>
-    <li>向</li>
-    <li>喜</li>
-    <li>欢</li>
-    <li>的</li>
-    <li>人</li>
-    <li>.</li>
-    <li>可</li>
-    <li>它</li>
-    <li>让</li>
-    <li>我</li>
-    <li>等</li>
-    <li>,</li>
-    <li>要</li>
-    <li>我</li>
-    <li>耐</li>
-    <li>得</li>
-    <li>住</li>
-    <li>不</li>
-    <li>断</li>
-    <li>延</li>
-    <li>长</li>
-    <li>的</li>
-    <li>时</li>
-    <li>间</li>
-    <li>线</li>
-    <li>,</li>
-    <li>要</li>
-    <li>我</li>
-    <li>交</li>
-    <li>付</li>
-    <li>出</li>
-    <li>足</li>
-    <li>够</li>
-    <li>的</li>
-    <li>努</li>
-    <li>力</li>
-    <li>堆</li>
-    <li>砌</li>
-    <li>在</li>
-    <li>沉</li>
-    <li>闷</li>
-    <li>、</li>
-    <li>晦</li>
-    <li>涩</li>
-    <li>又</li>
-    <li>漫</li>
-    <li>长</li>
-    <li>短</li>
-    <li>暂</li>
-    <li>的</li>
-    <li>时</li>
-    <li>光</li>
-    <li>里</li>
-    <li>,</li>
-    <li>才</li>
-    <li>肯</li>
-    <li>将</li>
-    <li>一</li>
-    <li>切</li>
-    <li>一</li>
-    <li>点</li>
-    <li>一</li>
-    <li>点</li>
-    <li>的</li>
-    <li>递</li>
-    <li>送</li>
-    <li>于</li>
-    <li>我</li>
-    <li>的</li>
-    <li>手</li>
-    <li>里</li>
-    <li>.</li>
-  </ul>
-</div>
-<div class="btn">
-  <button class="login_btn" onclick="showAlertAndRedirect()">进入</button>
+<div>
+  <p id="chineseText">我太急切地想要所有的答案了，<br>想要风光的学位，瞬间的博学，<br>想要意气风发，想闪着金光走向喜欢的人。<br>可它让我等, 要我耐得住不断延长的时间线,<br>要我交付出足够的努力堆砌在沉闷、晦涩又漫长短暂的时光里,<br>才肯将一切一点一点的递送于我的手里.</p>
+  <p id="englishText">But it makes me wait, <br>requires me to endure the continuously extending timeline, <br>put in enough effort, stacking in the dull, obscure, and both long and short moments, <br>only then will it be willing to deliver everything bit by bit into my hands.</p>
+  <button id="dynamicButton" onclick="showAlertAndRedirect()" >进 入</button>
 </div>
 </body>
+<script>
+  function showAlertAndRedirect() {
+    alert('完蛋了，我还没有开发后面的页面');
+    window.location.href = "my_html.html";
+  }
 
-<script type="text/javascript" src="js1/jquery-1.3.2.min.js"></script>
-<script src="js1/3DEngine.js" type="text/javascript" charset="utf-8"></script>
-<script src="js1/Ring.js" type="text/javascript" charset="utf-8"></script>
-<script type="text/javascript">
-		//<![CDATA[
-		
-		$(document).ready(function() {
-
-			var camera = new Camera3D();
-			camera.init(0,0,0,300);
-			
-			var container = $("#item");
-			
-			var item = new Object3D(container);
-
-			item.addChild(new Ring(200, $("#item ul li").length));
-			
-			var scene = new Scene3D();
-			scene.addToScene(item);
-			
-			
-			var mouseX,mouseY = 0;
-			var offsetX = $("#item").offset().left;
-			var offsetY = $("#item").offset().top;
-			var speed = 6000;
-			
-			$().mousemove(function(e){
-				mouseX = e.clientX - offsetX - (container.width() / 2);
-				mouseY = e.clientY - offsetY - (container.height() / 2);
-			});
-			
-			axisRotation.x = 1.5;
-			
-			var animateIt = function(){
-				if (mouseX != undefined){
-					axisRotation.y += (mouseX) / speed;
-				}
-				
-				scene.renderCamera(camera);
-				
-			};
-			
-			
-			setInterval(animateIt, 20);
-			
-			
-			});
-		//]]>
-	</script>
-</body>
+  // Delay the animation to show the message
+  setTimeout(function() {
+    document.querySelector('.msg').classList.remove('fadeInOut');
+  }, 1000);
+</script>
 </html>
