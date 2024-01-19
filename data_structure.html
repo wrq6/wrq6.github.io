@@ -2397,8 +2397,9 @@ int main()
 <pre>
      <span style="font-size: 50px">常见的几种排序</span>
     <span style="color: #0d66c2;font-size: 15px">希尔排序、快速排序、堆排序、归并排序、基数排序、折半查找</span>
+       <hr class="hr-shadow">
 (1) 归并排序
-        对{40，24，80，39，43，18，20，10，90，70} 进行从小到大排序过程(两两分组比较)
+    <span style="color: #00daff">对{40，24，80，39，43，18，20，10，90，70} 进行从小到大排序过程(两两分组比较)</span>
     <svg width="500" height="300" xmlns="http://www.w3.org/2000/svg">
         <g>
         <text x="40" y="40" font-size="12" text-anchor="middle">[40]</text>
@@ -2458,9 +2459,9 @@ int main()
 </g>
     </svg>
     <span style="color: #00aa44">这应该看得懂吧？一目了然了都😏😏</span>
+       <hr class="hr-shadow">
 (2) 快速排序
-    对{46，58，15，45，90，18，10，62}进行快速排序
-        <hr class="hr-shadow">
+    <span style="color: #00daff">对{46，58，15，45，90，18，10，62}进行快速排序</span>
     以第一个数为基准提出来
         ___  58  15  45  90  18  10  62
         ___  58  15  45  90  18  10  62<--
@@ -2487,7 +2488,6 @@ int main()
     <span style="color: #00aa44">到此为止全部元素都和46比较过了，于是把46放到空位处</span>
         10  18  15  45  <span style="color: red">46</span>  90  58  62
     <span style="color: #00aa44">此时46的位置已经确定了，46所在的位置就是这里，你可能也感觉出来了，这一轮比较就是把比46小的一股脑丢46前面，比46大的一股脑丢到后面去</span>
-    <hr class="hr-shadow">
     <span style="color: #00aa44">既然46确定了，只需要比较两块内容就行了，也就是46前面的，和46后面的就行，还是按照之前的方法</span>
         ___  18  15  45<--  <span style="color: red">46</span>  ___  58   62<--
     <span style="color: #00aa44">哈哈哈，开启双开模式，前面提10，后面提90</span>
@@ -2499,8 +2499,9 @@ int main()
         <span style="color: red">10</span>  ___  15 45<--  <span style="color: red">46</span>  ___  58<--  <span style="color: red">90</span>
         <span style="color: red">10</span>  ___  15<-- 45  <span style="color: red">46</span>  58  ___  <span style="color: red">90</span>
         <span style="color: red">10</span>  <span style="color: red">15  18  45</span>  <span style="color: red">46</span>  <span style="color: red"> 58  62</span>  <span style="color: red">90</span>
+   <hr class="hr-shadow">
 (3) 希尔排序
-    利用希尔排序对关键字系列{40，24，80，39，43，18，20，10，90，70}从小到大排序(增量5，3，1)
+    <span style="color: #00daff">利用希尔排序对关键字系列{40，24，80，39，43，18，20，10，90，70}从小到大排序(增量5，3，1)</span>
     增量的意思就是每个x个为一个组比较大小
     当增量为5时
     <span style="color: red">40</span>，24，80，39，43，<span style="color: red">18</span>，20，10，90，70
@@ -2519,7 +2520,965 @@ int main()
     18，20, 24，43，40，39，80，90，70
     18，20，24，39，40，43，70，80，90
     完成
+    <hr class="hr-shadow">
+(4)基数排序
+    <span style="color: #00daff">对{457,131,481,219,392,674,350,815,315}进行基数排序</span>
+    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="100" y1="50" x2="100" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="125" y1="50" x2="125" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="150" y1="50" x2="150" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="175" y1="50" x2="175" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="200" y1="50" x2="200" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="225" y1="50" x2="225" y2="200" stroke="black" stroke-width="2"/>
+     <line x1="250" y1="50" x2="250" y2="200" stroke="black" stroke-width="2"/>
+     <line x1="275" y1="50" x2="275" y2="200" stroke="black" stroke-width="2"/>
+     <line x1="300" y1="50" x2="300" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">看</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">位</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">数</text>
+        <text x="30" y="160" font-size="12" text-anchor="middle">放</text>
+        </g>
+
+        <g id="loading-txt">
+        <text x="60" y="50" font-size="12" text-anchor="middle">Q_0</text>
+        <text x="85" y="50" font-size="12" text-anchor="middle">Q_1</text>
+        <text x="110" y="50" font-size="12" text-anchor="middle">Q_2</text>
+        <text x="135" y="50" font-size="12" text-anchor="middle">Q_3</text>
+        <text x="160" y="50" font-size="12" text-anchor="middle">Q_4</text>
+        <text x="185" y="50" font-size="12" text-anchor="middle">Q_5</text>
+        <text x="210" y="50" font-size="12" text-anchor="middle">Q_6</text>
+        <text x="235" y="50" font-size="12" text-anchor="middle">Q_7</text>
+        <text x="260" y="50" font-size="12" text-anchor="middle">Q_8</text>
+        <text x="285" y="50" font-size="12" text-anchor="middle">Q_9</text>
+        </g>
+        <g id="loading-txt">
+        <text x="60" y="80" font-size="10" text-anchor="middle"  >350</text>
+        <text x="85" y="80" font-size="10" text-anchor="middle"  >481</text>
+        <text x="110" y="80" font-size="10" text-anchor="middle" >392</text>
+        <text x="160" y="80" font-size="10" text-anchor="middle" >674</text>
+        <text x="185" y="80" font-size="10" text-anchor="middle" >475</text>
+        <text x="185" y="110" font-size="10" text-anchor="middle" >815</text>
+        <text x="185" y="140" font-size="10" text-anchor="middle" >315</text>
+        <text x="235" y="80" font-size="10" text-anchor="middle" >137</text>
+        <text x="285" y="80" font-size="10" text-anchor="middle" >219</text>
+        </g>
+    </svg>
+<span style="color: #fa0a0a">接下来就是收集（从上到下，从左到右）：{350,481,392,674,475,815,315,137,219}</span>
+    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="100" y1="50" x2="100" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="125" y1="50" x2="125" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="150" y1="50" x2="150" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="175" y1="50" x2="175" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="200" y1="50" x2="200" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="225" y1="50" x2="225" y2="200" stroke="black" stroke-width="2"/>
+     <line x1="250" y1="50" x2="250" y2="200" stroke="black" stroke-width="2"/>
+     <line x1="275" y1="50" x2="275" y2="200" stroke="black" stroke-width="2"/>
+     <line x1="300" y1="50" x2="300" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">看</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">十</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">位</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">数</text>
+        <text x="30" y="160" font-size="12" text-anchor="middle">放</text>
+        </g>
+
+        <g id="loading-txt">
+        <text x="60" y="50" font-size="12" text-anchor="middle">Q_0</text>
+        <text x="85" y="50" font-size="12" text-anchor="middle">Q_1</text>
+        <text x="110" y="50" font-size="12" text-anchor="middle">Q_2</text>
+        <text x="135" y="50" font-size="12" text-anchor="middle">Q_3</text>
+        <text x="160" y="50" font-size="12" text-anchor="middle">Q_4</text>
+        <text x="185" y="50" font-size="12" text-anchor="middle">Q_5</text>
+        <text x="210" y="50" font-size="12" text-anchor="middle">Q_6</text>
+        <text x="235" y="50" font-size="12" text-anchor="middle">Q_7</text>
+        <text x="260" y="50" font-size="12" text-anchor="middle">Q_8</text>
+        <text x="285" y="50" font-size="12" text-anchor="middle">Q_9</text>
+        </g>
+        <g id="loading-txt">
+        <text x="85" y="80" font-size="10" text-anchor="middle"  >815</text>
+        <text x="85" y="110" font-size="10" text-anchor="middle"  >315</text>
+        <text x="85" y="140" font-size="10" text-anchor="middle" >219</text>
+        <text x="135" y="80" font-size="10" text-anchor="middle" >137</text>
+        <text x="185" y="80" font-size="10" text-anchor="middle" >350</text>
+        <text x="235" y="80" font-size="10" text-anchor="middle">674</text>
+        <text x="235" y="110" font-size="10" text-anchor="middle">475</text>
+        <text x="260" y="80" font-size="10" text-anchor="middle" >481</text>
+        <text x="285" y="80" font-size="10" text-anchor="middle" >392</text>
+        </g>
+    </svg>
+<span style="color: #fa0a0a">接下来就是收集（从上到下，从左到右）：{815,315,219,137,350,674,475,481,392}</span>
+    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="100" y1="50" x2="100" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="125" y1="50" x2="125" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="150" y1="50" x2="150" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="175" y1="50" x2="175" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="200" y1="50" x2="200" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="225" y1="50" x2="225" y2="200" stroke="black" stroke-width="2"/>
+     <line x1="250" y1="50" x2="250" y2="200" stroke="black" stroke-width="2"/>
+     <line x1="275" y1="50" x2="275" y2="200" stroke="black" stroke-width="2"/>
+     <line x1="300" y1="50" x2="300" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">看</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">百</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">位</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">数</text>
+        <text x="30" y="160" font-size="12" text-anchor="middle">放</text>
+        </g>
+
+        <g id="loading-txt">
+        <text x="60" y="50" font-size="12" text-anchor="middle">Q_0</text>
+        <text x="85" y="50" font-size="12" text-anchor="middle">Q_1</text>
+        <text x="110" y="50" font-size="12" text-anchor="middle">Q_2</text>
+        <text x="135" y="50" font-size="12" text-anchor="middle">Q_3</text>
+        <text x="160" y="50" font-size="12" text-anchor="middle">Q_4</text>
+        <text x="185" y="50" font-size="12" text-anchor="middle">Q_5</text>
+        <text x="210" y="50" font-size="12" text-anchor="middle">Q_6</text>
+        <text x="235" y="50" font-size="12" text-anchor="middle">Q_7</text>
+        <text x="260" y="50" font-size="12" text-anchor="middle">Q_8</text>
+        <text x="285" y="50" font-size="12" text-anchor="middle">Q_9</text>
+        </g>
+        <g id="loading-txt">
+        <text x="85" y="80" font-size="10" text-anchor="middle"  >137</text>
+        <text x="110" y="80" font-size="10" text-anchor="middle"  >219</text>
+        <text x="135" y="80" font-size="10" text-anchor="middle" >315</text>
+        <text x="135" y="110" font-size="10" text-anchor="middle" >350</text>
+        <text x="135" y="140" font-size="10" text-anchor="middle" >392</text>
+        <text x="235" y="80" font-size="10" text-anchor="middle">475</text>
+        <text x="235" y="110" font-size="10" text-anchor="middle">481</text>
+        <text x="210" y="80" font-size="10" text-anchor="middle" >674</text>
+        <text x="260" y="80" font-size="10" text-anchor="middle" >815</text>
+        </g>
+    </svg>
+<span style="color: #fa0a0a">接下来就是收集（从上到下，从左到右）：{137，219，315，350，392，475，481，674，815}</span>
+至此你也看出来了，它到底是怎么运作来实现排序的
+也不难，先个位数，再十位数，再百位数，一步步确保
+    <hr class="hr-shadow">
+(5)折半查找
+    <span style="color: #00daff">对{5,13,17,29,37,41,61,79,89}利用折半查找值为29的元素</span>
+<svg width="400" height="150" xmlns="http://www.w3.org/2000/svg">
+
+
+        <g id="loading-txt">
+        <text x="60" y="50" font-size="12" text-anchor="middle" >_0_</text>
+        <text x="85" y="50" font-size="12" text-anchor="middle" >_1_</text>
+        <text x="110" y="50" font-size="12" text-anchor="middle">_2_</text>
+        <text x="135" y="50" font-size="12" text-anchor="middle">_3_</text>
+        <text x="160" y="50" font-size="12" text-anchor="middle">_4_</text>
+        <text x="185" y="50" font-size="12" text-anchor="middle">_5_</text>
+        <text x="210" y="50" font-size="12" text-anchor="middle">_6_</text>
+        <text x="235" y="50" font-size="12" text-anchor="middle">_7_</text>
+        <text x="260" y="50" font-size="12" text-anchor="middle">_8_</text>
+        </g>
+        <g id="loading-txt">
+        <text x="60" y="80" font-size="12" text-anchor="middle" >5</text>
+        <text x="85" y="80" font-size="12" text-anchor="middle" >13</text>
+        <text x="110" y="80" font-size="12" text-anchor="middle">17</text>
+        <text x="135" y="80" font-size="12" text-anchor="middle">29</text>
+        <text x="160" y="80" font-size="12" text-anchor="middle">37</text>
+        <text x="185" y="80" font-size="12" text-anchor="middle">41</text>
+        <text x="210" y="80" font-size="12" text-anchor="middle">61</text>
+        <text x="235" y="80" font-size="12" text-anchor="middle">79</text>
+        <text x="260" y="80" font-size="12" text-anchor="middle">89</text>
+        </g>
+        <g id="loading-txt">
+        <text x="60" y="100" font-size="12" text-anchor="middle" >↑</text>
+        <text x="160" y="100" font-size="12" text-anchor="middle">↑</text>
+        <text x="260" y="100" font-size="12" text-anchor="middle">↑</text>
+        </g>
+        <g id="loading-txt">
+        <text x="60" y="110" font-size="12" text-anchor="middle" >low</text>
+        <text x="160" y="110" font-size="12" text-anchor="middle">mid</text>
+        <text x="260" y="110" font-size="12" text-anchor="middle">high</text>
+        </g>
+    </svg>
+我们规定了首尾都有一个指针，其次mid的指针由下面式子给出
+    <span style="color: #00aa44"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>m</mi><mi>i</mi><mi>d</mi><mo>=</mo><mfrac><mrow><mi>l</mi><mi>o</mi><mi>w</mi><mo>+</mo><mi>h</mi><mi>i</mi><mi>g</mi><mi>h</mi></mrow><mn>2</mn></mfrac><mo>=</mo><mfrac><mrow><mn>0</mn><mo>+</mo><mn>8</mn></mrow><mn>2</mn></mfrac><mo>=</mo><mn>4</mn></mrow></math></span>
+是的，折半的想法，此时mid指向的值为<span style="color: red">37</span>比我们要找的值29大
+这就是说明我们的中间的指针是比这个大的(😏废话)
+所以我们把高指针的指向重新定义为mid(中间指针)的<span style="color: red">前一个</span>
+如果你对为什么是前一个没有疑虑，那么你很聪明
+因为我们比较的就是中间指针肯定是要么大要么小，如果相同的就结束了啊
+所以这个相当于不属于我们下一次查找的范围了
+
+<svg width="400" height="150" xmlns="http://www.w3.org/2000/svg">
+
+
+        <g id="loading-txt">
+        <text x="60" y="50" font-size="12" text-anchor="middle" >_0_</text>
+        <text x="85" y="50" font-size="12" text-anchor="middle" >_1_</text>
+        <text x="110" y="50" font-size="12" text-anchor="middle">_2_</text>
+        <text x="135" y="50" font-size="12" text-anchor="middle">_3_</text>
+        <text x="160" y="50" font-size="12" text-anchor="middle">_4_</text>
+        <text x="185" y="50" font-size="12" text-anchor="middle">_5_</text>
+        <text x="210" y="50" font-size="12" text-anchor="middle">_6_</text>
+        <text x="235" y="50" font-size="12" text-anchor="middle">_7_</text>
+        <text x="260" y="50" font-size="12" text-anchor="middle">_8_</text>
+        </g>
+        <g id="loading-txt">
+        <text x="60" y="80" font-size="12" text-anchor="middle" >5</text>
+        <text x="85" y="80" font-size="12" text-anchor="middle" >13</text>
+        <text x="110" y="80" font-size="12" text-anchor="middle">17</text>
+        <text x="135" y="80" font-size="12" text-anchor="middle">29</text>
+        <text x="160" y="80" font-size="12" text-anchor="middle">37</text>
+        <text x="185" y="80" font-size="12" text-anchor="middle">41</text>
+        <text x="210" y="80" font-size="12" text-anchor="middle">61</text>
+        <text x="235" y="80" font-size="12" text-anchor="middle">79</text>
+        <text x="260" y="80" font-size="12" text-anchor="middle">89</text>
+        </g>
+        <g id="loading-txt">
+        <text x="60" y="100" font-size="12" text-anchor="middle" >↑</text>
+        <text x="85" y="100" font-size="12" text-anchor="middle">↑</text>
+        <text x="135" y="100" font-size="12" text-anchor="middle">↑</text>
+        </g>
+        <g id="loading-txt">
+        <text x="60" y="110" font-size="12" text-anchor="middle" >low</text>
+        <text x="85" y="110" font-size="12" text-anchor="middle">mid</text>
+        <text x="135" y="110" font-size="12" text-anchor="middle">high</text>
+        </g>
+    </svg>
+
+    <span style="color: #00aa44"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>m</mi><mi>i</mi><mi>d</mi><mo>=</mo><mfrac><mrow><mi>l</mi><mi>o</mi><mi>w</mi><mo>+</mo><mi>h</mi><mi>i</mi><mi>g</mi><mi>h</mi></mrow><mn>2</mn></mfrac><mo>=</mo><mfrac><mrow><mn>0</mn><mo>+</mo><mn>3</mn></mrow><mn>2</mn></mfrac><mo>=</mo><mn>1</mn></mrow></math></span>(向下取整)
+mid指向的是13，比29小，我们把low(小)指针改为mid(中间指针)的后面一个
+<svg width="400" height="150" xmlns="http://www.w3.org/2000/svg">
+
+
+        <g id="loading-txt">
+        <text x="60" y="50" font-size="12" text-anchor="middle" >_0_</text>
+        <text x="85" y="50" font-size="12" text-anchor="middle" >_1_</text>
+        <text x="110" y="50" font-size="12" text-anchor="middle">_2_</text>
+        <text x="135" y="50" font-size="12" text-anchor="middle">_3_</text>
+        <text x="160" y="50" font-size="12" text-anchor="middle">_4_</text>
+        <text x="185" y="50" font-size="12" text-anchor="middle">_5_</text>
+        <text x="210" y="50" font-size="12" text-anchor="middle">_6_</text>
+        <text x="235" y="50" font-size="12" text-anchor="middle">_7_</text>
+        <text x="260" y="50" font-size="12" text-anchor="middle">_8_</text>
+        </g>
+        <g id="loading-txt">
+        <text x="60" y="80" font-size="12" text-anchor="middle" >5</text>
+        <text x="85" y="80" font-size="12" text-anchor="middle" >13</text>
+        <text x="110" y="80" font-size="12" text-anchor="middle">17</text>
+        <text x="135" y="80" font-size="12" text-anchor="middle">29</text>
+        <text x="160" y="80" font-size="12" text-anchor="middle">37</text>
+        <text x="185" y="80" font-size="12" text-anchor="middle">41</text>
+        <text x="210" y="80" font-size="12" text-anchor="middle">61</text>
+        <text x="235" y="80" font-size="12" text-anchor="middle">79</text>
+        <text x="260" y="80" font-size="12" text-anchor="middle">89</text>
+        </g>
+        <g id="loading-txt">
+        <text x="110" y="100" font-size="12" text-anchor="middle" >↑</text>
+        <text x="110" y="130" font-size="12" text-anchor="middle">↑</text>
+        <text x="135" y="100" font-size="12" text-anchor="middle">↑</text>
+        </g>
+        <g id="loading-txt">
+        <text x="110" y="110" font-size="12" text-anchor="middle" >low</text>
+        <text x="110" y="140" font-size="12" text-anchor="middle">mid</text>
+        <text x="135" y="110" font-size="12" text-anchor="middle">high</text>
+        </g>
+    </svg>
+
+    <span style="color: #00aa44"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>m</mi><mi>i</mi><mi>d</mi><mo>=</mo><mfrac><mrow><mi>l</mi><mi>o</mi><mi>w</mi><mo>+</mo><mi>h</mi><mi>i</mi><mi>g</mi><mi>h</mi></mrow><mn>2</mn></mfrac><mo>=</mo><mfrac><mrow><mn>2</mn><mo>+</mo><mn>3</mn></mrow><mn>2</mn></mfrac><mo>=</mo><mn>2</mn></mrow></math></span>(向下取整)
+此时mid指向的是17还是比29小，于是把low指针指向mid的下一个
+<svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
+
+
+        <g id="loading-txt">
+        <text x="60" y="50" font-size="12" text-anchor="middle" >_0_</text>
+        <text x="85" y="50" font-size="12" text-anchor="middle" >_1_</text>
+        <text x="110" y="50" font-size="12" text-anchor="middle">_2_</text>
+        <text x="135" y="50" font-size="12" text-anchor="middle">_3_</text>
+        <text x="160" y="50" font-size="12" text-anchor="middle">_4_</text>
+        <text x="185" y="50" font-size="12" text-anchor="middle">_5_</text>
+        <text x="210" y="50" font-size="12" text-anchor="middle">_6_</text>
+        <text x="235" y="50" font-size="12" text-anchor="middle">_7_</text>
+        <text x="260" y="50" font-size="12" text-anchor="middle">_8_</text>
+        </g>
+        <g id="loading-txt">
+        <text x="60" y="80" font-size="12" text-anchor="middle" >5</text>
+        <text x="85" y="80" font-size="12" text-anchor="middle" >13</text>
+        <text x="110" y="80" font-size="12" text-anchor="middle">17</text>
+        <text x="135" y="80" font-size="12" text-anchor="middle">29</text>
+        <text x="160" y="80" font-size="12" text-anchor="middle">37</text>
+        <text x="185" y="80" font-size="12" text-anchor="middle">41</text>
+        <text x="210" y="80" font-size="12" text-anchor="middle">61</text>
+        <text x="235" y="80" font-size="12" text-anchor="middle">79</text>
+        <text x="260" y="80" font-size="12" text-anchor="middle">89</text>
+        </g>
+        <g id="loading-txt">
+        <text x="135" y="160" font-size="12" text-anchor="middle" >↑</text>
+        <text x="135" y="130" font-size="12" text-anchor="middle">↑</text>
+        <text x="135" y="100" font-size="12" text-anchor="middle">↑</text>
+        </g>
+        <g id="loading-txt">
+        <text x="135" y="170" font-size="12" text-anchor="middle" >low</text>
+        <text x="135" y="140" font-size="12" text-anchor="middle">mid</text>
+        <text x="135" y="110" font-size="12" text-anchor="middle">high</text>
+        </g>
+    </svg>
+    <span style="color: #00aa44"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>m</mi><mi>i</mi><mi>d</mi><mo>=</mo><mfrac><mrow><mi>l</mi><mi>o</mi><mi>w</mi><mo>+</mo><mi>h</mi><mi>i</mi><mi>g</mi><mi>h</mi></mrow><mn>2</mn></mfrac><mo>=</mo><mfrac><mrow><mn>3</mn><mo>+</mo><mn>3</mn></mrow><mn>2</mn></mfrac><mo>=</mo><mn>3</mn></mrow></math></span>
+bingo！mid指向29，刚好是我们要找的，好吧，麻烦是麻烦了点
+但是编程实现起来比其他简单啊🤨
+
+<hr class="hr-shadow">
+
+(6)堆排序（大根堆/小根堆）
+    <span style="color: #00daff">对{5,1,6,9,2}如何构造大/小根堆</span>
+    怎么说呢，就是大小根堆简单就是根是最大/小的就是
+    我们操作的步骤第一步就是将给出的数列按完全二叉树排列(完全二叉树不知道的话那，废了)
+    <canvas id="myCanvas17" width="800" height="300"></canvas>
+    <script>
+    var canvas = document.getElementById('myCanvas17');
+    var context = canvas.getContext('2d');
+
+    // 定义图的顶点
+    var vertices = [
+        { x: 250, y: 50, label:'5    【1】' },
+        { x: 150, y: 100,label:'1    【2】' },
+        { x: 400, y: 100,label:'6    【3】' },
+        { x: 100, y: 175, label:'9    【4】' },
+        { x: 190, y: 175, label:'2    【5】' },
+
+    ];
+
+    // 定义图的边
+    var edges = [
+        { start: vertices[0], end: vertices[1] },
+        { start: vertices[0], end: vertices[2] },
+        { start: vertices[1], end: vertices[3] },
+        { start: vertices[1], end: vertices[4] },
+        { start: vertices[4], end: vertices[5] },
+    ];
+
+
+    // 绘制顶点
+    vertices.forEach(function(vertex) {
+        context.beginPath();
+        context.arc(vertex.x, vertex.y, 20, 0, 2 * Math.PI);
+        context.fillStyle = 'lightblue';
+        context.fill();
+        context.stroke();
+
+        // 绘制顶点标签
+        context.fillStyle = 'black';
+        context.font = '14px Arial';
+        context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+    });
+
+
+    // 绘制边和权重
+    edges.forEach(function(edge) {
+        context.beginPath();
+        context.moveTo(edge.start.x, edge.start.y);
+        context.lineTo(edge.end.x, edge.end.y);
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // 绘制边权重标签
+        if (edge.weight !== undefined) {
+            var weightX = (edge.start.x + edge.end.x) / 2;
+            var weightY = (edge.start.y + edge.end.y) / 2;
+            context.fillStyle = 'red';
+            context.font = '12px Arial';
+            context.fillText(edge.weight, weightX, weightY);
+        }
+    });
+</script>
+我们这样5个数，我们取一半（向下取整）
+    <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mfrac><mn>5</mn><mn>2</mn></mfrac><mo>=</mo><mn>2</mn></mrow></math>
+我们从第二个数开始即1【2】开始比较它与它的左右孩子们的大小，大的放根上就行
+    <canvas id="myCanvas18" width="800" height="300"></canvas>
+    <script>
+    var canvas = document.getElementById('myCanvas18');
+    var context = canvas.getContext('2d');
+
+    // 定义图的顶点
+    var vertices = [
+        { x: 250, y: 50, label:'5    【1】' },
+        { x: 150, y: 100,label:'9    【2】' },
+        { x: 400, y: 100,label:'6    【3】' },
+        { x: 100, y: 175, label:'1    【4】' },
+        { x: 190, y: 175, label:'2    【5】' },
+
+    ];
+
+    // 定义图的边
+    var edges = [
+        { start: vertices[0], end: vertices[1] },
+        { start: vertices[0], end: vertices[2] },
+        { start: vertices[1], end: vertices[3] },
+        { start: vertices[1], end: vertices[4] },
+        { start: vertices[4], end: vertices[5] },
+    ];
+
+
+    // 绘制顶点
+    vertices.forEach(function(vertex) {
+        context.beginPath();
+        context.arc(vertex.x, vertex.y, 20, 0, 2 * Math.PI);
+        context.fillStyle = 'lightblue';
+        context.fill();
+        context.stroke();
+
+        // 绘制顶点标签
+        context.fillStyle = 'black';
+        context.font = '14px Arial';
+        context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+    });
+
+
+    // 绘制边和权重
+    edges.forEach(function(edge) {
+        context.beginPath();
+        context.moveTo(edge.start.x, edge.start.y);
+        context.lineTo(edge.end.x, edge.end.y);
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // 绘制边权重标签
+        if (edge.weight !== undefined) {
+            var weightX = (edge.start.x + edge.end.x) / 2;
+            var weightY = (edge.start.y + edge.end.y) / 2;
+            context.fillStyle = 'red';
+            context.font = '12px Arial';
+            context.fillText(edge.weight, weightX, weightY);
+        }
+    });
+</script>
+    然后再第1个数即5【1】比较它与它的左右孩子大小
+    <canvas id="myCanvas19" width="800" height="300"></canvas>
+    <script>
+    var canvas = document.getElementById('myCanvas19');
+    var context = canvas.getContext('2d');
+
+    // 定义图的顶点
+    var vertices = [
+        { x: 250, y: 50, label:'9    【1】' },
+        { x: 150, y: 100,label:'5    【2】' },
+        { x: 400, y: 100,label:'6    【3】' },
+        { x: 100, y: 175, label:'1    【4】' },
+        { x: 190, y: 175, label:'2    【5】' },
+
+    ];
+
+    // 定义图的边
+    var edges = [
+        { start: vertices[0], end: vertices[1] },
+        { start: vertices[0], end: vertices[2] },
+        { start: vertices[1], end: vertices[3] },
+        { start: vertices[1], end: vertices[4] },
+        { start: vertices[4], end: vertices[5] },
+    ];
+
+
+    // 绘制顶点
+    vertices.forEach(function(vertex) {
+        context.beginPath();
+        context.arc(vertex.x, vertex.y, 20, 0, 2 * Math.PI);
+        context.fillStyle = 'lightblue';
+        context.fill();
+        context.stroke();
+
+        // 绘制顶点标签
+        context.fillStyle = 'black';
+        context.font = '14px Arial';
+        context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+    });
+
+
+    // 绘制边和权重
+    edges.forEach(function(edge) {
+        context.beginPath();
+        context.moveTo(edge.start.x, edge.start.y);
+        context.lineTo(edge.end.x, edge.end.y);
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // 绘制边权重标签
+        if (edge.weight !== undefined) {
+            var weightX = (edge.start.x + edge.end.x) / 2;
+            var weightY = (edge.start.y + edge.end.y) / 2;
+            context.fillStyle = 'red';
+            context.font = '12px Arial';
+            context.fillText(edge.weight, weightX, weightY);
+        }
+    });
+</script>
+以上就是大根堆的构造过程，小根堆同理但是这只是简单数字比较少的时候的情况
+一旦数字过多就会出现，一些没讲过的情况例如
+    {9,43,-54,4,-13,10,36}(初步一看就不是最大根堆/最小根堆，因为第一个数基本上最大也不是最小)
+<canvas id="myCanvas20" width="800" height="300"></canvas>
+    <script>
+    var canvas = document.getElementById('myCanvas20');
+    var context = canvas.getContext('2d');
+
+    // 定义图的顶点
+    var vertices = [
+        { x: 250, y: 50, label:'9   【1】' },
+        { x: 150, y: 100,label:'43    【2】' },
+        { x: 400, y: 100,label:'-54  【3】' },
+        { x: 100, y: 175, label:'4    【4】' },
+        { x: 190, y: 175, label:'-13  【5】' },
+        { x: 370, y: 175, label:'10 【6】' },
+        { x: 440, y: 175, label:'36   【7】' }
+
+    ];
+
+    // 定义图的边
+    var edges = [
+        { start: vertices[0], end: vertices[1] },
+        { start: vertices[0], end: vertices[2] },
+        { start: vertices[1], end: vertices[3] },
+        { start: vertices[1], end: vertices[4] },
+        { start: vertices[2], end: vertices[6] },
+        { start: vertices[2], end: vertices[5] },
+
+    ];
+
+
+    // 绘制顶点
+    vertices.forEach(function(vertex) {
+        context.beginPath();
+        context.arc(vertex.x, vertex.y, 20, 0, 2 * Math.PI);
+        context.fillStyle = 'lightblue';
+        context.fill();
+        context.stroke();
+
+        // 绘制顶点标签
+        context.fillStyle = 'black';
+        context.font = '14px Arial';
+        context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+    });
+
+
+    // 绘制边和权重
+    edges.forEach(function(edge) {
+        context.beginPath();
+        context.moveTo(edge.start.x, edge.start.y);
+        context.lineTo(edge.end.x, edge.end.y);
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // 绘制边权重标签
+        if (edge.weight !== undefined) {
+            var weightX = (edge.start.x + edge.end.x) / 2;
+            var weightY = (edge.start.y + edge.end.y) / 2;
+            context.fillStyle = 'red';
+            context.font = '12px Arial';
+            context.fillText(edge.weight, weightX, weightY);
+        }
+    });
+</script>
+我们构造大根堆，第一步还是总个数/2
+    <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mfrac><mn>7</mn><mn>2</mn></mfrac><mo>=</mo><mn>3</mn></mrow></math>(向下取整)
+比较第三个与它的左右孩子的大小，大的放根上
+<canvas id="myCanvas22" width="800" height="300"></canvas>
+    <script>
+    var canvas = document.getElementById('myCanvas22');
+    var context = canvas.getContext('2d');
+
+    // 定义图的顶点
+    var vertices = [
+        { x: 250, y: 50, label:'9   【1】' },
+        { x: 150, y: 100,label:'43    【2】' },
+        { x: 400, y: 100,label:'36   【3】' },
+        { x: 100, y: 175, label:'4    【4】' },
+        { x: 190, y: 175, label:'-13  【5】' },
+        { x: 370, y: 175, label:'10 【6】' },
+        { x: 440, y: 175, label:'-54   【7】' }
+
+    ];
+
+    // 定义图的边
+    var edges = [
+        { start: vertices[0], end: vertices[1] },
+        { start: vertices[0], end: vertices[2] },
+        { start: vertices[1], end: vertices[3] },
+        { start: vertices[1], end: vertices[4] },
+        { start: vertices[2], end: vertices[6] },
+        { start: vertices[2], end: vertices[5] },
+
+    ];
+
+
+    // 绘制顶点
+    vertices.forEach(function(vertex) {
+        context.beginPath();
+        context.arc(vertex.x, vertex.y, 20, 0, 2 * Math.PI);
+        context.fillStyle = 'lightblue';
+        context.fill();
+        context.stroke();
+
+        // 绘制顶点标签
+        context.fillStyle = 'black';
+        context.font = '14px Arial';
+        context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+    });
+
+
+    // 绘制边和权重
+    edges.forEach(function(edge) {
+        context.beginPath();
+        context.moveTo(edge.start.x, edge.start.y);
+        context.lineTo(edge.end.x, edge.end.y);
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // 绘制边权重标签
+        if (edge.weight !== undefined) {
+            var weightX = (edge.start.x + edge.end.x) / 2;
+            var weightY = (edge.start.y + edge.end.y) / 2;
+            context.fillStyle = 'red';
+            context.font = '12px Arial';
+            context.fillText(edge.weight, weightX, weightY);
+        }
+    });
+</script>
+接着比较第二个数与它的左右孩子的大小，大的放根上
+<canvas id="myCanvas21" width="800" height="300"></canvas>
+    <script>
+    var canvas = document.getElementById('myCanvas21');
+    var context = canvas.getContext('2d');
+
+    // 定义图的顶点
+    var vertices = [
+        { x: 250, y: 50, label:'9   【1】' },
+        { x: 150, y: 100,label:'43    【2】' },
+        { x: 400, y: 100,label:'36   【3】' },
+        { x: 100, y: 175, label:'4    【4】' },
+        { x: 190, y: 175, label:'-13  【5】' },
+        { x: 370, y: 175, label:'10 【6】' },
+        { x: 440, y: 175, label:'-54   【7】' }
+
+    ];
+
+    // 定义图的边
+    var edges = [
+        { start: vertices[0], end: vertices[1] },
+        { start: vertices[0], end: vertices[2] },
+        { start: vertices[1], end: vertices[3] },
+        { start: vertices[1], end: vertices[4] },
+        { start: vertices[2], end: vertices[6] },
+        { start: vertices[2], end: vertices[5] },
+
+    ];
+
+
+    // 绘制顶点
+    vertices.forEach(function(vertex) {
+        context.beginPath();
+        context.arc(vertex.x, vertex.y, 20, 0, 2 * Math.PI);
+        context.fillStyle = 'lightblue';
+        context.fill();
+        context.stroke();
+
+        // 绘制顶点标签
+        context.fillStyle = 'black';
+        context.font = '14px Arial';
+        context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+    });
+
+
+    // 绘制边和权重
+    edges.forEach(function(edge) {
+        context.beginPath();
+        context.moveTo(edge.start.x, edge.start.y);
+        context.lineTo(edge.end.x, edge.end.y);
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // 绘制边权重标签
+        if (edge.weight !== undefined) {
+            var weightX = (edge.start.x + edge.end.x) / 2;
+            var weightY = (edge.start.y + edge.end.y) / 2;
+            context.fillStyle = 'red';
+            context.font = '12px Arial';
+            context.fillText(edge.weight, weightX, weightY);
+        }
+    });
+</script>
+接着比较第一个数与它的左右孩子的大小大的放根上
+<canvas id="myCanvas23" width="800" height="300"></canvas>
+    <script>
+    var canvas = document.getElementById('myCanvas23');
+    var context = canvas.getContext('2d');
+
+    // 定义图的顶点
+    var vertices = [
+        { x: 250, y: 50, label:'43   【1】' },
+        { x: 150, y: 100,label:'9    【2】' },
+        { x: 400, y: 100,label:'36   【3】' },
+        { x: 100, y: 175, label:'4    【4】' },
+        { x: 190, y: 175, label:'-13  【5】' },
+        { x: 370, y: 175, label:'10 【6】' },
+        { x: 440, y: 175, label:'-54   【7】' }
+
+    ];
+
+    // 定义图的边
+    var edges = [
+        { start: vertices[0], end: vertices[1] },
+        { start: vertices[0], end: vertices[2] },
+        { start: vertices[1], end: vertices[3] },
+        { start: vertices[1], end: vertices[4] },
+        { start: vertices[2], end: vertices[6] },
+        { start: vertices[2], end: vertices[5] },
+
+    ];
+
+
+    // 绘制顶点
+    vertices.forEach(function(vertex) {
+        context.beginPath();
+        context.arc(vertex.x, vertex.y, 20, 0, 2 * Math.PI);
+        context.fillStyle = 'lightblue';
+        context.fill();
+        context.stroke();
+
+        // 绘制顶点标签
+        context.fillStyle = 'black';
+        context.font = '14px Arial';
+        context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+    });
+
+
+    // 绘制边和权重
+    edges.forEach(function(edge) {
+        context.beginPath();
+        context.moveTo(edge.start.x, edge.start.y);
+        context.lineTo(edge.end.x, edge.end.y);
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // 绘制边权重标签
+        if (edge.weight !== undefined) {
+            var weightX = (edge.start.x + edge.end.x) / 2;
+            var weightY = (edge.start.y + edge.end.y) / 2;
+            context.fillStyle = 'red';
+            context.font = '12px Arial';
+            context.fillText(edge.weight, weightX, weightY);
+        }
+    });
+</script>
+OK，此时就是最大根堆了，哎呀呀，我想说的那种情况没有发生，
+    就是那种像最后一步的时候，9和43不是换了嘛，9到新位置以后如果它的左右孩子有比它小的，也要再调换
+
+然后就是仅仅这样不算是堆排序，这一步只是把最大值选出来了
+我们可以通过移除最大值，来继续排但这样多此一举
+不如直接让这个根（最大值）和我们的第七个数（大概率最小值）调换
+调换以后，我们可以忽略它，然后重新排序
+    按照我们说的，继续
+<canvas id="myCanvas24" width="800" height="300"></canvas>
+    <script>
+    var canvas = document.getElementById('myCanvas24');
+    var context = canvas.getContext('2d');
+
+    // 定义图的顶点
+    var vertices = [
+        { x: 250, y: 50, label:'-54   【1】' },
+        { x: 150, y: 100,label:'9    【2】' },
+        { x: 400, y: 100,label:'36   【3】' },
+        { x: 100, y: 175, label:'4    【4】' },
+        { x: 190, y: 175, label:'-13  【5】' },
+        { x: 370, y: 175, label:'10 【6】' },
+        { x: 440, y: 175, label:'43   【被灭了】' }
+
+    ];
+
+    // 定义图的边
+    var edges = [
+        { start: vertices[0], end: vertices[1] },
+        { start: vertices[0], end: vertices[2] },
+        { start: vertices[1], end: vertices[3] },
+        { start: vertices[1], end: vertices[4] },
+        { start: vertices[2], end: vertices[6] },
+        { start: vertices[2], end: vertices[5] },
+
+    ];
+
+
+    // 绘制顶点
+    vertices.forEach(function(vertex) {
+        context.beginPath();
+        context.arc(vertex.x, vertex.y, 20, 0, 2 * Math.PI);
+        context.fillStyle = 'lightblue';
+        context.fill();
+        context.stroke();
+
+        // 绘制顶点标签
+        context.fillStyle = 'black';
+        context.font = '14px Arial';
+        context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+    });
+
+
+    // 绘制边和权重
+    edges.forEach(function(edge) {
+        context.beginPath();
+        context.moveTo(edge.start.x, edge.start.y);
+        context.lineTo(edge.end.x, edge.end.y);
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // 绘制边权重标签
+        if (edge.weight !== undefined) {
+            var weightX = (edge.start.x + edge.end.x) / 2;
+            var weightY = (edge.start.y + edge.end.y) / 2;
+            context.fillStyle = 'red';
+            context.font = '12px Arial';
+            context.fillText(edge.weight, weightX, weightY);
+        }
+    });
+</script>
+    嘿嘿
+    <math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mfrac><mn>6</mn><mn>2</mn></mfrac><mo>=</mo><mn>3</mn></mrow></math>
+    还是比较第三个数和它的左右孩子，但是这次，它只有左孩子了
+    然后就是第二个数和它的左右孩子，9还是最大的，然后我们比较
+    第一个数，发现36是最大的调上去
+<canvas id="myCanvas25" width="800" height="300"></canvas>
+    <script>
+    var canvas = document.getElementById('myCanvas25');
+    var context = canvas.getContext('2d');
+
+    // 定义图的顶点
+    var vertices = [
+        { x: 250, y: 50, label:'36   【1】' },
+        { x: 150, y: 100,label:'9    【2】' },
+        { x: 400, y: 100,label:'-54   【3】' },
+        { x: 100, y: 175, label:'4    【4】' },
+        { x: 190, y: 175, label:'-13  【5】' },
+        { x: 370, y: 175, label:'10 【6】' },
+        { x: 440, y: 175, label:'43   【被灭了】' }
+
+    ];
+
+    // 定义图的边
+    var edges = [
+        { start: vertices[0], end: vertices[1] },
+        { start: vertices[0], end: vertices[2] },
+        { start: vertices[1], end: vertices[3] },
+        { start: vertices[1], end: vertices[4] },
+        { start: vertices[2], end: vertices[6] },
+        { start: vertices[2], end: vertices[5] },
+
+    ];
+
+
+    // 绘制顶点
+    vertices.forEach(function(vertex) {
+        context.beginPath();
+        context.arc(vertex.x, vertex.y, 20, 0, 2 * Math.PI);
+        context.fillStyle = 'lightblue';
+        context.fill();
+        context.stroke();
+
+        // 绘制顶点标签
+        context.fillStyle = 'black';
+        context.font = '14px Arial';
+        context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+    });
+
+
+    // 绘制边和权重
+    edges.forEach(function(edge) {
+        context.beginPath();
+        context.moveTo(edge.start.x, edge.start.y);
+        context.lineTo(edge.end.x, edge.end.y);
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // 绘制边权重标签
+        if (edge.weight !== undefined) {
+            var weightX = (edge.start.x + edge.end.x) / 2;
+            var weightY = (edge.start.y + edge.end.y) / 2;
+            context.fillStyle = 'red';
+            context.font = '12px Arial';
+            context.fillText(edge.weight, weightX, weightY);
+        }
+    });
+</script>
+    <span style="color: red">到这里并没有结束，我之前说的情况发生了</span>
+    就是第六个数10比第三个数（掉下来的）-54大，此时同样需要换
+    最终就是
+<canvas id="myCanvas26" width="800" height="300"></canvas>
+    <script>
+    var canvas = document.getElementById('myCanvas26');
+    var context = canvas.getContext('2d');
+
+    // 定义图的顶点
+    var vertices = [
+        { x: 250, y: 50, label:'36   【1】' },
+        { x: 150, y: 100,label:'9    【2】' },
+        { x: 400, y: 100,label:'10   【3】' },
+        { x: 100, y: 175, label:'4    【4】' },
+        { x: 190, y: 175, label:'-13  【5】' },
+        { x: 370, y: 175, label:'-54 【6】' },
+        { x: 440, y: 175, label:'43   【被灭了】' }
+
+    ];
+
+    // 定义图的边
+    var edges = [
+        { start: vertices[0], end: vertices[1] },
+        { start: vertices[0], end: vertices[2] },
+        { start: vertices[1], end: vertices[3] },
+        { start: vertices[1], end: vertices[4] },
+        { start: vertices[2], end: vertices[6] },
+        { start: vertices[2], end: vertices[5] },
+
+    ];
+
+
+    // 绘制顶点
+    vertices.forEach(function(vertex) {
+        context.beginPath();
+        context.arc(vertex.x, vertex.y, 20, 0, 2 * Math.PI);
+        context.fillStyle = 'lightblue';
+        context.fill();
+        context.stroke();
+
+        // 绘制顶点标签
+        context.fillStyle = 'black';
+        context.font = '14px Arial';
+        context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+    });
+
+
+    // 绘制边和权重
+    edges.forEach(function(edge) {
+        context.beginPath();
+        context.moveTo(edge.start.x, edge.start.y);
+        context.lineTo(edge.end.x, edge.end.y);
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // 绘制边权重标签
+        if (edge.weight !== undefined) {
+            var weightX = (edge.start.x + edge.end.x) / 2;
+            var weightY = (edge.start.y + edge.end.y) / 2;
+            context.fillStyle = 'red';
+            context.font = '12px Arial';
+            context.fillText(edge.weight, weightX, weightY);
+        }
+    });
+</script>
+然后就是再把根36和最后位第六位调换，然后重新排，以此往复
+直到排完就是一个以完全二叉树的从小到大的排序了
+小根堆是同理的。（暂时更到这里，累死我了😭😣🤤😬😰😨🥶🥵🥴😵‍💫🤧🤮🤢🫵😗）
 </pre>
+
+
+
+
 <button id="downloadBtn">下载 本页面PDF</button>
 
 <script>
