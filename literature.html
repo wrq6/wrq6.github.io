@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文学</title>
+
+    <style>
+        :root {
+            --main-height: 150px;
+            --theme-bg-color: rgba(239, 112, 155, .9);
+        }
+
+        body {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start; /* Align items at the top */
+            padding-top: 50px; /* Add space from the top */
+        }
+
+        div {
+            box-sizing: border-box;
+        }
+
+        /* 书本主体  */
+        .book {
+            position: relative;
+            margin: 10px;
+            width: 150px;
+            height: var(--main-height);
+            transition: all .7s linear;
+            cursor: pointer;
+        }
+
+        /* 书脊 */
+        .book-side {
+            position: absolute;
+            left: -14px;
+            width: 15px;
+            height: var(--main-height);
+            border-radius: 5px 0 0 5px;
+            background-color: var(--theme-bg-color);
+        }
+
+        /* 封面 */
+        .book--cover {
+            position: absolute;
+            top: 0;
+            left: -1px;
+            padding: 10px;
+            width: 105px;
+            height: var(--main-height);
+            font-size: 18px;
+            font-weight: 400;
+            border-radius: 0 6px 6px 0;
+            transform-origin: left center;
+            transform: rotateX(-8deg) rotateY(30deg);
+            transition: all .7s linear;
+            background-color: var(--theme-bg-color);
+            background-image: url('img/aaq.jpg');
+            background-size: cover; /* Ensure the image covers the entire container */
+        }
+
+        .book:active {
+            transform: scale(1.7);
+        }
+
+        .book:hover .book--cover {
+            transform: rotateX(-10deg) rotateY(50deg);
+            box-shadow: 30px 0 10px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .book:active .book--cover {
+            transform: rotateX(-10deg) rotateY(138deg);
+        }
+
+        /* 书本内容 Begin */
+        .book--content {
+            padding: 4px 5px 4px 2px;
+            width: 105px;
+            height: var(--main-height);
+            border-radius: 2px;
+            background-color: var(--theme-bg-color);
+        }
+
+        .book--inner {
+            padding: 10px 0;
+            width: 100%;
+            height: 100%;
+            color: #333;
+            border-radius: 1px;
+            box-shadow: 0px 2px 14px 0px rgba(0, 0, 0, 0.2);
+            background-color: rgba(250, 250, 250, 0.8);
+        }
+
+        /* Adjust font size for the text "你好，旧时光" */
+        .book--content div:first-child {
+            font-size: 6px; /* Adjust as needed */
+        }
+    </style>
+</head>
+
+<body>
+<div class="book">
+    <div class="book-side"></div>
+    <div class="book--cover" style="background-image: url('img/aaq.jpg');"></div>
+    <div class="book--content">
+        <div class="book--inner">
+            <div style="padding-left: 2px">
+                <div><span style="color: red">你好，旧时光</span></div>
+                <div><span style="color: #00aa44">八月长安</span></div>
+                <div>回不去的小时候</div>
+                <div>一代人又一代人，生命就像往复的陀螺，兜兜转转</div>
+                <div>原来让一个人变强大的最好方式，就是拥有一个想要保护的人</div>
+                <div>所谓新的开始，不过就是把往事以更高难度重演一遍</div>
+                <div>时间是伟大的魔法师，从不为任何人停留</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="book">
+    <div class="book-side"></div>
+    <div class="book--cover" style="background-image: url('img/aar.jpg');"></div>
+    <div class="book--content">
+        <div class="book--inner">
+            <div style="padding-left: 2px">
+                <div><span style="color: red">最好的我们</span></div>
+                <div><span style="color: #00aa44">八月长安</span></div>
+                <div>这本书是2018.12.27一个高中同学赠与</div>
+                <div>当时我喜欢看你好，旧时光这样的青春文学</div>
+                <div>他很细心，也很可爱</div>
+                <div>以下是他写在封面上的文字</div>
+                <div>陈子安送给武若权的第一个礼物</div>
+                <div>相信也不是最后一个</div>
+                <div>我还要陪你走过人生的小路</div>
+                <div>希望你还能记得</div>
+                <div>高中时期最好的我们</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="book">
+    <div class="book-side"></div>
+    <div class="book--cover" style="background-image: url('img/aas.jpg');"></div>
+    <div class="book--content">
+        <div class="book--inner">
+            <div style="padding-left: 2px">
+                <div><span style="color: red">质数的孤独</span></div>
+                <div><span style="color: #00aa44">保罗·乔尔达诺</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="book">
+    <div class="book-side"></div>
+    <div class="book--cover" style="background-image: url('img/aat.jpg');"></div>
+    <div class="book--content">
+        <div class="book--inner">
+            <div style="padding-left: 2px">
+                <div><span style="color: red">追风筝的人</span></div>
+                <div><span style="color: #00aa44">卡勒德·胡赛尼（Khaled Hosseini）</span></div>
+                <div>当初看的时候真的很有触动</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="book">
+    <div class="book-side"></div>
+    <div class="book--cover" style="background-image: url('img/aau.jpg');"></div>
+    <div class="book--content">
+        <div class="book--inner">
+            <div style="padding-left: 2px">
+                <div><span style="color: red">我在未来 等你</span></div>
+                <div><span style="color: #00aa44">刘同</span></div>
+                <div>到现在还记得书上的一句话：</div>
+                <div>能够看到自己一点儿一点儿变好</div>
+                <div>真是一件比什么都幸福的事</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="book">
+    <div class="book-side"></div>
+    <div class="book--cover" style="background-image: url('img/aav.jpg');"></div>
+    <div class="book--content">
+        <div class="book--inner">
+            <div style="padding-left: 2px">
+                <div><span style="color: red">活着</span></div>
+                <div><span style="color: #00aa44">余华</span></div>
+                <div>我记得当初看这本书的时候是高中</div>
+                <div>当初课堂上看的，被英语老师抓住了</div>
+                <div>上交了，一个星期后拿回来了</div>
+                <div>老师说她也看过</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="book">
+    <div class="book-side"></div>
+    <div class="book--cover" style="background-image: url('img/aaw.jpg');"></div>
+    <div class="book--content">
+        <div class="book--inner">
+            <div style="padding-left: 2px">
+                <div><span style="color: red">三体</span></div>
+                <div><span style="color: #00aa44">刘慈欣</span></div>
+                <div>高中的时候看的，一开始死活看不懂</div>
+                <div>后面越看越上瘾</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="book">
+    <div class="book-side"></div>
+    <div class="book--cover" style="background-image: url('img/aax.jpg');"></div>
+    <div class="book--content">
+        <div class="book--inner">
+            <div style="padding-left: 2px">
+                <div><span style="color: red">不存在的星球</span></div>
+                <div><span style="color: #00aa44">北京市科学技术协会 蝌蚪五线谱网站/编</span></div>
+                <div>当时看完了三体，对这类型的书特别感兴趣就买了</div>
+                <div>很不错，就是短篇读起来会有一种意犹未尽的遗憾</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="book">
+    <div class="book-side"></div>
+    <div class="book--cover" style="background-image: url('img/aay.jpg');"></div>
+    <div class="book--content">
+        <div class="book--inner">
+            <div style="padding-left: 2px">
+                <div><span style="color: red">小王子</span></div>
+                <div><span style="color: #00aa44">安托万·德·圣-埃克苏佩里</span></div>
+                <div>这本书当时读起来觉得很多地方莫名其妙的</div>
+                <div>后面仔细品尝，绝了</div>
+                <div>嘘，等我一会！</div>
+                <div>我在寻找一个没有大人的地方</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="book">
+    <div class="book-side"></div>
+    <div class="book--cover" style="background-image: url('img/aaz.jpg');"></div>
+    <div class="book--content">
+        <div class="book--inner">
+            <div style="padding-left: 2px">
+                <div><span style="color: red">超星系纪元</span></div>
+                <div><span style="color: #00aa44">刘慈欣</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="book">
+    <div class="book-side"></div>
+    <div class="book--cover" style="background-image: url('img/aaaa.jpg');"></div>
+    <div class="book--content">
+        <div class="book--inner">
+            <div style="padding-left: 2px">
+                <div><span style="color: red">球状闪电</span></div>
+                <div><span style="color: #00aa44">刘慈欣</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="book">
+    <div class="book-side"></div>
+    <div class="book--cover" style="background-image: url('img/aaab.jpg');"></div>
+    <div class="book--content">
+        <div class="book--inner">
+            <div style="padding-left: 2px">
+                <div><span style="color: red">你的孤独 虽败犹荣</span></div>
+                <div><span style="color: #00aa44">刘同</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="book">
+    <div class="book-side"></div>
+    <div class="book--cover" style="background-image: url('img/aaac.jpg');"></div>
+    <div class="book--content">
+        <div class="book--inner">
+            <div style="padding-left: 2px">
+                <div><span style="color: red">白鹿原</span></div>
+                <div><span style="color: #00aa44">陈忠实</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
