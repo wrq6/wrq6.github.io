@@ -1,28 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Python</title>
+    <title>MYSQL急速入门笔记</title>
     <style>
         body {
-            font-family: Consolas, monospace;
-            background-color: #f5f5f5;
-            padding: 20px;
+            font-family: Arial, sans-serif;
         }
-
-        h1 {
-            color: #333;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        h2 {
-            color: #666;
-            font-size: 20px;
-            margin-top: 40px;
-            margin-bottom: 10px;
-        }
-
         pre {
             background-color: #fff;
             padding: 10px;
@@ -45,73 +29,18 @@
             color: #abb2bf;
             background: #282c34;
         }
-
-        .hljs-keyword,
-        .hljs-selector-tag,
-        .hljs-section,
-        .hljs-title,
-        .hljs-built_in,
-        .hljs-literal,
-        .hljs-template-tag,
-        .hljs-template-variable,
-        .hljs-type,
-        .hljs-addition {
-            color: #e06c75;
+        .highlight {
+            background-color: yellow;
         }
-
-        .hljs-string,
-        .hljs-quote,
-        .hljs-meta,
-        .hljs-tag .hljs-value .hljs-string,
-        .hljs-regexp,
-        .hljs-symbol,
-        .hljs-bullet,
-        .hljs-link,
-        .hljs-deletion {
-            color: #98c379;
+        .comment {
+            color: green;
         }
-
-        .hljs-number,
-        .hljs-selector-class,
-        .hljs-selector-attr,
-        .hljs-selector-pseudo,
-        .hljs-template-tag,
-        .hljs-template-variable,
-        .hljs-variable,
-        .hljs-type .hljs-tag,
-        .hljs-typename {
-            color: #d19a66;
+        #table-of-contents {
+            margin-top: 20px;
         }
-
-        .hljs-comment,
-        .hljs-quote {
-            color: #5c6370;
-            font-style: italic;
-        }
-
-        .hljs-doctag,
-        .hljs-meta .hljs-keyword,
-        .hljs-meta .hljs-string {
-            color: #c678dd;
-        }
-
-        .hljs-attribute {
-            color: #56b6c2;
-        }
-
-        .hljs-keyword {
-            font-weight: bold;
-        }
-
-        .hljs-selector-tag,
-        .hljs-title,
-        .hljs-section,
-        .hljs-selector-id {
-            font-weight: 700;
-        }
-        .audio-wrapper {
-            display: flex;
-            justify-content: center;
+        #table-of-contents ul {
+            list-style-type: none;
+            padding-left: 10px;
         }
     </style>
     <link rel="stylesheet"
@@ -120,116 +49,282 @@
     <script>hljs.highlightAll();</script>
 </head>
 <body>
-<pre>
-    <span style="color: red">Python基础入门笔记</span>
-	<code>
--------------------------------------------------------------------
-//////////////////////////////////////////////////
-接受键盘输入，小于20，输出结果
-a =0
-while a < 20:
-    a = input('请输入一个数字\n')
-    a = int(a)
-    if a < 20:
-        print(a)
-    else:
-        print('输入的数大于20,结束')
-        exit(0)5
+<header>
+    <h1>Python笔记</h1>
+    <nav>
+        <ul id="table-of-contents">
+            <li><a href="https://wrq6.gitee.io/my_html.html">不想看回到主页</a></li>
+            <li><a href="#introduction">介绍</a></li>
+            <li><a href="#installation">安装</a></li>
+            <li><a href="#前言">MySQL的先前言</a></li>
+            <li><a href="#basics">基础</a></li>
+            <li><a href="#advanced">高级</a></li>
+            <li><a href="#各种实例以及遇到的各种问题">各种实例以及遇到的各种问题</a></li>
+        </ul>
+    </nav>
+</header>
+<hr><hr>
+<section id="introduction">
+    <h2>介绍</h2>
+    <hr>
+    <p>Python 是一种<span style="color: red">解释型、面向对象、动态数据类型</span>的<span style="color: #26a508">高级</span>程序设计语言。</p>
 
--------------------------------------------------------------------
-//////////////////////////////////////////////
-/输出python的关键字，保留字
-import keyword
-print(keyword.kwlist)
+    <p>Python 由 Guido van Rossum 于 1989 年底发明，第一个公开发行版发行于 1991 年。</p>
 
--------------------------------------------------------------------
-/////////////////////////////////////////////
-/python中简单运算符
-a = 2
-b = 3
-print("2的3次幂乘等于 ",a**b)
-a += b
-print("2+3为 ",a)
-a = 2
-a -= b
-print("2-3为 ",a)
-a = 2
-a *= ba
-print("2*3为 ",a)
-a = 2
-a /= b
-print("2/3（取小数部分） ",a)
-a = 2
-a //= b
-print("2//3（取整数部分） ",a)
+    <p>像 Perl 语言一样, Python 源代码同样遵循 GPL(GNU General Public License) 协议。</p>
+</section>
+<hr><hr>
+<section id="installation">
+    <h2>安装</h2>
+    <hr>
+    <a href="https://www.python.org/" target="_blank">1.点击去官网下载</a>
+    <hr>
+    <h3>2.点击Downloads</h3>
+    <img src="img/aaal.png" style="height: auto; width: auto\9; width:50%;">
+    <hr>
+    <h3>3.选择你电脑的系统</h3>
+    <img src="img/aaam.png" style="height: auto; width: auto\9; width:50%;">
+    <hr>
+    <h3>4.点击第一个就行，下面的是以前的版本</h3>
+    <img src="img/aaan.png" style="height: auto; width: auto\9; width:50%;">
+    <hr>
+    <h3>5.滑到最下面，选择符合你电脑位数的可执行程序（.exe）即installer</h3>
+    <img src="img/aaao.png" style="height: auto; width: auto\9; width:50%;">
+    <hr>
+    <h3>6.网页自带下载可能很慢，可以下载迅雷然后下载。</h3>
+    <hr>
+    <h3>7.勾选add python to path（自动给你添加环境变量）</h3>
+    <img src="img/aaap.png" style="height: auto; width: auto\9; width:50%;">
+    <hr>
+    <h3>8.选择自定义安装（customize installation）</h3>
+    <img src="img/aaaq.png" style="height: auto; width: auto\9; width:50%;">
+    <hr>
+    <h3>9.全部勾选，点击next</h3>
+    <img src="img/aaar.png" style="height: auto; width: auto\9; width:50%;">
+    <hr>
+    <h3>10.download开头的不要勾选，然后选择你安装的地址，然后点击install</h3>
+    <img src="img/aaas.png" style="height: auto; width: auto\9; width:50%;">
+    <hr>
+    <h3>11.测试python是否安装完成</h3>
+    Win+R 然后输入cmd 打开控制台
+    输入python
+    出现以下类似东西就是安装完成
+    <img src="img/aaat.png" style="height: auto; width: auto\9; width:50%;">
+    <hr>
+    <h3>到这里你的环境什么的都可以了，但是你也只是可以通过电脑自带的文本编辑器或者控制台来写代码</h3>
+    <h3>你学会了走路，但是你活在的社会是现代社会，请坐上科学家发明的汽车！</h3>
+    <h3>“汽车”在计算机里面称为集成IDE，也就是工作台（比如visual studio等等）</h3>
+    <h3>推荐使用Pycharm ,JetBrains公司旗下的一个专门解决python的方案（还有c、java，web的IDE，我当前的网页就是使用Webstorm写的）</h3>
+</section>
+<hr><hr>
+<section id="前言">
+    <h2>前言</h2>
+    <hr>
+    <p><strong>Python大小写敏感吗：</strong> <br>区分</p>
+</section>
+<hr><hr>
+<section id="basics">
+    <h2>基础</h2>
+    <hr>
+    <p><strong class="highlight">基本语法和数据类型</strong></p>
+    <h6>注释</h6>
+    <pre class="code"><code class="python">
+        # 单行注释以‘#’开头
+    </code></pre>
+    <h6>变量</h6>
+    <pre class="code"><code class="python">
+        变量是一个很有意思的东西，从字面意思上就可以看出来了
+        就是一个可以变化的量，它类似你的名字
+        理解这一点很重要，你的名字是可以在某种程度上代替你
+        但是终究不是你本身，它只是你这个人的代名词
+        我们要找你，知道你的名字就可以
+        变量也是这样，变量可以体现一个量的存在
+        但是它终究不是量本身，其次变量是很花心的
+        它可以随意的去更换来体现任何的量
+        例如下面的代码：
+        x = 5  #这就把5这个常数赋给了变量x，x就是5的代名词
+        x = 10  #现在更改了x的值为10，使得x指向了常数10，就不再指向5了
+    </code></pre>
+    <h6>数据类型</h6>
+    Python支持多种数据类型，其中包括整数(int)、浮点数(float)、字符串(str)
+    <pre class="code"><code class="python">
+        x = 5 #整数
+        x = 3.1415 #浮点数
+        x = '你好，世界' #字符串,python中既可以用双引号“”也可以用单引号‘’来表示字符串
+    </code></pre>
+    <h6>基本操作符和表达式</h6>
+    Python支持各种基本操作符，例如加法‘+’，减法‘-’，乘法’*‘，除法’/‘
+    <pre class="code"><code class="python">
+    a = 5
+    b = 2
+    加法 = a + b   #在python中是可以使用中文来作为变量名的，不建议，推荐使用Sum英文
+    减法 = a - b
+    乘法 = a * b
+    除法 = a / b
+    优先级和我们学的数学一样，可以使用（）来调整优先级
+    =========================================
+        字符串的拼接是使用’+‘，没错就是加号
+        a = ’我是‘
+        b = ’人类‘
+        c = a + b  #此时c的值是’我是人类‘
+        =========================================
+        比较运算（大小）
+        a = 5
+        b = 2
+        a == b  #首先这是一个式子整体是有值的（返回真true或假false），其次这句话是判断a是否等于b
+        a > b  #a是否大于b
+        a < b  #a是否小于b
+        a >= b  #a是否大于等于b
+        a <= b  #a是否小于等于b
+        a != b  #a是否不等于b
+        笨蛋，你当然可以将整体的式子的值赋给一个变量啊
+        c = a == b #赋值运算符’=‘ 优先级在所有的里面都是最低的（印象里面是这样）
 
--------------------------------------------------------------------
-//////////////////////////////////////////////
-#创建列表
-list = ["apple", "banana", "cherry"]
-#索引访问
-print(list[1])
-#切片
-b = list[1:3]#可以使用切片操作提取列表中的一部分
-print(b)
-#添加元素，列表理论上大小动态可变，变的大小不限，取决于你的计算机内存和处理器的限制
-list.append("wrq")
-print(list)
-#修改元素
-#通过索引，修改特定值
-list[0] = "wrq6"
-print(list)
-#删除元素的值
-del list[1]
-print(list)
-#列表长度
-length = len(list)
-print(length)
-#成员检查
-if 'wrq' in list:
-    print("Y")
-
--------------------------------------------------------------------
-//////////////////////////////////////////////
-#创建元组元组（Tuple）是Python中的一种有序、不可变的数据结构
-#用于存储一组元素。与列表不同，元组的元素不能被修改，添加或删除。
-tuple = (1,2,3,4,5,6,7,8,9,10,10)
-#访问元组元素
-print(tuple[1])
-print(tuple[-2])#是循环列表的显示方式
-#元组解构
-x,y,z = tuple[0:3]#元组解构的元组所含元素不能多也不能少于你要赋值的变量
-print(x,y,z)
-#长度
-length = len(tuple)
-print(length)
-#成员检查
-is_true = 2 in tuple
-print(is_true)
-#元组连接
-#composed = tuple + (45)//错误
-#当你使用 + 运算符连接两个元组时，右侧的操作数必须是一个可迭代对象（例如元组）。
-# 如果右侧的元组只包含一个元素，并且没有逗号将其与其他元素隔开，Python 将无法识别它是一个元组。
-composed = tuple + (4,5)#python可以识别出这是python的元组
-print(composed)
-#我就想添加一个元素45怎么办？添加一个逗号（，）即可
-composed = tuple + (45,)
-print(composed)
-#元组重复
-repl = tuple * 2
-print(repl)
-#元组方法
-#使用 count() 方法计算元素在元组中出现的次数
-#使用 index() 方法获取元素在元组中第一次出现的索引。
-count = tuple.count(10)#出现次数
-index = tuple.index(5)#第一次出现的位置
-print(count)
-print(index)
--------------------------------------------------------------------
+    </code></pre>
+    <p><strong class="highlight">控制流</strong></p>
+    <h6>条件语句</h6>
+    <pre class="code"><code class="python">
+      if语句
+        x = 10
+        if x > 5:
+            print("x是大于5的")
+        #忘记说了，python和其他的语言不一样，没有块符号，没有语句结束符号（换行结束）
+        #一切都是格式来决定代码块，print在if后面，代表print是if语句块中的语句
+       if-else语句
+        if x > 5:
+            print(...)
+        else if x == 5:
+            print(...)
+        else:
+            print(...)
+        ===================================================
+        循环结构
+      for语句
+        a = [1,2,3,4,5,6,7]
+        for b in a:
+            print(b)
+        #这个有点难以理解确实，C语言在这方面做的就不错
+        #首先我们定义了一个类似于数组的东西
+        #我们让b在a这个数组中以此找值来赋给b实现循环
+        #最后我们再打印b
+        ----------------------------------------------------
+      while语句
+        a = 0
+        while a < 5:
+            print(a)
+            a += 1
+        #while循环是“直到”的意思
+        #应该注意到，a是条件是需要更新的，不然这个循环是无限循环下去
+        ----------------------------------------------------
+        break 是结束当前块
+        continue 是结束本次循环（后面都不执行），开启下一次新的
+        给你看一段代码：
+        for i in range(10):
+            if i == 5:
+                break;
+            print(i)
+        #range是一个迭代(遍历)一个范围内的数字，就是0-9，不包括10，因为10是一个量数
+        #别误解，我说的量数就是字面意思，10个的意思
+        #是的，你如果聪明点，就会想到一个范围，什么范围？
+        #我能不能range(10,16)，哈哈当然可以，这就是从10开始到15，不包括16
+        #其次看break，它缩进在if后面，结束的是if？
+        #nonono，break(绝大部分)只能用于循环结构，if是判断
+        #所以break退出的是for循环
+        #如果此处的是continue，那么循环块中后面的所有代码都不执行
+        #重新开启下一轮循环
+    </code></pre>
+    <p><strong class="highlight">列表与元组</strong></p>
+    <h6>列表(List)</h6>
+    <pre class="code"><code class="python">
+        ============================================
+        创建列表
+        list = [1,2,3,4,5]
+            列表是python中最常用的数据结构之一，存储有序的元素
+            列表可变，可以随时增删改查
+            列表是包容万象的，数据不一定是同一种类型（和C是区别很大的）
+        --------------------------------------------
+        增加元素（使用append()方法）
+        list.append(19) #在列表最后增加一个值为19的元素
+        --------------------------------------------
+        删除元素（使用remove()方法）
+        list.remove(19) #删除列表中值为19的元素
+        #当然了，如果列表中存在多个值为19的，只会删除第一个
+        当然也可以使用索引来删除
+        del list[5] #删除索引为5的元素
+        --------------------------------------------
+        修改元素（通过索引修改）
+        list[5] = 10 #修改下标为5的元素的值为10
+        --------------------------------------------
+        查找元素（通过索引）
+        value = list[5] #找到下标为5的元素的值赋给value
+        ============================================
+        python中有个重要的东西叫做“切片”
+        就是可以获取列表一部分的值
+        list[1:4] #获取的是下标为2，3的值，是不包括两头的
+        其次还有许多的方法
+        len() #获取列表长度
+        max() #获取列表中的最大值
+        min() #获取列表中的最小值
+        index() #获取指定值的索引，这个有点难以理解
+        #简单的说就是list.index(3) 返回的是第一个值为3的下标
+    </code></pre>
+    <h6>元组（Tuple）</h6>
+    <pre class="code"><code class="sql">
+        ============================================
+        基本上元组和列表是一样的
+        唯一一点也就是最大的区别就是
+        元组一旦创建不可修改
+        其次元组的创建是“()”而不是“[]”
+        tuple = (1,2,3,4,5,6) #一旦创建只可访问
+        ============================================
+    </code></pre>
+    <p><strong class="highlight">函数和模块</strong></p>
+    <h6>函数的定义和调用</h6>
+    <pre class="code"><code class="python">
+        函数，这个词在数学中也经常看见
+        在编程里面也有异曲同工之妙
+        我们在面向对象的语言中也听过方法这个词（没听过也不要紧）
+        都有一个共同的特点就是：
+        一次定义，多次重用
+        ==============================================
+        def function(参数1，参数2...):
+            函数体
+            return 返回值
+        ==============================================
+        #在这里我主要说几点
+        #1，python中使用缩进来规定语法格式
+        #2.参数，就是类似数学中的f(x)中的x，x是传给函数，函数用来运算的基本数
+        #3.函数体，这就是我们之前学习的各种语句，根据需求都可以放进来
+        #4.return 返回值，类似数学中的f(x)，f(x)本身就是y，也有值，我们也需要运算的结果是吧
     </code>
-</pre>
+    </pre>
+    <pre class="code"><code class="python">
+        这里讲述两个概念
+        1.默认返回值
+            你使用return就是纯粹返回一个值
+            但是有一天，你就是不返回，那么默认返回None
+            None不知道什么东西？我也不知道，看起来就是“没有”
+        2.默认参数
+            编程讲究的就是个优雅
+            你写数学的时候f(x)，x的值你不给，我拿命给你算y
+            但是编程里面就不一样了，你可以设置默认的x
+            即便是某些可爱的用户不给你x让你算y，你也可以魔法打败魔法
+            def function(a = 5，b = 10)
+                return a + b
+    </code>
+    </pre>
 
+</section>
+<hr><hr>
+<section id="advanced">
+    <h2>高级</h2>
 
+</section>
+<hr><hr>
+<section id="各种实例以及遇到的各种问题">
+    <h2>各种实例以及遇到的各种问题</h2>
+</section>
+<hr><hr>
 
 </body>
 </html>

@@ -2,46 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <!-- 引入CSS文件 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/styles.css">
-
-    <!-- 引入JavaScript文件 -->
     <script src="js/main.js"></script>
     <style>
-        html {
-            background: linear-gradient(to bottom,  #9CECFB,#65C7F7,#0052D4);
+        /* Reset some default styles */
+        body, h2, p, ul, li, audio, video {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #9CECFB, #65C7F7, #0052D4);
             text-align: center;
             font-size: 10px;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .iframe-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 60px; /* 调整与导航栏的距离 */
-        }
+
         nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             padding: 16px;
-            z-index: 999; /* 确保导航栏在其他元素之上 */
+            z-index: 999;
             background-color: transparent;
             border: none;
             outline: none;
-            border-radius: 20px; /* 添加圆角边框 */
-            text-align: center;/* <nav> 元素的 text-align 属性设置为 center，这样导航栏内容将会水平居中对齐 */
+            border-radius: 20px;
+            text-align: center;
         }
-        .input {
-            width: auto; /* 调整输入框的宽度 */
-            height: auto;
-            min-height: 40px; /* 设置最小高度 */
-            resize: vertical; /* 允许垂直调整大小 */
-        }
-        .animate-slide-in-down {
-            color: #890680;
-        }
-        /* 设置导航链接的字体样式 */
+
         nav a {
             font-family: Arial, sans-serif;
             font-size: 10px;
@@ -49,79 +42,34 @@
             text-decoration: none;
         }
 
-        /* 设置悬停时链接的字体样式 */
         nav a:hover {
             color: #890680;
             text-decoration: underline;
         }
 
-        @media (max-width: 600px)
-        {
-            /* 当视口宽度小于 600px 时，应用以下 CSS 样式 */
-            nav {
-                width: 100%;
-                margin: 0;
-            }
-
+        .iframe-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 60px;
         }
 
-
-
-        #btn {
-            position: absolute;
-            top: 22%;
-            left: 298px;
-            height: 75px;
-            border: 0;
-            border-left: 1px solid rgb(23, 32, 43, 0.2);
-            background: #AA3344;
-            color: #fff;
-            cursor: pointer;
+        .input {
+            width: auto;
+            height: auto;
+            min-height: 40px;
+            resize: vertical;
         }
 
-        .box {
-            float: left;
-            position: relative;
-            left: 0;
-            height: 1000px;
-            width: 300px;
-            margin-left: 0;
-            display: block;
-            background-color: #a34;
-            -moz-transition: margin-left 2s;
-            transition: margin-left 2s;
+        /* Make the content responsive */
+        #daily-sharing {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
-        aside ul li {
-            height: 40px;
-            line-height: 40px;
-            border-top: 1px solid #fff;
-            border-bottom: 1px solid #fff;
-            list-style-type: none;
-            text-align: center;
-        }
-
-        aside ul li a {
-            width: 100%;
-            height: 100%;
-            text-decoration-line: none;
-            color: #fff;
-            display: block;
-        }
-
-        aside ul li a:hover {
-            background: #d3d;
-        }
-
-        section {
-            width: 100%;
-            height: 100%;
-            background: #d4d4d4;
-            height: 1000px;
-        }
-
-
-
+        /* Other styles... */
     </style>
     <title>日常</title>
 </head>
