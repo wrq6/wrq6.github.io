@@ -134,7 +134,7 @@
       flex-direction: column;
       align-items: center;
       z-index: 1;
-      height: 60px; /* 设置播放控件的高度 */
+      height: 100px; /* 设置播放控件的高度 */
     }
     #chineseText{
       margin-top: 240px;
@@ -153,14 +153,21 @@
 </head>
 <body>
 <div id="musicPlayerContainer">
-  <audio id="audioPlayer" controls>
-    <source src="music/g.mp3" type="audio/mp3">
+  <audio id="audioPlayer" controls style="font-size:300px">
+    <source src="music/l.mp3" type="audio/mp3">
   </audio>
   <div id="lyricsContainer">
     <marquee behavior="scroll" direction="up" scrollamount="2">
       <!-- Add your lyrics here -->
-      <p>诀别书</p>
-      <p>邓垚</p>
+      <p>Travelers' encore</p>
+      <p>星际拓荒</p>
+      <p>小小的沙子飞上天际，</p>
+      <p>好奇的种子在旷野延续。</p>
+      <p>干涸的沙漠掩盖记忆的足迹，</p>
+      <p>文明流水前仆后继。</p>
+      <p>人和宇宙其实并无关系，</p>
+      <p>不断添加鼓点的小小歌曲，</p>
+      <p>是献上崇高的生命赞礼。</p>
       <!-- Add more lines as needed -->
     </marquee>
   </div>
@@ -178,7 +185,7 @@
 </body>
 <script>
   const audioPlayer = document.getElementById('audioPlayer');
-  audioPlayer.src = 'music/g.mp3';
+  audioPlayer.src = 'music/l.mp3';
   console.log("我太急切地想要所有的答案了，\n想要风光的学位，瞬间的博学，\n想要意气风发，\n想要闪着金光\n可它让我等,\n要我耐得住不断延长的时间线,\n要我交付出足够的努力\n堆砌在沉闷、晦涩又漫长短暂的时光里,\n才肯将一切\n一点一点的递送于我的手里.")
 </script>
 <script>
