@@ -1195,7 +1195,7 @@ img.svg{
 }
 .arlo_tm_portfolio_list li img{min-width: 100%;}
 .arlo_tm_portfolio_titles {
-  white-space: nowrap;
+  /*white-space: nowrap;*/
   background: #ffffff;
   font-size: 20px;
   font-weight: 700;
@@ -2599,4 +2599,56 @@ img.svg{
 	.arlo_tm_portfolio_list{margin: 0px;}
 	.arlo_tm_portfolio_list > li{width: 100%;padding-left: 0px;}
 	.arlo_tm_counter_wrap{padding: 94px 0px 48px 0px;}
-}	
+}
+.braced-text {
+	display: inline-block;
+	position: relative;
+	padding-left: 15px; /* 调整文本与花括号之间的距离 */
+}
+
+.braced-text::before {
+	content: "{";
+	position: absolute;
+	left: 0;
+	top: 50%; /* 使花括号垂直居中 */
+	transform: translateY(-50%); /* 使花括号垂直居中 */
+}
+section {
+	position: relative;
+}
+
+/* 添加伪元素，模拟竖线 */
+.with-line::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 5px; /* 竖线的宽度 */
+	background-color: #ddd; /* 淡灰色 */
+}
+
+h2, p {
+	margin-left: 10px; /* 确保文本不挨着竖线 */
+}
+
+p {
+	margin-bottom: 10px; /* 添加底部间距 */
+}
+
+/* 其他样式，可根据需要修改 */
+h2 {
+	color: #333;
+}
+
+p {
+	line-height: 1.5;
+	color: #666;
+}
+
+/* 添加样式以适应移动设备 */
+@media (max-width: 767px) {
+	.with-line::before {
+		/*display: none; !* 在小屏幕上隐藏竖线 *!*/
+	}
+}
