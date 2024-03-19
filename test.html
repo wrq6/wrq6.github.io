@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>emotional</title>
+	<title>emotional</title>
 	<meta charset="utf-8">
-    <!-- 引入CSS文件 -->
-    <link rel="stylesheet" href="css/styles.css">
+	<!-- 引入CSS文件 -->
+	<link rel="stylesheet" href="css/styles.css">
 
-    <!-- 引入JavaScript文件 -->
-    <script src="js/main.js"></script>
+	<!-- 引入JavaScript文件 -->
+	<script src="js/main.js"></script>
 	<style>
 		html {
 			background: linear-gradient(to bottom,  #9CECFB,#65C7F7,#0052D4);
@@ -15,24 +15,24 @@
 			font-size: 10px;
 		}
 		.iframe-container {
-  			display: flex;
- 		 	justify-content: center;
- 			align-items: center;
- 			margin-top: 60px; /* 调整与导航栏的距离 */
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-top: 60px; /* 调整与导航栏的距离 */
 		}
 		nav {
-    		position: fixed;
-    		top: 0;
-    		left: 0;
-    		width: 100%;
-    		padding: 16px;
-    		z-index: 999; /* 确保导航栏在其他元素之上 */
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			padding: 16px;
+			z-index: 999; /* 确保导航栏在其他元素之上 */
 			background-color: transparent;
-    		border: none;
-    		outline: none;
-    		border-radius: 20px; /* 添加圆角边框 */
+			border: none;
+			outline: none;
+			border-radius: 20px; /* 添加圆角边框 */
 			text-align: center;/* <nav> 元素的 text-align 属性设置为 center，这样导航栏内容将会水平居中对齐 */
-  			}
+		}
 		.input {
 			width: auto; /* 调整输入框的宽度 */
 			height: auto;
@@ -40,30 +40,30 @@
 			resize: vertical; /* 允许垂直调整大小 */
 		}
 		.animate-slide-in-down {
-							color: #890680;
-								}
-		 /* 设置导航链接的字体样式 */
-		  nav a {
-		    font-family: Arial, sans-serif;
-		    font-size: 10px;
-		    color: #333;
-		    text-decoration: none;
-		  }
+			color: #890680;
+		}
+		/* 设置导航链接的字体样式 */
+		nav a {
+			font-family: Arial, sans-serif;
+			font-size: 10px;
+			color: #333;
+			text-decoration: none;
+		}
 
-		  /* 设置悬停时链接的字体样式 */
-		  nav a:hover {
-		    color: #890680;
-		    text-decoration: underline;
-		  }
+		/* 设置悬停时链接的字体样式 */
+		nav a:hover {
+			color: #890680;
+			text-decoration: underline;
+		}
 
-		  @media (max-width: 600px) 
-		  {
- 				/* 当视口宽度小于 600px 时，应用以下 CSS 样式 */
- 				nav {
- 				  width: 100%;
- 				  margin: 0;
- 				}
-			
+		@media (max-width: 600px)
+		{
+			/* 当视口宽度小于 600px 时，应用以下 CSS 样式 */
+			nav {
+				width: 100%;
+				margin: 0;
+			}
+
 		}
 
 
@@ -89,7 +89,7 @@
 			margin-left: 0;
 			display: block;
 			background-color: #a34;
-			-moz-transition: margin-left 2s;
+			-moz-transition: margin-left2s;
 			transition: margin-left 2s;
 		}
 
@@ -118,35 +118,36 @@
 			width: 100%;
 			height: 100%;
 			background: #d4d4d4;
-			height: 1000px;
+
 		}
-
-
-
+		#a img {
+			max-width: 100%; /* Ensure images don't exceed their container's width */
+			height: auto; /* Maintain aspect ratio */
+		}
 	</style>
 </head>
 <body>
 <nav>
-<!-- 导航内容 -->
-<a href="linear_algebra.html" class="animate-slide-in-down" target="_blank">线性代数</a>
-<a href="grad_student.html" class="animate-slide-in-down" target="_blank">研校</a>
-<a href="literature.html" class="animate-slide-in-down" target="_blank">文学</a>
-<a href="English.html" class="animate-slide-in-down" target="_blank">英语</a>
-<a href="play_someing.html" class="animate-slide-in-down" target="_blank">简历</a>
-<a href="Cplus.html" class="animate-slide-in-down" target="_blank">C++</a>
-<a href="MuSQL.html" class="animate-slide-in-down" target="_blank">MySQL</a>
-<a href="Python.html" class="animate-slide-in-down" target="_blank">Python</a>
+	<!-- 导航内容 -->
+	<a href="linear_algebra.html" class="animate-slide-in-down" target="_blank">线性代数</a>
+	<a href="grad_student.html" class="animate-slide-in-down" target="_blank">研校</a>
+	<a href="literature.html" class="animate-slide-in-down" target="_blank">文学</a>
+	<a href="English.html" class="animate-slide-in-down" target="_blank">英语</a>
+	<a href="play_someing.html" class="animate-slide-in-down" target="_blank">简历</a>
+	<a href="Cplus.html" class="animate-slide-in-down" target="_blank">C++</a>
+	<a href="MuSQL.html" class="animate-slide-in-down" target="_blank">MySQL</a>
+	<a href="Python.html" class="animate-slide-in-down" target="_blank">Python</a>
 </nav>
 <div class="iframe-container">
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86"
-src="//music.163.com/outchain/player?type=2&id=38576323&auto=1&height=66"></iframe>
+	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86"
+			src="//music.163.com/outchain/player?type=2&id=38576323&auto=1&height=66"></iframe>
 </div>
 </body>
 <aside class="box" id="test">
 	<button id="btn">------</button>
 	<ul>
 		<li>目录</li>
-		<li><a href="Everything.html">执手相看,了然于心</a></li>
+		<li><a href="Everything.html">全国计算机技术与软件专业技术资格（水平）考试</a></li>
 		<li><a href="Discrete_mathematics.html" target="_blank">离散数学</a></li>
 		<li><a href="math/math.html" target="_blank">高等数学</a></li>
 		<li><a href="http://wrq6.gitee.io/mind" target="_blank">思维导图</a></li>
@@ -157,6 +158,7 @@ src="//music.163.com/outchain/player?type=2&id=38576323&auto=1&height=66"></ifra
 		<li><a href="Unreal_Engine.html">虚幻5引擎</a></li>
 		<li><a href="test/index.html">炫酷网页(测试中)</a></li>
 		<li><a href="https://wrq6.gitee.io/homework/">中国传统文化</a></li>
+		<li><a href="#">Blender</a></li>
 	</ul>
 </aside>
 <script>
@@ -170,116 +172,49 @@ src="//music.163.com/outchain/player?type=2&id=38576323&auto=1&height=66"></ifra
 		}
 	}
 </script>
-	<!-- -------------------------------------------------------------------------------------- -->
-    <!-- 网页主体内容 -->
-    <div class="container">
-        <div class="left-column">·
-            <!-- 空出一侧 -->
+<!-- -------------------------------------------------------------------------------------- -->
+<!-- 网页主体内容 -->
+<div class="container">
+	<div class="left-column">·
+		<!-- 空出一侧 -->
 
-        </div>
+	</div>
 
-        <div class="main-content">
-            <!-- 日常分享区域 -->
+	<div class="main-content">
+		<!-- 日常分享区域 -->
 
-<!-- --------------------------------------------------------------------------------------			 -->
-            <div id="daily-sharing">
-                <!-- 分享标题 -->
-                <h2>角落</h2>
-                <!-- 文本内容 -->
-                <p id="text-content"></p>
-                <!-- 图片内容 -->
-                <div id="image-container"></div>
-            </div>
-<!-- -----------------------------------start---------------------------------------------------			 -->
-			<div id="daily-sharing">
-				<div id="lyric-container"></div>
-				<div class="audio-container">
-					<audio controls ontimeupdate="showLyrics()">
-						<source src="music/k.mp3" type="audio/mpeg">
-						反方向的钟-周杰伦
-					</audio>
-				</div>
-<!--				<script>-->
-<!--					var lyricContainer = document.getElementById("lyric-container");-->
-<!--					var audio = document.getElementsByTagName("audio")[0];-->
-<!--					var lyrics = []; // 存储所有歌词的数组-->
-
-<!--					function loadLyrics() {-->
-<!--						// 获取歌曲名称，用于加载对应的歌词文件-->
-<!--						var songName = audio.getElementsByTagName("source")[0].src.split("/").pop().replace(".mp3", "");-->
-<!--						var xhttp = new XMLHttpRequest();-->
-<!--						xhttp.onreadystatechange = function () {-->
-<!--							if (this.readyState == 4 && this.status == 200) {-->
-<!--								var lyricText = this.responseText;-->
-<!--								lyrics = parseLyrics(lyricText); // 解析歌词文本并存储到数组中-->
-<!--								console.log("已加载 " + lyrics.length + " 行歌词。");-->
-<!--							}-->
-<!--						};-->
-<!--						xhttp.open("GET", "geci/" + songName + ".lrc", true); // 修改为您存放歌词文件的路径-->
-<!--						xhttp.send();-->
-<!--					}-->
-
-<!--					function parseLyrics(lyricText) {-->
-<!--						var lines = lyricText.split("\n");-->
-<!--						var result = [];-->
-<!--						for (var i = 0; i < lines.length; i++) {-->
-<!--							var line = lines[i];-->
-<!--							var timeRegex = /\[(\d{2}):(\d{2})\.(\d{2})\]/; // 匹配时间标签的正则表达式-->
-<!--							var matches = line.match(timeRegex);-->
-<!--							if (matches) {-->
-<!--								var minutes = parseInt(matches[1]);-->
-<!--								var seconds = parseInt(matches[2]);-->
-<!--								var milliseconds = parseInt(matches[3]);-->
-<!--								var text = line.replace(timeRegex, "").trim();-->
-<!--								var time = minutes * 60 + seconds + milliseconds / 100;-->
-<!--								result.push({ time: time, text: text });-->
-<!--							}-->
-<!--						}-->
-<!--						return result;-->
-<!--					}-->
-
-<!--					function showLyrics() {-->
-<!--						loadLyrics(); // 加载歌词-->
-<!--						var currentTime = audio.currentTime;-->
-<!--						var displayedLyrics = []; // 存储要显示的歌词行-->
-<!--						for (var i = 0; i < lyrics.length; i++) {-->
-<!--							if (currentTime >= lyrics[i].time) {-->
-<!--								displayedLyrics.push(lyrics[i]);-->
-<!--							}-->
-<!--						}-->
-<!--						if (displayedLyrics.length > 0) {-->
-<!--							var lyricsHTML = '';-->
-<!--							for (var j = 0; j < displayedLyrics.length; j++) {-->
-<!--								lyricsHTML += '<p>' + displayedLyrics[j].text + '</p>';-->
-<!--							}-->
-<!--							lyricContainer.innerHTML = lyricsHTML;-->
-<!--							lyricContainer.scrollTop = (displayedLyrics.length - 1) * 25; // 滚动到最后一行歌词-->
-<!--							lyrics.splice(0, displayedLyrics.length); // 删除已经显示的歌词行-->
-<!--						}-->
-<!--					}-->
-
-
-<!--					// 在音频播放时调用 showLyrics 函数-->
-<!--					audio.addEventListener("timeupdate", function () {-->
-<!--						showLyrics();-->
-<!--					});-->
-
-<!--				</script>-->
-
-  					<!-- 分享标题 -->
-  					<h3>青木下黄土旧叶，落日里长路新人。</h3>
-  					<!-- 图片内容 -->
-  					<div id="image-container">
-  					  <img src="img/d.jpg" alt="从图书馆回来的路上">
-  					</div>
-
-  					<div class="horizontal-line">
-  					  <!-- 时间容器 -->
-  					  <div id="time-container">
-  					    <p>2023年9月28日</p>
-  					  </div>
-  					</div>
+		<!-- --------------------------------------------------------------------------------------			 -->
+		<div id="daily-sharing">
+			<!-- 分享标题 -->
+			<h2>角落</h2>
+			<!-- 文本内容 -->
+			<p id="text-content"></p>
+			<!-- 图片内容 -->
+			<div id="image-container"></div>
+		</div>
+		<!-- -----------------------------------start---------------------------------------------------			 -->
+		<div id="daily-sharing">
+			<div id="lyric-container"></div>
+			<div class="audio-container">
+				<audio controls ontimeupdate="showLyrics()">
+					<source src="music/k.mp3" type="audio/mpeg">
+					反方向的钟-周杰伦
+				</audio>
 			</div>
+			<!-- 分享标题 -->
+			<h3>青木下黄土旧叶，落日里长路新人。</h3>
+			<!-- 图片内容 -->
+			<div id="a">
+				<img src="img/d.jpg" alt="从图书馆回来的路上">
+			</div>
+
+			<div class="horizontal-line">
+				<!-- 时间容器 -->
+				<div id="time-container">
+					<p>2023年9月28日</p>
+				</div>
+			</div>
+		</div>
 <!-- ------------------------------------start--------------------------------------------------			 -->
        <div id="daily-sharing">
 				<div class="audio-container">
@@ -296,7 +231,7 @@ src="//music.163.com/outchain/player?type=2&id=38576323&auto=1&height=66"></ifra
 					真的绝了
 				</p>
                 <!-- 图片内容 -->
-               	<div id="image-container">
+		   <div id="a">
   					  <img src="img/e.jpg" alt="天下第一洞">
   				</div>
 				<div class="horizontal-line">
@@ -327,7 +262,7 @@ src="//music.163.com/outchain/player?type=2&id=38576323&auto=1&height=66"></ifra
 					这似乎是人活一生，每个人都会思考的各种问题<br>
 				</p>
 				<!-- 图片内容 -->
-				<div id="image-container">
+				<div id="a">
 					<img src="img/aap.png" alt="无耻之徒">
 				</div>
 				<div class="horizontal-line">
@@ -374,7 +309,7 @@ src="//music.163.com/outchain/player?type=2&id=38576323&auto=1&height=66"></ifra
 					不免心中几分自怜<br>
 				</p>
 				<!-- 图片内容 -->
-				<div id="image-container">
+				<div>
 					<img src="" alt="">
 				</div>
 				<div class="horizontal-line">
@@ -405,7 +340,7 @@ src="//music.163.com/outchain/player?type=2&id=38576323&auto=1&height=66"></ifra
 					一生向阳<br>
 				</p>
 				<!-- 图片内容 -->
-				<div id="image-container">
+				<div>
 					<img src="" alt="">
 				</div>
 				<div class="horizontal-line">

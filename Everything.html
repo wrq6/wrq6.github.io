@@ -3,18 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <title>了然于心</title>
+    <style>
+        /* 全局样式 */
+        html {
+            text-align: center;
+            font-size: 16px;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .notes {
+            margin-bottom: 30px;
+        }
+        .notes p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        .audio-container {
+            margin-bottom: 30px;
+        }
+        /* 歌词样式 */
+        #lyric-container {
+            max-height: 200px; /* 设置歌词容器最大高度 */
+            overflow-y: auto; /* 滚动条 */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            margin-bottom: 20px;
+        }
+        #lyric-container p {
+            margin: 5px 0;
+            line-height: 1.4;
+            white-space: nowrap; /* 防止换行 */
+            overflow: hidden;
+            text-overflow: ellipsis; /* 超出部分显示省略号 */
+        }
+        .island {
+            display: inline-block; /* 将岛屿设为内联块级元素，使其水平排列 */
+            width: calc(100% - 40px); /* 计算岛屿宽度，减去左右边距 */
+            padding: 10px;
+            margin: 10px 0; /* 添加垂直外边距，与下一个岛屿产生间距 */
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease; /* 添加平滑过渡效果 */
+        }
+        .island:hover {
+            transform: translateY(-10px); /* 悬浮时向上移动 */
+        }
+    </style>
 </head>
 <body>
-<div id="lyric-container"></div>
-<div class="audio-container">
-    <audio controls ontimeupdate="showLyrics()">
-        <source src="music/c.mp3" type="audio/mpeg">
-        我知道 - By2
-    </audio>
+
+<div class="container">
+    <h1>计算机系统知识</h1>
+    <div class="notes">
+        <div class="island">1. Cache与主存地址映射由硬件自动完成</div>
+        <div class="island">2. PC是程序计数器(在控制器中),用来存放将要执行的下一条指令在内存中的地址</div>
+        <div class="island">3. 中断:出现意外情况，自停止当前运行的程序，转入处理新的情况，处理完毕又返回被暂停的程序继续执行</div>
+    </div>
+
+    <div class="audio-container">
+        <div id="lyric-container"></div>
+        <audio controls ontimeupdate="showLyrics()">
+            <source src="music/c.mp3" type="audio/mpeg">
+            我知道 - By2
+        </audio>
+    </div>
 </div>
+
 <script>
     var lyricContainer = document.getElementById("lyric-container");
-    var audio = document.getElementsByTagName("audio")[0];
+    var audio = document.querySelector("audio");
     var lyrics = []; // 存储所有歌词的数组
 
     function loadLyrics() {
@@ -37,7 +116,7 @@
         var result = [];
         for (var i = 0; i < lines.length; i++) {
             var line = lines[i];
-            var timeRegex = /\[(\d{2}):(\d{2})\.(\d{2})\]/; // 匹配时间标签的正则表达式
+            var timeRegex = /\[(\d{2}):(\d{2})\.(\d0.{2})\]/; // 匹配时间标签的正则表达式
             var matches = line.match(timeRegex);
             if (matches) {
                 var minutes = parseInt(matches[1]);
@@ -66,17 +145,16 @@
                 lyricsHTML += '<p>' + displayedLyrics[j].text + '</p>';
             }
             lyricContainer.innerHTML = lyricsHTML;
-            lyricContainer.scrollTop = (displayedLyrics.length - 1) * 25; // 滚动到最后一行歌词
+            lyricContainer.scrollTop = lyricContainer.scrollHeight; // 滚动到最后一行歌词
             lyrics.splice(0, displayedLyrics.length); // 删除已经显示的歌词行
         }
     }
-
 
     // 在音频播放时调用 showLyrics 函数
     audio.addEventListener("timeupdate", function () {
         showLyrics();
     });
-
 </script>
+
 </body>
 </html>
