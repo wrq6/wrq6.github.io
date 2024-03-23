@@ -1295,6 +1295,30 @@
 														<br>
 														<p>$$即a=-4c$$</p>
 													</div>
+													<hr>
+													<div class="full_def">
+														<p style="color: red">等价无穷小的充分必要条件</p>
+														<br>
+														<p>$$ f(x)\, =g(x)+O[g(x)]\leftrightarrow f(x)∽ g(x) $$</p>
+														<br>
+														<p>换成人话就是要想等价，就需要让其中一个式子等于另一个式子加上它的高阶无穷小</p>
+													</div>
+													<div class="full_def">
+														<p style="color: red">高阶无穷小的运算法则</p>
+														<br>
+														<p style="color: #0d66c2">1.加减低阶吸收原则</p>
+														<br>
+														<p>$$ O({x}^{m})\mp O({x}^{n})=O({x}^{l}),l\in min(m,n) $$</p>
+														<br>
+														<p style="color: #0d66c2">2.乘法叠加原则</p>
+														<br>
+														<p>$$ O({x}^{m})\cdot O({x}^{n})=O({x}^{m+n}) $$</p>
+														<p>$$ {x}^{m}\cdot O({x}^{n})=O({x}^{m+n}) $$</p>
+														<br>
+														<p style="color: #0d66c2">3.数乘无关原则</p>
+														<br>
+														<p>$$ k\cdot O({x}^{n})=O({k\cdot x}^{n})=O({x}^{n})//k≠0 $$</p>
+													</div>
 												</div>
 												<div class="arlo_tm_popup_share_wrap">
 													<ul>
@@ -1329,7 +1353,52 @@
 													<p>3.上下同阶原则(经验原则)</p>
 												</div>
 												<div class="full_def">
-													<p>未完待续</p>
+													<p style="color: #00daff">普通泰勒公式一共八个，我扩展到十个，其次有的后面直接加了大O阶，也就是x的最高次数的高阶无穷小，是因为这个泰勒无规律可言，其他的需要你在写到哪一阶就加上哪一阶的高阶无穷小</p>
+												</div>
+												<div class="full_def">
+													<section class="with-line" style="padding-left: 50px">
+														<p>$$ sinx=x+\frac {{(-1)}^{n}{x}^{2n+1}} {(2n+1)!} $$</p><br>
+														<p>$$ tanx=x+\frac {1} {3}{x}^{3}+O({x}^{3}) $$</p><br>
+														<p>$$ arcsinx=x+\frac {1} {6}{x}^{3}+O({x}^{3}) $$</p><br>
+														<p>$$ arctanx=x+\frac {{(-1)}^{n}{x}^{2n+1}} {2n+1} $$</p><br>
+														<p>$$ cosx=1+\frac {{(-1)}^{n}{x}^{2n}} {(2n)!} $$</p><br>
+														<p>$$ ln(x+1)=x+\frac {{(-1)}^{n}{x}^{n+1}} {n+1} $$</p><br>
+														<p>$$ {a}^{x}=1+\frac {{(xlna)}^{n}} {n!} $$</p><br>
+														<p>$$ {(x+1)}^{α }=1+\frac {(α -n+1){x}^{n}} {n!} $$</p><br>
+														<p>$$ \frac {1} {x+1}=1+{(-1)}^{n}{x}^{n} $$</p><br>
+														<p>$$ \frac {1} {x-1}=1+{x}^{n} $$</p>
+													</section>
+												</div>
+												<div class="full_def">
+													<p style="color: pink">人难我难我不畏难，人易我易我不大意</p>
+													<br>
+													<p>一天一条，包括复习之前背的，像我这样脑子不好的，一个星期也能背的滚瓜烂熟，不骗你，时间真的能改变任何东西</p>
+													<br>
+													<p><span style="color: #0d66c2">[考点]</span>泰勒公式的用法(展开原则)</p>
+													<br>
+													<hr>
+													<p style="color: red">原则一：相消不为0</p>
+													<br>
+													<p style="color: #00aa00">例题$$ x\to 0,tanx-sinx∽\_\_\_\_$$</p>
+													<br>
+													<p>$$ tanx-sinx=[x+\_ \_ \_ \_ \_ ]-[x+\_ \_ \_ \_ \_ ] $$</p>
+													<p>注意了，泰勒是等号，是我们数学中传统意义上的等号,接下来我们先展第一项</p>
+													<br>
+													<p>$$ tanx-sinx=[x+\frac {1} {3}{x}^{3}+\_ \_ \_ \_ \_ ]-[x+(-\frac {1} {6}{x}^{3})+\_ \_ \_ \_ \_ ] $$</p>
+													<br>
+													<p>好了，这个时候，我们看到如果展开做运算是不会导致式子的结果为0的，于是我们加上各自的高阶无穷小</p>
+													<br>
+													<p>$$ tanx-sinx=[x+\frac {1} {3}{x}^{3}+O({x}^{3})]-[x+(-\frac {1} {6}{x}^{3})+O({x}^{3})] $$</p>
+													<br>
+													<p>小学题做运算</p>
+													<br>
+													<p>$$ tanx-sinx=\frac {1} {2}{x}^{3}+O({x}^{3})-O({x}^{3}) $$</p>
+													<br>
+													<p>等价无穷小的运算中的加减低阶吸收原则即：$$ tanx-sinx=\frac {1} {2}{x}^{3}+O({x}^{3}) $$</p>
+													<br>
+													<p>根据等价无穷小的必要条件，a式子=b式子加上它的高阶无穷小，那么这个a式子与b式子等价,那你可能会问了，明明高阶无穷小里面没有系数啊，那么还有一个运算规则你没有掌握就是数乘无关原则</p>
+													<br>
+													<p>即$$ tanx-sinx∽ \frac {1} {2}{x}^{3} $$</p>
 												</div>
 												<div class="arlo_tm_popup_share_wrap">
 													<ul>
