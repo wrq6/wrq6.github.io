@@ -1,179 +1,243 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"><head><meta charset="UTF-8" >
-    <title>程序员用HTML5制作的爱心树表白动画- 柯乐义</title><base target="_blank" href="http://keleyi.com/keleyi/phtml/html5/" />
-    <link type="text/css" rel="stylesheet" href="http://keleyi.com/keleyi/phtml/html5/31/renxi/default.css">
-    <script type="text/javascript" src="http://keleyi.com/keleyi/pmedia/jquery/jquery-1.11.2.min.js"></script>
-    <script type="text/javascript" src="http://keleyi.com/keleyi/phtml/html5/31/renxi/jscex.min.js"></script>
-    <script type="text/javascript" src="http://keleyi.com/keleyi/phtml/html5/31/renxi/jscex-parser.js"></script>
-    <script type="text/javascript" src="http://keleyi.com/keleyi/phtml/html5/31/renxi/jscex-jit.js"></script>
-    <script type="text/javascript" src="http://keleyi.com/keleyi/phtml/html5/31/renxi/jscex-builderbase.min.js"></script>
-    <script type="text/javascript" src="http://keleyi.com/keleyi/phtml/html5/31/renxi/jscex-async.min.js"></script>
-    <script type="text/javascript" src="http://keleyi.com/keleyi/phtml/html5/31/renxi/jscex-async-powerpack.min.js"></script>
-    <script type="text/javascript" src="http://keleyi.com/keleyi/phtml/html5/31/renxi/functions.js" charset="utf-8"></script>
-    <script type="text/javascript" src="http://keleyi.com/keleyi/phtml/html5/31/renxi/love.js" charset="utf-8"></script>
-    <style type="text/css">
-        <!--
-        .STYLE1 {color: #666666}
-        -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcards</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #87CEEB, #1E90FF);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .flashcard-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .flashcard {
+            width: 1000px; /* 更大的宽度 */
+            height: 600px; /* 更大的高度 */
+            margin: 10px;
+            margin-bottom: 20px; /* 设置卡片之间的间隔 */
+            position: relative;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        .card {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+        }
+        .card.flip {
+            transform: rotateY(180deg);
+        }
+        .side {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            /*justify-content: center;*/
+            /*align-items: center;*/
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            backface-visibility: hidden;
+            padding: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .back {
+            transform: rotateY(180deg);
+        }
+        .content {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: flex; /* 添加此行 */
+            justify-content: center; /* 添加此行 */
+            align-items: center; /* 添加此行 */
+        }
+        .content_one
+        {
+
+        }
+        h2{
+            display: flex; /* 添加此行 */
+            justify-content: center; /* 添加此行 */
+            align-items: center; /* 添加此行 */
+        }
     </style>
 </head>
 <body>
-<div id="main">
-    <div id="error">本页面采用HTML5技术，目前您的浏览器无法显示，请使用<a href="http://keleyi.com/a/bjac/g039tue3.htm">支持HTML5的浏览器</a>查看本页。</div>
-    <div id="wrap">
-        <div id="text">
-            <div id="code">
-                <p> <font color="#FF0000"> <span class="say">亲爱的*：</span><br>
-                    <span class="say"></span><br />
-                    <span class="say">曾经，</span><br>
-                    <span class="say">有一份真挚的爱情摆在我面前，</span><br />
-                    <span class="say">我没有珍惜，</span><br />
-                    <span class="say">等到我失去的时候才后悔莫及，</span><br>
-                    <span class="say">人世间最痛苦的事莫过于此......</span><br>
-                    <span class="say">如果上天能够给我一个再来一次的机会，</span><br>
-                    <span class="say">我会对那个女孩子说三个字：</span><br>
-                    <span class="say"><B>我爱你！</B></span><br />
-                    <span class="say">如果非要在这份爱上加一个期限，</span><br>
-                    <span class="say">我希望是..... </span><br>
-                    <span class="say">一万年！</span><br />
-                    <span class="say"><span class="space"></span> -- 爱你的*--</span>
-                </font></p>
+
+<div class="flashcard-container">
+    <h1>计算机网络记忆卡片</h1>
+    <div class="flashcard" onclick="flipCard(this)">
+        <div class="card">
+            <div class="side front">
+                <h2>ICP/IP参考模型有几层？分别是</h2>
+                <p class="content"></p>
+            </div>
+            <div class="side back">
+                <h2>答案</h2>
+                <p class="content" style="color: #00feff">四层</p>
+                <p class="content_one">-网络接口层(物理层+数据链路层)</p>
+                <p class="content_one">-网际层(网络层)</p>
+                <p class="content_one">-传输层</p>
+                <p class="content_one">-应用层(会话层、表示层、应用层)</p>
             </div>
         </div>
-        <div id="clock-box">
-            <script type="text/javascript" src="/kineryi/js/gggg336x280a.js"></script>
+    </div>
+    <br>
+    <br>
+    <div class="flashcard" onclick="flipCard(this)">
+        <div class="card">
+            <div class="side front">
+                <h2 style="">计算机网络的分类(分布范围)</h2>
+                <p class="content_one"></p>
+            </div>
+            <div class="side back">
+                <h2>答案</h2>
+                <p class="content_one">广域网(WAN)</p>
+                <p class="content_one">城域网(MAN)</p>
+                <p class="content_one">局域网(LAN)</p>
+                <p class="content_one">个人区域网(PAN)</p>
+            </div>
         </div>
-        <canvas id="keleyi" width="1100" height="680"></canvas>
+    </div>
+    <br>
+    <br>
+    <div class="flashcard" onclick="flipCard(this)">
+        <div class="card">
+            <div class="side front">
+                <h2 style="">计算机网络的功能</h2>
+                <p class="content_one"></p>
+            </div>
+            <div class="side back">
+                <h2>答案</h2>
+                <p class="content_one">数据通信</p>
+                <p class="content_one">资源共享(<span style="color: #a5010a">主要 </span>)</p>
+                <p class="content_one">分布式处理</p>
+                <p class="content_one">提高可靠性</p>
+                <p class="content_one">负载均衡</p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="flashcard" onclick="flipCard(this)">
+        <div class="card">
+            <div class="side front">
+                <h2 style="">计算机网络是什么？</h2>
+                <p class="content_one"></p>
+            </div>
+            <div class="side back">
+                <h2>答案</h2>
+                <p class="content_one">是一些互连的、自治的计算机系统的集合</p>
+
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="flashcard" onclick="flipCard(this)">
+        <div class="card">
+            <div class="side front">
+                <h2 style="">世界上第一个计算机网络？</h2>
+                <p class="content_one"></p>
+            </div>
+            <div class="side back">
+                <h2>答案</h2>
+                <p class="content_one">APRANET</p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="flashcard" onclick="flipCard(this)">
+        <div class="card">
+            <div class="side front">
+                <h2 style="">网络协议的三要数</h2>
+                <p class="content_one"></p>
+            </div>
+            <div class="side back">
+                <h2>答案</h2>
+                <p class="content_one">语法</p>
+                <p class="content_one">语义</p>
+                <p class="content_one">时序</p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="flashcard" onclick="flipCard(this)">
+        <div class="card">
+            <div class="side front">
+                <h2 style="">OSI参考模型有几层？分别是什么？</h2>
+                <p class="content_one"></p>
+            </div>
+            <div class="side back">
+                <h2>答案</h2>
+                <p class="content_one">1.物理层(最底层)</p>
+                <p class="content_one">2.数据链路层</p>
+                <p class="content_one">3.网络层</p>
+                <p class="content_one">4.传输层</p>
+                <p class="content_one">5.会话层</p>
+                <p class="content_one">6.表示层</p>
+                <p class="content_one">7.应用层(最高层)</p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="flashcard" onclick="flipCard(this)">
+        <div class="card">
+            <div class="side front">
+                <h2 style="">物理层中的四大特性分别是什么？并简要解释</h2>
+                <p class="content_one"></p>
+            </div>
+            <div class="side back">
+                <h2>答案</h2>
+                <p class="content_one">1.机械特性：接口是怎么样的</p>
+                <p class="content_one">2.电气特性：用多少伏的电</p>
+                <p class="content_one">3.功能特性：线路上电平电压的特性</p>
+                <p class="content_one">4.过程特性：实现不同功能所发射信号顺序</p>
+                <p class="content_one" style="color: #0a3d2e">我是这样记忆的：机电功程</p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="flashcard" onclick="flipCard(this)">
+        <div class="card">
+            <div class="side front">
+                <h2 style="">物理层中的两种信号分别是什么？并在闹钟浮现图像</h2>
+                <p class="content_one"></p>
+            </div>
+            <div class="side back">
+                <h2>答案</h2>
+                <p class="content_one">1.模拟信号：特定频段</p>
+                <p class="content_one">2.数字信号：非0即1</p>
+                <img>
+            </div>
+        </div>
     </div>
 </div>
+
 <script>
-    (function(){
-        var canvas = $('#ke'+'leyi');
-        if (!canvas[0].getContext) {
-            $("#error").show();
-            return false; }
-        var width = canvas.width();
-        var height = canvas.height();
-        canvas.attr("width", width);
-        canvas.attr("height", height);
-        var opts = {
-            seed: {
-                x: width / 2 - 20,
-                color: "rgb(190, 26, 37)",
-                scale: 2
-            },
-            branch: [
-                [535, 680, 570, 250, 500, 200, 30, 100, [
-                    [540, 500, 455, 417, 340, 400, 13, 100, [
-                        [450, 435, 434, 430, 394, 395, 2, 40]
-                    ]],
-                    [550, 445, 600, 356, 680, 345, 12, 100, [
-                        [578, 400, 648, 409, 661, 426, 3, 80]
-                    ]],
-                    [539, 281, 537, 248, 534, 217, 3, 40],
-                    [546, 397, 413, 247, 328, 244, 9, 80, [
-                        [427, 286, 383, 253, 371, 205, 2, 40],
-                        [498, 345, 435, 315, 395, 330, 4, 60]
-                    ]],
-                    [546, 357, 608, 252, 678, 221, 6, 100, [
-                        [590, 293, 646, 277, 648, 271, 2, 80]
-                    ]]
-                ]]
-            ],
-            bloom: {
-                num: 700,
-                width: 1080,
-                height: 650,
-            },
-            footer: {
-                width: 1200,
-                height: 5,
-                speed: 10,
-            }
-        }
-        var tree = new Tree(canvas[0], width, height, opts);
-        var seed = tree.seed;
-        var foot = tree.footer;
-        var hold = 1;
-        canvas.click(function(e) {
-            var offset = canvas.offset(), x, y;
-            x = e.pageX - offset.left;
-            y = e.pageY - offset.top;
-            if (seed.hover(x, y)) {
-                hold = 0;
-                canvas.unbind("click");
-                canvas.unbind("mousemove");
-                canvas.removeClass('hand');
-            }
-        }).mousemove(function(e){
-            var offset = canvas.offset(), x, y;
-            x = e.pageX - offset.left;
-            y = e.pageY - offset.top;
-            canvas.toggleClass('hand', seed.hover(x, y));
-        });
-        var seedAnimate = eval(Jscex.compile("async", function () {
-            seed.draw();
-            while (hold) {
-                $await(Jscex.Async.sleep(10));
-            }
-            while (seed.canScale()) {
-                seed.scale(0.95);
-                $await(Jscex.Async.sleep(10));
-            }
-            while (seed.canMove()) {
-                seed.move(0, 2);
-                foot.draw();
-                $await(Jscex.Async.sleep(10));
-            }
-        }));
-        var growAnimate = eval(Jscex.compile("async", function () {
-            do {
-                tree.grow();
-                $await(Jscex.Async.sleep(10));
-            } while (tree.canGrow());
-        }));
-        var flowAnimate = eval(Jscex.compile("async", function () {
-            do {
-                tree.flower(2);
-                $await(Jscex.Async.sleep(10));
-            } while (tree.canFlower());
-        }));
-        var moveAnimate = eval(Jscex.compile("async", function () {
-            tree.snapshot("p1", 240, 0, 610, 680);
-            while (tree.move("p1", 500, 0)) {
-                foot.draw();
-                $await(Jscex.Async.sleep(10));
-            }
-            foot.draw();
-            tree.snapshot("p2", 500, 0, 610, 680);
-// 会有闪烁不得意这样做, (＞﹏＜)
-            canvas.parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
-            canvas.css("background", "#ffe");
-            $await(Jscex.Async.sleep(300));
-            canvas.css("background", "none");
-        }));
-        var jumpAnimate = eval(Jscex.compile("async", function () {
-            var ctx = tree.ctx;
-            while (true) {
-                tree.ctx.clearRect(0, 0, width, height);
-                tree.jump();
-                foot.draw();
-                $await(Jscex.Async.sleep(25));
-            }
-        }));
-        var textAnimate = eval(Jscex.compile("async", function () {
-            $("#code").show().typewriter();
-        }));
-        var runAsync = eval(Jscex.compile("async", function () {
-            $await(seedAnimate());
-            $await(growAnimate());
-            $await(flowAnimate());
-            $await(moveAnimate());
-            textAnimate().start();
-            $await(jumpAnimate());
-        }));
-        runAsync().start();
-    })();
+    function flipCard(card) {
+        card.querySelector('.card').classList.toggle('flip');
+    }
 </script>
+
 </body>
 </html>
