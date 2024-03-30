@@ -1535,10 +1535,27 @@
 													<p style="color: #00daff">幂指转换</p>
 													<br>
 													<section class="with-line" style="padding-left: 50px">
-														<p>$${lim}_{x\to□ }{底}^{幂}={e}^{{lim}_{x\to }幂\cdot (底-1)}$$</p>
+														<p>$${lim}_{x\to□ }{底}^{幂}={e}^{{lim}_{x\to }幂\cdot (底-1)} 在{1}^{∞}可用$$</p>
 														<br>
-														<p>$$lim{u}^{v}={e}^{limvlnu}$$</p>
+														<p>$$lim{u}^{v}={e}^{limvlnu}在{0}^{0}或者{∞}^{0}可用$$</p>
 													</section>
+													<br>
+													<p style="color: #00daff">提矛法</p>
+													<br>
+													<p style="color: #5a397a">$$ 例：求极限{lim}_{x\to ∞}[x-{x}^{2}ln(1+\frac {1} {x})] $$</p>
+													<br>
+													<p>$$ 其中{x}^{2}最大，提出去 $$</p>
+													<br>
+													<p>$$ 即{lim}_{x\to ∞}{x}^{2}[\frac {1} {x}-ln(1+\frac {1} {x})] $$</p>
+													<br>
+													<p>$$联想等价无穷小 x-ln(x+1)∽\frac 1 {2}{x}^{2} 可以把x换成1/x$$</p>
+													<br>
+													<p>$$ {lim}_{x\to ∞}{x}^{2}\cdot \frac {1} {2}{(\frac {1} {x})}^{2}=\frac {1} {2} $$</p>
+													<br>
+													<p style="color: #00daff">抓大头</p>
+													<br>
+													<p>类似我们之前的无穷小的时候合取低阶原则，不过！！！你注意了，这个是无穷大，在无穷大中，只取高阶的，也就是分子分母中都取最高阶的来计算就行</p>
+													<br>
 													<hr>
 													<p style="color: red">[<span style="color: #dcb801">黄金</span>考点]七种未定式的极限计算(先定型，后定法，定法之前先四化)</p>
 													<br>
@@ -1580,9 +1597,9 @@
 														<br>
 														<p>1.等价无穷小</p>
 														<br>
-														<p>2.泰勒</p>
+														<p>2.泰勒(只要等价无穷小，拼了命也想不出来等价的东西，优先泰勒)</p>
 														<br>
-														<p>3.洛必达</p>
+														<p>3.洛必达(只要函数看起来导数好算就优先)</p>
 														<br>
 														<p>4.极限四则运算</p>
 													</section>
@@ -1667,6 +1684,239 @@
 											</div>
 										</div>
 									</li>
+									<li class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay="0.4s">
+										<div class="inner_list">
+											<div class="image_wrap">
+												<img class="small" src="img/blog/500x350.jpg" alt="" />
+												<img class="big" src="img/blog/1170x450.jpg" alt="" />
+												<div class="news_image" data-url="img/blog/8.png"></div>
+												<a class="link_news" href="index.html"></a>											</div>
+											<div class="definitions_wrap">
+												<div class="date_wrap">
+													<p>August Aug, 八月 <a href="index.html">Branding</a></p>
+												</div>
+												<div class="title_holder">
+													<h3><a href="index.html">数列极限</a></h3>
+												</div>
+												<div class="definition">
+													<p>1.数列极限的性质</p>
+													<p>2.数列极限的计算</p>
+													<p>3.数列极限的有界性和单调性的证明(难点)</p>
+												</div>
+												<div class="full_def">
+													<p style="color: red">数列极限仅有一种趋向(别喷我，我目前的考研水平就只要求我这样学)，就是n→∞(正无穷)</p>
+													<br>
+													<p>$$ {lim}_{n\to ∞}{x}_{n}= $$</p>
+													<br>
+													<section class="with-line" style="padding-left: 50px">
+														<p>$$ A\to [{x}_{n}]收敛于A $$</p>
+														<br>
+														<p>$$ 不存在\to [{x}_{n}]发散 $$</p>
+													</section>
+													<br>
+													<p>不知道你有没有体会到数列极限和普通的极限的区别，趋向的变量成了n，n不在是唯一影响结果的东西，就是说，这个极限是有无数项的自变量x，组成的，每一个n仅能影响它挂上的那个x，其实你可以这样来看待数列极限</p>
+													<hr>
+													<p style="color: red">数列性质</p>
+													<br>
+													<p>1.唯一性</p>
+													<br>
+													<p>2.有界性</p>
+													<p></p>
+													<hr>
+													<img src="img/about/a3.png">
+													<br>
+
+													<p>就是从m项的Xm开始，每一个x都无限等同于A，还是补充一句，等同不是说就是A。其次我估计你看上面的图，可能会有一个疑问，就是x轴上的点一直向右边移动，A在哪里啊，A不应该是一条垂直的线隔断吗？很好，和我一样聪明，你看看这个轴线，代表的是增量n，而不是下标为n的X的值。这是数列，懂吗，是无数个数组成的，这轴线是代表人数，不是人的身高</p>
+													<hr>
+													<p style="color: red">[总结]收敛数列和子数列之间的关系</p>
+													<br>
+													<p>[Xn]收敛于A→所有的子数列收敛于A|<span style="color: #370b60 ">还记得什么叫收敛吗？就是一个极限数列从某个数开始就无限接近于A，就是收敛于A，如果这个极限什么也不趋向，就是发散。</span></p>
+													<br>
+													<p>$$ 若{lim}_{n\to ∞}{x}_{n}=A,\, 则数列\{ {x}_{n}\} 有界 $$</p>
+													<br>
+													<p>$$ 若{lim}_{n\to ∞}{x}_{n}=∞,\, 则数列\{ {x}_{n}\} 无界 $$</p>
+													<hr>
+													<p style="color: red">局部保号性</p>
+													<br>
+													<p>$$ {lim}_{n\to ∞}{x}_{n}>{lim}_{n\to ∞}{y}_{n} $$</p>
+													<br>
+													<p>以上式子只能说明在某个n往后，我比你大，而不能说明我一直比你大</p>
+													<hr>
+													<p style="color: #00feff">
+														[类型题一：同函数极限计算]
+													</p>
+													<br>
+													<p style="color: #00aa44">$$ {lim}_{x\to ∞}(1+x)(1+{x}^{2})(1+{x}^{4})...(1+{x}^{{2}^{n}}) 注意：0<  x <1$$</p>
+													<br>
+													<p>习总书记说过，系好第一颗扣子至关重要的，拿到题目，先被恶心，再被人的本性折磨，我想大概率你会慌了阵脚。但是请别慌，请立马撕掉试卷回寝室睡觉。</p>
+													<br>
+													<p>好，正经一下，我们继续，这一步挺重要的，就是，我们要将无限项的式子计算，在目前的水平来讲，是有可能的，伟大的人说过只要努力，万事皆有可能。但是我不想，我是个普普通通的人</p>
+													<br>
+													<p>我比较懒，我背公式得都背一个通用的公式，那这道题我们也可以想办法化成一个式子，怎么化？</p>
+													<br>
+													<p style="color: #00aa44">$$ {lim\, }_{n\to ∞}\frac {(1-x)(1+x)(1+{x}^{2})(1+{x}^{4})...(1+{x}^{{2}^{n}})} {1-x} $$</p>
+													<br>
+													<p>这一步很妙啊，我们观察分母，1-x和1+x会成为一系列的连锁反映啊，别觉得自己不会，现在不就会了，开锁的师傅都得开无数个门才成为开锁师傅的呢😨</p>
+													<br>
+													<p style="color: #00aa44">$$ {lim}_{n\to ∞}\frac {1-{x}^{{2}^{n+1}}} {1-x}=\frac {1} {1-x} $$</p>
+													<br>
+													<p>你可能会好奇，为什么分母变成1了，先等等我要提醒你x是已知数，这不是关于x的极限。其次我们再来解释，看题目给出0< x <1</p>
+													<br>
+													<p style="color: #00aa44">$$ {lim}_{n\to ∞}{2}^{n+1}=∞\to {lim}_{n\to ∞}{x}^{{2}^{n+1}}=0 $$</p>
+													<br>
+													<p>没看懂？这是什么原理？你可以将1/2无数次的乘上它本身，看是不是越来越小</p>
+													<hr>
+													<p style="color: #00feff">
+														[类型题二：连续化处理，换成函数极限]
+													</p>
+													<br>
+													<p style="color: #00aa44">$$ {lim}_{n\to ∞}\frac {3n} {{e}^{n}+2n} $$</p>
+													<br>
+													<p style="color: #00aa44">$$ 连续化为{lim}_{x\to ∞}\frac {3x} {{e}^{x}+2x} =0$$</p>
+													 <br>
+													<P>显然分母比分子大太多，值就是0</P>
+													<br>
+													<P style="color: #00aa44">$$即 {lim}_{n\to ∞}\frac {3n} {{e}^{n}+2n} =0 $$</P>
+													<hr>
+													<p style="color: #00feff">
+														[类型题三：夹逼准则]
+													</p>
+													<br>
+													<p>我知道，这个模块让人浑身一抖，我说实话，我也是至高中多年以来，才渐渐体会到这种方法。</p>
+													<br>
+													<p style="color: red">$$ 若{y}_{n}\leq {x}_{n}\leq {z}_{n}且{lim}_{n\to ∞}{y}_{n}={lim}_{n\to ∞}{z}_{n}=A,则{lim}_{x\to ∞}{x}_{n}=A $$</p>
+													<br>
+													<p>我知道这很难，我也知道，你的大脑会自动的掠过很多信息，直到你看见自己最喜爱的中文，但是学习数学就是这样，不断的折磨自己，达到自己从未到达的高度</p>
+													<br>
+													<p>好了，言归正传，其实如果你认真的看一遍这个定义就会发现这个定义说了一个很简单的事情</p>
+													<br>
+													<p style="color: #1aaf5d">如果一个数列介于A与B数列之间</p>
+													<br>
+													<p style="color: #1aaf5d">分别求A和B数列的极限，如果都相等并且等于一个值</p>
+													<br>
+													<p style="color: #1aaf5d">那么，夹在中间的数列的极限也应该是这个数</p>
+													<br>
+													<p>如果看着中文都不能理解，也是正常的，因为我们习惯具体的东西，而不是抽象的</p>
+													<br>
+													<p>我们经常说，计算机面向对象的语言，抽象的更符合人类的思维方式，其实也不全是，抽象更重要的是模仿大自然的鬼斧神工，就像你所看见所有的人类的科技，几乎都是模仿生物的特性。具体什么，我也不说了，因为我瞎说的</p>
+													<br>
+													<p style="color: #1aaf5d">既然中间是我们要求的数列极限，那么A和B必定一个大一个小，这就叫缩小和放大，而且这种缩小和放大要巧，而且要有理</p>
+													<br>
+													<p>好了，现在的要求就是你对夹逼有个初步的认识，并且有一个大概的想法就行了，不至于在未来的某一天看见了，不知道这种是夹逼</p>
+													<hr>
+													<p style="color: #00feff">
+														[类型题四：单调有界必有极限]<span style="color: red">重点，难点</span>
+													</p>
+													<br>
+													<p style="color: #fa7dc0">单调有界必有极限的内容</p>
+													<br>
+													<p style="color: #1aaf5d">∃N>0,当n>N时//∃是意思是“存在”</p>
+													<br>
+													<p style="color: #1aaf5d">1.若[Xn]单调递增，且有上界</p>
+													<br>
+													<p style="color: #1aaf5d">2.若[Xn]单调递减，且有下界</p>
+													<br>
+													<p style="color: #1aaf5d">$$则称 {lim}_{x\to ∞}{x}_{n} 存在$$</p>
+													<br>
+													<p style="color: #fa7dc0">数学归纳法的复习</p>
+													<br>
+													<p style="color: #1aaf5d">1.验证第一项成立</p>
+													<br style="color: #1aaf5d">
+													<p style="color: #1aaf5d">2.假设第n项时，成立</p>
+													<br>
+													<p style="color: #1aaf5d">3.推断出第n+1项成立</p>
+													<br>
+													<p style="color: #1aaf5d">则均成立</p>
+													<br>
+													<p>证明单调性：这件事情，可以作比，你想单调递增是不是后面比前面大，比值大于1就说明递增。其次也可以做差，后面见前面的是正的不就说明递增嘛</p>
+													<hr>
+													<p style="color: #1aaf5d">$$[例题] 设{x}_{1}=10,{x}_{n+1}=\sqrt {{x}_{n}+6},n=1,2,.....证明数列\{ {x}_{n}\} 有极限，并求此极限 $$</p>
+													<br>
+													<p style="color: #946b3e">(草稿上写出)</p>
+													<br>
+													<p style="color: #946b3e">$$ 设{lim}_{n\to ∞}{x}_{n}=A,可以推出{lim}_{n\to ∞}{x}_{n+1}=A $$</p>
+													<br>
+													<p style="color: #946b3e">$$ \, 即{lim}_{n\to ∞}{x}_{n+1}={lim}_{n\to ∞}\sqrt {{x}_{n}+6}即A=\sqrt {A+6} $$</p>
+													<br>
+													<p style="color: #946b3e">$$ {A}^{2}-A-6=0\to A=3或-2 $$</p>
+													<br>
+													<p style="color: #946b3e">$$ 又{x}_{n+1}>0,即A>0，因此A=3 $$</p>
+													<br>
+													<p>1.我们来证明有界性</p>
+													<br>
+													<p>$$ 猜测{x}_{n}>3(n=1,2,3...) $$</p>
+													<br>
+													<p style="color: #946b3e">为什么猜测这数，上面我们不是求出极限是3嘛，那为什么不是4，不是小于3，因为第一项是10啊，其次数列极限是无限接近的结果</p>
+													<br>
+													<p>$$ 当n=1时,{x}_{1}=10>3成立 $$</p>
+													<br>
+													<p>$$ 假设当n=k时,{x}_{k+1}=\sqrt {{x}_{k}+6}\to \sqrt {{x}_{k}+6}>3 $$</p>
+													<br>
+													<p>$$ 即{x}_{k+1}>3成立 $$</p>
+													<br>
+													<p>$$ 则{x}_{n}>3(n=1,2,3...) $$</p>
+													<br>
+													<p style="color: #946b3e">OK了，下界已经证明存在了</p>
+													<br>
+													<p>2.证明单调性</p>
+													<br>
+													<p>$$ {x}_{n+1}=\sqrt {6+{x}_{n}} $$</p>
+													<br>
+													<p>$$ 作比\frac {{x}_{n+1}} {{x}_{n}}=\frac {\sqrt {6+{x}_{n}}} {{x}_{n}}=\frac {1} {\sqrt {{x}_{n}}}\cdot \sqrt {\frac {6+{x}_{n}} {{x}_{n}}} $$</p>
+													<br>
+													<p>$$ =\frac {1} {\sqrt {{x}_{n}}}\cdot \sqrt {\frac {6} {{x}_{n}}+1} $$</p>
+													<br>
+													<p>$$ 我们带入{x}_{n}=3 $$</p>
+													<br>
+													<p>$$ =\frac {1} {\sqrt {3}}\cdot \sqrt {3}=1 $$</p>
+													<br>
+													<p>$$ s注意，{x}_{n}\, >3的，是极限等于3.也就是 $$</p>
+													<br>
+													<p>$$ \frac {1} {\sqrt {{x}_{n}}}\cdot \sqrt {\frac {6} {{x}_{n}}+1}<1 $$</p>
+													<br>
+													<p>$$ 则{x}_{n+1}<{x}_{n}\to 数列极限[{x}_{n}]单调递减 $$</p>
+													<br>
+													<p>根据我们《单调有界必有极限》可知，数列单调递减，并且有下界的时候，数列存在。</p>
+													<br>
+													<p>另一种是单调递增，并且有上界才有极限</p>
+													<hr>
+													<p style="color:#a40505;">[重要不等式]</p>
+													<br>
+													<section class="with-line" style="padding-left: 50px">
+														<p>$$ a+b\geq 2\sqrt {ab} $$</p>
+														<br>
+														<p>$$ 当0< x <\frac {Π} {2}时,tanx> x >sinx 那个Π是是派，不是蛋黄派，是3.1415...的派$$</p>
+														<br>
+														<p>$$ 当x>0是,x>sinx,当x<0,sinx>x $$</p>
+														<br>
+														<p>$$ {e}^{x}-1\geq x $$</p>
+														<br>
+														<p>$$ \frac {1} {1+x}< ln(1+\frac {1} {x})<\frac {1} {x} $$</p>
+														<br>
+														<p>$$ \frac {x} {1+x}< ln(1+x)< x $$</p>
+														<br>
+														<p>$$ x\geq ln(x+1) $$</p>
+														<br>
+														<p>$$ {lim}_{n\to ∞}\sqrt[{n}] {{a}^{n}+{b}^{n}+{c}^{n}}=max(a,b,c)//(a>0,b>0,c>0) $$</p>
+														<br>
+														<p>$$ {lim}_{n\to ∞}\sqrt[{n}] {a}=1 $$</p>
+														<br>
+														<p>$$ {lim}_{n\to ∞}\sqrt[{n}] {n}=1 $$</p>
+													</section>
+												</div>
+												<div class="arlo_tm_popup_share_wrap">
+													<ul>
+														<li><a href="#">已学</a></li>
+														<li><a href="#">看不懂</a></li>
+														<li><a href="#">简单</a></li>
+														<li><a href="#">你这写的啥玩意</a></li>
+													</ul>
+												</div>
+												<div class="read_more">
+													<a href="#"><span>Read More</span></a>												</div>
+											</div>
+										</div>
+									</li>
 								</ul>
 							</div>
 						</div>
@@ -1678,7 +1928,7 @@
 				<div class="arlo_tm_section" id="contact">
 					<div class="container">
 						<div class="arlo_tm_title_holder contact">
-							<h3>Contact Me</h3>
+							<h3>联系我</h3>
 							<span>Get in touch with me</span>						</div>
 					</div>
 					<div class="arlo_tm_footer_contact_wrapper_all">
