@@ -122,7 +122,7 @@
             return;
         }
 
-        createComment(content + " - 提交时间：" + currentTime)
+        createComment(content)
             .then(function() {
                 document.getElementById('commentInput').value = ''; // 清空留言内容
                 fetchComments(); // 重新加载留言
@@ -159,11 +159,6 @@
                     resolveExplanation.classList.add('status');
                     resolveExplanation.innerText = "解决说明：待解决";
                     commentItem.appendChild(resolveExplanation);
-
-
-
-
-
                     // 为每个问题项添加点击事件，显示编辑表单
                     commentItem.addEventListener('click', function() {
                         if (!commentItem.classList.contains('resolved')) {
