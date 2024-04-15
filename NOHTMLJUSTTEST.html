@@ -3,195 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>问题反馈</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            text-align: center;
-        }
-        h1 {
-            color: #333;
-        }
-        #commentInput {
-            width: 60%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        #commentButton {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        #commentsList {
-            list-style-type: none;
-            padding: 0;
-        }
-        .comment {
-            background-color: #fff;
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: relative;
-            font-family: "Helvetica", sans-serif;
-            color: #333;
-        }
-        .comment::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 20px;
-            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1));
-            pointer-events: none;
-        }
-        .time {
-            font-family: "Arial", sans-serif;
-            color: #777;
-            font-size: 0.8em;
-            margin-top: 5px;
-        }
-        .status {
-            font-family: "Arial", sans-serif;
-            color: #ff0000;
-        }
-        .resolved {
-            color: #00aa00;
-        }
-        .editForm {
-            display: none; /* 初始隐藏编辑表单 */
-            margin-top: 10px;
-        }
-        .editForm textarea {
-            width: 80%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-    </style>
+    <title>二维坐标系和曲线</title>
 </head>
 <body>
-<div class="container">
-    <h1>问题反馈</h1>
-    <input type="text" id="commentInput" placeholder="请输入您的问题">
-    <button id="commentButton">提交问题</button>
-    <ul id="commentsList"></ul>
+
+<div class="canvas" style="width: 400px; height: 400px; border: 1px solid black; position: relative; transform: translate(200px, 200px) scale(0.5); transform-origin: 0 0;">
+    <div class="axis x-axis" style="position: absolute; background-color: black; width: 100%; height: 1px; bottom: calc(50% - 1px);"></div>
+    <div class="axis y-axis" style="position: absolute; background-color: black; width: 1px; height: 100%; left: calc(50% - 1px);"></div>
+    <div class="arrow x-arrow" style="position: absolute; width: 0; height: 0; border-style: solid; top: calc(50% - 3px); left: calc(100% - 5px); border-width: 3px 0 3px 5px; border-color: transparent transparent transparent black;"></div>
+    <div class="arrow y-arrow" style="position: absolute; width: 0; height: 0; border-style: solid; top: 0; left: calc(50% - 3px); border-width: 5px 3px 0 3px; border-color: black transparent transparent transparent;"></div>
+    <div class="origin" style="position: absolute; top: calc(50% - 5px); left: calc(50% - 5px); font-size: 7px;">0</div>
+    <svg class="curve" width="400" height="400" style="position: absolute; top: 0; left: 0; overflow: visible;">
+        <path d="M 250 90 Q 270 40 340 60" stroke="red" fill="none" />
+        <path d="M 250 90 250 200 " stroke="black" stroke-width="0.5" stroke-dasharray="5,5"/>
+        <path d="M 340 60 340 200 " stroke="black" stroke-width="0.5" stroke-dasharray="5,5"/>
+        <text x="350" y="70" fill="black">y=f(x)</text>
+    </svg>
 </div>
 
-<script>
-    var repoOwner = 'wrq6'; // 替换为你的用户名
-    var repoName = 'wrq6'; // 替换为你的仓库名
-    var issueNumber = 'I9D698'; // 替换为你要用于保存留言的Issue编号
-    var lastSubmissionTime = 0;
-    var submissionInterval = 5000; // 限制用户提交的间隔时间，单位为毫秒
-
-    // 加载现有的留言
-    fetchComments();
-
-    // 表单提交事件
-    document.getElementById('commentButton').addEventListener('click', function(event) {
-        event.preventDefault(); // 阻止表单默认提交行为
-
-        var content = document.getElementById('commentInput').value.trim();
-
-        if(content === "") {
-            alert("请输入问题内容");
-            return;
-        }
-
-        var currentTime = new Date().toLocaleString();
-
-        // 验证提交间隔时间
-        if(currentTime - lastSubmissionTime < submissionInterval) {
-            alert("请稍候再提交");
-            return;
-        }
-
-        createComment(content + " - 提交时间：" + currentTime)
-            .then(function() {
-                document.getElementById('commentInput').value = ''; // 清空留言内容
-                fetchComments(); // 重新加载留言
-                lastSubmissionTime = currentTime; // 更新上次提交时间
-            })
-            .catch(function(error) {
-                console.error('提交留言时出错:', error);
-            });
-    });
-
-    // 使用Gitee API获取留言
-    function fetchComments() {
-        fetch('https://gitee.com/api/v5/repos/' + repoOwner + '/' + repoName + '/issues/' + issueNumber + '/comments')
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(comments) {
-                var commentsList = document.getElementById('commentsList');
-                commentsList.innerHTML = ''; // 清空现有留言
-
-                comments.forEach(function(comment) {
-                    var commentItem = document.createElement('li');
-                    commentItem.classList.add('comment');
-                    commentItem.innerText = comment.body;
-
-                    // 添加提交时间
-                    var time = document.createElement('div');
-                    time.classList.add('time');
-                    time.innerText = "提交时间：" + comment.created_at; // 这里假设返回的 JSON 中有 created_at 字段
-                    commentItem.appendChild(time);
-
-                    // 添加解决说明
-                    var resolveExplanation = document.createElement('div');
-                    resolveExplanation.classList.add('status');
-                    resolveExplanation.innerText = "解决说明：待解决";
-                    commentItem.appendChild(resolveExplanation);
 
 
-
-
-
-                    // 为每个问题项添加点击事件，显示编辑表单
-                    commentItem.addEventListener('click', function() {
-                        if (!commentItem.classList.contains('resolved')) {
-                            editForm.style.display = 'block'; // 显示编辑表单
-                        }
-                    });
-
-                    commentsList.appendChild(commentItem);
-                });
-            })
-            .catch(function(error) {
-                console.error('获取问题时出错:', error);
-            });
-    }
-
-    // 使用Gitee API创建新评论
-    function createComment(content) {
-        var accessToken = 'bd05e71d5885839b05bff7c0fdc8d8d8'; // 替换为你的Gitee访问令牌
-
-        var formData = new FormData();
-        formData.append('access_token', accessToken);
-        formData.append('body', content);
-
-        return fetch('https://gitee.com/api/v5/repos/' + repoOwner + '/' + repoName + '/issues/' + issueNumber + '/comments', {
-            method: 'POST',
-            body: formData
-        });
-    }
-</script>
 </body>
 </html>

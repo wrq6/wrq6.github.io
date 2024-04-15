@@ -3715,9 +3715,211 @@ int main()
 	return 0;
 }
     </code>
+
 </pre>
+<pre>
+    <span style="font-size: 50px"><span style="color: red">后缀表达式</span>的<span style="color: #00aa00">求值与转换</span></span>
+    <span style="color: #00daff">四则运算表达式转化为后缀表达式的规则：</span>
+    <span style="color: #e600ff">
+        1.数字直接写
+        2.运算符号如果高于栈顶的，直接入栈写上，如果低于栈顶的让栈顶先出，自己再进去
+    </span>
+    我们来举个例子：9+（3-1）×3+10
+	<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="100" y1="50" x2="100" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="125" y1="50" x2="125" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="150" y1="50" x2="150" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="175" y1="50" x2="175" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="200" y1="50" x2="200" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="225" y1="50" x2="225" y2="200" stroke="black" stroke-width="2"/>
+     <line x1="250" y1="50" x2="250" y2="200" stroke="black" stroke-width="2"/>
+     <line x1="275" y1="50" x2="275" y2="200" stroke="black" stroke-width="2"/>
+     <line x1="300" y1="50" x2="300" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">看</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">位</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">数</text>
+        <text x="30" y="160" font-size="12" text-anchor="middle">放</text>
+        </g>
 
+        <g id="loading-txt">
+        <text x="60" y="50" font-size="12" text-anchor="middle">Q_0</text>
+        <text x="85" y="50" font-size="12" text-anchor="middle">Q_1</text>
+        <text x="110" y="50" font-size="12" text-anchor="middle">Q_2</text>
+        <text x="135" y="50" font-size="12" text-anchor="middle">Q_3</text>
+        <text x="160" y="50" font-size="12" text-anchor="middle">Q_4</text>
+        <text x="185" y="50" font-size="12" text-anchor="middle">Q_5</text>
+        <text x="210" y="50" font-size="12" text-anchor="middle">Q_6</text>
+        <text x="235" y="50" font-size="12" text-anchor="middle">Q_7</text>
+        <text x="260" y="50" font-size="12" text-anchor="middle">Q_8</text>
+        <text x="285" y="50" font-size="12" text-anchor="middle">Q_9</text>
+        </g>
+        <g id="loading-txt">
+        <text x="60" y="80" font-size="10" text-anchor="middle"  >350</text>
+        <text x="85" y="80" font-size="10" text-anchor="middle"  >481</text>
+        <text x="110" y="80" font-size="10" text-anchor="middle" >392</text>
+        <text x="160" y="80" font-size="10" text-anchor="middle" >674</text>
+        <text x="185" y="80" font-size="10" text-anchor="middle" >475</text>
+        <text x="185" y="110" font-size="10" text-anchor="middle" >815</text>
+        <text x="185" y="140" font-size="10" text-anchor="middle" >315</text>
+        <text x="235" y="80" font-size="10" text-anchor="middle" >137</text>
+        <text x="285" y="80" font-size="10" text-anchor="middle" >219</text>
+        </g>
+    </svg>
+    <code>
 
+    </code>
+</pre>
+<pre>
+    <span style="font-size: 50px;color: red">时间复杂度、空间复杂度</span>
+<code>
+#include < iostream >
+#include < vector >
+using namespace std;
+bool find(vector< int > &nums);
+int main()
+{
+    //时间复杂度，假设输入的数据量大小为N
+    //时间复杂度统计的是【计算的操作数量】而不是【运行的绝对时间】
+    //其次【计算的操作数量】和【运行的绝对时间】的正相关(并不是相等)
+    //再次，运行时间受到【运行环境、语言、处理器】的影响
+    //⬯[最差]、⊝[平均]、Ω[最佳]
+    vector< int > a;
+    a.push_back(1);
+    a.push_back(2);
+    a.push_back(7);
+    if (find(a))
+    {
+        cout << "找到啦！" << endl;
+    }
+    else
+    {
+        cout << "没有找到" << endl;
+    }
+}
+bool find(vector< int > &nums)
+{
+    for (int i=0;i < nums.size();i++)
+    {
+        if (nums[i] == 7)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+//最好的情况就是【7,a,b,c,e,d,da,a,s,sa,】第一次就找到了
+//最坏的情况就是整个数组都没有7，循环了一遍也没有
+//常见的算法时间复杂度有：⬯(1)<⬯(log N)<⬯(N)<⬯(N log N)<⬯(N²)<⬯(2^N)<⬯(N!)
+//⬯(1)表示运行次数不随输入数据大小N的变化而变化
+int algo(int N)
+{
+    int a = 1;
+    int b = 2;
+    int x = a * b + N;
+    return 1;
+
+}
+//⬯(N)运行次数和N大小是线性关系
+int algo1(int N)
+{
+    int a = 0;
+    for (int i = 0; i < N; i++)//运行了N次
+    {
+        a++;
+    }
+    return a;
+}
+//⬯(N²)表示运行次数和N还是线性关系，但是是N²的关系
+int algo2(int N)
+{
+    int a = 0;
+    for (int i = 0; i < N; i++)//此处运行了N次
+    {
+        for (int j = 0; j < N; j++)//又运行了N次
+        {
+            a++;
+        }
+    }//总体上运行了N的平方次
+}
+//⬯(2^N)是指数级，类似我们的细胞分裂，一分为二，二分为四，四分为八
+int algo3(int N)
+{
+    if (N <= 0)
+        return 0;
+    int a = algo3(N - 1);//递归调用，自我递归叫做直接递归
+    int b = algo3(N - 1);//这两个式子，就是让每一个都可以一分为二
+    return a + b;
+}
+//⬯(N!)这个是一开始分裂的是N个，然后每一层分裂比上一层少一个
+int algo4(int N)
+{
+    if (N <= 0)return 1;
+    int a = 0;
+    for (int i = 0; i < N; i++)
+    {
+        a += algo4(N - 1);//为什么这里用循环，因为循环的次数的外层循环×上内层循环的次数，每向内一层的循环次数-1就能达到我们想要的效果
+    }
+    return a;
+}
+//⬯(log N)对数阶和指数阶是相反的，指数阶是每轮分裂，这个是每轮结合，也就是八合四，四合二，二合一
+int algo5(int N)
+{
+    int a = 0;
+    float i = N;
+    while (i > 1)
+    {
+        i = i / 2;
+        a++;
+    }
+    return a;
+}
+//⬯(N log N)，相信你已经明白了，不就是套个N的循环嘛，yes
+int algo6(int N)
+{
+    int a = 0;
+    float i = N;
+    while (i > 1)//while循环次数为log N，因为每次减半
+    {
+        i = i / 2;
+        for (int j = 0; j < N; j++)//循环次数为N
+        {
+            a += 1;
+        }
+    }
+    return a;
+ }
+//------------------------------------------------------------------------
+//空间复杂度
+//栈帧空间
+int test()
+{
+    return 0;
+}
+int algor(int N)
+{
+    for (int i = 0; i < N; i++)
+    {
+        test();//这个循环中每次调用函数test以后，栈帧空间就会被释放
+    }
+}//因此这个函数的空间复杂度为⬯(1)
+
+//---------------------------------------
+
+int algor1(int N)
+{
+    if (N <= 1)
+    {
+        return 1;
+    }
+    return algor1(N - 1) + 1;//注意这是个递归函数，每次使用了，栈帧空间是不释放的
+}//因此空间复杂度为⬯(N)
+</code>
+</pre>
 
 <button id="downloadBtn">下载 本页面PDF</button>
 
