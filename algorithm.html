@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm Showcase</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        #algorithm-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 800px;
+        }
+        #algorithm-title {
+            font-size: 24px;
+            margin-top: 0;
+        }
+        #algorithm-description {
+            font-size: 16px;
+            color: #666;
+        }
+        #algorithm-code {
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            padding: 10px;
+            overflow-x: auto;
+        }
+        #button-container {
+            overflow: hidden;
+            width: 300px; /* 设置按钮区域的宽度 */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin: 20px auto;
+        }
+        #buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            padding-bottom: 40px; /* 留出滚动条的空间 */
+        }
+        .button {
+            flex: 0 0 auto;
+            width: 100px; /* 设置每个按钮的宽度 */
+            height: 40px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        #slider {
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="algorithm-container">
+    <h1 id="algorithm-title">算法合集(C语言编写，C++文件实现)</h1>
+    <p id="algorithm-description">这是一个示例代码，跳转点击按钮</p>
+    <pre id="algorithm-code" class="language-javascript">
+      <code id="code-block">
+        // 示例代码
+        int main(){
+          printf("我的一生是这样的吗？");
+          }
+      </code>
+    </pre>
+</div>
+<div id="button-container">
+    <div id="buttons">
+        <button class="button" onclick="showAlgorithm(1)">两数之和</button>
+        <button class="button" onclick="showAlgorithm(2)">Algorithm 2</button>
+        <button class="button" onclick="showAlgorithm(2)">Algorithm 3</button>
+        <button class="button" onclick="showAlgorithm(2)">Algorithm 4</button>
+        <button class="button" onclick="showAlgorithm(2)">Algorithm 5</button>
+        <button class="button" onclick="showAlgorithm(2)">Algorithm 6</button>
+        <button class="button" onclick="showAlgorithm(2)">Algorithm 7</button>
+        <button class="button" onclick="showAlgorithm(2)">Algorithm 8</button>
+        <button class="button" onclick="showAlgorithm(2)">Algorithm 9</button>
+        <button class="button" onclick="showAlgorithm(2)">Algorithm 10</button>
+    </div>
+    <!-- Add more buttons for additional algorithms -->
+    <input type="range" id="slider" min="0" max="100" value="0">
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+<script>
+    const buttonContainer = document.getElementById('buttons');
+    const slider = document.getElementById('slider');
+
+    slider.addEventListener('input', () => {
+        const value = slider.value;
+        const translateX = -value * (buttonContainer.offsetWidth - document.getElementById('button-container').offsetWidth) / 100;
+        buttonContainer.style.transform = `translateX(${translateX}px)`;
+    });
+
+    function showAlgorithm(algorithmNumber) {
+        // 根据算法编号加载对应的数据
+        let title, description, code;
+        if (algorithmNumber === 1) {
+            title = "两数之和";
+            description = "给定目标整数数组nums和目标值target,找出和为目标值的两个整数，并返回数组下标";
+            code = `
+#include< stdio.h >
+#include< iostream >
+using namespace std;
+//给定目标整数数组nums和目标值target,找出和为目标值的两个整数，并返回数组下标
+int* twoSum(int* nums, int numsSize, int target, int* returnSize)
+{
+\t
+\tfor (int i = 0; i < numsSize; i++)
+\t{
+\t\tfor (int j = i + 1; j < numsSize; j++)
+\t\t{
+\t\t\tif (nums[i] + nums[j] == target)
+\t\t\t{
+\t\t\t\tint* temp = (int*)malloc(sizeof(int) * 2);
+\t\t\t\t*returnSize = 2;
+\t\t\t\tif (temp != NULL)
+\t\t\t\t{
+\t\t\t\t\ttemp[0] = i;
+\t\t\t\t\ttemp[1] = j;
+\t\t\t\t}
+\t\t\t\treturn temp;
+\t\t\t}
+\t\t}
+\t}
+\t*returnSize = 0;
+\treturn NULL;
+}
+int main()
+{
+\tint a = 0;
+\tint c = 0;
+\tint* d = 0;
+\tint* e = (int*)malloc(sizeof(int) * 2);
+\tprintf("请输入你想要建立的数组大小\\n");
+\tscanf_s("%d", &a);
+\tint* b = (int*)malloc(sizeof(int) * a);
+\tprintf("\\n接下来输入你的数组的值\\n");
+\tfor (int i = 0; i < a; i++)
+\t{
+\t\tprintf("请输入第%d个元素值\\n",i+1);
+\t\tscanf_s("%d", b+i);
+\t}
+\tprintf("恭喜数组创建完成！\\n");
+\tprintf("请输入一个数，我将返回数组中两个数和为此数的数值以及其数组的下标\\n");
+\tscanf_s("%d",&c);
+\te = twoSum(b,a,c,d);
+\tif (e != NULL)
+\t{
+\t\tfor (int i = 0; i < 2; i++)
+\t\t{
+\t\t\tprintf(" 第%d个数为%d", i + 1, b[e[i]]);
+\t\t}
+\t\tfor (int i = 0; i < 2; i++)
+\t\t{
+\t\t\tprintf(" 第%d个数下标为%d", i + 1, e[i]);
+\t\t}
+\t}
+\telse {
+\t\tprintf("数组中没有两个数和为%d的", c);
+\t}
+\treturn 0;
+}
+        `;
+        } else if (algorithmNumber === 2) {
+            title = "Algorithm 2";
+            description = "This is the description of Algorithm 2.";
+            code = `
+          function algorithm2() {
+            // Paste your code here
+          }
+        `;
+        }
+        // 更新页面内容和代码高亮
+        document.getElementById("algorithm-title").innerText = title;
+        document.getElementById("algorithm-description").innerText = description;
+        document.getElementById("code-block").innerHTML = `<code>${code}</code>`;
+        Prism.highlightAll();
+    }
+</script>
+</body>
+</html>

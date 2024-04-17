@@ -752,7 +752,7 @@
 														<div class="quotebox_wrap">
 															<i class="xcon-quote-left"></i>														</div>
 														<div class="definitions_wrap">
-															<p>“无所谓、没必要、不至于”</p>
+															<p>“无所谓、没必要、不至于，但真做不到，至少在我这岁数做不到”</p>
 														</div>
 														<div class="name_holder">
 															<p>匿名</p>
@@ -813,6 +813,18 @@
 															<i class="xcon-quote-left"></i>														</div>
 														<div class="definitions_wrap">
 															<p>“请别在互联网上养成自己的三观”</p>
+														</div>
+														<div class="name_holder">
+															<p>匿名</p>
+														</div>
+													</div>
+												</li>
+												<li class="item">
+													<div class="inner">
+														<div class="quotebox_wrap">
+															<i class="xcon-quote-left"></i>														</div>
+														<div class="definitions_wrap">
+															<p>“不瞒你说，昂贵的电脑到手的时候，小心翼翼的姿态，到后来时过境迁，竟懒的管了，只要没有大事，就让它该怎么样怎么样，但是偶尔想起，第一次见到它的时候的场景，我就想轻轻抚摸它”</p>
 														</div>
 														<div class="name_holder">
 															<p>匿名</p>
@@ -2429,13 +2441,45 @@
 														</svg>
 													</div>
 													<p>网页制作量巨大，很多图形画的很难，并且达不到效果，所以我放一张图，看下图</p>
-													<img src="img/about/a11.png" >
+													<img src="img/about/a11.png" ><br>
 													<p>这张图本质是在探索面积的求法，面积的值无非就是和长宽有关，所以无非就是在探索长宽的值是怎么求的</p><br>
 													<p>a和b是已知数，在坐标上的已知点，既然我们要把a到b分为n块，那么每一小块不就是(b-a)/2</p><br>
 													<p>这是什么，这是我们要求的宽，因为每一个矩形的宽都是一样的，但是问题来了，曲线意味着，我们的高每一块都不是一样的</p><br>
 													<p>求高也不难，不就是求出横坐标，代进函数不就是高了，但是你别傻乎乎就把(b-a)/2代进去就完事了</p><br>
 													<p>横坐标应该是以a为基础上加上第几块就乘上多少个(b-a)/2</p><br>
 													<p>当然了，既然是矩形，宽也就是左右两点的函数值都可以成为高，所以选左，选右都可以成为你的高</p><br>
+													<p style="color: red">$$ 梯形面积S={lim}_{n\to ∞}\sum ^{n}_{i=1} {\frac {b-a} {n}}f(a+\frac {b-a} {n}\cdot i)\leftrightarrow \int ^{b}_{a} {f(x)dx} $$</p><br>
+													<p>这个公式没有问题吧？就是每一块长乘宽求其面积再总和起来，然后就是等同于求积分限为a到b的定积分</p><br>
+													<p>在考研中重点考察的上下积分限为0到1</p><br>
+													<img src="img/about/a12.png"><br>
+													<p>还是看不懂？算了，记公式也行，就是两个转换公式罢了</p><br>
+													<p style="color: #01f362">$$ {lim}_{n\to ∞}\frac {1} {n}\sum ^{n}_{i=1} {f(\frac {i} {n})}\leftrightarrow \int ^{1}_{0} {f(x)dx} $$</p><br>
+													<p style="color: #01f362">$$ {lim}_{n\to ∞}\frac {1} {n}\sum ^{n}_{i=1} {f(\frac {i-1} {n})}\leftrightarrow \int ^{1}_{0} {f(x)dx} $$</p><br>
+													<p>我们来看一道例题：</p><br>
+													<hr>
+													<p style="color: #0a3d2e">$$ {求lim}_{n\to 0}n\cdot (\frac {1} {1+{n}^{2}}+\frac {1} {{2}^{2}+{n}^{2}}+...+\frac {1} {{n}^{2}+{n}^{2}}) $$</p><br>
+													<p>我们来刨析一下这道题，不是我匡你，刚学的东西，套公式罢了，没什么好说的，但是就怕公式都套不上就尴尬咯</p><br>
+													<p>我们看多项式，是求和的形式，我们写成通项公式，加上求和的符号</p><br>
+													<p>$$ n\cdot {lim}_{n\to ∞}(\frac {1} {1+{n}^{2}}+\frac {1} {{2}^{2}+{n}^{2}}+...+\frac {1} {{n}^{2}+{n}^{2}}) $$</p><br>
+													<p>写到这里以后继续凑公式，我们的公式里面有i，i是什么？不就是每一项的值吗，就是第一项i=1，第二项i=2，等等等</p><br>
+													<p>$$ n\cdot {lim}_{n\to ∞}\sum ^{n}_{i=1} {\frac {1} {{i}^{2}+{n}^{2}}} $$</p><br>
+													<p>真的不爽啊，lim前面应该是1/n啊，现在是n，你心里面是不是一万个怒气值？哈哈哈哈哈哈哈🤣🤣🤣🤣</p><br>
+													<p>没事，我们变成1/n，再把n的平方给进去不就行了？</p><br>
+													<p>$$ \frac {1} {n}\cdot {lim}_{n\to ∞}\sum ^{n}_{i=1} {\frac {{n}^{2}} {{i}^{2}+{n}^{2}}} $$</p><br>
+													<p>别说这一步你看不懂，不然我怒气值就要几百万了，好了，继续</p><br>
+													<p>怎么继续，观察我们的公式，写的是f(i/n)也就是i/n是自变量x，好好品一下这句话</p><br>
+													<p>$$ \frac {1} {n}\cdot {lim}_{n\to ∞}\sum ^{n}_{i=1} {\frac {\frac {{n}^{2}} {{n}^{2}}} {\frac {{i}^{2}} {{n}^{2}}+\frac {{n}^{2}} {{n}^{2}}}} $$</p><br>
+													<p>$$ \frac {1} {n}\cdot {lim}_{n\to ∞}\sum ^{n}_{i=1} {\frac {1} {\frac {{i}^{2}} {{n}^{2}}+1}} $$</p><br>
+													<p>$$ \frac {1} {n}\cdot {lim}_{n\to ∞}\sum ^{n}_{i=1} {\frac {1} {{x}^{2}+1}} $$</p><br>
+													<p>$$ \int ^{1}_{0} {\frac {1} {{x}^{2}+1}}dx $$</p><br>
+													<p>然后用那个被苹果砸了脑袋的人的公式（牛顿-莱布尼茨（这是另一个人，不是牛顿））</p><br>
+													<p>$$ arctanx{|}^{1}_{0} $$</p><br>
+													<p>$$ \frac {π} {4} $$</p><br>
+													<hr>
+													<p></p><br>
+													<p></p><br>
+
+
 												</div>
 
 												<div class="arlo_tm_popup_share_wrap">

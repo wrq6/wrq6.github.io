@@ -3920,6 +3920,60 @@ int algor1(int N)
 }//因此空间复杂度为⬯(N)
 </code>
 </pre>
+<pre>
+    <span style="font-size: 50px;color: red">链表例题</span>
+     问题如下：我们实现图书的管理员手上有一张链表图书表，其中int为图书编号，现在我们需要倒序输出图书的编号
+    <code>
+#include< stdio.h >
+#include< iostream >
+using namespace std;
+struct book
+{
+	int head;
+	book* prev;
+	book* next;
+};
+int main()
+{
+	int a = 0;
+	cout << "请输入你想要添加书本的数量" << endl;
+	cin >> a;
+	cout << sizeof(book) << endl;
+	book* b = (book*)malloc(sizeof(book));
+
+	book* p = b;
+	for (int i = 0; i < a; i++)
+	{
+		int j = 0;
+		cout << "请输入第"<<i+1<<"本书的编号" << endl;
+		cin >> j;
+		b->head = j;
+		//book* temp = b;
+		b->next = (book*)malloc(sizeof(book));
+		b->next->prev = b;
+		b = b->next;
+		//b->prev = temp;
+	}
+	b = b->prev;
+	cout << "书本倒序的编号为：" << endl;
+	for (int i = 0;i < a;i++)
+	{
+
+			cout << b->head << endl;
+			b = b->prev;
+
+	}
+
+	return 0;
+}
+        我们具体来分析一下思路，结构体定义，没话可说吧？我一开始只定义了后续节点的指针，导致我倒序输出，没办法，当然硬实现还是可以的，反正耍赖谁都会
+        我是那种理论学的太多了，实践就傻眼了，结构体初始化，我竟然还是数组的那种思想
+        就是我以为一开始就初始化好就行了，但是细看就是内存谁知道在哪里，怎么初始化？我这段话看起来可能有点语无伦次
+        事实上也是如此，好了，就是说链表其实是动态的主动的给分配内存的，b->next = (book*)malloc(sizeof(book));的作用就是分配内存
+
+
+    </code>
+</pre>
 
 <button id="downloadBtn">下载 本页面PDF</button>
 
