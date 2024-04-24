@@ -63,6 +63,22 @@
             width: 100%;
             margin-top: 10px;
         }
+        #solution-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 800px;
+        }
+        #solution-title {
+            font-size: 20px;
+            margin-top: 0;
+        }
+        #solution-content {
+            font-size: 16px;
+            color: #666;
+        }
     </style>
 </head>
 <body>
@@ -78,10 +94,14 @@
       </code>
     </pre>
 </div>
+<div id="solution-container">
+    <h2 id="solution-title">解决思路和难点</h2>
+    <div id="solution-content">这里是描述解决思路的</div>
+</div>
 <div id="button-container">
     <div id="buttons">
         <button class="button" onclick="showAlgorithm(1)">两数之和</button>
-        <button class="button" onclick="showAlgorithm(2)">Algorithm 2</button>
+        <button class="button" onclick="showAlgorithm(2)">两数相加</button>
         <button class="button" onclick="showAlgorithm(2)">Algorithm 3</button>
         <button class="button" onclick="showAlgorithm(2)">Algorithm 4</button>
         <button class="button" onclick="showAlgorithm(2)">Algorithm 5</button>
@@ -99,19 +119,21 @@
 <script>
     const buttonContainer = document.getElementById('buttons');
     const slider = document.getElementById('slider');
-
     slider.addEventListener('input', () => {
         const value = slider.value;
-        const translateX = -value * (buttonContainer.offsetWidth - document.getElementById('button-container').offsetWidth) / 100;
+        const translateX = -value * (buttonContainer.offsetWidth - document.getElementById('button-container').offsetWidth) / 0.1;
         buttonContainer.style.transform = `translateX(${translateX}px)`;
+
     });
 
     function showAlgorithm(algorithmNumber) {
         // 根据算法编号加载对应的数据
-        let title, description, code;
+        let title, description, code,solutioncontent,src;
         if (algorithmNumber === 1) {
             title = "两数之和";
+            solutioncontent = "没有难度";
             description = "给定目标整数数组nums和目标值target,找出和为目标值的两个整数，并返回数组下标";
+            src='math/img/hero/2.jpg';
             code = `
 #include< stdio.h >
 #include< iostream >
@@ -177,19 +199,148 @@ int main()
 }
         `;
         } else if (algorithmNumber === 2) {
-            title = "Algorithm 2";
-            description = "This is the description of Algorithm 2.";
+            title = "两数相加";
+            description = "给定两个非空链表，表示两个非负的整数。它们每位数字都是按照逆序的方式存储，并且每个节点只能存储一位数字，将两个数相加，以相同形式返回一个表示和结果的链表";
+            solutioncontent = "这道题给我难点在于，我创建两个存储输入整数数字的链表的时候，\n第一个问题就是怎么样把当前指针指向下一个的同时，让下一个的前驱指针指向当前指针，\n这并不是一件很好笑的事情man，我思考了很久，我总觉得有点驳论，\n因为我一种感觉就是，你让你的儿子生出你来一样。\n我是真的蠢啊，直接先给后继指针p->next 分配空间，\np->next 就是后继指针，然后让后继指针的前驱指向p，也就是p->next->prev = p，\n然后再把当前指针指向后继p = p->next。就这么简单\n第二个问题就是给链表的每一个节点赋值的时候，\n你会发现就是，总会最后一个指针多分配，也就是当你存完了所有数\n然后它最后还会再开辟一个内存，最后一个存有数字的节点的下一个是有内存的，\n不是NULL，但是其中是没有存数字的\n会造成你打印的时候总会打印出未初始化的东西\n然后我的解决办法就是，在给链表赋值完成以后\np->prev->next = NULL;\n懂我意思吧？就是最后一个节点不是多余了嘛，我让最后一个的前一个节点的指向变为NULL，\n让最后一个节点不被指向，但是记得释放内存，我这里没有free(指针)";
             code = `
-          function algorithm2() {
-            // Paste your code here
-          }
+#include< stdio.h >
+#include< iostream >
+using namespace std;
+struct ListNode
+{
+\tint a=0;
+\tListNode* next = nullptr;
+\tListNode* prev = nullptr;
+};
+//给定两个非空链表，表示两个非负的整数。它们每位数字都是按照逆序的方式存储，并且每个节点只能存储一位数字
+struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2)
+{
+\tint a = 0;
+\tint b = 0;
+\tint c = 0;
+\tint d = 0;
+\tint e = 0;
+\tint temp = 1;
+\tint temp1 = 1;
+\twhile (l1!=NULL)
+\t{
+\t\twhile(c)
+\t\t{
+\t\t\ttemp *= 10;
+\t\t\tc--;
+\t\t}
+\t\tif(l1->a!=NULL)
+\t\ta += l1->a * temp;
+\t\tl1 = l1->next;
+\t\tc++;
+\t}
+\twhile (l2!=NULL)
+\t{
+\t\twhile (d)
+\t\t{
+\t\t\ttemp1 *= 10;
+\t\t\td--;
+\t\t}
+\t\tif (l2->a != NULL)
+\t\tb += l2->a * temp1;
+\t\tl2 = l2->next;
+\t\td++;
+\t}
+\te = a + b;
+\tListNode* p = (ListNode*)malloc(sizeof(ListNode));
+\tListNode* q = p;
+\twhile (e)
+\t{
+\t\tp->a = e % 10;
+\t\tp->next = (ListNode*)malloc(sizeof(ListNode));
+\t\tp->next->prev = p;
+\t\tp = p->next;
+\t\te = e / 10;
+\t}
+\tp->prev->next = NULL;
+\treturn q;
+}
+int main()
+{
+\tint a = 0;
+\tint b = 0;
+\tListNode* l1;
+\tListNode* l2;
+\tl1 = (ListNode*)malloc(sizeof(ListNode));
+\tprintf("请输入你的第一个整数数字(只允许输入正整数)\\n");
+\tscanf_s("%d",&a);
+\tListNode* p = l1;
+\twhile (a)
+\t{
+\t\tl1->a = a % 10;
+\t\t\tl1->next = (ListNode*)malloc(sizeof(ListNode));
+\t\t\tl1->next->prev = l1;
+\t\t\tl1 = l1->next; // 更新当前节点指针
+\t\ta = a / 10;
+\t}
+\tl1->prev->next = NULL;
+\t//l1 = nullptr;
+\t//while (p!= nullptr)
+\t//{
+\t//\t
+\t//\t\tprintf("%d", p->a);
+\t//\t\tp = p->next;
+\t//\t
+\t//\t
+\t//}
+\tprintf("请输入你的第二个整数数字(只允许输入正整数)\\n");
+\tscanf_s("%d", &b);
+\tl2 = (ListNode*)malloc(sizeof(ListNode));
+\tListNode* q = l2;
+\twhile (b)
+\t{
+\t\tl2->a = b % 10;
+\t\t\tl2->next = (ListNode*)malloc(sizeof(ListNode));
+\t\t\tl2->next->prev = l2;
+\t\t\tl2 = l2->next; // 更新当前节点指针
+\t\tb = b / 10;
+\t\t
+\t}
+\tl2->prev->next = NULL;
+\tListNode* answer = addTwoNumbers(p,q);
+\twhile (answer)
+\t{
+\t\tprintf("%d",answer->a);
+\t\tanswer = answer->next;
+\t}
+\treturn 0;
+}
+
         `;
+
+        }else if(algorithmNumber ===3){
+            title = "";
+            description="";
+            solutioncontent = "";
+            code = '';
+
+        }else if(algorithmNumber ===4){
+            title = "";
+            description = "";
+            solutioncontent = "";
+            code = '';
         }
         // 更新页面内容和代码高亮
         document.getElementById("algorithm-title").innerText = title;
         document.getElementById("algorithm-description").innerText = description;
         document.getElementById("code-block").innerHTML = `<code>${code}</code>`;
         Prism.highlightAll();
+        document.getElementById("solution-content").innerText = solutioncontent;
+        const textContainer = document.getElementById("solution-content");
+        // 插入图片
+        const img = document.createElement('img');
+        img.src = src; // 图片的 URL
+        img.alt = ''; // 图片的替代文本
+        img.style.maxWidth = '100%'; // 设置图片的最大宽度为100%
+        img.style.height = 'auto'; // 让图片的高度自适应
+        textContainer.appendChild(img); // 添加图片到文本容器的末尾
+
+
     }
 </script>
 </body>
