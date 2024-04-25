@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高等数学错题本</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            color: #91a6ff;
+        }
+        h2{
+            color: green;
+        }
+        h3{
+            color: red;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .answer {
+            display: none;
+        }
+
+        .card:hover .answer {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<h1>高等数学错题</h1>
+
+<!-- 第一道题目 -->
+<div class="card">
+    <div class="question">
+        <h2>题目1</h2>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mstyle mathcolor="#792500"><mo>设</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><munder><mo data-mjx-texclass="OP" movablelimits="true">lim</mo><mrow><mi>n</mi><mo accent="false" stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow></munder><mfrac><mrow><mn>2</mn><msup><mi>x</mi><mrow><mi>n</mi></mrow></msup><mo>−</mo><mn>3</mn><msup><mi>x</mi><mrow><mo>−</mo><mi>n</mi></mrow></msup></mrow><mrow><msup><mi>x</mi><mrow><mi>n</mi></mrow></msup><mo>+</mo><msup><mi>x</mi><mrow><mo>−</mo><mi>n</mi></mrow></msup></mrow></mfrac><mi>sin</mi><mo data-mjx-texclass="NONE">⁡</mo><mfrac><mn>1</mn><mi>x</mi></mfrac><mo>则</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>有</mo></mstyle></mrow></math>  </p>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mo stretchy="false">(</mo><mi>A</mi><mo stretchy="false">)</mo><mo>两个第一类间断点</mo></math></p>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">)</mo><mo>三个第一类间断点</mo></math></p>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mo stretchy="false">(</mo><mi>C</mi><mo stretchy="false">)</mo><mo>两个第一类间断点和一个第二类间断点</mo></math></p>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo><mo>一个第一类间断点和一个第二类间断点</mo></math></p>
+    </div>
+
+    <div class="error">
+        <h3>出错原因：</h3>
+        <p>不会，第一步就开始找可疑点(无定义点)，殊不知极限对n求，结果没有n,极限都没有求就开始找点了，你是真的牛逼</p>
+    </div>
+
+    <div class="answer">
+        <h3>详细答案：</h3>
+        <img src="">
+    </div>
+</div>
+
+<!-- 第二道题目 -->
+<div class="card">
+    <div class="question">
+        <h2>题目2</h2>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mo>求函数</mo><mi>y</mi><mo>=</mo><msub><mi>ln</mi><mrow></mrow></msub><mo data-mjx-texclass="NONE">⁡</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>+</mo><msqrt><msup><mi>x</mi><mrow><mn>2</mn></mrow></msup><mo>−</mo><mn>1</mn></msqrt><mo stretchy="false">)</mo></mrow><mo stretchy="false">(</mo><mi>x</mi><mo>≥</mo><mn>1</mn><mo stretchy="false">)</mo><mo>的反函数</mo></math></p>
+
+    </div>
+
+    <div class="error">
+        <h3>出错原因：</h3>
+        <p>只会左右同时换个以e为底的步骤然后懵了，根号不知道怎么去</p>
+    </div>
+
+    <div class="answer">
+        <h3>详细答案：</h3>
+        <p></p>
+    </div>
+</div>
+<!-- 第三道题目 -->
+<div class="card">
+    <div class="question">
+        <h2>题目3</h2>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mstyle mathcolor="#792500"><mo>求极限</mo><munder><mo data-mjx-texclass="OP" movablelimits="true">lim</mo><mrow><mi>x</mi><mo accent="false" stretchy="false">→</mo><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></munder><mo stretchy="false">(</mo><msqrt><mi>x</mi><mo>+</mo><msqrt><mi>x</mi><mo>+</mo><msqrt><mi>x</mi></msqrt></msqrt></msqrt><mo>−</mo><msqrt><mi>x</mi><mrow></mrow></msqrt><mo stretchy="false">)</mo></mstyle></mrow></math></p>
+    </div>
+
+    <div class="error">
+        <h3>出错原因：</h3>
+        <p>看到这道题第一步竟然不是想有理化，而是自以为是的提出根号x，还以为这样绝了</p>
+    </div>
+
+    <div class="answer">
+        <h3>详细答案：</h3>
+        <p></p>
+    </div>
+</div>
+<!-- 第四道题目 -->
+<div class="card">
+    <div class="question">
+        <h2>题目4</h2>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mstyle mathcolor="#792500"><mo>设</mo><mi>α</mi><mo>=</mo><msqrt><mi>x</mi><mi>sin</mi><mo data-mjx-texclass="NONE">⁡</mo><msqrt><mi>x</mi></msqrt></msqrt><mo>,</mo><mi>β</mi><mo>=</mo><msqrt><mi>x</mi><mo>+</mo><msqrt><mi>x</mi></msqrt></msqrt><mo>,</mo><mi>γ</mi><mo>=</mo><msqrt><mn>1</mn><mo>+</mo><msqrt><mn>1</mn><mo>+</mo><msqrt><mi>x</mi></msqrt></msqrt></msqrt><mo>−</mo><msqrt><mn>2</mn></msqrt><mo>,</mo><mo>当</mo><mi>x</mi><mo stretchy="false">⟶</mo><msup><mn>0</mn><mrow><mo>+</mo></mrow></msup><mo>时，这三个无穷小量从低阶到高阶的排序是</mo></mstyle></mrow></math></p>
+        <p>A.<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mstyle mathcolor="#792500"><mi>α</mi><mo>，</mo><mi>β</mi><mo>，</mo><mi>γ</mi></mstyle></mrow></math></p>
+        <p>B.<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mstyle mathcolor="#792500"><mi>γ</mi><mo>，</mo><mi>β</mi><mo>，</mo><mi>α</mi></mstyle></mrow></math></p>
+        <p>C.<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mstyle mathcolor="#792500"><mi>β</mi><mo>，</mo><mi>α</mi><mo>，</mo><mi>γ</mi></mstyle></mrow></math></p>
+        <p>D.<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mstyle mathcolor="#792500"><mi>β</mi><mo>，</mo><mi>γ</mi><mo>，</mo><mi>α</mi></mstyle></mrow></math></p>
+    </div>
+
+    <div class="error">
+        <h3>出错原因：</h3>
+        <p>太久了，忘了</p>
+    </div>
+
+    <div class="answer">
+        <h3>详细答案：</h3>
+        <p></p>
+    </div>
+</div>
+<!-- 第五道题目 -->
+<div class="card">
+    <div class="question">
+        <h2>题目5</h2>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mstyle mathcolor="#792500"><mo>当</mo><mi>x</mi><mo accent="false" stretchy="false">→</mo><msup><mn>0</mn><mrow><mo>+</mo></mrow></msup><mo>，下列无穷小量中比其他三个都高阶的是</mo></mstyle></mrow></math></p>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>A</mi><mo>.</mo><mi>x</mi><msub><mi>ln</mi><mrow></mrow></msub><mo data-mjx-texclass="NONE">⁡</mo><mrow><mi>x</mi></mrow></math></p>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>B</mi><mo>.</mo><msup><mi>e</mi><mrow><mi>cos</mi><mo data-mjx-texclass="NONE">⁡</mo><mi>x</mi></mrow></msup><mo>−</mo><mi>e</mi></math></p>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>C</mi><mo>.</mo><mroot><mrow><mi>cos</mi><mo data-mjx-texclass="NONE">⁡</mo><mi>x</mi></mrow><mn>3</mn></mroot><mo>−</mo><mn>1</mn></math></p>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>D</mi><mo>.</mo><msub><mi>ln</mi><mrow></mrow></msub><mo data-mjx-texclass="NONE">⁡</mo><mrow><mo stretchy="false">(</mo><mi>tan</mi><mo data-mjx-texclass="NONE">⁡</mo><mi>x</mi><mo>−</mo><mi>sin</mi><mo data-mjx-texclass="NONE">⁡</mo><mi>x</mi><mo>+</mo><msup><mi>e</mi><mrow><msup><mi>x</mi><mrow><mn>4</mn></mrow></msup></mrow></msup><mo stretchy="false">)</mo></mrow></math></p>
+    </div>
+
+    <div class="error">
+        <h3>出错原因：</h3>
+        <p>忘了</p>
+    </div>
+
+    <div class="answer">
+        <h3>详细答案：</h3>
+        <p></p>
+    </div>
+</div>
+<!-- 第六道题目 -->
+<div class="card">
+    <div class="question">
+        <h2>题目6</h2>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mstyle mathcolor="#792500"><mo>试确定常数</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>的值，使得</mo><msub><mi>ln</mi><mrow></mrow></msub><mo data-mjx-texclass="NONE">⁡</mo><mrow><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><mo>−</mo><mfrac><mrow><mi>a</mi><mi>x</mi></mrow><mrow><mn>1</mn><mo>+</mo><mi>b</mi><mi>x</mi></mrow></mfrac><mo>=</mo><mi>c</mi><mi>x</mi><mo>−</mo><msup><mi>x</mi><mrow><mn>2</mn></mrow></msup><mo>+</mo><mo>∘</mo><mo stretchy="false">(</mo><msup><mi>x</mi><mrow><mn>3</mn></mrow></msup><mo stretchy="false">)</mo><mo>,</mo><mo>其中</mo><mo>∘</mo><mo stretchy="false">(</mo><msup><mi>x</mi><mrow><mn>3</mn></mrow></msup><mo stretchy="false">)</mo><mo>是当</mo><mi>x</mi><mo accent="false" stretchy="false">→</mo><mn>0</mn><mo>时比</mo><msup><mi>x</mi><mrow><mn>3</mn></mrow></msup><mo>高阶的无穷小量。</mo></mstyle></mrow></math></p>
+     </div>
+
+    <div class="error">
+        <h3>出错原因：</h3>
+        <p>忘了</p>
+    </div>
+
+    <div class="answer">
+        <h3>详细答案：</h3>
+        <p></p>
+    </div>
+</div>
+</body>
+</html>
