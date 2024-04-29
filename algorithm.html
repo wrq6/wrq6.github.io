@@ -102,7 +102,7 @@
     <div id="buttons">
         <button class="button" onclick="showAlgorithm(1)">两数之和</button>
         <button class="button" onclick="showAlgorithm(2)">两数相加</button>
-        <button class="button" onclick="showAlgorithm(2)">Algorithm 3</button>
+        <button class="button" onclick="showAlgorithm(3)">无重复字符的最长子串</button>
         <button class="button" onclick="showAlgorithm(2)">Algorithm 4</button>
         <button class="button" onclick="showAlgorithm(2)">Algorithm 5</button>
         <button class="button" onclick="showAlgorithm(2)">Algorithm 6</button>
@@ -314,10 +314,44 @@ int main()
         `;
 
         }else if(algorithmNumber ===3){
-            title = "";
-            description="";
-            solutioncontent = "";
-            code = '';
+            title = "无重复字符的最长子串";
+            description="给定一个字符串，找出其中不含重复字符的最长子串的长度";
+            solutioncontent = "这道题的难点在于你怎么样判断子串不重复，以及重复了怎么办。我没写出来\n我看到了网上的一种办法，确实挺牛的\n运用ASCII码只有128数字位，来判断有无重复，0判等没有就赋值为1\n有的话也就是判等为1的时候，将左指针右移\n我一开始会想这是不是会造成有些最大串的丢失\n但是仔细一看不会，因为求的是字串，重复就丢掉前一个\n不重复就加入，不断记录最长的子串长度" +
+                "\n挺牛的";
+            code =
+                '#include< stdio.h >\n' +
+                '#include< iostream >\n' +
+                'using namespace std;\n' +
+                '//给定一个字符串 s ，请你找出其中不含有重复字符的最长子串的长度。\n' +
+                'int lengthOfLongestSubstring(char* s) {\n' +
+                '    int sLen = strlen(s); //获取字符串长度\n' +
+                '    int left = 0, right = 0; //左右指针\n' +
+                '    int res = 0, cnt = 0; //结果和计数\n' +
+                '    int tmp[128] = { 0 }; //以128位数组记录子串中的字符是否已经出现\n' +
+                '\n' +
+                '    while (right < sLen) {           //循环条件为右指针小于字符串长度\n' +
+                '        if (0 == tmp[s[right]]) {  //当右指针指向的字符没出现在子串中时\n' +
+                '            tmp[s[right]] = 1;       //使用tmp数组记录右指针指向的字符在ascii码中对应的位置（这一点太牛逼了，大佬牛逼）\n' +
+                '            right++;                     //右指针右移\n' +
+                '            cnt++;                       //计数加1\n' +
+                '            res = res > cnt ? res : cnt;   //记录结果\n' +
+                '        }\n' +
+                '        else {                            //当右指针指向的字符出现在子串中时\n' +
+                '            tmp[s[left]] = 0;     //左指针指向字符的ascii码不再出现在tmp数组中\n' +
+                '            left++;                    //左指针右移\n' +
+                '            cnt--;                      //计数减1\n' +
+                '        }\n' +
+                '    }\n' +
+                '    return res;          //返回最终无重复字串长度\n' +
+                '}\n' +
+                'int main() {\n' +
+                '\tprintf("请输入你的一个字符串：\\n");\n' +
+                '\tchar* s = (char*)malloc(sizeof(char) * 5 * 10 * 10 * 10 * 10);//分配大小题目规定\n' +
+                '\tscanf_s("%s", s, strlen(s));//必须加上判读的变量\n' +
+                '\tint a = lengthOfLongestSubstring(s);\n' +
+                '\tprintf("不含有重复字符的 最长 子串的长度为%d",a);\n' +
+                '\treturn 0;\n' +
+                '}';
 
         }else if(algorithmNumber ===4){
             title = "";
