@@ -103,7 +103,7 @@
         <button class="button" onclick="showAlgorithm(1)">两数之和</button>
         <button class="button" onclick="showAlgorithm(2)">两数相加</button>
         <button class="button" onclick="showAlgorithm(3)">无重复字符的最长子串</button>
-        <button class="button" onclick="showAlgorithm(2)">Algorithm 4</button>
+        <button class="button" onclick="showAlgorithm(4)">寻找两个正序数组的中位数</button>
         <button class="button" onclick="showAlgorithm(2)">Algorithm 5</button>
         <button class="button" onclick="showAlgorithm(2)">Algorithm 6</button>
         <button class="button" onclick="showAlgorithm(2)">Algorithm 7</button>
@@ -319,41 +319,123 @@ int main()
             solutioncontent = "这道题的难点在于你怎么样判断子串不重复，以及重复了怎么办。我没写出来\n我看到了网上的一种办法，确实挺牛的\n运用ASCII码只有128数字位，来判断有无重复，0判等没有就赋值为1\n有的话也就是判等为1的时候，将左指针右移\n我一开始会想这是不是会造成有些最大串的丢失\n但是仔细一看不会，因为求的是字串，重复就丢掉前一个\n不重复就加入，不断记录最长的子串长度" +
                 "\n挺牛的";
             code =
+'#include< stdio.h >\n' +
+'#include< iostream >\n' +
+'using namespace std;\n' +
+'//给定一个字符串 s ，请你找出其中不含有重复字符的最长子串的长度。\n' +
+'int lengthOfLongestSubstring(char* s) {\n' +
+'    int sLen = strlen(s); //获取字符串长度\n' +
+'    int left = 0, right = 0; //左右指针\n' +
+'    int res = 0, cnt = 0; //结果和计数\n' +
+'    int tmp[128] = { 0 }; //以128位数组记录子串中的字符是否已经出现\n' +
+'\n' +
+'    while (right < sLen) {           //循环条件为右指针小于字符串长度\n' +
+'        if (0 == tmp[s[right]]) {  //当右指针指向的字符没出现在子串中时\n' +
+'            tmp[s[right]] = 1;       //使用tmp数组记录右指针指向的字符在ascii码中对应的位置（这一点太牛逼了，大佬牛逼）\n' +
+'            right++;                     //右指针右移\n' +
+'            cnt++;                       //计数加1\n' +
+'            res = res > cnt ? res : cnt;   //记录结果\n' +
+'        }\n' +
+'        else {                            //当右指针指向的字符出现在子串中时\n' +
+'            tmp[s[left]] = 0;     //左指针指向字符的ascii码不再出现在tmp数组中\n' +
+'            left++;                    //左指针右移\n' +
+'            cnt--;                      //计数减1\n' +
+'        }\n' +
+'    }\n' +
+'    return res;          //返回最终无重复字串长度\n' +
+'}\n' +
+'int main() {\n' +
+'\tprintf("请输入你的一个字符串：\\n");\n' +
+'\tchar* s = (char*)malloc(sizeof(char) * 5 * 10 * 10 * 10 * 10);//分配大小题目规定\n' +
+'\tscanf_s("%s", s, strlen(s));//必须加上判读的变量\n' +
+'\tint a = lengthOfLongestSubstring(s);\n' +
+'\tprintf("不含有重复字符的 最长 子串的长度为%d",a);\n' +
+'\treturn 0;\n' +
+'}';
+
+        }else if(algorithmNumber ===4){
+            title = "寻找两个正序数组的中位数";
+            description = "给定两个大小m和n的正序(从小到大)数组nums1和nums2，找出并返回这两个正序数组的中位数";
+            solutioncontent = "这道题目难点在于如何将两个数组合并成一个从小到大的数组\n说实话，认真一点就可以，不断的debug，用vs的打断点来试，\n我的思路是这样的，以第一个数组的数为基准判断出第二个数组中比它小的数依次放入，\n如果没有就将这个数放入，\n通过设置第二个for循环的索引来避免重复放入比第一个数组小的数，\n如何中位数的计算，就是如果是奇数个就是一半的那个数，\n如果是偶数个数就是将中间的两个数的和除2.0，这样保证有余数。";
+            code =
                 '#include< stdio.h >\n' +
                 '#include< iostream >\n' +
                 'using namespace std;\n' +
-                '//给定一个字符串 s ，请你找出其中不含有重复字符的最长子串的长度。\n' +
-                'int lengthOfLongestSubstring(char* s) {\n' +
-                '    int sLen = strlen(s); //获取字符串长度\n' +
-                '    int left = 0, right = 0; //左右指针\n' +
-                '    int res = 0, cnt = 0; //结果和计数\n' +
-                '    int tmp[128] = { 0 }; //以128位数组记录子串中的字符是否已经出现\n' +
-                '\n' +
-                '    while (right < sLen) {           //循环条件为右指针小于字符串长度\n' +
-                '        if (0 == tmp[s[right]]) {  //当右指针指向的字符没出现在子串中时\n' +
-                '            tmp[s[right]] = 1;       //使用tmp数组记录右指针指向的字符在ascii码中对应的位置（这一点太牛逼了，大佬牛逼）\n' +
-                '            right++;                     //右指针右移\n' +
-                '            cnt++;                       //计数加1\n' +
-                '            res = res > cnt ? res : cnt;   //记录结果\n' +
-                '        }\n' +
-                '        else {                            //当右指针指向的字符出现在子串中时\n' +
-                '            tmp[s[left]] = 0;     //左指针指向字符的ascii码不再出现在tmp数组中\n' +
-                '            left++;                    //左指针右移\n' +
-                '            cnt--;                      //计数减1\n' +
-                '        }\n' +
-                '    }\n' +
-                '    return res;          //返回最终无重复字串长度\n' +
+                '//给定两个大小分别为m和n的正序(从小到大)数组nums1和nums2，找出并返回正序数组的中位数\n' +
+                'double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size)\n' +
+                '{\n' +
+                '\tint* temp = (int*)malloc(sizeof(int) * (nums1Size + nums2Size));\n' +
+                '\t\tint a = 0;\n' +
+                '\t\tint b = 0;\n' +
+                '\t\tfor (int i = 0; i < nums1Size; i++)\n' +
+                '\t\t{\n' +
+                '\t\t\tfor (int j = b; j < nums2Size; j++)\n' +
+                '\t\t\t{\n' +
+                '\t\t\t\tif (nums1[i] >= nums2[j])\n' +
+                '\t\t\t\t{\n' +
+                '\t\t\t\t\ttemp[a] = nums2[j];\n' +
+                '\t\t\t\t\tb++;\n' +
+                '\t\t\t\t\ta++;\n' +
+                '\t\t\t\t}\n' +
+                '\t\t\t}\n' +
+                '\t\t\ttemp[a] = nums1[i];\n' +
+                '\t\t\ta++;\n' +
+                '\t\t}\n' +
+                '\t\twhile (b < nums2Size)\n' +
+                '\t\t{\n' +
+                '\t\t\ttemp[a] = nums2[b];\n' +
+                '\t\t\tb++;\n' +
+                '\t\t\ta++;\n' +
+                '\t\t}\n' +
+                '\tdouble c = 0;\n' +
+                '\tif ((nums1Size + nums2Size) % 2 == 0)\n' +
+                '\t{\n' +
+                '\t\tc = (temp[(nums1Size + nums2Size) / 2] + temp[(nums1Size + nums2Size) / 2 - 1]) / 2.0;\n' +
+                '\t}\n' +
+                '\telse {\n' +
+                '\t\tc = temp[(nums1Size + nums2Size) / 2];\n' +
+                '\t}\n' +
+                '\treturn c ;\n' +
                 '}\n' +
                 'int main() {\n' +
-                '\tprintf("请输入你的一个字符串：\\n");\n' +
-                '\tchar* s = (char*)malloc(sizeof(char) * 5 * 10 * 10 * 10 * 10);//分配大小题目规定\n' +
-                '\tscanf_s("%s", s, strlen(s));//必须加上判读的变量\n' +
-                '\tint a = lengthOfLongestSubstring(s);\n' +
-                '\tprintf("不含有重复字符的 最长 子串的长度为%d",a);\n' +
+                '\tint a = 0, b = 0;\n' +
+                '\tint* nums1;\n' +
+                '\tint* nums2;\n' +
+                '\t\n' +
+                '\tnums2 = (int*)malloc(sizeof(int));\n' +
+                '\tprintf("\\n请输入你想输入第一个数组的大小\\n");\n' +
+                '\tscanf_s("%d",&a);\n' +
+                '\tnums1 = (int*)malloc(sizeof(int)*a);\n' +
+                '\tprintf("\\n输入第一个数组的数据，注意是从小到大输入\\n");\n' +
+                '\tfor (int i = 0; i < a; i++)\n' +
+                '\t{\n' +
+                '\t\tscanf_s("%d",nums1+i);\n' +
+                '\t}\n' +
+                '\tprintf("\\n请输入你想输入第二个数组的大小\\n");\n' +
+                '\tscanf_s("%d", &b);\n' +
+                '\tnums2 = (int*)malloc(sizeof(int) * b);\n' +
+                '\tprintf("\\n输入第二个数组的数据，注意是从小到大输入\\n");\n' +
+                '\tfor (int i = 0; i < b; i++)\n' +
+                '\t{\n' +
+                '\t\tscanf_s("%d", nums2+i);\n' +
+                '\t}\n' +
+                '\tprintf("\\n第一个数组的数据如下\\n");\n' +
+                '\tfor (int i = 0; i < a; i++)\n' +
+                '\t{\n' +
+                '\t\tprintf("%d",nums1[i]);\n' +
+                '\t}\n' +
+                '\tprintf("\\n第二个数组的数据如下\\n");\n' +
+                '\tfor (int i = 0; i < b; i++)\n' +
+                '\t{\n' +
+                '\t\tprintf("%d", nums2[i]);\n' +
+                '\t}\n' +
+                '\tdouble c = 0;\n' +
+                '\tc = findMedianSortedArrays(nums1, a, nums2, b);\n' +
+                '\tprintf("\\n两个正序数组的中位数为：%f", c);\n' +
                 '\treturn 0;\n' +
                 '}';
-
-        }else if(algorithmNumber ===4){
+        }else if(algorithmNumber ===5)
+        {
             title = "";
             description = "";
             solutioncontent = "";
