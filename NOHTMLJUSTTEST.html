@@ -3,101 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MathJax Example</title>
+    <title>不定积分题目展示</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
+            background-color: #edf7ed; /* 淡绿色背景 */
             padding: 20px;
-            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .problem {
+            margin-bottom: 20px;
         }
 
         h1 {
+            color: #007bff; /* 显眼的蓝色标题 */
             text-align: center;
-            color: #91a6ff;
-        }
-        h2{
-            color: green;
-        }
-        h3{
-            color: red;
         }
 
-        .card {
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            padding: 20px;
+        h2 {
+            color: #333;
         }
 
-        .question {
-            margin-bottom: 20px;
+        p {
+            color: #666;
+            line-height: 1.6;
         }
 
-        .error, .answer {
-            display: none;
-        }
-
-        .card:hover .error, .card:hover .answer {
+        button.toggle-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
             display: block;
+            margin: 0 auto;
         }
+
+        button.toggle-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .answer,
+        .reflection {
+            margin-top: 10px;
+        }
+
+        .answer h3,
+        .reflection h3 {
+            color: #333;
+        }
+
+        .answer p,
+        .reflection p {
+            color: #666;
+        }
+
+        /* 响应式设计 - 适配手机和PC端不同分辨率 */
+        @media (max-width: 600px) {
+            .container {
+                max-width: 90%;
+            }
+        }
+
     </style>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-<h1>高等数学错题</h1>
 
-<!-- 第一道题目 -->
-<div class="card">
-    <div class="question">
-        <h2>题目1</h2>
-        <p>计算以下极限：</p>
-        <p>\[
-            \lim_{{x \to \infty}} \frac{{3x^2 - 2x + 1}}{{2x^2 + 5x - 3}}
-            \]</p>
-    </div>
-
-    <div class="error">
-        <h3>出错原因：</h3>
-        <p>错误在于没有考虑最高次项的系数对极限值的影响。</p>
-    </div>
-
-    <div class="answer">
-        <h3>详细答案：</h3>
-        <p>首先，我们观察到分子和分母的最高次项都是 \(x^2\)，因此我们可以将极限转化为 \(\frac{{3 - \frac{2}{x} + \frac{1}{x^2}}}{{2 + \frac{5}{x} - \frac{3}{x^2}}}\)。接下来，随着 \(x\) 趋向无穷大，分数中含有 \(\frac{1}{x}\) 和 \(\frac{1}{x^2}\) 的部分趋于零，因此最终的极限是 \(\frac{3}{2}\)。</p>
+<div class="container">
+    <div class="problem">
+        <h1>不定积分题目</h1>
+        <h2>计算不定积分</h2>
+        <p>求解 $\int (3x^2 + 2x + 1) \, dx$</p>
+        <button class="toggle-btn" onclick="toggleVisibility('answer')">显示答案</button>
+        <div class="answer" id="answer" style="display: none;">
+            <h3>答案：</h3>
+            <p>$\int (3x^2 + 2x + 1) \, dx = x^3 + x^2 + x + C$，其中 $C$ 为常数。</p>
+            <button class="toggle-btn" onclick="toggleVisibility('reflection')">显示心得</button>
+            <div class="reflection" id="reflection" style="display: none;">
+                <h3>心得：</h3>
+                <p>不定积分是求导的逆运算，对多项式进行不定积分时，每一项指数加一，然后除以新的指数。</p>
+            </div>
+        </div>
     </div>
 </div>
-
-<!-- 第二道题目 -->
-<div class="card">
-    <div class="question">
-        <h2>题目1</h2>
-        <p>计算以下极限：</p>
-        <p>\[
-            \lim_{{x \to \infty}} \frac{{3x^2 - 2x + 1}}{{2x^2 + 5x - 3}}
-            \]</p>
-    </div>
-
-    <div class="error">
-        <h3>出错原因：</h3>
-        <p>错误在于没有考虑最高次项的系数对极限值的影响。</p>
-    </div>
-
-    <div class="answer">
-        <h3>详细答案：</h3>
-        <p>\[
-            \begin{vmatrix}
-            a & b \\
-            c & d
-            \end{vmatrix}
-            \]
-        </p>
-        <p>首先，我们观察到分子和分母的最高次项都是 \(x^2\)，因此我们可以将极限转化为 \(\frac{{3 - \frac{2}{x} + \frac{1}{x^2}}}{{2 + \frac{5}{x} - \frac{3}{x^2}}}\)。接下来，随着 \(x\) 趋向无穷大，分数中含有 \(\frac{1}{x}\) 和 \(\frac{1}{x^2}\) 的部分趋于零，因此最终的极限是 \(\frac{3}{2}\)。</p>
+<div class="container">
+    <div class="problem">
+        <h1>不定积分题目</h1>
+        <h2>计算不定积分</h2>
+        <p>求解 $\int (3x^2 + 2x + 1) \, dx$</p>
+        <button class="toggle-btn" onclick="toggleVisibility('answer')">显示答案</button>
+        <div class="answer" id="answer" style="display: none;">
+            <h3>答案：</h3>
+            <p>$\int (3x^2 + 2x + 1) \, dx = x^3 + x^2 + x + C$，其中 $C$ 为常数。</p>
+            <button class="toggle-btn" onclick="toggleVisibility('reflection')">显示心得</button>
+            <div class="reflection" id="reflection" style="display: none;">
+                <h3>心得：</h3>
+                <p>不定积分是求导的逆运算，对多项式进行不定积分时，每一项指数加一，然后除以新的指数。</p>
+            </div>
+        </div>
     </div>
 </div>
-<!-- 可以继续添加更多的题目卡片 -->
+<script>
+    function toggleVisibility(elementId) {
+        var element = document.getElementById(elementId);
+        if (element.style.display === "none") {
+            element.style.display = "block";
+        } else {
+            element.style.display = "none";
+        }
+    }
+</script>
 
 </body>
 </html>
