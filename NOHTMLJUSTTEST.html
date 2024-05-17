@@ -3,127 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>不定积分题目展示</title>
+    <title>Mouse Light Effect</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #edf7ed; /* 淡绿色背景 */
-            padding: 20px;
+            margin: 0;
+            height: 100vh;
+            background-color: #2c3e50;
+            overflow: hidden;
+            cursor: none; /* 隐藏默认鼠标指针 */
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        .light {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 80%);
+            pointer-events: none;
+            transition: opacity 0.2s ease, transform 0.1s ease;
+            opacity: 0; /* 初始时光晕不可见 */
+            will-change: transform, opacity;
         }
-
-        .problem {
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            color: #007bff; /* 显眼的蓝色标题 */
-            text-align: center;
-        }
-
-        h2 {
-            color: #333;
-        }
-
-        p {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        button.toggle-btn {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 10px;
-            display: block;
-            margin: 0 auto;
-        }
-
-        button.toggle-btn:hover {
-            background-color: #0056b3;
-        }
-
-        .answer,
-        .reflection {
-            margin-top: 10px;
-        }
-
-        .answer h3,
-        .reflection h3 {
-            color: #333;
-        }
-
-        .answer p,
-        .reflection p {
-            color: #666;
-        }
-
-        /* 响应式设计 - 适配手机和PC端不同分辨率 */
-        @media (max-width: 600px) {
-            .container {
-                max-width: 90%;
-            }
-        }
-
     </style>
 </head>
 <body>
+<div class="light"></div>
 
-<div class="container">
-    <div class="problem">
-        <h1>不定积分题目</h1>
-        <h2>计算不定积分</h2>
-        <p>求解 $\int (3x^2 + 2x + 1) \, dx$</p>
-        <button class="toggle-btn" onclick="toggleVisibility('answer')">显示答案</button>
-        <div class="answer" id="answer" style="display: none;">
-            <h3>答案：</h3>
-            <p>$\int (3x^2 + 2x + 1) \, dx = x^3 + x^2 + x + C$，其中 $C$ 为常数。</p>
-            <button class="toggle-btn" onclick="toggleVisibility('reflection')">显示心得</button>
-            <div class="reflection" id="reflection" style="display: none;">
-                <h3>心得：</h3>
-                <p>不定积分是求导的逆运算，对多项式进行不定积分时，每一项指数加一，然后除以新的指数。</p>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="problem">
-        <h1>不定积分题目</h1>
-        <h2>计算不定积分</h2>
-        <p>求解 $\int (3x^2 + 2x + 1) \, dx$</p>
-        <button class="toggle-btn" onclick="toggleVisibility('answer')">显示答案</button>
-        <div class="answer" id="answer" style="display: none;">
-            <h3>答案：</h3>
-            <p>$\int (3x^2 + 2x + 1) \, dx = x^3 + x^2 + x + C$，其中 $C$ 为常数。</p>
-            <button class="toggle-btn" onclick="toggleVisibility('reflection')">显示心得</button>
-            <div class="reflection" id="reflection" style="display: none;">
-                <h3>心得：</h3>
-                <p>不定积分是求导的逆运算，对多项式进行不定积分时，每一项指数加一，然后除以新的指数。</p>
-            </div>
-        </div>
-    </div>
-</div>
 <script>
-    function toggleVisibility(elementId) {
-        var element = document.getElementById(elementId);
-        if (element.style.display === "none") {
-            element.style.display = "block";
-        } else {
-            element.style.display = "none";
-        }
-    }
-</script>
+    const light = document.querySelector('.light');
 
+    document.addEventListener('mousemove', (e) => {
+        light.style.opacity = 1;
+        light.style.transform = `translate(${e.clientX - 150}px, ${e.clientY - 150}px)`;
+    });
+
+    document.addEventListener('mouseleave', () => {
+        light.style.opacity = 0;
+    });
+
+    document.addEventListener('mouseenter', (e) => {
+        light.style.opacity = 1;
+        light.style.transform = `translate(${e.clientX - 150}px, ${e.clientY - 150}px)`;
+    });
+</script>
 </body>
 </html>
