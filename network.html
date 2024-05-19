@@ -1,127 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?bc6db7abfb9862a0d43ea41ed01d1f2c";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flashcards</title>
+    <title>Flashcards - 计算机网络</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom, #87CEEB, #1E90FF);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background-color: #f4f4f4;
         }
-        .flashcard-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        h1, h2 {
+            text-align: center;
         }
         .flashcard {
-            width: 1000px; /* 更大的宽度 */
-            height: 600px; /* 更大的高度 */
-            margin: 10px;
-            margin-bottom: 20px; /* 设置卡片之间的间隔 */
-            position: relative;
-            perspective: 1000px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 10px 0;
+            padding: 20px;
+            background-color: #f9f9f9;
             cursor: pointer;
+            transition: transform 0.3s;
         }
-        .card {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            transform-style: preserve-3d;
-            transition: transform 0.5s;
+        .flashcard:hover {
+            transform: scale(1.05);
         }
-        .card.flip {
-            transform: rotateY(180deg);
-        }
-        .side {
-            width: 100%;
-            height: 100%;
+        .flashcard .card {
             display: flex;
             flex-direction: column;
-            /*justify-content: center;*/
-            /*align-items: center;*/
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            backface-visibility: hidden;
-            padding: 20px;
-            position: absolute;
-            top: 0;
-            left: 0;
+            align-items: center;
+            text-align: center;
         }
-        .back {
-            transform: rotateY(180deg);
+        .flashcard .side {
+            padding: 10px;
         }
-        .content {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            display: flex; /* 添加此行 */
-            justify-content: center; /* 添加此行 */
-            align-items: center; /* 添加此行 */
-        }
-        .content_one {
-            list-style: none;
-            padding: 0;
-        }
-
-        .content_one li {
-            position: relative;
-            padding-left: 20px; /* 设置左边距 */
-        }
-
-        .content_one li:before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 10px; /* 设置树枝宽度 */
-            border-left: 2px solid #000; /* 设置树枝颜色和粗细 */
-            height: 100%;
-        }
-
-        .content_one li:last-child:before {
-            height: 50%; /* 最后一个元素的树枝高度 */
-        }
-
-        .content_one li:after {
-            content: "";
-            position: absolute;
-            left: -5px; /* 调整连接线位置 */
-            top: 50%;
-            width: 10px; /* 设置节点大小 */
-            height: 10px; /* 设置节点大小 */
-            border: 2px solid #000; /* 设置节点样式 */
-            border-radius: 50%; /* 让节点为圆形 */
-            background: #fff; /* 节点背景色与页面背景色相同 */
-            transform: translateY(-50%); /* 垂直居中节点 */
-        }
-        h2{
-            display: flex; /* 添加此行 */
-            justify-content: center; /* 添加此行 */
-            align-items: center; /* 添加此行 */
+        .flashcard .side.back {
+            display: none;
         }
     </style>
+    <script>
+        function flipCard(element) {
+            const front = element.querySelector('.side.front');
+            const back = element.querySelector('.side.back');
+            if (front.style.display === 'none') {
+                front.style.display = 'block';
+                back.style.display = 'none';
+            } else {
+                front.style.display = 'none';
+                back.style.display = 'block';
+            }
+        }
+    </script>
 </head>
 <body>
 
-<div class="flashcard-container">
+<div class="container">
     <h1>计算机网络记忆卡片</h1>
+
     <div class="flashcard" onclick="flipCard(this)">
         <div class="card">
             <div class="side front">
@@ -130,267 +74,126 @@
             </div>
             <div class="side back">
                 <h2>答案</h2>
-                <p class="content" style="color: #00feff">四层</p>
-                <p class="content_one">-网络接口层(物理层+数据链路层)</p>
-                <p class="content_one">-网际层(网络层)</p>
-                <p class="content_one">-传输层</p>
-                <p class="content_one">-应用层(会话层、表示层、应用层)</p>
+                <ul class="content_one">
+                    <li>网络接口层(物理层+数据链路层)</li>
+                    <li>网际层(网络层)</li>
+                    <li>传输层</li>
+                    <li>应用层(会话层、表示层、应用层)</li>
+                </ul>
             </div>
         </div>
     </div>
-    <br>
-    <br>
-    <div class="flashcard" onclick="flipCard(this)">
-        <div class="card">
-            <div class="side front">
-                <h2 style="">计算机网络的分类(分布范围)</h2>
-                <p class="content_one"></p>
-            </div>
-            <div class="side back">
-                <h2>答案</h2>
-                <p class="content_one">广域网(WAN)</p>
-                <p class="content_one">城域网(MAN)</p>
-                <p class="content_one">局域网(LAN)</p>
-                <p class="content_one">个人区域网(PAN)</p>
-            </div>
-        </div>
-    </div>
-    <br>
-    <br>
-    <div class="flashcard" onclick="flipCard(this)">
-        <div class="card">
-            <div class="side front">
-                <h2 style="">计算机网络的功能</h2>
-                <p class="content_one"></p>
-            </div>
-            <div class="side back">
-                <h2>答案</h2>
-                <p class="content_one">数据通信</p>
-                <p class="content_one">资源共享(<span style="color: #a5010a">主要 </span>)</p>
-                <p class="content_one">分布式处理</p>
-                <p class="content_one">提高可靠性</p>
-                <p class="content_one">负载均衡</p>
-            </div>
-        </div>
-    </div>
-    <br>
-    <br>
-    <div class="flashcard" onclick="flipCard(this)">
-        <div class="card">
-            <div class="side front">
-                <h2 style="">计算机网络是什么？</h2>
-                <p class="content_one"></p>
-            </div>
-            <div class="side back">
-                <h2>答案</h2>
-                <p class="content_one">是一些互连的、自治的计算机系统的集合</p>
 
-            </div>
-        </div>
-    </div>
-    <br>
-    <br>
     <div class="flashcard" onclick="flipCard(this)">
         <div class="card">
             <div class="side front">
-                <h2 style="">世界上第一个计算机网络？</h2>
-                <p class="content_one"></p>
+                <h2>计算机网络的分类(分布范围)</h2>
+                <p class="content"></p>
             </div>
             <div class="side back">
                 <h2>答案</h2>
-                <p class="content_one">APRANET</p>
+                <ul class="content_one">
+                    <li>广域网(WAN)</li>
+                    <li>城域网(MAN)</li>
+                    <li>局域网(LAN)</li>
+                    <li>个人区域网(PAN)</li>
+                </ul>
             </div>
         </div>
     </div>
-    <br>
-    <br>
-    <div class="flashcard" onclick="flipCard(this)">
-        <div class="card">
-            <div class="side front">
-                <h2 style="">网络协议的三要数</h2>
-                <p class="content_one"></p>
-            </div>
-            <div class="side back">
-                <h2>答案</h2>
-                <p class="content_one">语法</p>
-                <p class="content_one">语义</p>
-                <p class="content_one">时序</p>
-            </div>
-        </div>
-    </div>
-    <br>
-    <br>
-    <div class="flashcard" onclick="flipCard(this)">
-        <div class="card">
-            <div class="side front">
-                <h2 style="">OSI参考模型有几层？分别是什么？</h2>
-                <p class="content_one"></p>
-            </div>
-            <div class="side back">
-                <h2>答案</h2>
-                <p class="content_one">1.物理层(最底层)</p>
-                <p class="content_one">2.数据链路层</p>
-                <p class="content_one">3.网络层</p>
-                <p class="content_one">4.传输层</p>
-                <p class="content_one">5.会话层</p>
-                <p class="content_one">6.表示层</p>
-                <p class="content_one">7.应用层(最高层)</p>
-            </div>
-        </div>
-    </div>
-    <br>
-    <br>
-    <div class="flashcard" onclick="flipCard(this)">
-        <div class="card">
-            <div class="side front">
-                <h2 style="">物理层中的四大特性分别是什么？并简要解释</h2>
-                <p class="content_one"></p>
-            </div>
-            <div class="side back">
-                <h2>答案</h2>
-                <p class="content_one">1.机械特性：接口是怎么样的</p>
-                <p class="content_one">2.电气特性：用多少伏的电</p>
-                <p class="content_one">3.功能特性：线路上电平电压的特性</p>
-                <p class="content_one">4.过程特性：实现不同功能所发射信号顺序</p>
-                <p class="content_one" style="color: #0a3d2e">我是这样记忆的：机电功程</p>
-            </div>
-        </div>
-    </div>
-    <br>
-    <br>
-    <div class="flashcard" onclick="flipCard(this)">
-        <div class="card">
-            <div class="side front">
-                <h2 style="">物理层中的两种信号分别是什么？并在脑中浮现图像</h2>
-                <p class="content_one"></p>
-            </div>
-            <div class="side back">
-                <h2>答案</h2>
-                <p class="content_one">1.模拟信号：特定频段</p>
-                <p class="content_one">2.数字信号：非0即1</p>
-                <img src="img/a1.png" style="width: 300px;height: 150px">
 
-            </div>
-        </div>
-    </div>
-    <br>
-    <br>
     <div class="flashcard" onclick="flipCard(this)">
         <div class="card">
             <div class="side front">
-                <h2 style="">物理层中的调制于编码分别是干嘛的，编码过程是什么？</h2>
-                <p class="content_one"></p>
-            </div>
-            <div class="side back">
-                <h2>答案</h2>
-                <p class="content_one">调制：将数据转成模拟信号</p>
-                <p class="content_one">编码：将数据转成数字信号</p>
-                <p class="content_one">编码过程：1.采样 2.量化 3.编码</p>
-            </div>
-        </div>
-    </div>
-    <br>
-    <br>
-    <div class="flashcard" onclick="flipCard(this)">
-        <div class="card">
-            <div class="side front">
-                <h2 style="">物理层中的传输介质分为？</h2>
-                <p class="content_one"></p>
+                <h2>计算机网络的功能</h2>
+                <p class="content"></p>
             </div>
             <div class="side back">
                 <h2>答案</h2>
                 <ul class="content_one">
-                    双绞线
-                    <li>
-                        屏蔽双绞线STP
-                    </li>
-                    <li>
-                        非屏蔽双绞线UTP
-                    </li>
-                    <li>
-                        标准
-                        <ol>568B</ol>
-                        <ol>568A</ol>
-                    </li>
+                    <li>数据通信</li>
+                    <li>资源共享(<span style="color: #a5010a">主要</span>)</li>
+                    <li>分布式处理</li>
+                    <li>提高可靠性</li>
+                    <li>负载均衡</li>
                 </ul>
-                <ul class="content_one">
-                    光纤
+            </div>
+        </div>
+    </div>
 
-                </ul>
+    <div class="flashcard" onclick="flipCard(this)">
+        <div class="card">
+            <div class="side front">
+                <h2>计算机网络是什么？</h2>
+                <p class="content"></p>
+            </div>
+            <div class="side back">
+                <h2>答案</h2>
                 <ul class="content_one">
-                    同轴电缆
-                    <li>传输的是模拟信号</li>
+                    <li>是一些互连的、自治的计算机系统的集合</li>
                 </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="flashcard" onclick="flipCard(this)">
+        <div class="card">
+            <div class="side front">
+                <h2>世界上第一个计算机网络？</h2>
+                <p class="content"></p>
+            </div>
+            <div class="side back">
+                <h2>答案</h2>
                 <ul class="content_one">
-                    无线(协议标准IEEE802.11)
+                    <li>ARPANET</li>
                 </ul>
             </div>
         </div>
     </div>
-    <br>
-    <br>
+
     <div class="flashcard" onclick="flipCard(this)">
         <div class="card">
             <div class="side front">
-                <h2 style="">物理层传输介质之一双绞线的两种标准从左到右分别是什么？</h2>
-                <p class="content_one"></p>
+                <h2>网络协议的三要素</h2>
+                <p class="content"></p>
             </div>
             <div class="side back">
                 <h2>答案</h2>
-                <p class="content_one" style="color: red">568B</p>
-                <p class="content_one">橙白、橙、绿白、蓝、蓝白、绿、棕白、棕</p>
-                <p class="content_one" style="color: red">568A</p>
-                <p class="content_one">绿白、绿、橙白、蓝、蓝白、橙、棕白、棕</p>
+                <ul class="content_one">
+                    <li>语法</li>
+                    <li>语义</li>
+                    <li>时序</li>
+                </ul>
             </div>
         </div>
     </div>
-    <br>
-    <br>
+
     <div class="flashcard" onclick="flipCard(this)">
         <div class="card">
             <div class="side front">
-                <h2 style="">物理层中的基本通信技术的五种信道复用技术是？<br>复用:多种不同信号在同一信道上传输解决不同信号传输时应该如何区分</h2>
-                <p class="content_one"></p>
+                <h2>OSI参考模型有几层？分别是什么？</h2>
+                <p class="content"></p>
             </div>
             <div class="side back">
                 <h2>答案</h2>
-                <p class="content_one">1.频分复用(FDM):利用频率</p>
-                <p class="content_one">2.时分复用(TDM):利用时间段</p>
-                <p class="content_one">3.波分复用(WDM):利用光波的波长</p>
-                <p class="content_one">4.码分复用(CDM):同时同频利用数据码</p>
-                <p class="content_one">5.统计时分(STDM)</p>
-                <p class="content_one">我的记忆方法：频时波码统</p>
+                <ul class="content_one">
+                    <li>物理层(最底层)</li>
+                    <li>数据链路层</li>
+                    <li>网络层</li>
+                    <li>传输层</li>
+                    <li>会话层</li>
+                    <li>表示层</li>
+                    <li>应用层(最高层)</li>
+                </ul>
             </div>
         </div>
     </div>
-    <br>
-    <br>
+
     <div class="flashcard" onclick="flipCard(this)">
         <div class="card">
             <div class="side front">
-                <h2 style="">物理层中的编码与调制中常用的五种编码分别为</h2>
-                <p class="content_one"></p>
-            </div>
-            <div class="side back">
-                <h2>答案</h2>
-                <p class="content_one">1.归零编码</p>
-                <p class="content_one">2.非归零编码</p>
-                <p class="content_one">3.反向非归零编码</p>
-                <p class="content_one">4.曼切斯特编码(以太网使用)</p>
-                <p class="content_one">5.差分曼切斯特编码</p>
-                <p class="content_one">6.4B/5B编码</p>
-                <hr>
-                <p class="content_one">以上内容记住就行，具体原理以后再说</p>
-            </div>
-        </div>
-    </div>
-    <br>
-    <br>
-    <div class="flashcard" onclick="flipCard(this)">
-        <div class="card">
-            <div class="side front">
-                <h2 style="">物理层的作用</h2>
-                <p class="content_one"></p>
+                <h2>物理层的作用</h2>
+                <p class="content"></p>
             </div>
             <div class="side back">
                 <h2>答案</h2>
@@ -398,13 +201,469 @@
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    function flipCard(card) {
-        card.querySelector('.card').classList.toggle('flip');
-    }
-</script>
+    <div class="flashcard" onclick="flipCard(this)">
+        <div class="card">
+            <div class="side front">
+                <h2 style="">TCP连接三次握手过程</h2>
+                <p class="content"></p>
+            </div>
+            <div class="side back">
+                <h2>答案</h2>
+                <p class="content_one">客户端----->服务器端|发出连接请求，等待服务器确认</p>
+                <p class="content_one">服务器端----->客户端|返回一个2响应，通知客户端接收到请求</p>
+                <p class="content_one">客户端再次向服务器端发出确认信息，确认连接</p>
+            </div>
+        </div>
+    </div>
+    <div class="flashcard" onclick="flipCard(this)">
+        <div class="card">
+            <div class="side front">
+                <h2 style="">以下的各个作用</h2>
+                <p class="content">IP</p>
+                <p class="content">ARP</p>
+                <p class="content">RARP</p>
+                <p class="content">ICMP</p>
+                <p class="content">IGMP</p>
+            </div>
+            <div class="side back">
+                <h2>答案</h2>
+                <p class="content">IP:实现互联</p>
+                <p class="content">ARP:解决IP与硬件之间的映射问题</p>
+                <p class="content">RARP:解决硬件与IP之间的映射问题</p>
+                <p class="content">ICMP:提供差错报告和询问报文</p>
+                <p class="content">IGMP:用于探寻、转发本局域网内的组成员关系</p>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <p>下面讲一个《<span style="color: red;font-size: 40px" >路由表更新</span>》</p>
+    <p>题目：已有一个路由表，此时发来一个路由表</p>
+    <p>解题:</p>
+    <p>1.对发来的路由表，所有距离+1，表中不存在的直接添加</p>
+    <p>2.下一跳不同，更新为距离更小的(别犟，原本的就很小不动，那也可以叫更新了啊，只不过更新为一模一样罢了)</p>
+    <p>3.下一跳相同，无条件更新</p>
+    <span style="color: red">谁</span>发来的
+    <table border="1">
+        <tr>
+            <td>目的</td>
+            <td>距离</td>
+            <td>下一跳路由</td>
+            <td>________</td>
+        </tr>
+    <tr>
+        <td>N2</td>
+        <td>5</td>
+        <td>________</td>
+        <td>________</td>
+    </tr>
+        <tr>
+            <td>N3</td>
+            <td>9</td>
+            <td>________</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N6</td>
+            <td>5</td>
+            <td>________</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N8</td>
+            <td>6</td>
+            <td>________</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N9</td>
+            <td>7</td>
+            <td>________</td>
+            <td>________</td>
+        </tr>
+    </table>
+    直接将<span style="color: red">距离</span>＋1再说
+    <table border="1">
+        <tr>
+            <td>目的</td>
+            <td>距离</td>
+            <td>下一跳路由</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N2</td>
+            <td style="color: #0bc48b">6</td>
+            <td>________</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N3</td>
+            <td style="color: #0bc48b">10</td>
+            <td>________</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N6</td>
+            <td style="color: #0bc48b">6</td>
+            <td>________</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N8</td>
+            <td style="color: #0bc48b">7</td>
+            <td>________</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N9</td>
+            <td style="color: #0bc48b">8</td>
+            <td>________</td>
+            <td>________</td>
+        </tr>
+    </table>
+    接着直接将<span style="color: #a5010a">谁</span>发来的下一跳路由全部写成<span style="color: #a5010a">谁</span>
+    <table border="1">
+        <tr>
+            <td>目的</td>
+            <td>距离</td>
+            <td>下一跳路由</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N2</td>
+            <td>6</td>
+            <td style="color: #0bc48b">谁</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N3</td>
+            <td>10</td>
+            <td style="color: #0bc48b">谁</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N6</td>
+            <td>6</td>
+            <td style="color: #0bc48b">谁</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N8</td>
+            <td>7</td>
+            <td style="color: #0bc48b">谁</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N9</td>
+            <td>8</td>
+            <td style="color: #0bc48b">谁</td>
+            <td>________</td>
+        </tr>
+    </table>
+    是不是觉得谁很烦？好吧，满足你，写成C
+    <table border="1">
+        <tr>
+            <td>目的</td>
+            <td>距离</td>
+            <td>下一跳路由</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N2</td>
+            <td>6</td>
+            <td style="color: #0bc48b">C</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N3</td>
+            <td>10</td>
+            <td style="color: #0bc48b">C</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N6</td>
+            <td>6</td>
+            <td style="color: #0bc48b">C</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N8</td>
+            <td>7</td>
+            <td style="color: #0bc48b">C</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N9</td>
+            <td>8</td>
+            <td style="color: #0bc48b">C</td>
+            <td>________</td>
+        </tr>
+    </table>
+    <p>OK，到此为此，我们处理好了，发来的路由表，但是路由表更新是指，将老旧的路由表的更新，不是说新的直接来替换</p>
+    <p>我们看看我们老旧的路由表</p>
+    <table border="1">
+        <tr>
+            <td>目的</td>
+            <td>距离</td>
+            <td>下一跳路由</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N1</td>
+            <td>7</td>
+            <td>A</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N2</td>
+            <td>2</td>
+            <td>C</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N6</td>
+            <td>8</td>
+            <td>F</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N8</td>
+            <td>4</td>
+            <td>E</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N9</td>
+            <td>4</td>
+            <td>F</td>
+            <td>________</td>
+        </tr>
+    </table>
+    不存在的直接加入，N3不存在加入
+    <table border="1">
+        <tr>
+            <td>目的</td>
+            <td>距离</td>
+            <td>下一跳路由</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N1</td>
+            <td>7</td>
+            <td>A</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N2</td>
+            <td>2</td>
+            <td>C</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N3</td>
+            <td>10</td>
+            <td>C</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N6</td>
+            <td>8</td>
+            <td>F</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N8</td>
+            <td>4</td>
+            <td>E</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N9</td>
+            <td>4</td>
+            <td>F</td>
+            <td>________</td>
+        </tr>
+    </table>
+    <p>再看N2，目的网络相同，其次下一跳路由也相同，于是无条件更新</p>
+    <table border="1">
+        <tr>
+            <td>目的</td>
+            <td>距离</td>
+            <td>下一跳路由</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N1</td>
+            <td>7</td>
+            <td>A</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N2</td>
+            <td style="color: red">6</td>
+            <td style="color: red">C</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N3</td>
+            <td>10</td>
+            <td>C</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N6</td>
+            <td>8</td>
+            <td>F</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N8</td>
+            <td>4</td>
+            <td>E</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N9</td>
+            <td>4</td>
+            <td>F</td>
+            <td>________</td>
+        </tr>
+    </table>
+    <p>再看N6，目的网络相同，但是下一跳不同，比较距离，新表更小，更新</p>
+    <table border="1">
+        <tr>
+            <td>目的</td>
+            <td>距离</td>
+            <td>下一跳路由</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N1</td>
+            <td>7</td>
+            <td>A</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N2</td>
+            <td>6</td>
+            <td>C</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N3</td>
+            <td>10</td>
+            <td>C</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N6</td>
+            <td style="color: red">6</td>
+            <td style="color: red">C</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N8</td>
+            <td>4</td>
+            <td>E</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N9</td>
+            <td>4</td>
+            <td>F</td>
+            <td>________</td>
+        </tr>
+    </table>
+    <p>再看N8，目的网络相同，下一跳不同，比较距离，旧表更小，不更新</p>
+    <p>再看N9，目的网络相同，但下一跳不同，比较距离，旧表还是更小，也不更新,于是路由表更新的结果如下</p>
+    <table border="1">
+        <tr>
+            <td>目的</td>
+            <td>距离</td>
+            <td>下一跳路由</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N1</td>
+            <td>7</td>
+            <td>A</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N2</td>
+            <td>6</td>
+            <td>C</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N3</td>
+            <td>10</td>
+            <td>C</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N6</td>
+            <td>6</td>
+            <td>C</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N8</td>
+            <td>4</td>
+            <td>E</td>
+            <td>________</td>
+        </tr>
+        <tr>
+            <td>N9</td>
+            <td>4</td>
+            <td>F</td>
+            <td>________</td>
+        </tr>
+    </table>
+    <hr>
+    <p style="font-size: 40px;color: red">冗余码计算问题</p>
+    <p>给定题目：</p>
+    <p>一个多项式:P(x)=X⁴+X+1</p>
+    <p>1.求余数</p>
+    <p>2.数据怎样，最后一个1变0或0变1能否被发现</p>
+    <p style="color: #1de770">第一问，求余数，别和我说你不知道余数是什么，不知道，随便去一个小学门口问一个小孩去</p>
+    <p style="color: #1de770">什么？你就是小学生？好吧，10/6=1...4，其中，10是被除数，6是除数，1是商(好像是😬😬)，4是余数</p>
+    <p style="color: #1de770">求余数，当然得知道除数和被除数啦，被除数，题目会说，那除数呢？</p>
+    <p style="color: #1de770">观察题目给出的多项式:P(x)=X⁴+X+1，最高次方是4</p>
+    <pre  style="color: #1de770">
+        4  3  2  1  0
+        1  0  0  1  1
+        我们直接从4开始写到0，其次将多项式中出现的次方数，有的为1，没有的为0
+    </pre>
+    <p style="color: #1de770">其中10011就是除数</p>
+    <p style="color: #1de770"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mo>除数</mo><msqrt><mo>发送的数据</mo></msqrt></math></p>
+    <p style="color: #1de770">注意是作模二运算，得出的余数，什么？你不知道模二运算？好吧好吧，服了你了😡😡🤬</p>
+    <pre style="color: #1de770">
+        我们假设发送的数据为11001010
+        10011     11001010  第一步上1，因为被除数第一位为1
+                  10011
+        --------------------
+                  01010010  异或运算，相同为0，不同为1
+                   1010010  每次运算，去掉首位，不用担心首位是不是1，因为必定为0
+                   10011    首位为1，上1
+        --------------------
+                   0011110  异或运算，相同为0，不同为1
+                    011110  我们去掉首位以后，当前首位还是0，那我们上0，10011X0=00000,别疑惑了，这就是数学运算
+                    00000
+        --------------------
+                    011110
+                     11110  首位为1，上1
+                     10011
+        --------------------
+                     01101
+                      1101   剩下的只有4为，比我们的除数位数少，不够除，就成了余数
+        --------------------
+                      1101   这就是模2除法的余数
+
+    </pre>
+    <p style="color: #507c38">第二问，将发送数据的尾端加上求出来的余数，其次，在原本的发送的数据(未加余数)的尾端的最后一个数1改为0，再与原来的除数作模2运算，如果余数不为0，即能发现</p>
+    <hr>
+</div>
 
 </body>
 </html>
