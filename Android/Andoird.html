@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Android(安卓)教程</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #e6ffe6;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: #32CD32;
+            font-size: 2.5em;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .drawer {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: -250px;
+            background-color: #333;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+        .drawer a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 1.5em;
+            color: #e6ffe6;
+            display: block;
+            transition: 0.3s;
+        }
+        .drawer a:hover {
+            background-color: #575757;
+        }
+        .drawer .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+        .openbtn {
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #32CD32;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+        }
+        .openbtn:hover {
+            background-color: #228B22;
+        }
+        .main-content {
+            margin-left: 15px;
+            transition: margin-left 0.5s;
+            padding: 16px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .step {
+            margin-bottom: 30px;
+        }
+        .step h2 {
+            color: #228B22;
+            font-size: 1.5em;
+        }
+        .step img {
+            border: 5px solid #32CD32;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        .step img:hover {
+            transform: scale(1.1);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 90%;
+            max-width: 700px;
+        }
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            color: #fff;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: #999;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        @media screen and (max-width: 768px) {
+            .step img {
+                width: 100%;
+            }
+            h1 {
+                font-size: 2em;
+            }
+        }
+        @media screen and (max-width: 480px) {
+            .step img {
+                width: 100%;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="myDrawer" class="drawer">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeDrawer()">&times;</a>
+    <a href="#tutorial1" onclick="closeDrawer()">安卓项目打包</a>
+    <a href="#tutorial2" onclick="closeDrawer()">第二个教程</a>
+    <a href="#tutorial3" onclick="closeDrawer()">第三个教程</a>
+    <!-- 可以根据需要添加更多链接 -->
+</div>
+<button class="openbtn" onclick="openDrawer()">☰ 打开导航栏</button>
+
+<div class="main-content">
+    <h1>安卓项目打包</h1>
+    <div id="tutorial1" class="container">
+        <div class="step">
+            <h2>步骤 1</h2>
+            <img src="img/1.png" alt="Step 1" onclick="openModal(this)">
+        </div>
+        <div class="step">
+            <h2>步骤 2</h2>
+            <img src="img/2.png" alt="Step 2" onclick="openModal(this)">
+        </div>
+        <div class="step">
+            <h2>步骤 3</h2>
+            <img src="img/3.png" alt="Step 3" onclick="openModal(this)">
+        </div>
+        <div class="step">
+            <h2>步骤 4</h2>
+            <img src="img/4.png" alt="Step 4" onclick="openModal(this)">
+        </div>
+        <div class="step">
+            <h2>步骤 5</h2>
+            <img src="img/5.png" alt="Step 5" onclick="openModal(this)">
+        </div>
+        <div class="step">
+            <h2>步骤 6</h2>
+            <img src="img/6.png" alt="Step 6" onclick="openModal(this)">
+        </div>
+        <div class="step">
+            <h2>步骤 7</h2>
+            <img src="img/7.png" alt="Step 7" onclick="openModal(this)">
+        </div>
+        <div class="step">
+            <h2>步骤 8 完成后打开项目地址</h2>
+            <img src="img/8.png" alt="Step 8" onclick="openModal(this)">
+        </div>
+        <div class="step">
+            <h2>步骤 9 </h2>
+            <img src="img/9.png" alt="Step 9" onclick="openModal(this)">
+        </div>
+        <div class="step">
+            <h2>步骤 10 打包完成 </h2>
+            <img src="img/10.png" alt="Step 10" onclick="openModal(this)">
+        </div>
+        <div class="step">
+            <h2>步骤 11 接下来转换为apk，也就是安卓的安装包 </h2>
+            <pre>将AAB文件转换为APK文件，可以使用Google官方的bundletool工具。这个工具需要JDK 8或更高版本，并通过命令行运行。下面是一些基本的步骤：<br>
+                1.首先下载bundletool工具，可以从Google官方仓库中下载最新版的bundletool.jar文件。<br>
+                2.打开终端窗口，导航到bundletool.jar的目录下。<br>
+                3.执行以下命令将AAB文件转换为APK文件：<br>
+                java -jar bundletool.jar build-apks --bundle=/path/to/your/app.aab --output=/path/to/output.apks
+                其中，“/path/to/your/app.aab”是AAB文件的路径，“/path/to/output.apks”是输出APK文件的路径。在执行此命令后，bundletool将创建一个“output.apks”文件，其中包含应用程序的所有APK文件。<br>
+                4.将生成的APK文件解压缩到一个新的目录中。可以使用任何zip工具来完成这个步骤。例如，在Windows中，可以右键单击“output.apks”文件，选择“Extract All”选项。解压缩后，你会发现生成了多个APK文件。<br>
+                5.安装所有APK文件。你可以通过USB连接将设备与计算机连接，并使用adb命令安装这些APK文件。例如，执行以下命令来安装生成的“base-master.apk”文件：<br>
+                java -jar D:\666\bundletool.jar install-apks --apks=C:\Users\16201\Desktop\music1.apks</pre>
+            <img src="img/12.png" alt="Step 12" onclick="openModal(this)">
+            <img src="img/13.png" alt="Step 13" onclick="openModal(this)">
+            <img src="img/11.png" alt="Step 11" onclick="openModal(this)">
+            <pre>
+                adb
+                Windows版本：https://dl.google.com/android/repository/platform-tools-latest-windows.zip
+                Mac版本：https://dl.google.com/android/repository/platform-tools-latest-darwin.zip
+                Linux版本：https://dl.google.com/android/repository/platform-tools-latest-linux.zip
+            </pre>
+            <pre>
+                bundletool
+                https://link.zhihu.com/?target=https%3A//github.com/google/bundletool/releases
+            </pre>
+        </div>
+        <hr>
+    </div>
+
+    <h1>第二个教程</h1>
+    <div id="tutorial2" class="container">
+        <!-- 此处添加第二个教程的步骤和图片 -->
+        <div class="step">
+            <h2>步骤 1</h2>
+            <img src="img/tutorial2_1.png" alt="Step 1" onclick="openModal(this)">
+        </div>
+        <div class="step">
+            <h2>步骤 2</h2>
+            <img src="img/tutorial2_2.png" alt="Step 2" onclick="openModal(this)">
+        </div>
+        <!-- 添加更多步骤 -->
+    </div>
+
+    <h1>第三个教程</h1>
+    <div id="tutorial3" class="container">
+        <!-- 此处添加第三个教程的步骤和图片 -->
+        <div class="step">
+            <h2>步骤 1</h2>
+            <img src="img/tutorial3_1.png" alt="Step 1" onclick="openModal(this)">
+        </div>
+        <div class="step">
+            <h2>步骤 2</h2>
+            <img src="img/tutorial3_2.png" alt="Step 2" onclick="openModal(this)">
+        </div>
+        <!-- 添加更多步骤 -->
+    </div>
+</div>
+
+<div id="myModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+        <img id="modalImg" src="">
+    </div>
+</div>
+
+<script>
+    function openDrawer() {
+        document.getElementById("myDrawer").style.left = "0";
+    }
+
+    function closeDrawer() {
+        document.getElementById("myDrawer").style.left = "-250px";
+    }
+
+    function openModal(imgElement) {
+        var modal = document.getElementById("myModal");
+        var modalImg = document.getElementById("modalImg");
+        modal.style.display = "flex";
+        modalImg.src = imgElement.src;
+    }
+
+    function closeModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+</body>
+</html>
