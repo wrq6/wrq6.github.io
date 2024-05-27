@@ -12,6 +12,7 @@
 		s.parentNode.insertBefore(hm, s);
 	})();
 </script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -30,6 +31,7 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="css/plugins.css" />
 <link rel="stylesheet" type="text/css" href="css/style.css" />
+
 <!--[if lt IE 9]> <script type="text/javascript" src="js/modernizr.custom.js"></script> <![endif]-->
 <!-- /STYLES -->
 
@@ -2745,83 +2747,168 @@
 													<p></p>
 												</div>
 												<div class="full_def">
-													<p></p>
+													<p>我们先来看一个函数图像</p>
+													<br>
+													<div class="container">
+														<canvas id="chart1" style="max-width: 100%;height: auto;"></canvas>
+													</div>
+													<script>
+														// Generate data points for the improper integral y = 1/x from x=2 to a large number
+														function generateData() {
+															const data = [];
+															for (let x = 2; x <= 100; x += 0.1) { // Use 100 to approximate infinity
+																data.push({x: x, y: 1/x});
+															}
+															return data;
+														}
+
+														const ctx = document.getElementById('chart1').getContext('2d');
+														const chart = new Chart(ctx, {
+															type: 'line', // Change to line chart for better visualization
+															data: {
+																datasets: [{
+																	label: 'y = 1/x (从 x=2 到 ∞)',
+																	data: generateData(),
+																	borderColor: 'rgba(75, 192, 192, 1)',
+																	backgroundColor: 'rgba(75, 192, 192, 0.2)',
+																	fill: false
+																}]
+															},
+															options: {
+																scales: {
+																	x: {
+																		type: 'linear',
+																		position: 'bottom',
+																		title: {
+																			display: true,
+																			text: 'x'
+																		},
+																		min: 0,
+																		max: 20
+																	},
+																	y: {
+																		title: {
+																			display: true,
+																			text: 'y'
+																		},
+																		min: 0,
+																		max: 2 // Set a fixed scale for y to make it more clear
+																	}
+																},
+																plugins: {
+																	title: {
+																		display: true,
+																		text: 'Graph of y = 1/x (从 x=2 到 ∞)'
+																	},
+																	annotation: {
+																		annotations: {
+																			box1: {
+																				type: 'box',
+																				xMin: 98,
+																				xMax: 100,
+																				yMin: 0,
+																				yMax: 0.5,
+																				backgroundColor: 'rgba(255, 99, 132, 0.25)',
+																				borderColor: 'rgba(255, 99, 132, 1)',
+																				borderWidth: 1,
+																				label: {
+																					content: 'x → ∞',
+																					enabled: true,
+																					position: 'center'
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														});
+													</script>
+													<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msubsup><mo data-mjx-texclass="OP">∫</mo><mrow><mn>2</mn></mrow><mrow><mi mathvariant="normal">∞</mi></mrow></msubsup><mfrac><mn>1</mn><mi>x</mi></mfrac><mi>d</mi><mi>x</mi></math></p>
+													<br>
+													<p>这是求这条曲线和x=2以及x=无穷的面积，这就g了，无穷面积怎么求？</p>
+													<br>
+													<p>这就是反常积分也称广义积分</p>
+													<br>
+													<p>无论上限还是下限中有一个或者两个是趋向未知(也可以说是无穷)的，还是在上下限中间有未定的</p>
+													<br>
+													<p>都是反常积分</p>
+													<br>
+													<p><img src="img/about/a15.png"><br></p>
+													<p>这种就是属于中间有x=5的时候是未定的</p>
+													<br>
+													<p style="font-size: 20px;color: red">如何判断一个积分是反常积分？</p>
+													<br>
+													<p>1.<span style="color: red">积分限</span>出现∞，那这个无穷点就是<span style="color: red" >奇点</span></p>
+													<br>
+													<p>2.如果积分限有限(就是你日常中的那个有限，相当于你钱包里面的钱)的话，需要判断积分限中是否有<span style="color: red">瑕点</span></p>
+													<br>
+													<p>"瑕点"是指在积分区间内的某一点或某些点上，被积函数的值出现无穷大或不可导的情况。</p>
+													<br>
+													<p>单纯的无定义点不一定是瑕点</p>
+													<br>
+													<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mn>1.</mn><mi>x</mi><mo>=</mo><mi>a</mi><mo>是无定义点</mo><mn>2.</mn><munder><mo data-mjx-texclass="OP" movablelimits="true">lim</mo><mrow><mi>x</mi><mo accent="false" stretchy="false">→</mo><mi>a</mi></mrow></munder><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="normal">∞</mi></math></p>
+													<br>
+													<p>满足以上两点的才叫瑕点，也称整体为反常积分，并且趋向是趋向一边，只有一边</p>
+													<br>
+													<p style="font-size: 20px;color: red">反常积分的计算</p>
+													<br>
+													<p>先看有没有瑕点</p>
+													<br>
+													<p>没有就按定积分来算，不管上下限如何，先把定积分算出来，再带入求极限</p>
+													<br>
+													<p>有就按瑕点定分段，按可加性拆分，分别算</p>
+													<br>
+													<p>有口诀</p>
+													<br>
+													<p>无暇直算，有瑕分段</p>
+													<br>
+													<p>注意：极限只求一边，面向区间的那一边</p>
+													<br>
+													<p style="font-size: 20px;color: red">反常积分的四则运算(加减)</p>
+													<br>
+													<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msubsup><mo data-mjx-texclass="OP">∫</mo><mrow><mi>a</mi></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup><mo stretchy="false">[</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>±</mo><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">]</mo><mi>d</mi><mi>x</mi><mo>=</mo><msubsup><mo data-mjx-texclass="OP">∫</mo><mrow><mi>a</mi></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi><mo>+</mo><msubsup><mo data-mjx-texclass="OP">∫</mo><mrow><mi>a</mi></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi></math></p>
+													<br>
+													<p>这个和洛必达有点像(别误会)，需要拆开的两个反常积分都收敛才可以拆。</p>
+													<br>
+													<p>并且，一个发散都发散</p>
+													<br>
+													<p>如果不能使用四则运算怎么办？</p>
+													<br>
+													<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msubsup><mo data-mjx-texclass="OP">∫</mo><mrow><mi>a</mi></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup><msubsup><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN" fence="true" stretchy="true" symmetric="true"></mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>+</mo><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo data-mjx-texclass="CLOSE">]</mo></mrow><mi>d</mi><mi>x</mi><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mi>F</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>+</mo><mi>G</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo data-mjx-texclass="CLOSE">]</mo></mrow><mo data-mjx-texclass="CLOSE">|</mo></mrow><mrow><mi>a</mi></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup></math></p>
+													<br>
+													<p>那就不拆，求整体原函数，再带值</p>
+													<br>
+													<p>记住三个公式</p>
+													<br>
+													<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msubsup><mo data-mjx-texclass="OP">∫</mo><mrow><mi>a</mi></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup><mfrac><mn>1</mn><msup><mi>x</mi><mrow><mi>p</mi></mrow></msup></mfrac><mi>d</mi><mi>x</mi><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">{</mo><mtable columnalign="left left" columnspacing="1em" rowspacing=".2em"><mtr><mtd><mfrac><msup><mi>a</mi><mrow><mn>1</mn><mo>−</mo><mi>p</mi></mrow></msup><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></mfrac><mo>收敛，</mo><mi>p</mi><mo>&gt;</mo><mn>1</mn></mtd></mtr><mtr><mtd><mo>发散，</mo><mn>0</mn><mo>&lt;</mo><mi>p</mi><mo>≤</mo><mn>1</mn></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE" fence="true" stretchy="true" symmetric="true"></mo></mrow></math></p>
+													<br>
+													<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msubsup><mo data-mjx-texclass="OP">∫</mo><mrow><mi>a</mi></mrow><mrow><mi>b</mi></mrow></msubsup><mfrac><mn>1</mn><mrow><mo stretchy="false">(</mo><mi>x</mi><mo>−</mo><mi>a</mi><msup><mo stretchy="false">)</mo><mrow><mi>q</mi></mrow></msup></mrow></mfrac><mi>d</mi><mi>x</mi><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">{</mo><mtable columnalign="left left" columnspacing="1em" rowspacing=".2em"><mtr><mtd><mfrac><mrow><mo stretchy="false">(</mo><mi>b</mi><mo>−</mo><mi>a</mi><msup><mo stretchy="false">)</mo><mrow><mn>1</mn><mo>−</mo><mi>q</mi></mrow></msup></mrow><mrow><mn>1</mn><mo>−</mo><mi>q</mi></mrow></mfrac></mtd><mtd><mtext>收敛,</mtext><mn>0</mn><mo>&lt;</mo><mi>q</mi><mo>&lt;</mo><mn>1</mn></mtd></mtr><mtr><mtd><mo>发散</mo><mo>,</mo><mi>q</mi><mo>≥</mo><mn>1</mn></mtd><mtd></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE" fence="true" stretchy="true" symmetric="true"></mo></mrow></math></p>
+													<br>
+													<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtable displaystyle="true" columnalign="right left right left right left right left right left right left" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt"><mtr><mtd><msubsup><mo data-mjx-texclass="OP">∫</mo><mrow><mi>a</mi></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup><mfrac><mn>1</mn><mrow><msup><mi>x</mi><mrow><mi>p</mi></mrow></msup><msup><mi>ln</mi><mrow><mi>q</mi></mrow></msup><mo data-mjx-texclass="NONE">⁡</mo><mi>x</mi></mrow></mfrac></mtd><mtd><mi></mi><mo>,</mo><mi>a</mi><mo>&gt;</mo><mn>1</mn></mtd></mtr><mtr><mtd><mi>p</mi><mo>&gt;</mo><mn>1</mn><mtext>时收敛，老大给力</mtext></mtd><mtd></mtd></mtr><mtr><mtd><mi>p</mi><mo>=</mo><mn>1</mn><mtext>时 ，</mtext><mi>q</mi><mo>&gt;</mo><mn>1</mn><mo>，收敛，老大萎靡，看老二</mo></mtd><mtd></mtd></mtr><mtr><mtd><mi>p</mi><mo>&lt;</mo><mn>1</mn><mtext>时 发散，老大gg</mtext></mtd><mtd></mtd></mtr></mtable></math></p>
 													<br>
 													<p></p>
 													<br>
-													<p></p>
+													<p style="font-size: 20px;color: red">反常积分的奇偶性(注意区别定积分的奇偶性)</p>
 													<br>
-													<p></p>
+													<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mo>当</mo><msubsup><mo data-mjx-texclass="OP">∫</mo><mrow><mn>0</mn></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi><mo>收敛时</mo><mo>,</mo><mo>则</mo><msubsup><mo data-mjx-texclass="OP">∫</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">{</mo><mtable columnalign="center center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mn>2</mn><msubsup><mo data-mjx-texclass="OP">∫</mo><mrow><mn>0</mn></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi></mtd><mtd><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mtext>&nbsp;为偶函数&nbsp;</mtext></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mtext>&nbsp;为奇函数&nbsp;</mtext></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE" fence="true" stretchy="true" symmetric="true"></mo></mrow><mo>当</mo><msubsup><mo data-mjx-texclass="OP">∫</mo><mrow><mn>0</mn></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi><mo>发散，时则</mo><msubsup><mo data-mjx-texclass="OP">∫</mo><mrow><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi><mo>发散</mo></math></p>
 													<br>
-													<p></p>
+													<p style="font-size: 20px;color: red">反常积分的比较审敛法</p>
 													<br>
-													<p></p>
+													<p><img src="img/about/a16.png"><br></p>
 													<br>
-													<p></p>
+													<p>不瞒你说，我曾几何时，以为这个是判断是不是反常积分的。我真的是蠢猪啊</p>
 													<br>
-													<p></p>
+													<p>这就是比较反常积分的敛散性，是在已经确定是反常积分的基础上，来判断反常积分的收敛和发散</p>
 													<br>
-													<p></p>
+													<p>别告诉我，你不知道什么是收敛和发散，收敛就是结果为一个数，发散就是无穷大</p>
 													<br>
-													<p></p>
+													<p>1</p>
 													<br>
-													<p></p>
+													<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtable displaystyle="true" columnalign="right left right left right left right left right left right left" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt"><mtr><mtd><msubsup><mo data-mjx-texclass="OP">∫</mo><mrow><mi>a</mi></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi></mtd><mtd><mtext>且无瑕点(f(x)&gt;=0)</mtext></mtd></mtr><mtr><mtd></mtd><mtd><mi></mi><mo>若</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>∼</mo><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mstyle scriptlevel="0"><mspace width="1em"></mspace></mstyle><mo stretchy="false">(</mo><mi>x</mi><mo accent="false" stretchy="false">→</mo><mo>+</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo></mtd></mtr><mtr><mtd></mtd><mtd><mi></mi><mo>则</mo><msubsup><mo data-mjx-texclass="OP">∫</mo><mrow><mi>a</mi></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi><mstyle scriptlevel="0"><mspace width="1em"></mspace></mstyle><mtext>为</mtext><msubsup><mo data-mjx-texclass="OP">∫</mo><mrow><mi>a</mi></mrow><mrow><mo>+</mo><mi mathvariant="normal">∞</mi></mrow></msubsup><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi><mstyle scriptlevel="0"><mspace width="1em"></mspace></mstyle><mtext>同敛散性</mtext></mtd></mtr></mtable></math></p>
 													<br>
-													<p></p>
+													<p>2</p>
 													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
-													<br>
-													<p></p>
+													<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtable displaystyle="true" columnalign="right left right left right left right left right left right left" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt"><mtr><mtd><msubsup><mo data-mjx-texclass="OP">∫</mo><mn>0</mn><mrow><mi>a</mi></mrow></msubsup><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi><mo>,</mo></mtd><mtd><mtext>&nbsp;其中&nbsp;</mtext><mi>x</mi><mo>=</mo><mn>0.</mn><mtext>为瑕点</mtext></mtd></mtr><mtr><mtd><mtext>当</mtext><mi>x</mi><mo accent="false" stretchy="false">→</mo><msup><mn>0</mn><mrow><mo>+</mo></mrow></msup></mtd><mtd><mtext>时,&nbsp;</mtext><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>∼</mo><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mtd></mtr><mtr><mtd><mo>则</mo><msubsup><mo data-mjx-texclass="OP">∫</mo><mn>0</mn><mrow><mi>a</mi></mrow></msubsup><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi><mo>与</mo><msubsup><mo data-mjx-texclass="OP">∫</mo><mn>0</mn><mrow><mi>a</mi></mrow></msubsup><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>d</mi><mi>x</mi></mtd><mtd><mtext>&nbsp;同敛散性</mtext></mtd></mtr></mtable></math></p>
 													<br>
 													<p></p>
 													<br>

@@ -3,80 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>数据流图</title>
+    <title>Improper Integral Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
         }
         .container {
-            position: relative;
-            width: 1200px;
-            height: 800px;
-            background-color: white;
-            border: 1px solid #ddd;
-        }
-        .box {
-            position: absolute;
-            border: 1px solid black;
-            padding: 10px;
-            background-color: white;
             text-align: center;
-            width: 120px;
         }
-        .box.e1 { top: 20px; left: 150px; }
-        .box.system { top: 100px; left: 500px; width: 200px; }
-        .box.e3 { top: 100px; left: 850px; }
-        .box.e2 { top: 200px; left: 150px; }
-        .box.p1 { top: 400px; left: 50px; width: 100px; }
-        .box.p5 { top: 400px; left: 350px; }
-        .box.p2 { top: 400px; left: 600px; }
-        .box.p6 { top: 600px; left: 50px; }
-        .box.p4 { top: 600px; left: 600px; }
-        .box.p3 { top: 600px; left: 350px; }
-        svg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        canvas {
+            max-width: 100%;
+            height: auto;
         }
     </style>
 </head>
 <body>
-
 <div class="container">
-    <div class="box e1">E1<br>物流合同<br>路线信息/订单信息</div>
-    <div class="box system">二手车物流系统<br>物流信息/订单信息</div>
-    <div class="box e3">E3<br>物流商注册信息</div>
-    <div class="box e2">E2<br>车辆交易信息</div>
-    <div class="box p1">P1<br>抓取线索</div>
-    <div class="box p5">P5<br>寻找物流商</div>
-    <div class="box p2">P2<br>发起订单</div>
-    <div class="box p6">P6<br>物流商注册</div>
-    <div class="box p4">P4<br>合约管理</div>
-    <div class="box p3">P3<br>路线管理</div>
-
-    <svg>
-        <!-- Draw lines using SVG -->
-        <line x1="210" y1="50" x2="500" y2="150" stroke="black" />
-        <line x1="700" y1="150" x2="850" y2="150" stroke="black" />
-        <line x1="600" y1="150" x2="500" y2="150" stroke="black" />
-        <line x1="200" y1="250" x2="500" y2="150" stroke="black" />
-        <line x1="200" y1="250" x2="100" y2="450" stroke="black" />
-        <line x1="200" y1="450" x2="450" y2="450" stroke="black" />
-        <line x1="650" y1="450" x2="750" y2="450" stroke="black" />
-        <line x1="100" y1="650" x2="200" y2="450" stroke="black" />
-        <line x1="700" y1="650" x2="650" y2="450" stroke="black" />
-        <line x1="450" y1="650" x2="450" y2="450" stroke="black" />
-        <line x1="450" y1="650" x2="700" y2="650" stroke="black" />
-    </svg>
+    <h1>Improper Integral Visualization</h1>
+    <canvas id="myChart"></canvas>
 </div>
+<script>
+    // Generate data points for the improper integral y = 1/x
+    function generateData() {
+        const data = [];
+        for (let x = 0.1; x <= 10; x += 0.1) {
+            data.push({x: x, y: 1/x});
+        }
+        return data;
+    }
 
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const chart = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: 'y = 1/x',
+                data: generateData(),
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                showLine: true,
+                fill: false
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    type: 'linear',
+                    position: 'bottom',
+                    title: {
+                        display: true,
+                        text: 'x'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'y'
+                    }
+                }
+            },
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Graph of y = 1/x'
+                }
+            }
+        }
+    });
+</script>
 </body>
 </html>
