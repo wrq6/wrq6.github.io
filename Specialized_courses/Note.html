@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Notes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/default.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .block {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .block h2 {
+            margin-top: 0;
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .block p {
+            margin-bottom: 10px;
+        }
+        .block pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ddd;
+            overflow-x: auto;
+            border-radius: 5px;
+            margin-top: 0;
+        }
+        .console {
+            background-color: #000;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow-x: auto;
+            font-family: Consolas, monospace;
+        }
+        .console pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+        .console pre code::before {
+            content: "$ ";
+            color: green;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .search-container {
+            margin-bottom: 20px;
+        }
+        .search-box {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        h3{
+            color: #00aa44;
+        }
+        h2{
+            color: #20ecac;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>笔记</h1>
+    <div class="search-container">
+        <input type="text" class="search-box" id="searchBox" placeholder="输入关键词进行搜索...">
+    </div>
+</header>
+<div class="container">
+    <div class="block">
+        <p>这里是笔记说明</p>
+        <h2>代码示例</h2>
+        <pre>
+            <code class="c">
+#include &lt;stdio.h>
+
+int main() {
+    printf("Hello, world!\n");
+    return 0;
+}
+            </code>
+        </pre>
+        <h3>控制台输出</h3>
+        <div class="console">
+            <pre>
+                <code>
+$ ./a.out
+Hello, world!
+                </code>
+            </pre>
+        </div>
+    </div>
+    <div class="block">
+        <p>我在在在在</p>
+        <h2>代码示例</h2>
+        <pre>
+            <code class="c">
+#include &lt;stdio.h>
+int main() {
+    printf("Hello, world!\n");
+    return 0;
+}
+            </code>
+        </pre>
+        <h3>控制台输出</h3>
+        <div class="console">
+            <pre>
+                <code>
+$ ./a.out
+Hello, world!
+                </code>
+            </pre>
+        </div>
+    </div>
+    <div class="block">
+        <p>我在在在在</p>
+        <h2>代码示例</h2>
+        <pre>
+            <code class="c">
+#include &lt;stdio.h>
+
+int main() {
+    printf("Hello, world!\n");
+    return 0;
+}
+            </code>
+        </pre>
+        <h3>控制台输出</h3>
+        <div class="console">
+            <pre>
+                <code>
+$ ./a.out
+Hello, world!
+                </code>
+            </pre>
+        </div>
+    </div>
+
+    <!-- 添加更多的块 -->
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js"></script>
+<script>
+    hljs.highlightAll();
+
+    document.getElementById('searchBox').addEventListener('input', function() {
+        const searchKeyword = this.value.trim().toLowerCase();
+        const blocks = document.querySelectorAll('.block');
+        blocks.forEach(block => {
+            const content = block.textContent.toLowerCase();
+            if (content.includes(searchKeyword)) {
+                block.style.display = 'block';
+                // 自动滚动到匹配内容位置
+                block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                block.style.display = 'none';
+            }
+        });
+    });
+</script>
+</body>
+</html>
