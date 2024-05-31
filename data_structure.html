@@ -86,7 +86,25 @@
 
 </head>
 <body id="pdf">
-
+<header>
+    <h1>数据结构笔记</h1>
+    <nav>
+        <ul id="table-of-contents">
+            <li><a href="my_html.html">不想看回到主页</a></li>
+            <li><a href="#1">浅析KMP算法之Next数组</a></li>
+            <li><a href="#2">图的最小生成树</a></li>
+            <li><a href="#3">哈夫曼树</a></li>
+            <li><a href="#4">哈希函数</a></li>
+            <li><a href="#5">图的深度优先与广度优先</a></li>
+            <li><a href="#5">二叉树的前中后序遍历</a></li>
+            <li><a href="#6">常见的几种排序(希尔、快排、堆排、归并、基数、折半)</a></li>
+            <li><a href="#7">顺序存储的线性表的操作</a></li>
+            <li><a href="#8">后缀表达式的求值与转换</a></li>
+            <li><a href="#9">时间复杂度、空间复杂度</a></li>
+            <li><a href="#9">链表例题</a></li>
+        </ul>
+    </nav>
+</header>
 <div id="lyric-container"></div>
 <div class="audio-container">
     <audio controls ontimeupdate="showLyrics()">
@@ -161,7 +179,7 @@
 
 </script>
 <pre>
-     <span style="font-size: 50px">浅析KMP算法之Next数组</span>
+     <span style="font-size: 50px" id="1">浅析KMP算法之Next数组</span>
 	<code>
 首先我们需要知道KMP是干嘛的，通俗易懂的来讲是查找相同字符串的一种捷径
 我们人的本能的趋简避繁，例如aababcbdaabacbbbd这样的字符串，我们需要在其中找到子串aabacb我们怎么操作？
@@ -288,7 +306,7 @@ int main()
 </pre>
 
 <pre>
-     <span style="font-size: 50px">图的最小生成树</span>
+     <span style="font-size: 50px" id="2">图的最小生成树</span>
     <p>          给定图，利用<span style="color: red">Kruskal算法（克鲁斯卡算法）</span>生成最小生成树</p>
 
     <canvas id="myCanvas" width="400" height="200" style="border:1px solid #000;"></canvas>
@@ -824,7 +842,7 @@ int main()
 </pre>
 
 <pre>
-     <span style="font-size: 50px">哈夫曼树</span>
+     <span style="font-size: 50px" id="3">哈夫曼树</span>
     <p>          已知      <table>
         <tbody>
             <tr>
@@ -1125,7 +1143,7 @@ int main()
     别觉得哈夫曼编码就是固定长度(🤣🫵)
         </pre>
 <pre>
-     <span style="font-size: 50px">哈希函数</span>
+     <span style="font-size: 50px" id="4">哈希函数</span>
     设散列表长为11，记录关键字集合为{15，17，28，41，37，31，56，23，45，51，73}，散列函数：H(Key) = key MOD 11，冲突处理采用线性探测法，请给出散列表的构造过程，再求平均查找程度ASL
 (1)先看散列函数，H(Key) = Key MOD 11.(对每个数都取余，与11相除，取余)
     <table>
@@ -1656,7 +1674,7 @@ int main()
     此题就是ASL=1*6+2*4+3*1
 </pre>
 <pre>
-     <span style="font-size: 50px">图的深度优先与广度优先</span>
+     <span style="font-size: 50px" id="5">图的深度优先与广度优先</span>
             <table style="width: auto">
         <tbody>
             <tr style="">
@@ -1937,7 +1955,7 @@ int main()
     就是1、3、2、4、5
 </pre>
 <pre>
-     <span style="font-size: 50px">二叉树的前中后序遍历</span>
+     <span style="font-size: 50px" id="6">二叉树的前中后序遍历</span>
 这类题目一般给前中/后中，来确定后/前序遍历，因为只有前中/后中才能确定唯一的二叉树，而前后序不能确定
     <hr class="hr-shadow">
     （1）给定前序ABDGHCEFI与中序GDHBAECIF，写出后序遍历。
@@ -2404,7 +2422,7 @@ int main()
     还记得我们一开始说的吗？只有前中以及后中才能确定一棵树，而前后并不能确定唯一的一棵树</span>
 </pre>
 <pre>
-     <span style="font-size: 50px">常见的几种排序</span>
+     <span style="font-size: 50px" id="7">常见的几种排序</span>
     <span style="color: #0d66c2;font-size: 15px">希尔排序、快速排序、堆排序、归并排序、基数排序、折半查找</span>
        <hr class="hr-shadow">
 (1) 归并排序
@@ -3485,7 +3503,7 @@ OK，此时就是最大根堆了，哎呀呀，我想说的那种情况没有发
 小根堆是同理的。（暂时更到这里，累死我了😭😣🤤😬😰😨🥶🥵🥴😵‍💫🤧🤮🤢🫵😗）
 </pre>
 <pre>
-    <span style="font-size: 50px"><span style="color: red">顺序存储</span>的<span style="color: #00aa00">线性表</span>的操作（初版）纯手打（原创）</span>
+    <span style="font-size: 50px" id="8"><span style="color: red">顺序存储</span>的<span style="color: #00aa00">线性表</span>的操作（初版）纯手打（原创）</span>
 	<code>
         /*
 * 线性表的ADT（抽象）
@@ -3718,64 +3736,325 @@ int main()
 
 </pre>
 <pre>
-    <span style="font-size: 50px"><span style="color: red">后缀表达式</span>的<span style="color: #00aa00">求值与转换</span></span>
+    <span style="font-size: 50px" id="9"><span style="color: red">后缀表达式</span>的<span style="color: #00aa00">求值与转换</span></span>
     <span style="color: #00daff">四则运算表达式转化为后缀表达式的规则：</span>
     <span style="color: #e600ff">
         1.数字直接写
-        2.运算符号如果高于栈顶的，直接入栈写上，如果低于栈顶的让栈顶先出，自己再进去
+        2.运算符号如果级别高于栈顶的，直接入栈写上，如果等于或者低于栈顶的让栈顶先出，自己再进去
+        3.左括号不管入，遇到右括号，将左括号上面的所有出栈
     </span>
     我们来举个例子：9+（3-1）×3+10
+    数字直接写：<span style="color: red">9</span>
+    然后就是+号，符号入栈
 	<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
     <!-- 轴 -->
     <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
     <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
-    <line x1="100" y1="50" x2="100" y2="200" stroke="black" stroke-width="2"/>
-    <line x1="125" y1="50" x2="125" y2="200" stroke="black" stroke-width="2"/>
-    <line x1="150" y1="50" x2="150" y2="200" stroke="black" stroke-width="2"/>
-    <line x1="175" y1="50" x2="175" y2="200" stroke="black" stroke-width="2"/>
-    <line x1="200" y1="50" x2="200" y2="200" stroke="black" stroke-width="2"/>
-    <line x1="225" y1="50" x2="225" y2="200" stroke="black" stroke-width="2"/>
-     <line x1="250" y1="50" x2="250" y2="200" stroke="black" stroke-width="2"/>
-     <line x1="275" y1="50" x2="275" y2="200" stroke="black" stroke-width="2"/>
-     <line x1="300" y1="50" x2="300" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
         <g id="loading-txt">
-        <text x="30" y="80" font-size="12" text-anchor="middle">看</text>
-        <text x="30" y="100" font-size="12" text-anchor="middle">个</text>
-        <text x="30" y="120" font-size="12" text-anchor="middle">位</text>
-        <text x="30" y="140" font-size="12" text-anchor="middle">数</text>
-        <text x="30" y="160" font-size="12" text-anchor="middle">放</text>
-        </g>
-
-        <g id="loading-txt">
-        <text x="60" y="50" font-size="12" text-anchor="middle">Q_0</text>
-        <text x="85" y="50" font-size="12" text-anchor="middle">Q_1</text>
-        <text x="110" y="50" font-size="12" text-anchor="middle">Q_2</text>
-        <text x="135" y="50" font-size="12" text-anchor="middle">Q_3</text>
-        <text x="160" y="50" font-size="12" text-anchor="middle">Q_4</text>
-        <text x="185" y="50" font-size="12" text-anchor="middle">Q_5</text>
-        <text x="210" y="50" font-size="12" text-anchor="middle">Q_6</text>
-        <text x="235" y="50" font-size="12" text-anchor="middle">Q_7</text>
-        <text x="260" y="50" font-size="12" text-anchor="middle">Q_8</text>
-        <text x="285" y="50" font-size="12" text-anchor="middle">Q_9</text>
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
         </g>
         <g id="loading-txt">
-        <text x="60" y="80" font-size="10" text-anchor="middle"  >350</text>
-        <text x="85" y="80" font-size="10" text-anchor="middle"  >481</text>
-        <text x="110" y="80" font-size="10" text-anchor="middle" >392</text>
-        <text x="160" y="80" font-size="10" text-anchor="middle" >674</text>
-        <text x="185" y="80" font-size="10" text-anchor="middle" >475</text>
-        <text x="185" y="110" font-size="10" text-anchor="middle" >815</text>
-        <text x="185" y="140" font-size="10" text-anchor="middle" >315</text>
-        <text x="235" y="80" font-size="10" text-anchor="middle" >137</text>
-        <text x="285" y="80" font-size="10" text-anchor="middle" >219</text>
+        <text x="60" y="190" font-size="10" text-anchor="middle"  >+</text>
         </g>
     </svg>
-    <code>
+    然后就是（入
+    	<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+        <text x="60" y="190" font-size="10" text-anchor="middle"  >+</text>
+            <text x="60" y="180" font-size="10" text-anchor="middle"  >(</text>
+        </g>
+    </svg>
+    9+（3-1）×3+10，然后就是3，直接写
+    <span style="color: red">93</span>
+    然后就是-入
+     	<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+        <text x="60" y="190" font-size="10" text-anchor="middle"  >+</text>
+            <text x="60" y="180" font-size="10" text-anchor="middle"  >(</text>
+            <text x="60" y="170" font-size="10" text-anchor="middle"  >-</text>
+        </g>
+    </svg>
+    9+（3-1）×3+10，然后就是1，数字直接写
+    <span style="color: red"> 931</span>
+    然后就是）右括号，你瞧，直接打包出来，其实也没有就一个-号，收获不大啊，竹篮打水一场空
+    <span style="color: red"> 931-</span>
+       	<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+        <text x="60" y="190" font-size="10" text-anchor="middle"  >+</text>
+        </g>
+    </svg>
+    然后就是x，和此时的栈顶+比较，谁牛逼，显然x牛点，所以入栈
+           	<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+        <text x="60" y="190" font-size="10" text-anchor="middle"  >+</text>
+            <text x="60" y="180" font-size="10" text-anchor="middle"  >x</text>
+        </g>
+    </svg>
+    9+（3-1）×3+10，然后就是3，数字直接写
+    <span style="color: red">931-3</span>
+    然后就是+，比较栈顶的x，哦豁，没有它厉害，乖乖让x出来
+    就是
+    <span style="color: red">931-3x</span>
+    此时栈：
+          	<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+        <text x="60" y="190" font-size="10" text-anchor="middle"  >+</text>
+        </g>
+    </svg>
+    还没有完，还要继续比较现在的栈顶，是+和即将入的+是相等的，让栈顶出来
+    <span style="color: red">931-3x+</span>
+           	<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+        </g>
+    </svg>
+    这个时候，我们的+再入栈
+      <span style="color: red">931-3x+</span>
+           	<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+                 <text x="60" y="190" font-size="10" text-anchor="middle"  >+</text>
+        </g>
+    </svg>
+    9+（3-1）×3+10，然后就是10，数字直接写
+    <span style="color: red">931-3x+10</span>
+    然后没了，栈里面的给我滚出来吧
+    <span style="color: red">931-3x+10+</span>
+    <hr>
+    以上就是中转后缀表达式，下面讲讲如何模拟计算机一样，直接计算后缀表达式
+    <span style="color: #e600ff">
+    1.当是数字的时候直接入栈
 
-    </code>
+    2.当是运算符号的时候
+
+    3.就将栈的最上面两个数拿出进行运算 后 再将结果进栈 记住（栈顶元素永远在运算符号的右边）
+    </span>
+    看9 3 1 - 3 * + 10 2 / +
+    9 3 1依次入栈，没有异议
+
+    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+            <text x="60" y="190" font-size="10" text-anchor="middle"  >9</text>
+            <text x="60" y="180" font-size="10" text-anchor="middle"  >3</text>
+            <text x="60" y="170" font-size="10" text-anchor="middle"  >1</text>
+        </g>
+    </svg>
+    接下来是-，取出栈顶的两个元素，分别是1 3，1是栈顶，放-号的右边
+    就是3-1=2
+    将2入栈
+    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+            <text x="60" y="190" font-size="10" text-anchor="middle"  >9</text>
+            <text x="60" y="180" font-size="10" text-anchor="middle"  >2</text>
+        </g>
+    </svg>
+    9 3 1 - 3 * + 10 2 / +接下来是 3 入栈
+    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+            <text x="60" y="190" font-size="10" text-anchor="middle"  >9</text>
+            <text x="60" y="180" font-size="10" text-anchor="middle"  >2</text>
+            <text x="60" y="170" font-size="10" text-anchor="middle"  >3</text>
+        </g>
+    </svg>
+    9 3 1 - 3 * + 10 2 / +接下来是*，取出来运算
+    2*3=6，即便是*这种不在意次序的，你也务必养成习惯将栈顶放右边
+    6入栈
+    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+            <text x="60" y="190" font-size="10" text-anchor="middle"  >9</text>
+            <text x="60" y="180" font-size="10" text-anchor="middle"  >6</text>
+        </g>
+    </svg>
+    9 3 1 - 3 * + 10 2 / +接下来是+，取出运算
+    9+6=15，15入栈
+    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+            <text x="60" y="190" font-size="10" text-anchor="middle"  >15</text>
+        </g>
+    </svg>
+    9 3 1 - 3 * + 10 2 / +接下来是10，数字入栈
+    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+            <text x="60" y="190" font-size="10" text-anchor="middle"  >15</text>
+            <text x="60" y="180" font-size="10" text-anchor="middle"  >10</text>
+        </g>
+    </svg>
+    9 3 1 - 3 * + 10 2 / +接下来是
+    2入栈
+    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+            <text x="60" y="190" font-size="10" text-anchor="middle"  >15</text>
+            <text x="60" y="180" font-size="10" text-anchor="middle"  >10</text>
+            <text x="60" y="170" font-size="10" text-anchor="middle"  >2</text>
+        </g>
+    </svg>
+    9 3 1 - 3 * + 10 2 / +接下来是/，取出两个运算
+    10/2=5入栈
+    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+            <text x="60" y="190" font-size="10" text-anchor="middle"  >15</text>
+            <text x="60" y="180" font-size="10" text-anchor="middle"  >5</text>
+        </g>
+    </svg>
+    9 3 1 - 3 * + 10 2 / +接下来是+，取出来运算
+    15 + 5 = 20
+    好了，这就是最后结果了，不信你自己算嘛，给你9+（3-1）x 3+10/2
+
 </pre>
 <pre>
-    <span style="font-size: 50px;color: red">时间复杂度、空间复杂度</span>
+    <span style="font-size: 50px;color: red" id="10">时间复杂度、空间复杂度</span>
 <code>
 #include < iostream >
 #include < vector >
@@ -3921,7 +4200,7 @@ int algor1(int N)
 </code>
 </pre>
 <pre>
-    <span style="font-size: 50px;color: red">链表例题</span>
+    <span style="font-size: 50px;color: red" id="11">链表例题</span>
      问题如下：我们实现图书的管理员手上有一张链表图书表，其中int为图书编号，现在我们需要倒序输出图书的编号
     <code>
 #include< stdio.h >
@@ -3945,7 +4224,7 @@ int main()
 	for (int i = 0; i < a; i++)
 	{
 		int j = 0;
-		cout << "请输入第"<<i+1<<"本书的编号" << endl;
+		cout << "请输入第"<< i+1<<"本书的编号" << endl;
 		cin >> j;
 		b->head = j;
 		//book* temp = b;
@@ -3974,6 +4253,39 @@ int main()
 
     </code>
 </pre>
+
+
+<pre>
+    <span style="font-size: 50px;color: red" id="12">栈与队列</span>
+     栈是限定在表尾进行修改操作的线性表
+    允许操作的一端为栈顶(top)，另一端为栈底(bottom)
+    <code>
+ADT 栈
+Data
+	 同线性表，元素具有相同类型，相邻元素具有前驱和后继关系
+Operation
+	InitStack(*S):初始化，建立栈
+	DestroyStack(*S):若栈存在就摧毁
+	ClearStack(*S):将栈清空
+	StackEmpty(S):若栈为空，返回true，否则返回false
+	GetTop(S,*e):若栈存在且非空，用e返回栈顶元素
+	Push(*S,e):若栈存在，插入新元素e到栈中成为新栈顶
+	Pop(*S,*e):删除栈S中栈顶元素，并用e返回其值
+	StackLength(S):返回栈S的元素个数
+endADT
+        别觉得不重要，当你真的到那种境界的时候，看以上的东西就够了
+        别问，问就是答：我当然没有到那种境界了
+----------------------------------------
+typedef struct
+{
+	int data[MaxSize];//栈
+	int top;//栈顶指针
+}stack;
+-----------------------------------------
+    </code>
+</pre>
+
+
 
 <button id="downloadBtn">下载 本页面PDF</button>
 
