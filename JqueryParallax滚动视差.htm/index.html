@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>视觉</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-1.6.1.min.js"></script>
+    <!-- 简单实现的滚动视差 -->
+    <!-- <script src="js/par.js"></script> -->
+    <!-- 实现parallax.js完成更丰富的功能 -->
+    <script src="js/parallax.js"></script>
+    <script src="chrome-extension://ocggccaacacpienfcgmgcihoombokbbj/pages/client/livestartpage-message-add.js"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <header id="header">
+            <h1>英语阅读技巧</h1>
+        </header>
+         <!-- 导航部分 -->
+         <nav id="primary">
+            <ul>
+                <li>
+                    <a href="#" class="jump_to n1" rel="1">章节</a>
+                    <h2>精准定位出题句</h2>
+                </li>
+                <li>
+                    <a href="#" class="jump_to n2" rel="2">章节</a>
+                    <h2>对比出错概率最小的选项</h2>
+                </li>
+                <li>
+                    <a href="#" class="jump_to n3" rel="3">章节</a>
+                    <h2>利用好已知信息</h2>
+                </li>
+                <li>
+                    <a href="#" class="jump_to n4" rel="4">章节</a>
+                    <h2>根据内容判断逻辑</h2>
+                </li>
+            </ul>
+        </nav>
+        <!-- 内容 -->
+        <div id="content">
+            <article id="article1">
+                <section class="section">
+                    <h2>精准定位出题句</h2>
+                    <p>通读题干，基本判断题干所问的问题<br>☞再通读选项<br>☞找出选项的共性<br>☞回归题干<br>☞确定题干究竟在问什么<br>☞去文章中找到出题句</p>
+                </section>
+                <footer class="next_prev">
+                    <i class="spacing_line"></i>
+                    <a class="jump_to next" href="#" rel="2">Next</a>
+                </footer>
+            </article>
+
+            <article id="article2">
+                <section class="section">
+                    <h2>对比出错概率最小的选项</h2>
+                    <p>步骤一：<span style="color: red">接受信息</span>：通读选项（保持客观，不加任何生活背景，不加直接的解释，不做主观的推测<br>
+                        步骤二：<span style="color: red">对比信息</span>：看问题问的是什么，排除不沾边的，留下沾边的<br>
+                    </p>
+                </section>
+                <footer class="next_prev">
+                    <a class="jump_to prev" rel="1">Top</a>
+                    <i class="spacing_line"></i>
+                    <a class="jump_to next" href="#" rel="3">Next</a>
+                </footer>
+            </article>
+
+            <article id="article3">
+                <section class="section">
+                    <h2>利用好已知信息</h2>
+                    <p>1785年1月7日，法国气球飞行家让-皮埃尔·布兰查德(Jean-Pierre Blanchard)和
+                        美国医生约翰·杰弗里斯(John Jeffries)从多佛堡乘氢气球出发。在路途中，
+                        他们不得不把所有东西都扔出气球外才能维持漂浮状态。不过最终在两个半小时后，
+                        他们两个还是毫发无损地到达了法国。</p>
+                </section>
+                <footer class="next_prev">
+                    <a class="jump_to prev" rel="2">Top</a>
+                    <i class="spacing_line"></i>
+                    <a class="jump_to next" href="#" rel="4">Next</a>
+                </footer>
+            </article>
+
+            <article id="article4">
+                <section class="section">
+                    <h2>根据内容判断逻辑x</h2>
+                    <p>这是一个基于jQuery的视差滚动示例。<br>详细内容，<a href="#">请查看原文</a></p>
+                    <p>By: www.bluesdream.com</p>
+                </section>
+                <footer class="next_prev">
+                    <a class="jump_to prev" rel="3">Top</a>     
+                    <i class="spacing_line"></i>
+                </footer>
+            </article>
+        </div>
+
+            <!-- 气球、风景图片层 -->
+        <div id="parallax_area1">
+            <img class="parallax_img p1_1" src="img/1.svg" width="529" height="757" alt=>
+            <img class="parallax_img p1_2" src="img/2.svg" width="603" height="583" alt=>
+            <img class="parallax_img p1_3" src="img/3.svg" width="446" height="713" alt="">
+            <img class="parallax_img p1_4" src="img/5.svg" width="1104" height="684" alt="">
+        </div>
+        <!-- 云层1 -->
+        <div id="parallax_area2">
+            <img class="parallax_img p2_2" src="img/4.svg" width="488" height="138" alt="">
+            <img class="parallax_img p2_2" src="img/6.svg" width="488" height="138" alt="">
+            <img class="parallax_img p2_3" src="img/7.svg" width="488" height="138" alt="">
+            <img class="parallax_img p2_4" src="img/8.svg" width="488" height="138" alt="">
+            <img class="parallax_img p2_5" src="img/9.svg" width="488" height="138" alt="">
+        </div>
+        <!-- 云层2 -->
+        <div id="parallax_area3">
+            <img class="parallax_img p3_1" src="img/10.svg" width="311" height="105" alt="">
+            <img class="parallax_img p3_2" src="img/11.svg" width="311" height="105" alt="">
+            <img class="parallax_img p3_3" src="img/12.svg" width="311" height="105" alt="">
+            <img class="parallax_img p3_4" src="img/13.svg" width="311" height="105" alt="">
+        </div>
+       
+    </div>
+</body>
+</html>
