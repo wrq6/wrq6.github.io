@@ -104,18 +104,259 @@
         h2{
             color: #20ecac;
         }
+        p{
+            color: red;
+            font-size: 25px;
+        }
     </style>
 </head>
 <body>
 <header>
-    <h1>笔记</h1>
+    <h1>数据结构笔记</h1>
     <div class="search-container">
         <input type="text" class="search-box" id="searchBox" placeholder="输入关键词进行搜索...">
     </div>
 </header>
 <div class="container">
+    <!--   ------------------------------------------------------------------------------------------------------          -->
     <div class="block">
-        <p>这里是笔记说明</p>
+        <p>数据结构的三要素</p>
+        <h2>逻辑结构</h2>
+        <pre>
+            <code class="c">
+集合：元素之间没有特定关系
+线性结构：一对一    栈
+树形结构：一对多    树
+图形结构：多对多    图
+            </code>
+        </pre>
+        <h2>存储结构</h2>
+        <pre>
+顺序存储：数据元素按顺序存储在连续的存储空间中，例如数组，队列。
+链式存储：数据元素通过指针链接，例如链表。
+索引存储：为数据元素建立附加的索引表，例如数据库的索引。
+散列存储：通过散列函数将数据映射到散列表，例如哈希表。
+        </pre>
+        <h2>数据的操作</h2>
+        <pre>
+数据的操作包括对数据的增、删、改、查等基本操作。这些操作基于数据的逻辑结构和存储结构实现。
+        </pre>
+        <h2>总结</h2>
+        <pre>
+这部分的内容来说，就题目判断一个东西是否为逻辑结构和存储结构
+很大一部分不好判断，并且你写的莫名其妙的，答案也是莫名其妙的，总感觉无论选什么，答案总是能够圆谎一样
+没办法，只能积累，目前<span style="color: red">栈 树 图</span>是地地道道的逻辑结构
+中间有个万金油，就是<span style="color: red">链表</span> 它既可以是两种中的任意一种
+剩下的几乎全是存储，反正你只要不在最后一场考试选错，其他的一切都是积累
+        </pre>
+    </div>
+    <!--   ------------------------------------------------------------------------------------------------------          -->
+    <div class="block">
+        <p>算法和算法的度量</p>
+        <h2>算法的基本概念</h2>
+        <pre>
+            <code class="c">
+算法是对特定问题求解步骤的一种描述
+五个特性：
+1.有穷性
+2.确定性
+3.可行性
+4.输入
+5.输出
+            </code>
+        </pre>
+        <h2>时间复杂度</h2>
+        <pre>
+            <code class="c">
+n：问题规模
+T(n)：时间开销
+O(n)：时间复杂度
+推导大O阶：
+    1.用常数1取代运行时间中所有的加法常数
+    2.在修改后的运行次数函数中只保留最高阶项
+    3.将最高阶项系数变为1
+必须牢记的：
+⬯(1)<⬯(log₂n)<⬯(n)<⬯(nlog₂n)<⬯(n²)<⬯(n³)<⬯(2^n)<⬯(n!)<⬯(n^n)
+常       对       线      线对      方      立    指      全排   牛牛
+            </code>
+        </pre>
+        <h2>空间复杂度</h2>
+        <pre>
+            <code class="c">
+空间复杂度只需要观察与n有关变量即可
+递归调用空间复杂度就是递归的深度
+有一些是每一层都少去一点是就是n²
+也是大O表示法
+空间复杂度其实算的就是除去你输入的，以及程序本身的内存以外
+当你执行程序的时候，使用的变量会占有内存，这些内存就是空间复杂度的组成
+            </code>
+        </pre>
+        <h2>总结</h2>
+        <pre>
+空间复杂度不会怎么考
+时间复杂度考的多，这一类题目，纯粹就是数学题
+这里给出两个用的巨多的公式（等比数列求和，等差数列求和）
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mo>等差：</mo><msub><mi>S</mi><mi>n</mi></msub><mo>=</mo><mfrac><mi>n</mi><mn>2</mn></mfrac><mo>×</mo><mo stretchy="false">(</mo><mi>a</mi><mo>+</mo><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false">)</mo></math>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mo>等比数列：</mo><mtable displaystyle="true" columnalign="right left right left right left right left right left right left" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt"><mtr><mtd></mtd><mtd><msub><mi>S</mi><mi>n</mi></msub><mo>=</mo><mi>n</mi><msub><mi>a</mi><mn>1</mn></msub><mo>,</mo><mo stretchy="false">(</mo><mi>q</mi><mo>=</mo><mn>1</mn><mo stretchy="false">)</mo></mtd></mtr><mtr><mtd></mtd><mtd><msub><mi>S</mi><mi>n</mi></msub><mo>=</mo><mfrac><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>×</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><msup><mi>q</mi><mi>n</mi></msup><mo stretchy="false">)</mo></mrow><mrow><mn>1</mn><mo>−</mo><mi>q</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>−</mo><msub><mi>a</mi><mi>n</mi></msub><mi>q</mi></mrow><mrow><mn>1</mn><mo>−</mo><mi>q</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><msub><mi>a</mi><mi>n</mi></msub><mi>q</mi><mo>−</mo><msub><mi>a</mi><mn>1</mn></msub></mrow><mrow><mi>q</mi><mo>−</mo><mn>1</mn></mrow></mfrac><mo>,</mo><mo stretchy="false">(</mo><mi>q</mi><mo>≠</mo><mn>1</mn><mo stretchy="false">)</mo></mtd></mtr></mtable></math>
+        </pre>
+        <pre>
+例题一：n为正整数，程序的最坏情况下的时间复杂度
+            <code class="c">
+for (i = n - 1; i > 1; i--)
+{
+	for (j = 1; j < i; j++)
+	{
+		if (...)
+			.....
+	}
+}
+            </code>
+答案：<span style="color: red">O(n²)</span>
+解析：我之前由于学过一点数据结构，但是囫囵吞枣，我一看到这种双层循环，就意识到
+循环次数，那不就是外层循环×内层循环嘛，于是我算
+
+<span style="color: red">外层循环</span>：从n-1到1，但是不包括1,也就是执行了n-2次循环   为什么？不是哥们
+说实话我有时候也坎坷 似乎这是凭感觉得出这个次数的好像
+那我们代数看看，假如n-1=10，从10 到 1 你掰手指头看看有几次？
+别忘了，一定是包括10的，这没问题吧？😨
+但是是不包括1的，因为到1的时候循环是不执行的，也就是最后一次循环是2
+10 9 8 7 6 5 4 3 2
+1  2 3 4 5 6 7 8 9 次
+那不就是比初始值少一次嘛，那外层循环是n-1-1=n-2就说得通了
+
+再看<span style="color: red">内层循环</span>
+当i=n-1的时候，j从1开始，直到j < i  也就是j < n-1
+1到n-2 有几次？不知道？可去你的吧，n-2次啊😥
+同理，当i=n-2的时候，执行 n-3次
+i一直会到2，也就是内层最后一次是
+j<2，j从1开始，也就是执行1次
+好，我们捋一下
+n-2
+n-3
+...
+1
+是不是等差数列？
+所以我们算一下：
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>S</mi><mi>n</mi></msub><mo>=</mo><mfrac><mrow><mo stretchy="false">[</mo><mn>1</mn><mo>+</mo><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo><mo stretchy="false">]</mo><mo>⋅</mo><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo></mrow><mn>2</mn></mfrac><mo>=</mo><mfrac><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo></mrow><mn>2</mn></mfrac><mo>=</mo><mfrac><mrow><msup><mi>n</mi><mn>2</mn></msup><mo>−</mo><mn>3</mn><mi>n</mi><mo>+</mo><mn>2</mn></mrow><mn>2</mn></mfrac></math>
+
+好了，内外层我们都算完了，以我的想法就是将内层次数X外层次数
+当然是错的，为什么？为什么？我当时最大的问号就是为什么？我明明接触过的训练就是相乘
+其实我忽略了一个细节，那就是<span style="color: red">内层循环的次数不直接是n有关，是和外层有关</span>
+这就导致，其实这两个for循环，其实就是一个整体，语句的次数其实就是整体执行的次数
+不知道你能不能理解，反正我稍微有点感觉了
+所以我们的整体循环次数就是内层循环的次数
+也就是
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mfrac><mrow><msup><mi>n</mi><mn>2</mn></msup><mo>−</mo><mn>3</mn><mi>n</mi><mo>+</mo><mn>2</mn></mrow><mn>2</mn></mfrac></math>
+当然加上大O
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>O</mi><mo stretchy="false">(</mo><mfrac><mrow><msup><mi>n</mi><mn>2</mn></msup><mo>−</mo><mn>3</mn><mi>n</mi><mo>+</mo><mn>2</mn></mrow><mn>2</mn></mfrac><mo stretchy="false">)</mo><mo>=</mo><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></math>
+别问我，怎么突然间只剩下n方了，回上面看大O阶的推导，你啊你😡😡😡😡
+        </pre>
+        <pre>
+例题二：m++语句的执行次数
+            <code class="c">
+int m = 0, i, j;
+for (i = 1; i <= n; i++)
+{
+	for (j = 1; j <= 2 * i; j++)
+	{
+		m++;
+	}
+}
+            </code>
+答案：<span style="color: red">n(n+1)</span>
+分析：
+外层：i从1到n，也就是n次
+内层：
+第一次：1到2，包括2，也就是2次
+第二次：1到4，4次
+第三次：6
+8
+10
+12
+...
+第n次：2n
+等差数列是吧？
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>S</mi><mi>n</mi></msub><mo>=</mo><mfrac><mrow><mo stretchy="false">(</mo><mn>2</mn><mo>+</mo><mn>2</mn><mi>n</mi><mo stretchy="false">)</mo><mi>n</mi></mrow><mn>2</mn></mfrac><mo>=</mo><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mi>n</mi><mo stretchy="false">)</mo><mi>n</mi></math>
+结束了，又不是问时间复杂度，单纯问次数，如果是时间复杂度那就是O(n^2)
+        </pre>
+        <pre>
+例题三：n为描述问题规模的非负整数，求时间复杂度
+            <code class="c">
+x = 2;
+while (x < n / 2)
+	x = 2 * x;
+            </code>
+答案：<span style="color: red">n(n+1)</span>
+分析：这类问题怎么办？懵了？先别哭
+有套路！
+别高兴，骗你的
+一般设循环次数为t，解出t=多少，不就ok了？
+来，我们试一试
+设次数为t
+注意看循环停止的条件x < n/2
+每次的迭代量为*2，而x是从2开始
+也就是说2的某某次方为n/2的时候停止
+是这意思吧？但是注意从2开也就是一开始就是2的1次方
+所以
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mn>2</mn><mrow><mi>t</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo><mfrac><mi>n</mi><mn>2</mn></mfrac></math>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mn>2</mn><mrow><mi>t</mi></mrow></msup><mo>=</mo><mi>n</mi></math>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>log</mi><mrow><mn>2</mn></mrow></msub><mo data-mjx-texclass="NONE">⁡</mo><mrow></mrow><msup><mn>2</mn><mrow><mi>t</mi></mrow></msup><mo>=</mo><msub><mi>log</mi><mrow><mn>2</mn></mrow></msub><mo data-mjx-texclass="NONE">⁡</mo><mrow></mrow><mi>n</mi></math>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>t</mi><mo>=</mo><msub><mi>log</mi><mrow><mn>2</mn></mrow></msub><mo data-mjx-texclass="NONE">⁡</mo><mrow></mrow><mi>n</mi></math>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mo>那么时间复杂度：</mo><mi>O</mi><mo stretchy="false">(</mo><msub><mi>log</mi><mrow><mn>2</mn></mrow></msub><mo data-mjx-texclass="NONE">⁡</mo><mrow></mrow><mi>n</mi><mo stretchy="false">)</mo></math>
+        </pre>
+        <pre>
+难点：递归函数的时间复杂度
+            <code class="c">
+int fact(int n)
+{
+	if (n <= 1)
+		return 1;
+	return n * fact(n - 1);
+}
+            </code>
+答案：<span style="color: red">O(n)</span>
+分析：
+递归函数的时间复杂度可以说和前面不是一个量级的
+理解上就很难迈过去
+最好理解的一种方法就是公式递推法：
+	if (n <= 1)
+        return 1;   O(1)
+	return n * fact(n - 1); O(1)
+我们使用T(n)来表示时间的程度
+我们观察，当n<=1的时候只会执行return 1，也就是程序的时间复杂度就是O(1)
+当n>1的时候
+T(n) = O(1)+T(n-1)   这个O(1)是return n * fact(n - 1);的复杂度，因为乘法只会执行一次
+T(n-1)是指，进入下一个函数的时间的程度
+那么总的时间程度就是
+不断的累加
+T(n) = O(1) + T(n-1)
+T(n-1) = O(1) + T(n-2)
+...
+总的时间复杂度就是
+(1) + T(n-1)第一次
+2xO(1) + T (n-2)到第二个函数时
+3xO(1) + T (n-3)到第三个函数时
+...
+有没有发现规律
+yes
+O(1)的系数，就是后面T(n-系数)
+程序什么3时候停止？就是当T(1)的时候
+我们要让T(n-1)、T(n-2)、、、、变为T(1)
+那不就是T(n-(n-1))      n-1就是系数
+于是
+(n-1)O(1) + T(n-(n-1))
+(n-1)O(1) + T(1)
+就是
+O(n-1)
+O(n)
+于是答案就出来了
+这个方法，对于简单的递归来说还行，但是复杂的递归需要很大的毅力，分析能力
+但是总之，这个方法稍微掌握一下还是挺不错的
+        </pre>
+    </div>
+    <!--   ------------------------------------------------------------------------------------------------------          -->
+    <div class="block">
+        <p>我在在在在</p>
         <h2>代码示例</h2>
         <pre>
             <code class="c">
@@ -143,6 +384,53 @@ Hello, world!
         <pre>
             <code class="c">
 #include &lt;stdio.h>
+
+int main() {
+    printf("Hello, world!\n");
+    return 0;
+}
+            </code>
+        </pre>
+        <h3>控制台输出</h3>
+        <div class="console">
+            <pre>
+                <code>
+$ ./a.out
+Hello, world!
+                </code>
+            </pre>
+        </div>
+    </div>
+    <div class="block">
+        <p>我在在在在</p>
+        <h2>代码示例</h2>
+        <pre>
+            <code class="c">
+#include &lt;stdio.h>
+
+int main() {
+    printf("Hello, world!\n");
+    return 0;
+}
+            </code>
+        </pre>
+        <h3>控制台输出</h3>
+        <div class="console">
+            <pre>
+                <code>
+$ ./a.out
+Hello, world!
+                </code>
+            </pre>
+        </div>
+    </div>
+    <div class="block">
+        <p>我在在在在</p>
+        <h2>代码示例</h2>
+        <pre>
+            <code class="c">
+#include &lt;stdio.h>
+
 int main() {
     printf("Hello, world!\n");
     return 0;
