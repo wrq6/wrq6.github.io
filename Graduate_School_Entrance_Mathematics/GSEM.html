@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
+<script>LA.init({id:"3IgcPbFXfKH6JIH0",ck:"3IgcPbFXfKH6JIH0",autoTrack:true,hashMode:true,screenRecord:true})</script>
+<script src="../LA.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>考研数学</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #edf7ed; /* 淡绿色背景 */
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #007bff; /* 显眼的蓝色标题 */
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .toggle-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .toggle-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .answer,
+        .reflection {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .answer h3,
+        .reflection h3 {
+            color: #333;
+        }
+
+        .answer p,
+        .reflection p {
+            color: #666;
+        }
+
+        /* 响应式设计 - 适配手机和PC端不同分辨率 */
+        @media (max-width: 600px) {
+            .container {
+                max-width: 90%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div style="text-align: center">
+    <a href="../test.html" style="">主页</a>
+</div>
+<div class="container">
+    <div class="problem">
+        <h1></h1>
+        <h2>无穷小阶比-求极限-(重要)<span style="color: red">泰勒展开的原则以及细节</span></h2>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtable displaystyle="true" columnalign="right left right left right left right left right left right left" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt"><mtr><mtd></mtd><mtd><mtext>设</mtext><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><msup><mtext>=e</mtext><mi>x</mi></msup><mi>sin</mi><mo data-mjx-texclass="NONE">⁡</mo><mi>x</mi><msup><mtext>-x-x</mtext><mn>2</mn></msup><mo>,</mo><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mtext>=lncos&nbsp;</mtext><mi>x</mi><mo>+</mo><msqrt><mi>cos</mi><mo data-mjx-texclass="NONE">⁡</mo><mi>x</mi></msqrt><mtext>-1</mtext><mo>,</mo><mtext>则当&nbsp;</mtext><mi>x</mi><mo accent="false" stretchy="false">→</mo><mn>0</mn><mtext>&nbsp;时&nbsp;</mtext><mo>,</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mtext>为&nbsp;</mtext><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mtext>的</mtext><mo stretchy="false">(</mo></mtd></mtr><mtr><mtd></mtd><mtd><mrow><mtext>&nbsp;</mtext><mi mathvariant="normal">A</mi><mo>.</mo><mtext>&nbsp;</mtext></mrow><mtext>高阶无穷小量</mtext><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mrow><mtext>&nbsp;</mtext></mrow><mtext>&nbsp;B.</mtext><mtext>&nbsp;低阶无穷小量</mtext></mtd></mtr><mtr><mtd></mtd><mtd><mrow><mi mathvariant="normal">C</mi><mo>.</mo><mtext>&nbsp;</mtext></mrow><mtext>等价无穷小量</mtext><mrow><mtext>&nbsp;</mtext></mrow><mrow><mi mathvariant="normal">D</mi><mo>.</mo></mrow><mtext>同阶但非等价无穷小量</mtext></mtd></mtr></mtable></math></p>
+        <button class="toggle-btn" onclick="toggleVisibility(this)">显示答案</button>
+        <div class="answer">
+            <h3>答案：</h3>
+            <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtable displaystyle="true" columnalign="right left right left right left right left right left right left" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt"><mtr><mtd></mtd><mtd><mtext>解析:当 x→0时,因为</mtext></mtd></mtr><mtr><mtd></mtd><mtd><msup><mrow><mi mathvariant="normal">e</mi></mrow><mi>x</mi></msup><mi>sin</mi><mo data-mjx-texclass="NONE">⁡</mo><mi>x</mi><mo>−</mo><mi>x</mi><mo>−</mo><mo>−</mo><msup><mi>x</mi><mrow><mn>2</mn></mrow></msup><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mn>1</mn><mo>+</mo><mi>x</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>x</mi><mrow><mn>2</mn></mrow></msup><mo>+</mo><mi>o</mi><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><msup><mi>x</mi><mrow><mn>2</mn></mrow></msup><mo data-mjx-texclass="CLOSE">)</mo></mrow><mo data-mjx-texclass="CLOSE">]</mo></mrow><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mi>x</mi><mo>−</mo><mfrac><mn>1</mn><mn>6</mn></mfrac><msup><mi>x</mi><mrow><mn>3</mn></mrow></msup><mo>+</mo><mi>o</mi><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><msup><mi>x</mi><mrow><mn>3</mn></mrow></msup><mo data-mjx-texclass="CLOSE">)</mo></mrow><mo data-mjx-texclass="CLOSE">]</mo></mrow><mo>−</mo><mi>x</mi><mo>−</mo><msup><mi>x</mi><mrow><mn>2</mn></mrow></msup></mtd></mtr><mtr><mtd></mtd><mtd><mi></mi><mo>=</mo><mi>x</mi><mo>−</mo><mfrac><mn>1</mn><mn>6</mn></mfrac><msup><mi>x</mi><mn>3</mn></msup><mo>+</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>x</mi><mn>3</mn></msup><mo>+</mo><mi>o</mi><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><msup><mi>x</mi><mn>3</mn></msup><mo data-mjx-texclass="CLOSE">)</mo></mrow><mo>−</mo><mi>x</mi><mo>−</mo><msup><mi>x</mi><mn>2</mn></msup></mtd></mtr><mtr><mtd></mtd><mtd><mi></mi><mo>=</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><msup><mi>x</mi><mn>3</mn></msup><mo>+</mo><mi>o</mi><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><msup><mi>x</mi><mn>3</mn></msup><mo data-mjx-texclass="CLOSE">)</mo></mrow><mo>∼</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><msup><mi>x</mi><mn>3</mn></msup><mo>,</mo></mtd></mtr><mtr><mtd></mtd><mtd><mtext>所以</mtext><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mtext>&nbsp;为&nbsp;</mtext><mi>x</mi><mtext>&nbsp;的3 阶无穷小量</mtext><mo>.</mo><mtext>又因为当&nbsp;</mtext><mi>x</mi><mo accent="false" stretchy="false">→</mo><mn>0</mn><mtext>&nbsp;时&nbsp;</mtext><mo>,</mo></mtd></mtr><mtr><mtd></mtd><mtd><mi>cos</mi><mo data-mjx-texclass="NONE">⁡</mo><mi>x</mi><mo>∼</mo><mi>cos</mi><mo data-mjx-texclass="NONE">⁡</mo><mi>x</mi><mo>−</mo><mn>1</mn><mo>∼</mo><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>x</mi><mrow><mn>2</mn></mrow></msup><mo>,</mo><msqrt><mi>cos</mi><mo data-mjx-texclass="NONE">⁡</mo><mi>x</mi></msqrt><mo>−</mo><mn>1</mn><mo>∼</mo><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>⋅</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>x</mi><mrow><mn>2</mn></mrow></msup><mo>=</mo><mo>−</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><msup><mi>x</mi><mrow><mn>2</mn></mrow></msup></mtd></mtr><mtr><mtd></mtd><mtd><mtext>所以&nbsp;</mtext><mi>ln</mi><mo data-mjx-texclass="NONE">⁡</mo><mi>cos</mi><mo data-mjx-texclass="NONE">⁡</mo><mi>x</mi><mo>+</mo><msqrt><mi>cos</mi><mo data-mjx-texclass="NONE">⁡</mo><mi>x</mi></msqrt><mo>−</mo><mn>1</mn><mo>∼</mo><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>x</mi><mrow><mn>2</mn></mrow></msup><mo>−</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><msup><mi>x</mi><mrow><mn>2</mn></mrow></msup><mo>=</mo><mo>−</mo><mfrac><mn>3</mn><mn>4</mn></mfrac><msup><mi>x</mi><mrow><mn>2</mn></mrow></msup><mo>,</mo><mtext>故&nbsp;</mtext><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mtext>为</mtext><mi>x</mi><mtext>的2 阶无穷小量</mtext><mo>,</mo><mtext>应选(A)</mtext><mo>.</mo></mtd></mtr></mtable></math></p>
+            <button class="toggle-btn" onclick="toggleVisibility(this)">显示心得</button>
+            <div class="reflection">
+                <h3>心得：</h3>
+                <p>在这里我想说的就是泰勒展开的原则第一个：</p>
+                <p>1.头看尾，尾看头</p>
+                <p>2.想展到哪一阶，高于这一阶的全部归于此阶的高阶无穷小中</p>
+                <p>第一个原则</p>
+                <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtable displaystyle="true" columnalign="right left right left right left right left right left right left" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt"><mtr><mtd></mtd><mtd><msup><mrow><mi mathvariant="normal">e</mi></mrow><mi>x</mi></msup><mi>sin</mi><mo data-mjx-texclass="NONE">⁡</mo><mi>x</mi><mo>−</mo><mi>x</mi><mo>−</mo><mo>−</mo><msup><mi>x</mi><mrow><mn>2</mn></mrow></msup><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mn>1</mn><mo>+</mo><mi>x</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>x</mi><mrow><mn>2</mn></mrow></msup><mo>+</mo><mi>o</mi><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><msup><mi>x</mi><mrow><mn>2</mn></mrow></msup><mo data-mjx-texclass="CLOSE">)</mo></mrow><mo data-mjx-texclass="CLOSE">]</mo></mrow><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mi>x</mi><mo>−</mo><mfrac><mn>1</mn><mn>6</mn></mfrac><msup><mi>x</mi><mrow><mn>3</mn></mrow></msup><mo>+</mo><mi>o</mi><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><msup><mi>x</mi><mrow><mn>3</mn></mrow></msup><mo data-mjx-texclass="CLOSE">)</mo></mrow><mo data-mjx-texclass="CLOSE">]</mo></mrow><mo>−</mo><mi>x</mi><mo>−</mo><msup><mi>x</mi><mrow><mn>2</mn></mrow></msup></mtd></mtr><mtr><mtd></mtd><mtd><mi></mi><mo>头看尾，以第一个式子为基石</mo><mo stretchy="false">(</mo><mo>头</mo><mo stretchy="false">)</mo><mo>，看第二个式子第一个</mo><mo stretchy="false">(</mo><mo>尾</mo><mo stretchy="false">)</mo><mo>,</mo><mo>可以看出尾是</mo><mi>x</mi></mtd></mtr><mtr><mtd></mtd><mtd><mi></mi><mo>说明我们如果要展开到</mo><mn>3</mn><mo>阶那么第一个式子展到</mo><mn>2</mn><mo>阶就行</mo></mtd></mtr><mtr><mtd></mtd><mtd><mi></mi><mo>相反的，以第二个式子为基石</mo><mo stretchy="false">(</mo><mo>尾</mo><mo stretchy="false">)</mo><mo>,</mo><mo>看第一个式子第一个</mo><mo stretchy="false">(</mo><mo>头</mo><mo stretchy="false">)</mo></mtd></mtr><mtr><mtd></mtd><mtd><mi></mi><mo>是</mo><mn>1</mn><mo>，所以我们第二个时候想要到三阶就需要展开到三阶</mo></mtd></mtr><mtr><mtd></mtd><mtd><mi></mi><mo>也就是我们所展开的</mo></mtd></mtr></mtable></math></p>
+                <p>第二个原则</p>
+                <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtable displaystyle="true" columnalign="right left right left right left right left right left right left" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt"><mtr><mtd></mtd><mtd><msup><mrow><mi mathvariant="normal">e</mi></mrow><mi>x</mi></msup><mi>sin</mi><mo data-mjx-texclass="NONE">⁡</mo><mi>x</mi><mo>−</mo><mi>x</mi><mo>−</mo><mo>−</mo><msup><mi>x</mi><mrow><mn>2</mn></mrow></msup><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mn>1</mn><mo>+</mo><mi>x</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>x</mi><mrow><mn>2</mn></mrow></msup><mo>+</mo><mi>o</mi><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><msup><mi>x</mi><mrow><mn>2</mn></mrow></msup><mo data-mjx-texclass="CLOSE">)</mo></mrow><mo data-mjx-texclass="CLOSE">]</mo></mrow><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mi>x</mi><mo>−</mo><mfrac><mn>1</mn><mn>6</mn></mfrac><msup><mi>x</mi><mrow><mn>3</mn></mrow></msup><mo>+</mo><mi>o</mi><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><msup><mi>x</mi><mrow><mn>3</mn></mrow></msup><mo data-mjx-texclass="CLOSE">)</mo></mrow><mo data-mjx-texclass="CLOSE">]</mo></mrow><mo>−</mo><mi>x</mi><mo>−</mo><msup><mi>x</mi><mrow><mn>2</mn></mrow></msup></mtd></mtr><mtr><mtd></mtd><mtd><mi></mi><mo>=</mo><mi>x</mi><mo>−</mo><mfrac><mn>1</mn><mn>6</mn></mfrac><msup><mi>x</mi><mn>3</mn></msup><mo>+</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>x</mi><mn>3</mn></msup><mo>+</mo><mi>o</mi><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><msup><mi>x</mi><mn>3</mn></msup><mo data-mjx-texclass="CLOSE">)</mo></mrow><mo>−</mo><mi>x</mi><mo>−</mo><msup><mi>x</mi><mn>2</mn></msup></mtd></mtr><mtr><mtd></mtd><mtd><mi></mi><mo>=</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><msup><mi>x</mi><mn>3</mn></msup><mo>+</mo><mi>o</mi><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><msup><mi>x</mi><mn>3</mn></msup><mo data-mjx-texclass="CLOSE">)</mo></mrow><mo>∼</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><msup><mi>x</mi><mn>3</mn></msup><mo>,</mo></mtd></mtr><mtr><mtd></mtd><mtd><mi></mi><mo>发现没有，当你按照第一法则展开以后</mo></mtd></mtr><mtr><mtd></mtd><mtd><mi></mi><mo>你发现，咦，两个多项式相乘怎么少了这么多东西</mo></mtd></mtr><mtr><mtd></mtd><mtd><mi></mi><mo>这就是我们第二原则，展开高于想要阶的东西统一归为</mo><mi>o</mi><mo stretchy="false">(</mo><msup><mi>x</mi><mn>3</mn></msup><mo stretchy="false">)</mo><mo>中</mo></mtd></mtr><mtr><mtd></mtd><mtd><mi></mi><mo>别说你没有听懂，你认真看，假如我们两个式子展开</mo></mtd></mtr><mtr><mtd></mtd><mtd><mn>1</mn><mo>和后面相乘不管以为没有高于三阶的</mo></mtd></mtr><mtr><mtd></mtd><mtd><mi>x</mi><mo>和后面相乘</mo><mi>x</mi><mo>×</mo><mfrac><msup><mi>x</mi><mrow><mn>3</mn></mrow></msup><mn>6</mn></mfrac><mo>是四阶了，我们就不管统一划给</mo><mi>o</mi><mo stretchy="false">(</mo><msup><mi>x</mi><mn>3</mn></msup><mo stretchy="false">)</mo><mo>，最后写一个</mo><mi>o</mi><mo stretchy="false">(</mo><msup><mi>x</mi><mn>3</mn></msup><mo stretchy="false">)</mo><mo>就行</mo></mtd></mtr></mtable></math></p>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--<div class="container">-->
+<!--    <div class="problem">-->
+<!--        <h1></h1>-->
+<!--        <h2>计算不定积分</h2>-->
+<!--        <p></p>-->
+<!--        <button class="toggle-btn" onclick="toggleVisibility(this)">显示答案</button>-->
+<!--        <div class="answer">-->
+<!--            <h3>答案：</h3>-->
+<!--            <p></p>-->
+<!--            <button class="toggle-btn" onclick="toggleVisibility(this)">显示心得</button>-->
+<!--            <div class="reflection">-->
+<!--                <h3>心得：</h3>-->
+<!--                <p></p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<script>
+    function toggleVisibility(button) {
+        var answer = button.nextElementSibling;
+        var reflection = answer.querySelector('.reflection');
+
+        if (answer.style.display === "none" || answer.style.display === "") {
+            answer.style.display = "block";
+        } else {
+            answer.style.display = "none";
+        }
+
+        if (reflection.style.display === "none" || reflection.style.display === "") {
+            reflection.style.display = "block";
+        } else {
+            reflection.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>

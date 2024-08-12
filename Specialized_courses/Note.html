@@ -119,7 +119,14 @@
 </header>
 <div class="container">
     <!--   ------------------------------------------------------------------------------------------------------          -->
+    <div class="audio-container">
+        <audio controls ontimeupdate="showLyrics()">
+            <source src="../music/n.mp3" type="audio/mpeg">
+            孩子-西楼
+        </audio>
+    </div>
     <div class="block">
+
         <p>数据结构的三要素</p>
         <h2>逻辑结构</h2>
         <pre>
@@ -356,7 +363,899 @@ O(n)
     </div>
     <!--   ------------------------------------------------------------------------------------------------------          -->
     <div class="block">
-        <p>我在在在在</p>
+        <p>线性表</p>
+        <h2>线性表基本概念</h2>
+        <pre>
+线性表是具有<span style="color: red">相同</span>数据类型的n个数据元素的<span style="color: red">有限序列</span>，n=0时为空表
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mo>线性表</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">{</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd></mtd><mtd><mo>顺序存储</mo><mo>—</mo><mo>—</mo><mo>顺序表</mo></mtd></mtr><mtr><mtd></mtd><mtd><mo>链式存储</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">{</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><mo>单链表</mo></mtd></mtr><mtr><mtd><mo>双链表</mo></mtd></mtr><mtr><mtd><mo>循环链表</mo></mtd></mtr><mtr><mtd><mo>静态链表</mo><mo stretchy="false">(</mo><mo>数组实现</mo><mo stretchy="false">)</mo></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE" fence="true" stretchy="true" symmetric="true"></mo></mrow></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE" fence="true" stretchy="true" symmetric="true"></mo></mrow></math>
+不要急好哥们，有时候就是大道至简，这个图我放这不是用来凑字数的
+线性表是一种假想的东西，它是一个逻辑上的东西
+而线性表的实现也就是分为两种顺序和链式，这是两个存储结构
+别一眼带过，这是很重要的构思。
+顺序存储对应的就是顺序表，所以顺序表是一种存储结构
+链式存储对应的单链表，双链表，循环链表，静态链表都是一种存储结构
+        </pre>
+        <h2>顺序表</h2>
+        <pre>
+用顺序存储的方式实现线性表
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mo>顺序表</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">{</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><mo>静态分配（数组）</mo></mtd></mtr><mtr><mtd><mo>动态分配（指针分配内存）</mo></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE" fence="true" stretchy="true" symmetric="true"></mo></mrow></math>
+这里我讲解一下，动态分配，你是不是又没有思考？
+一定要有敏锐的察觉，动态分配，分为两种，就是，每存入一个数就分配一个数的地址将前面和后面链接起来
+这似乎是链表的思想
+那顺序表的动态是指在程序执行的时候才知道数组要存多少个
+这个时候我们动态分配一个数组
+存入，当过了一段时间，哦豁，又来新活了，怎么办？
+再分配一个新数组，注意是整体，是一个比原来大的数组，足以容纳新的数
+然后怎么办？整体搬迁，类似扶贫，整个危房村的人，统一搬迁到政府新建的集体房子
+<span style="color: red">顺序表的增删平均</span>
+1. 新增元素： O(N) （尾插是O(1),不考虑扩容的情况）
+2. 查找元素： O(N)
+3. 根据下标获取/修改元素：O(1)
+4. 删除元素：O(N)
+5. 清除所有元素：O(1)
+<span style="color: red">存取方式</span>
+读写的方式，顺序表是支持随机存取的存储结构，也就是可以访问任意一个元素
+        </pre>
+        <h2></h2>
+        <h2>单链表</h2>
+<pre>
+讲单链表之前我们先来说两个东西<span style="color: red">头指针</span>和<span style="color: red">头结点</span>
+头指针是指向链表第一个节点的指针
+头结点是放在第一个元素之前的一个特殊结点，不存储任何数据
+是的，当头结点存在，头指针就是指向头结点的
+很好
+接下来我们看看怎么建立链表，我们初步建立了一个思想，就是每当需要增加一个元素，采用分配的方法，指针指向的链接形成一个不连续内存的存储结构
+单链表有两种实现方法
+<span style="color: red">1.头插法</span>
+听着很熟悉吧，我们来看，如果这个链表带有头结点，那么每次新增的元素
+放到头节点之后，也就是说，每次新增的元素的下一指向先被赋为头结点的下一指向
+然后再将头结点的下一指向赋为这个元素
+L->next=NULL;
+p->next=L->next;
+L->next=p;
+那没有头结点的呢？
+L=NULL;
+p->next=L;
+L=p;
+咦，啊啊啊啊啊脑子要爆炸啦
+这里讲一个很混乱的东西，头结点和没有头结点怎么都是L啊
+头结点在哪呢？
+其实头结点就是实例化的一个头指针，我这么说可能有点歧义
+我们看下面两段代码
+    <code>
+Lnode *head,*p;
+head=(Lnode*)malloc(sizeof(Lnode));
+head->next=NULL;
+--------------------------------------------
+Lnode *head,*p;
+head=NULL;
+    </code>
+第一段代码，我们看到head是头指针，头指针被分配了指向
+    这不是给head分配空间，是让head指向了一个地方，分配空间Lnode *head这句已经自动分配了
+    好，头指针现在已经指向了一个地方，head->next是说头指针指向的这个地方的指针域指向下一个的地方赋为空
+    |头指针|->|头结点|->|NULL|
+第二段代码，我们看到head头指针直接被定义以后赋为NULL说明没有任何指向，也就是没有头指针。
+-------------------------
+然后我们讲讲头插法
+    <code>
+        带头结点
+p=(Lnode*)malloc(sizeof(Lnode));
+p->data=i;
+p->next=head->next;
+head->next=p;
+-----------------------------------------------
+        不带头结点
+p=(Lnode*)malloc(sizeof(Lnode));
+p->data=i;
+p->next=head;
+head=p;
+    </code>
+我们看<span style="color: green">第一段代码</span>，p是要新增的一个节点，p=(Lnode*)malloc(sizeof(Lnode));分配空间
+p->data=i;给数据域赋值
+p->next=head->next;这是带头结点的，所以head指向的地方是头结点而head->next是头结点指向的下一节点
+这句话就是将头结点指向的下一节点赋为新节点的下一节点
+head->next=p;将头指针指向的头结点的指针域指向p
+总体一套连招下来，打的你是晕头转向啊
+    没事我会魔法，看🪄
+    |head|->|头结点|->|NULL|
+    |p|->|NULL|
+    |head|->|头结点|->|p|->|NULL|
+    这样看不够清晰我们现在要是再增加一个节点M
+    |head|->|头结点|->|p|->|NULL|
+    |M|->|P|
+    |head|->|头结点|->|M|->|P|->|NULL|
+我们看<span style="color: green">第二段代码</span>
+    p->next=head;直接将p的下一个赋值为head指向的NULL
+    head=p;再将head头指针指向新增的p
+    慢慢体会吧
+<span style="color: red">2.尾插法</span>
+    尾插法就是每此新增的元素是增加到结尾
+    所以我们要增加一个尾指针，辅助我们在末尾增加新元素
+    头指针是不动的，尾指针每次结束是指向最后一个元素，再将最后一个元素的指针域赋为NULL
+    <code>
+    LinkList TailInster(LinkList &L,int n){
+	int x=1;
+	L= (LinkList)malloc(sizeof(LNode));
+	LNode *s,*r=L;
+	while(x!=n){
+   		s=(LNode*) malloc(sizeof(LNode));
+   		s->data=x;
+  	 	r->next=s;
+   		r=s;
+   		x++;
+	}
+	r->next=NULL;
+	return L;
+}
+    </code>
+因为有了尾指针，所以头插法和尾插法创建单链表的时间复杂度一样都是O(n)
+</pre>
+<h2>单链表的时间复杂度总结</h2>
+        <pre>
+头插法-尾插法:都是O(n)
+按值按序查:O(n)
+增:O(n)，给定节点:O(1)
+删:O(n)
+求表长:O(n)
+时间主要花在查找上
+        </pre>
+<h2>双链表</h2>
+        <pre>
+双链表有前驱和后继，两个指针域，单链表只有一个指针域，只能指向后继节点
+双链表的增删时间复杂度都是O(1)
+        </pre>
+<h2>循环单链表</h2>
+        <pre>
+比起单链表来讲，循环单链表最后一个元素节点的指针域，也就是指向下一个的指针，指向的不是NULL
+而是改为指向头结点，如果没有头结点就是头一个元素也就是头指针
+这里我要提个醒，链表不是数组，循环单链表的最后一个元素指向的是链表第一个元素
+是完整的，不存在任何一个节点的指针域是NULL，所以判断循环单链表的条件不是判空
+是判断头结点是不是等于头指针，这样一样来就是说没有元素存在，因为
+|head|->|头结点|->|head|
+我们也知道，单链表是存在头指针和尾指针
+循环链表的话，可以只存在其中一个
+如果只存在头指针，那么尾插法需要O(n)
+如果只存在尾指针,那么尾插，头插都是O(1)
+头指针因为要遍历到最后一个
+而尾指针尾插O(1)不需要解释
+头插为什么也是？因为头指针可以通过尾指针+1得到
+因为是循环链表嘛
+        </pre>
+<h2>循环双链表</h2>
+        <pre>
+循环双链表就不多说了，一样的思想，头结点两个指针域的指前指针是要指向链表末尾的节点
+判断的话，头结点是两个指针域都等于头指针
+        </pre>
+<h2>静态链表</h2>
+        <pre>
+静态链表采用数组的方式
+不同于其他，这是个结构体数组，就是说数组的每一个元素都是结构体
+结构体包含一个数据和一个整形表示位置
+这个整形的数字表示的就是这个元素的下一个元素指向的位置是数组中的第几个元素
+给代码自己看
+<code>
+ typedef struct
+    {
+        ElemType data;
+        int next;
+    }SLinkList[MaxSize];
+</code>
+        </pre>
+    </div>
+    <div class="block">
+        <p>栈、队列和数组</p>
+        <h2>栈</h2>
+        <pre>
+栈是一种线性表，只不过它的操作受到限制
+只能是一端进行增加和删除
+既然是线性表那么就有两种存储方式，也就是顺序栈和链栈
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mo>卡特兰数：</mo><mi>n</mi><mo>个不同元素入栈，出栈元素不同排列的个数为</mo><mfrac><mn>1</mn><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac><msubsup><mi>C</mi><mrow><mn>2</mn><mi>n</mi></mrow><mrow><mi>n</mi></mrow></msubsup></math>
+</pre>
+<h2>顺序栈</h2>
+        <pre>
+顺序栈的实现
+<code>
+typedef struct{
+    ElemType data[MaxSize];
+    int top;
+}SqStack;
+</code>
+栈空条件top=-1
+栈的实现其实就是一个数组以及记录栈顶(数组下标)的东西
+            你不能纯粹把数组形象化为一个栈，因为栈顶不是数组的开头而是指针向后移动
+            也就是说，下标越大的就是栈顶
+            |1|-|2|-|3|-|4|-|5|-|6|-|7|-|空|
+            7是栈顶，top指向的就是这个，top的值是6，因为数组是从0开始计数
+        </pre>
+<h2>共享栈</h2>
+        <pre>
+就是一个数组被两个栈共同占用，挺那啥的是吧，但是节省空间啊
+只会发生上溢
+我们来考虑一下，共享栈，也就是农村包围城市，两头包围
+|1|-|2|-|3|-|空|-|空|-|空|-|空|-|空|-|2|-|1|
+看到没有前一个栈是存了三个，栈顶元素是3，top是2是递加的
+后面一个栈是存了二个，栈顶元素是2，top是n-2=8是递减的
+溢满的情况是怎么样的？
+ |1|-|2|-|3|-|4|-|5|-|5|-|4|-|3|-|2|-|1|
+A->                                   <-B
+现在已经存满了
+如果A或者B此时再执行存入一个数，那么势必是造成A或B的一个数被覆盖
+造成数据混乱，叫上溢
+很多人不理解，为什么叫上溢不叫下溢？
+这里的<span style="color: red">上溢</span>是指
+栈的增长方向通常被视为“向上”增长。因此，当栈满时，进一步的增长操作导致数据“溢出”预设的界限，这就是“上溢”。
+如果栈已经没有元素了，即栈顶指针已经指向栈底或更下的位置，继续执行弹出操作就会导致<span style="color: red">下溢</span>错误。
+        </pre>
+<h2>链栈</h2>
+        <pre>
+链栈的实现
+<code>
+typedef struct LinkNode{
+    ElemType data;
+    int top;
+}*LiStack;
+</code>
+栈空条件top=MaxSize
+        </pre>
+<h2>队列</h2>
+        <pre>
+队列简称队，与栈一样是一种受到限制的线性表，只不过只能在一端插入，一端删除。
+队列的顺序存储，很简单与线性表顺序村粗无异，我们给定两个指针
+            <code>
+ #define MaxSize 50;
+ typedef struct{
+     ElemType data[MaxSize];
+     int front,rear;
+ }SqQueue;
+            </code>
+front 是指向对头，rear是指向队尾。
+一开始front和rear都是指向第一个元素，也就是空队
+当不断增加元素以后，rear不断后移。
+当是当我们有元素出队列的时候，front要后移
+这个时候问题就是出来了，就是说数组的前几个是空的
+而rear回不到前面，也就是说，一个冰箱上下都装满了物品
+当上面的物品被清空的时候，你还要放物品，你只知道去下面放
+下面是满的，你就说你要重新买个冰箱，因为现有的冰箱不能放了
+这是不实在的
+        </pre>
+<h2>顺序循环队列</h2>
+        <pre>
+所以我们就有<span style="color: red" >循环队列</span>
+<span style="color: red" >初始</span>：Q.front = Q.rear =0;
+<span style="color: red" >队首指针进1</span>:Q.front = (Q.front + 1) % MaxSize;
+<span style="color: red" >队尾指针进1</span>:Q.rear = (Q.rear + 1) % MaxSize;
+<span style="color: red" >队列长度</span>:(Q.rear - Q.front + MaxSize) % MaxSize;
+<span style="color: red" >队满条件</span>:(Q.rear +1) % MaxSize ==Q.front;//这里是约定空出一个不存储，也就是队尾+1就是队头的时候就是满,<span style="color: red">注意队尾指向的不是最后一个元素而是最后一个元素的下一个空位置</span>
+<span style="color: red" >队空条件</span>:Q.front == Q.rear;
+当然了，你也可以这样想，我们额外定义一个Size来记录列表存储个数，当Size=0并且头尾指针相等就是空
+如果Size=MixSize并且头尾指针相等就是队满
+同样，你也可以这样，出队的时候才会导致队空
+入队才会导致队满，定义一个参数tag，=0是删除操作，此时头尾相等是队空，=1是增加，头尾相等是队满
+MaxSize是指存储的个数，不是下标，其次A[21]，MaxSize是21，A[0...n]，MaxSize是n+1,因为有n+1个元素
+双端队列:允许两端都可以进行入队和出队操作的队列
+输入受限的双端队列:允许一端进行输入和删除，另一端只能删除
+输出受限的双端队列:允许一端进行输入和删除，另一端只能输入
+双端列表是数组形式的，也就是说先全部进入，再依次输出。
+即便是双端可进可出，那也是队列，是队列你就给我先进先出
+也就是全部进入以后再谈输出
+        </pre>
+<h2>队列的链式存储</h2>
+        <pre>
+链队列,尾指针是指向最后一个元素，这一点和顺序存储不同
+            <code>
+typedef struct LinkNode{
+    ElemType data;
+    struct LinkNode *next;
+}LinkNode;
+typedef struct{
+    LinkNode *front ,*rear;
+}*LinkQueue;
+            </code>
+当Q.front==NULL并且Q.rear==NULL表示队列为空;//认真记住链表和数组的不同的判断方法，不然你会栽跟头的
+        </pre>
+<h2>栈和队列的应用</h2>
+        <pre>
+<span style="font-size: 50px" id="9"><span style="color: red">后缀表达式</span>的<span style="color: #00aa00">求值与转换</span>(栈)</span>
+    <span style="color: #00daff">四则运算表达式转化为后缀表达式的规则：</span>
+    <span style="color: #e600ff">
+        1.数字直接写
+        2.运算符号如果级别高于栈顶的，直接入栈写上，如果等于或者低于栈顶的让栈顶先出，自己再进去
+        3.左括号不管入，遇到右括号，将左括号上面的所有出栈
+    </span>
+    我们来举个例子：9+（3-1）×3+10
+    数字直接写：<span style="color: red">9</span>
+    然后就是+号，符号入栈
+	<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+        <text x="60" y="190" font-size="10" text-anchor="middle"  >+</text>
+        </g>
+    </svg>
+    然后就是（入
+    	<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+        <text x="60" y="190" font-size="10" text-anchor="middle"  >+</text>
+            <text x="60" y="180" font-size="10" text-anchor="middle"  >(</text>
+        </g>
+    </svg>
+    9+（3-1）×3+10，然后就是3，直接写
+    <span style="color: red">93</span>
+    然后就是-入
+     	<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+        <text x="60" y="190" font-size="10" text-anchor="middle"  >+</text>
+            <text x="60" y="180" font-size="10" text-anchor="middle"  >(</text>
+            <text x="60" y="170" font-size="10" text-anchor="middle"  >-</text>
+        </g>
+    </svg>
+    9+（3-1）×3+10，然后就是1，数字直接写
+    <span style="color: red"> 931</span>
+    然后就是）右括号，你瞧，直接打包出来，其实也没有就一个-号，收获不大啊，竹篮打水一场空
+    <span style="color: red"> 931-</span>
+       	<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+        <text x="60" y="190" font-size="10" text-anchor="middle"  >+</text>
+        </g>
+    </svg>
+    然后就是x，和此时的栈顶+比较，谁牛逼，显然x牛点，所以入栈
+           	<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+        <text x="60" y="190" font-size="10" text-anchor="middle"  >+</text>
+            <text x="60" y="180" font-size="10" text-anchor="middle"  >x</text>
+        </g>
+    </svg>
+    9+（3-1）×3+10，然后就是3，数字直接写
+    <span style="color: red">931-3</span>
+    然后就是+，比较栈顶的x，哦豁，没有它厉害，乖乖让x出来
+    就是
+    <span style="color: red">931-3x</span>
+    此时栈：
+          	<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+        <text x="60" y="190" font-size="10" text-anchor="middle"  >+</text>
+        </g>
+    </svg>
+    还没有完，还要继续比较现在的栈顶，是+和即将入的+是相等的，让栈顶出来
+    <span style="color: red">931-3x+</span>
+           	<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+        </g>
+    </svg>
+    这个时候，我们的+再入栈
+      <span style="color: red">931-3x+</span>
+           	<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+                 <text x="60" y="190" font-size="10" text-anchor="middle"  >+</text>
+        </g>
+    </svg>
+    9+（3-1）×3+10，然后就是10，数字直接写
+    <span style="color: red">931-3x+10</span>
+    然后没了，栈里面的给我滚出来吧
+    <span style="color: red">931-3x+10+</span>
+    <hr>
+    以上就是中转后缀表达式，下面讲讲如何模拟计算机一样，直接计算后缀表达式
+    <span style="color: #e600ff">
+    1.当是数字的时候直接入栈
+
+    2.当是运算符号的时候
+
+    3.就将栈的最上面两个数拿出进行运算 后 再将结果进栈 记住（栈顶元素永远在运算符号的右边）
+    </span>
+    看9 3 1 - 3 * + 10 2 / +
+    9 3 1依次入栈，没有异议
+
+    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+            <text x="60" y="190" font-size="10" text-anchor="middle"  >9</text>
+            <text x="60" y="180" font-size="10" text-anchor="middle"  >3</text>
+            <text x="60" y="170" font-size="10" text-anchor="middle"  >1</text>
+        </g>
+    </svg>
+    接下来是-，取出栈顶的两个元素，分别是1 3，1是栈顶，放-号的右边
+    就是3-1=2
+    将2入栈
+    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+            <text x="60" y="190" font-size="10" text-anchor="middle"  >9</text>
+            <text x="60" y="180" font-size="10" text-anchor="middle"  >2</text>
+        </g>
+    </svg>
+    9 3 1 - 3 * + 10 2 / +接下来是 3 入栈
+    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+            <text x="60" y="190" font-size="10" text-anchor="middle"  >9</text>
+            <text x="60" y="180" font-size="10" text-anchor="middle"  >2</text>
+            <text x="60" y="170" font-size="10" text-anchor="middle"  >3</text>
+        </g>
+    </svg>
+    9 3 1 - 3 * + 10 2 / +接下来是*，取出来运算
+    2*3=6，即便是*这种不在意次序的，你也务必养成习惯将栈顶放右边
+    6入栈
+    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+            <text x="60" y="190" font-size="10" text-anchor="middle"  >9</text>
+            <text x="60" y="180" font-size="10" text-anchor="middle"  >6</text>
+        </g>
+    </svg>
+    9 3 1 - 3 * + 10 2 / +接下来是+，取出运算
+    9+6=15，15入栈
+    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+            <text x="60" y="190" font-size="10" text-anchor="middle"  >15</text>
+        </g>
+    </svg>
+    9 3 1 - 3 * + 10 2 / +接下来是10，数字入栈
+    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+            <text x="60" y="190" font-size="10" text-anchor="middle"  >15</text>
+            <text x="60" y="180" font-size="10" text-anchor="middle"  >10</text>
+        </g>
+    </svg>
+    9 3 1 - 3 * + 10 2 / +接下来是
+    2入栈
+    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+            <text x="60" y="190" font-size="10" text-anchor="middle"  >15</text>
+            <text x="60" y="180" font-size="10" text-anchor="middle"  >10</text>
+            <text x="60" y="170" font-size="10" text-anchor="middle"  >2</text>
+        </g>
+    </svg>
+    9 3 1 - 3 * + 10 2 / +接下来是/，取出两个运算
+    10/2=5入栈
+    <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+    <!-- 轴 -->
+    <line x1="50" y1="50" x2="50" y2="200" stroke="black" stroke-width="2"/>
+    <line x1="75" y1="50" x2="75" y2="200" stroke="black" stroke-width="2"/>
+   <line x1="50" y1="200" x2="75" y2="200" stroke="black" stroke-width="2"/>
+        <g id="loading-txt">
+        <text x="30" y="80" font-size="12" text-anchor="middle">这</text>
+        <text x="30" y="100" font-size="12" text-anchor="middle">是</text>
+        <text x="30" y="120" font-size="12" text-anchor="middle">个</text>
+        <text x="30" y="140" font-size="12" text-anchor="middle">栈</text>
+        </g>
+        <g id="loading-txt">
+            <text x="60" y="190" font-size="10" text-anchor="middle"  >15</text>
+            <text x="60" y="180" font-size="10" text-anchor="middle"  >5</text>
+        </g>
+    </svg>
+    9 3 1 - 3 * + 10 2 / +接下来是+，取出来运算
+    15 + 5 = 20
+    好了，这就是最后结果了，不信你自己算嘛，给你9+（3-1）x 3+10/2
+<span style="font-size: 50px">栈在递归中的应用</span>
+对同一个问题递归比非递归好看，但是非递归的效率比递归高
+<span style="font-size: 50px">队列在层次遍历中应用</span>
+信息的逐层处理
+<span style="font-size: 50px">队列在计算机系统中的应用</span>
+第一方面解决主机与外部设备之间速度不匹配的问题
+第二方面解决由多个用户引起的资源竞争问题
+<span style="font-size: 50px">数组和特殊矩阵</span>
+两种映射方法：行优先/列优先，行优先：先行后列，存储在一维数组中
+<span style="color:red;">压缩存储</span>多个相同的值只分配一个存储空间，节省空间
+<span style="color: red">特殊矩阵</span>线性代数中的对称，上/下三角，对角阵，稀疏矩阵
+        </pre>
+        </div>
+    <div class="block">
+<h1>串</h1>
+        <pre>
+串中任意多个连续的字符组成的子序列称为该串的子串，包含子串的串称为主串
+长度为0的才是空串，空格是空格串不是空串
+串中字符位置是从1开始数
+串也算一种特殊的线性表
+        </pre>
+<h2>串的顺序存储</h2>
+        <pre>
+没什么好说的，就是用数组来存
+        </pre>
+<h2>串的链式存储</h2>
+        <pre>
+也没什么好说的，块链存储的意思就是，每一个节点呐不单单是存一个字符，而是一串字符，如果存不满，用#填充
+        </pre>
+<h2>串的模式匹配</h2>
+        <pre>
+Next数组求解
+            <code type="c">
+首先我们需要知道KMP是干嘛的，通俗易懂的来讲是查找相同字符串的一种捷径
+我们人的本能的趋简避繁，例如aababcbdaabacbbbd这样的字符串，我们需要在其中找到子串aabacb我们怎么操作？
+为什么会将子串第一个字符依次对比字符串的每一个字符来判断：
+=----------1---------=
+aababcbdaabacbbbd
+aabacb
+=----------2---------=
+aababcbdaabacbbbd
+ aabacb
+=----------3---------=
+aababcbdaabacbbbd
+  aabacb
+=----------4---------=
+aababcbdaabacbbbd
+   abacb
+=----------5---------=
+aababcbdaabacbbbd
+    abacb
+=----------6---------=
+aababcbdaabacbbbd
+     abacb
+=----------7---------=
+aababcbdaabacbbbd
+      abacb
+=----------8---------=
+aababcbdaabacbbbd
+       abacb
+=----------9---------=
+aababcbdaabacbbbd
+        abacb
+=----------10---------=
+aababcbdaabacbbbd
+         abacb
+=----------end完结撒花---------=
+怎么样是不是很麻烦吧？//麻烦个嘚，我就喜欢
+不是，既然计算机大拿说了麻烦咱就认行吗？
+于是开头字母分别为KMP的三个人设计了一个算法叫KMP算法（具体思路自己百度，以下只解释最重要也是最难理解的Next数组该怎么求）
+Next数组说白了就是求子串中每一个最长相等前后缀（听不懂没关系，往下看）
+这里声明一个规则：
+前缀：不包含未元素的串
+后缀：不包含首元素的串
+我们来举个例子这是子串|a|a|b|a|a|f|
+（1）|a|
+前缀以及后缀都为0  导致最长相等前后缀为0
+（2）|a|a|
+前缀为|a|
+后缀为|a|相等
+最长相等前后缀为1
+（3）|a|a|b|
+前缀为|a|a|
+后缀为|a|b|不相等
+在这有两个元素的前后缀的基础上再下一次比较
+前缀|a|
+后缀|b|依然不相等//注意这里的|a|和|b|不是后缀中的|a|b|拆分的，是前缀|a|a|的第一个|a|以及后缀|a|b|最后的那个|b|
+最长相等前后缀为0
+（4）|a|a|b|a|
+前缀为|a|a|b|
+后缀为|a|b|a|当然不相等
+在这有三个元素的两个前后缀的基础上再下一次比较
+前缀|a|a|
+后缀|b|a|依然不相等
+同理再比较
+前缀|a|
+后缀|a|相等
+所以最长相等前后缀为1
+（5）|a|a|b|a|a|
+前缀|a|a|b|a|
+后缀|a|b|a|a|不等
+再前缀|a|a|b|
+后缀|b|a|a|不等
+再|a|a|
+后缀|a|a|相等长度为2
+最长相等前后缀为2
+（6）|a|a|b|a|a|f|
+前缀|a|a|b|a|a|
+后缀|a|b|a|a|f|不等
+前缀|a|a|b|a|
+后缀|b|a|a|f|不等
+前缀|a|a|b|
+后缀|a|a|f|不等
+前缀|a|a|
+后缀|a|f|不等
+前缀|a|
+后缀|f|不等
+所以最长相等前后缀为0
+所以前缀表的值就是，这6个算出来的数值
+即|0|1|0|1|2|0|
+<span style="color: red">重点</span>这还不是Next数组
+我们需要将-1发放到最前面，然后去掉最后一个数，整体右移
+|-1|0|1|0|1|2|
+以上为理论部分（聪明的人会看到这里的）
+
+以下是代码实现部分（C++）
+#include < stdio.h >
+#include < iostream >//c++的头文件
+#include< string >
+using namespace std;//c++的命名空间，如果没有这句话，很多地方会这样写std::cout等等
+class solution {//定义类，c++语法
+public://公共方法（好像java才说方法）以及属性
+    void getnext(int* next, const string& s) {//传入next数组以及字串
+        int j = 0;//j初始化为0
+        next[0] = 0;//首元素设置为0
+        for (int i = 1; i < s.size(); i++) {//我们假设i指向后缀的末尾，j指向前缀的末尾
+            while (j > 0 && s[i] != s[j]) {//while是用来处理前后缀不相同的情况
+                j = next[j - 1];//这句代码的意思是回退，回退到前一个数组元素的值为数组下标处
+            }
+            if (s[i] == s[j]) {//if用来处理前后缀相同的情况
+                j++;//如果想相同，则会将j++，让j来表示最长相等前后缀的情况
+            }
+            next[i] = j;//让此处的最长相等前后缀为j的值
+        }
+    }
+};
+int main()
+{
+    int next[8];
+    string s = "abcabcab";
+    solution*a = new solution();
+    a->getnext(next,s);
+    for(int i=0;i<8;i++)
+    printf("%d",next[i]);
+}
+        //放心，代码你十有八九看不懂，不过没关系，毕竟你要是自己研究出来了
+        //你就是KMP的发明者了，今天看几遍，过几天再来，慢慢的就理解了
+            </code>
+<span style="color: red">我就知道你肯定不会认真的看，所以我必须拿出点手段来</span>
+<span style="font-size: 20px" >Next数组求解</span>
+前缀：不包含未元素的串
+后缀：不包含首元素的串
+我们来举个例子这是子串|a|a|b|a|a|f|
+（1）|a|
+前缀以及后缀都为0  导致最长相等前后缀为0
+（2）|a|a|
+前缀为|a|
+后缀为|a|相等
+最长相等前后缀为1
+（3）|a|a|b|
+前缀为|a|a|
+后缀为|a|b|不相等
+在这有两个元素的前后缀的基础上再下一次比较
+前缀|a|
+后缀|b|依然不相等//注意这里的|a|和|b|不是后缀中的|a|b|拆分的，是前缀|a|a|的第一个|a|以及后缀|a|b|最后的那个|b|
+最长相等前后缀为0
+（4）|a|a|b|a|
+前缀为|a|a|b|
+后缀为|a|b|a|当然不相等
+在这有三个元素的两个前后缀的基础上再下一次比较
+前缀|a|a|
+后缀|b|a|依然不相等
+同理再比较
+前缀|a|
+后缀|a|相等
+所以最长相等前后缀为1
+（5）|a|a|b|a|a|
+前缀|a|a|b|a|
+后缀|a|b|a|a|不等
+再前缀|a|a|b|
+后缀|b|a|a|不等
+再|a|a|
+后缀|a|a|相等长度为2
+最长相等前后缀为2
+（6）|a|a|b|a|a|f|
+前缀|a|a|b|a|a|
+后缀|a|b|a|a|f|不等
+前缀|a|a|b|a|
+后缀|b|a|a|f|不等
+前缀|a|a|b|
+后缀|a|a|f|不等
+前缀|a|a|
+后缀|a|f|不等
+前缀|a|
+后缀|f|不等
+所以最长相等前后缀为0
+所以前缀表的值就是，这6个算出来的数值
+即|0|1|0|1|2|0|
+<span style="color: red">重点</span>这还不是Next数组
+我们需要将-1发放到最前面，然后去掉最后一个数，整体右移
+|-1|0|1|0|1|2|
+上面这个是下标<span style="font-size: 20px;color: red">从0开始</span>的Next数组，如果是从1开始的就是整体+1
+|0|1|2|1|2|3|
+什么是从0从1开始？我真的要敲爆你的脑子🧠
+            abcde中c是第三个就是从1开始
+            abcde中c是第二个就是从0开始
+好啦，Next数组求法已经完结，但是有些人真的太聪明了，搞出了一个NextVal数组(我真他妈的🤬)
+            也简单看下面
+            下标: |1|2|3|4|5|6|
+            字符: |a|a|b|a|a|f|
+            Next: |0|1|2|1|2|3|
+            因为下标从1开始，所以我们写的Next就是整体+1了
+            我们的NextVal数组第一个统一是0
+            <span style="color: green">|0|_|_|_|_|_|</span>
+            然后我们看
+            下标: |1|2|3|4|5|6|
+            字符: |a|a|b|a|a|f|
+            Next: |0|<span style="color: red">1</span>|2|1|2|3|
+            这个Next是1，对应的下标1所对应的字符是第一个a和此时的字符是一样的，其次第一个字符a对应的Next是0
+            一样的字符的话就引用前面的Next值就是0
+            <span style="color: green">|0|0|_|_|_|_|</span>
+            然后我们看
+            下标: |1|2|3|4|5|6|
+            字符: |a|a|b|a|a|f|
+            Next: |0|1|<span style="color: red">2</span>|1|2|3|
+            2对应的是a，与b不同，我们直接把b的下标拿下来
+            <span style="color: green">|0|0|2|_|_|_|</span>
+            然后我们看
+            下标: |1|2|3|4|5|6|
+            字符: |a|a|b|a|a|f|
+            Next: |0|1|2|<span style="color: red">1</span>|2|3|
+            1对应的是a，与a相同，使用第一个next
+            <span style="color: green">|0|0|2|0|_|_|</span>
+            然后我们看
+            下标: |1|2|3|4|5|6|
+            字符: |a|a|b|a|a|f|
+            Next: |0|1|2|1|<span style="color: red">2</span>|3|
+            2对应的是a，与a相同，使用第一个next
+            <span style="color: green">|0|0|2|0|0|_|</span>
+            然后我们看
+            下标: |1|2|3|4|5|6|
+            字符: |a|a|b|a|a|f|
+            Next: |0|1|2|1|2|<span style="color: red">3</span>|
+            3对应的是b，与f不同，则使用自己的
+            <span style="color: green">|0|0|2|0|0|3|</span>
+            给你一个例题：串“ababaaababaa”的next数组和nextval数组分别是什么？
+            答案：
+            -1,0,0,1,2,3,1,1,2,3,4,5
+            0,1,0,1,0,4,2,1,0,1,0,4
+<span style="color: green">设有字符串S='aabaabaabaac',P='aabaac'</span>
+<span style="color: green">1.求出P的next数组。
+2.若S作主串，P作模式串，给出KMP算法的匹配过程。</span>
+            <span style="color: #4603f5">
+            第一个答案好说|0|1|2|1|2|3|
+            第二个
+            第一趟匹配
+            S；|a|a|b|a|a|b|a|a|b|a|a|c|
+            P：|a|a|b|a|a|c|
+            在S[6]与P[6]的时候失效
+            注意到失效的P串的第六个字符的next数值是3，也就是下次比较的时候，直接跳到P串的第3个字符开始比较
+            P的第三个对应S的第六个
+            也就是第二趟
+            S；|a|a|b|a|a|<span style="color: red">b</span>|a|a|b|a|a|c|
+            P：      |a|a|<span style="color: red">b</span>|a|a|c|
+            失效的时候就是S[9]，P[6]，P的第六个对应的next是3
+            也就是下一次从S[9],P[3]开始
+            也就是第三趟
+            S；|a|a|b|a|a|b|a|a|<span style="color: red">b</span>|a|a|c|
+            P：            |a|a|<span style="color: red">b</span>|a|a|c|
+            匹配成功。
+                </span>
+        </pre>
+    </div>
+    <div class="block">
+        <p>树和二叉树</p>
         <h2>代码示例</h2>
         <pre>
             <code class="c">
@@ -379,7 +1278,7 @@ Hello, world!
         </div>
     </div>
     <div class="block">
-        <p>我在在在在</p>
+        <p>图</p>
         <h2>代码示例</h2>
         <pre>
             <code class="c">
@@ -402,7 +1301,7 @@ Hello, world!
         </div>
     </div>
     <div class="block">
-        <p>我在在在在</p>
+        <p>查找</p>
         <h2>代码示例</h2>
         <pre>
             <code class="c">
@@ -425,7 +1324,7 @@ Hello, world!
         </div>
     </div>
     <div class="block">
-        <p>我在在在在</p>
+        <p>排序</p>
         <h2>代码示例</h2>
         <pre>
             <code class="c">
@@ -448,7 +1347,7 @@ Hello, world!
         </div>
     </div>
     <div class="block">
-        <p>我在在在在</p>
+        <p>算法</p>
         <h2>代码示例</h2>
         <pre>
             <code class="c">
@@ -470,7 +1369,144 @@ Hello, world!
             </pre>
         </div>
     </div>
+    <div class="block">
+        <p>递归和分治</p>
+        <h2>代码示例</h2>
+        <pre>
+            <code class="c">
+#include &lt;stdio.h>
 
+int main() {
+    printf("Hello, world!\n");
+    return 0;
+}
+            </code>
+        </pre>
+        <h3>控制台输出</h3>
+        <div class="console">
+            <pre>
+                <code>
+$ ./a.out
+Hello, world!
+                </code>
+            </pre>
+        </div>
+    </div>
+    <div class="block">
+        <p>动态规划</p>
+        <h2>代码示例</h2>
+        <pre>
+            <code class="c">
+#include &lt;stdio.h>
+
+int main() {
+    printf("Hello, world!\n");
+    return 0;
+}
+            </code>
+        </pre>
+        <h3>控制台输出</h3>
+        <div class="console">
+            <pre>
+                <code>
+$ ./a.out
+Hello, world!
+                </code>
+            </pre>
+        </div>
+    </div>
+    <div class="block">
+        <p>贪心算法</p>
+        <h2>代码示例</h2>
+        <pre>
+            <code class="c">
+#include &lt;stdio.h>
+
+int main() {
+    printf("Hello, world!\n");
+    return 0;
+}
+            </code>
+        </pre>
+        <h3>控制台输出</h3>
+        <div class="console">
+            <pre>
+                <code>
+$ ./a.out
+Hello, world!
+                </code>
+            </pre>
+        </div>
+    </div>
+    <div class="block">
+        <p>回溯法和其他算法</p>
+        <h2>代码示例</h2>
+        <pre>
+            <code class="c">
+#include &lt;stdio.h>
+
+int main() {
+    printf("Hello, world!\n");
+    return 0;
+}
+            </code>
+        </pre>
+        <h3>控制台输出</h3>
+        <div class="console">
+            <pre>
+                <code>
+$ ./a.out
+Hello, world!
+                </code>
+            </pre>
+        </div>
+    </div>
+    <div class="block">
+        <p>数据结构经典题</p>
+        <h2>代码示例</h2>
+        <pre>
+            <code class="c">
+#include &lt;stdio.h>
+
+int main() {
+    printf("Hello, world!\n");
+    return 0;
+}
+            </code>
+        </pre>
+        <h3>控制台输出</h3>
+        <div class="console">
+            <pre>
+                <code>
+$ ./a.out
+Hello, world!
+                </code>
+            </pre>
+        </div>
+    </div>
+    <div class="block">
+        <p>算法经典题</p>
+        <h2>代码示例</h2>
+        <pre>
+            <code class="c">
+#include &lt;stdio.h>
+
+int main() {
+    printf("Hello, world!\n");
+    return 0;
+}
+            </code>
+        </pre>
+        <h3>控制台输出</h3>
+        <div class="console">
+            <pre>
+                <code>
+$ ./a.out
+Hello, world!
+                </code>
+            </pre>
+        </div>
+    </div>
     <!-- 添加更多的块 -->
 </div>
 
