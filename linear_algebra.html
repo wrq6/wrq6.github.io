@@ -843,6 +843,119 @@ D=	<div class="determinant" style="line-height:5px">
         <p>左行右列：左乘行变换，右乘列变换</p>
         <p style="color: red">初等变换法求逆矩阵</p>
         <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>E</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">)</mo></mrow><mover><mrow><mo>有限初等行变换</mo></mrow><mo>→</mo></mover><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>E</mi></mtd><mtd><msup><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">)</mo></mrow></math></p>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>NB表</th>
+                <th><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>E</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></math></th>
+                <th><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>E</mi><mrow><mi>i</mi></mrow></msub><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></math></th>
+                <th><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>E</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></math></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>左乘</td>
+                <td>交换ij行</td>
+                <td>第i行×k</td>
+                <td>第j行×k+第i行</td>
+            </tr>
+            <tr>
+                <td>右乘</td>
+                <td>交换ij列</td>
+                <td>第j列×k</td>
+                <td>第i列×k+第j列</td>
+            </tr>
+            <tr>
+                <td>行列式</td>
+                <td>-1</td>
+                <td>k</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>逆矩阵</td>
+                <td><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>E</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></math></td>
+                <td><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>E</mi><mrow><mi>i</mi></mrow></msub><mo stretchy="false">(</mo><mfrac><mn>1</mn><mi>k</mi></mfrac><mo stretchy="false">)</mo></math></td>
+                <td><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>E</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo stretchy="false">(</mo><mo>−</mo><mi>k</mi><mo stretchy="false">)</mo></math></td>
+            </tr>
+            <tr>
+                <td>转置</td>
+                <td><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>E</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></math></td>
+                <td><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>E</mi><mrow><mi>i</mi></mrow></msub><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></math></td>
+                <td><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>E</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></math></td>
+            </tr>
+            </tbody>
+        </table>
+        <p>怎么着对上面的表不以为意？甚至觉得让你感到厌恶？</p>
+        <div style="background-color: #D3D3D3; width: auto; height: auto;">
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo></math></p>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mo>−</mo><mn>2</mn></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo></math></p>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>2</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo></math></p>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">)</mo></mrow><mrow><mn>2024</mn></mrow></msup><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><mn>1</mn></mtd><mtd><mn>2</mn></mtd><mtd><mn>3</mn></mtd></mtr><mtr><mtd><mn>4</mn></mtd><mtd><mn>5</mn></mtd><mtd><mn>6</mn></mtd></mtr><mtr><mtd><mn>7</mn></mtd><mtd><mn>8</mn></mtd><mtd><mn>9</mn></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">)</mo></mrow><mstyle scriptlevel="0"><mspace width="negativethinmathspace"></mspace></mstyle><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><mn>1</mn></mtd><mtd><mo>−</mo><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">)</mo></mrow><mstyle scriptlevel="0"><mspace width="negativethinmathspace"></mspace></mstyle><mo>=</mo></math></p>
+        你不会傻乎乎还用传统的逆矩阵求解办法来吧？<br>
+            <span style="color: red">第一题</span><br>
+            看第一个不就是交换一二行，或者一二列，whatever<br>
+            反正就是<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>E</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></math>
+            逆矩阵不就是等于本身<br>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">)</mo></mrow></math>
+            <span style="color: red">第二题</span><br>
+            第二个不就初等矩阵的第三行或者第三列×-2<br>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>E</mi><mrow><mi>i</mi></mrow></msub><mo stretchy="false">(</mo><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo></math>
+            逆矩阵不就是<br>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>E</mi><mrow><mi>i</mi></mrow></msub><mo stretchy="false">(</mo><mfrac><mn>1</mn><mi>k</mi></mfrac><mo stretchy="false">)</mo></math>
+            你别再自以为是了，我问你这里的k分之1是什么意思？难道是给全部乘上吗？肯定不是啊，就是我们将本来×k的换成×1/k<br>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mo>−</mo><mn>2</mn></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mo>−</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">)</mo></mrow></math>
+            <span style="color: red">第三题</span><br>
+            不就是第一行×2加到第二行吗？你要是用列的想法也行，我建议是一贯制<br>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>E</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo></math>
+            它的逆矩阵不就是<br>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>E</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo stretchy="false">(</mo><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo></math>
+            所以<br>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>2</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mo>−</mo><mn>2</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">)</mo></mrow></math>
+            <span style="color:red">第四题</span><br>
+            我们先看左边，因为左行右列，也就是左乘是行变换<br>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN" fence="true" stretchy="true" symmetric="true"></mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mtable columnalign="center center center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE" fence="true" stretchy="true" symmetric="true"></mo></mrow><mo data-mjx-texclass="CLOSE">)</mo></mrow><mrow><mn>2024</mn></mrow></msup></math>
+            我们思考一个问题，假如这是一次方得到时候，是不是就是交换两行的意思？<br>
+            如果是平方呢？什么意思，这么快不认识平方了？矩阵平方不就是A×A吗？A交换1与2行<br>
+            A乘A，交换1与2行，再交换1与2行，不就恢复原位了<br>
+            好，简简单单，偶数次方就是原，奇数就是交换了<br>
+            2024是偶数还是奇数？不知道请去你们当地申请老年大学吧<br>
+            我们再看右边<br>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN" fence="true" stretchy="true" symmetric="true"></mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mtable columnalign="center center center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mn>1</mn></mtd><mtd><mo>−</mo><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE" fence="true" stretchy="true" symmetric="true"></mo></mrow><mo data-mjx-texclass="CLOSE">)</mo></mrow></math>
+            是不是第一列的负一倍加到第二列<br>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>E</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo stretchy="false">(</mo><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></math>
+            左行右列，这是右乘也就是变换列，也就是以某列的数倍加到某列<br>
+            那到底是哪一个呢？ij分别是什么？行就近，列就远<br>
+            Eij(k),列变换，i离k远就是以i列的-1倍加到j列<br>
+            也就是将中间矩阵的第一列的-1倍加到第二列<br>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN" fence="true" stretchy="true" symmetric="true"></mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mtable columnalign="center center center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE" fence="true" stretchy="true" symmetric="true"></mo></mrow><mo data-mjx-texclass="CLOSE">)</mo></mrow><mrow><mn>2024</mn></mrow></msup><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mtable columnalign="center center center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mn>1</mn></mtd><mtd><mn>2</mn></mtd><mtd><mn>3</mn></mtd></mtr><mtr><mtd><mn>4</mn></mtd><mtd><mn>5</mn></mtd><mtd><mn>6</mn></mtd></mtr><mtr><mtd><mn>7</mn></mtd><mtd><mn>8</mn></mtd><mtd><mn>9</mn></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">)</mo></mrow><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mtable columnalign="center center center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mn>1</mn></mtd><mtd><mo>−</mo><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">)</mo></mrow><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN" fence="true" stretchy="true" symmetric="true"></mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mtable columnalign="center center center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mn>1</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>3</mn></mtd></mtr><mtr><mtd><mn>4</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>6</mn></mtd></mtr><mtr><mtd><mn>7</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>9</mn></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE" fence="true" stretchy="true" symmetric="true"></mo></mrow><mo data-mjx-texclass="CLOSE">)</mo></mrow></math>
+        </div>
+        <p></p>
+        <div style="background-color: #DDA0DD; width: auto; height: auto;">
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtable displaystyle="true" columnalign="right left right left right left right left right left right left" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt"><mtr><mtd></mtd><mtd><mtext>&nbsp;设&nbsp;</mtext><mi>A</mi><mtext>&nbsp;是 3 阶矩阵,将&nbsp;</mtext><mi>A</mi><mtext>&nbsp;的第 1、2 行互换得矩阵&nbsp;</mtext><mi>B</mi><mtext>,再将&nbsp;</mtext><mi>B</mi><mtext>&nbsp;的第 2、3 列互换得单位矩</mtext></mtd></mtr><mtr><mtd></mtd><mtd><mtext>阵,记&nbsp;</mtext><msub><mi>P</mi><mn>1</mn></msub><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">)</mo></mrow><mo>,</mo><msub><mi>P</mi><mn>2</mn></msub><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">)</mo></mrow><mo>,</mo><mtext>则&nbsp;</mtext><msup><mi>A</mi><mo>∗</mo></msup><mo>=</mo></mtd></mtr><mtr><mtd></mtd><mtd><mrow><mi mathvariant="normal">A</mi><mo>.</mo></mrow><msub><mi>P</mi><mrow><mn>1</mn></mrow></msub><msub><mi>P</mi><mrow><mn>2</mn></mrow></msub><mo>.</mo><mstyle scriptlevel="0"><mspace width="1em"></mspace></mstyle><mrow><mi mathvariant="normal">B</mi><mo>.</mo></mrow><msub><mi>P</mi><mrow><mn>2</mn></mrow></msub><msub><mi>P</mi><mrow><mn>1</mn></mrow></msub><mo>.</mo><mstyle scriptlevel="0"><mspace width="1em"></mspace></mstyle><mrow><mi mathvariant="normal">C</mi><mo>.</mo></mrow><mo>−</mo><msubsup><mi>P</mi><mrow><mn>1</mn></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><msub><mi>P</mi><mrow><mn>2</mn></mrow></msub><mo>.</mo><mstyle scriptlevel="0"><mspace width="1em"></mspace></mstyle><mrow><mi mathvariant="normal">D</mi><mo>.</mo></mrow><mo>−</mo><msub><mi>P</mi><mrow><mn>1</mn></mrow></msub><msubsup><mi>P</mi><mrow><mn>2</mn></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mo>.</mo></mtd></mtr></mtable></math>
+            <hr>
+            我们不着急，分析题目，看目的，求A的伴随<br>
+            以我们往常的经验求伴随要么就是按定义硬求<br>
+            要么就是拿出求伴随的公式<br>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo><mfrac><msup><mi>A</mi><mo>∗</mo></msup><mrow><mo stretchy="false">|</mo><mi>A</mi><mo stretchy="false">|</mo></mrow></mfrac></math>
+            这道题可能是围绕这个公式来的，因为我们不知道A的具体数值<br>
+            好，我们尝试求A的逆矩阵，A的逆矩阵也不好求，因为我们不知道A<br>
+            所以有没有一种可能我们用一个东西替换A<br>
+            看题目给条件<br>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>P</mi><mrow><mn>1</mn></mrow></msub><mi>A</mi><mo>=</mo><mi>B</mi></math>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>P</mi><mrow><mn>1</mn></mrow></msub><mi>A</mi><msub><mi>P</mi><mrow><mn>2</mn></mrow></msub><mo>=</mo><mi>E</mi></math>
+            E是单位矩阵我们知道，两个P我们也知道，那我们就从中剥离A，左乘右乘P的逆<br>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msubsup><mi>P</mi><mrow><mn>1</mn></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><msub><mi>P</mi><mrow><mn>1</mn></mrow></msub><mi>A</mi><msub><mi>P</mi><mrow><mn>2</mn></mrow></msub><msubsup><mi>P</mi><mrow><mn>2</mn></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mo>=</mo><msubsup><mi>P</mi><mrow><mn>1</mn></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mi>E</mi><msubsup><mi>P</mi><mrow><mn>2</mn></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msubsup></math>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>A</mi><mo>=</mo><msubsup><mi>P</mi><mrow><mn>1</mn></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mi>E</mi><msubsup><mi>P</mi><mrow><mn>2</mn></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msubsup></math>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>A</mi><mo>=</mo><msub><mi>P</mi><mrow><mn>1</mn></mrow></msub><msub><mi>P</mi><mrow><mn>2</mn></mrow></msub></math>
+            别说你不知道初等矩阵的逆矩阵就是本身<br>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mi>A</mi><mo>∗</mo></msup><mo>=</mo><mo stretchy="false">(</mo><msub><mi>P</mi><mrow><mn>1</mn></mrow></msub><msub><mi>P</mi><mrow><mn>2</mn></mrow></msub><msup><mo stretchy="false">)</mo><mo>∗</mo></msup></math>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mi>A</mi><mo>∗</mo></msup><mo>=</mo><msubsup><mi>P</mi><mrow><mn>2</mn></mrow><mo>∗</mo></msubsup><msubsup><mi>P</mi><mrow><mn>1</mn></mrow><mo>∗</mo></msubsup></math>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mi>A</mi><mo>∗</mo></msup><mo>=</mo><msubsup><mi>P</mi><mrow><mn>2</mn></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mrow><mo stretchy="false">|</mo></mrow><msub><mi>P</mi><mrow><mn>2</mn></mrow></msub><mrow><mo stretchy="false">|</mo></mrow><mo>⋅</mo><msubsup><mi>P</mi><mrow><mn>1</mn></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mrow><mo stretchy="false">|</mo></mrow><msub><mi>P</mi><mrow><mn>1</mn></mrow></msub><mo stretchy="false">|</mo></math>
+            考虑我们的NB表<br>
+            初等逆是本身，初等行列式交换是-1<br>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mi>A</mi><mo>∗</mo></msup><mo>=</mo><msub><mi>P</mi><mrow><mn>2</mn></mrow></msub><msub><mi>P</mi><mrow><mn>1</mn></mrow></msub></math>
+            所以选B<br>
+        </div>
     </div>
     <div class="note-container">
         <h1>矩阵等价</h1>
@@ -993,7 +1106,7 @@ D=	<div class="determinant" style="line-height:5px">
         <p>我们定义里面说了，α是非零向量当然是秩小于个数，也就是n阶行列式是为0的</p>
         <p style="color: green">这里我其实一开始有点犹豫的，因为我想到线性相关的定义时，全0和非全0是系数k的，而不是x后来想了想没有半毛钱关系，两个都不是一个东西</p>
         <p>特征向量怎么求？</p>
-        <p>我们通过行列式为0求出多个特征向量，分别回代求出多个特征向量</p>
+        <p>我们通过行列式为0求出多个特征值，分别回代求出多个特征向量</p>
         <h3 style="color: red">主对角线的上三角、下三角、对角阵的特征值为对角线上的数</h3>
         <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>1</mn></mtd><mtd><mn>3</mn></mtd><mtd><mn>2</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>2</mn></mtd><mtd><mn>3</mn></mtd><mtd><mn>2</mn></mtd><mtd><mn>1</mn></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mo>的特征值就是</mo><mn>1</mn><mo>、</mo><mn>1</mn><mo>、</mo><mn>2</mn><mo>、</mo><mn>1</mn></math></p>
         <p>特征值与特征向量是一一对应的</p>
@@ -1147,7 +1260,7 @@ D=	<div class="determinant" style="line-height:5px">
         <p>我了个亲娘✌。这不就是实对称矩阵的相似对角化的式子吗？</p>
         <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mi>Q</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mi>A</mi><mi>Q</mi><mo>=</mo><mo>∧</mo><mo stretchy="false">⟹</mo><msup><mi>Y</mi><mrow><mi>T</mi></mrow></msup><mo>∧</mo><mi>Y</mi></math></p>
         <p>这下不就是对角阵了</p>
-        <h2 style="color: red">方法一：配方法</h2>
+        <h2 style="color: red">方法二：配方法</h2>
         <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>f</mi><mo>=</mo><msubsup><mi>x</mi><mrow><mn>1</mn></mrow><mrow><mn>2</mn></mrow></msubsup><mo>+</mo><mn>8</mn><msubsup><mi>x</mi><mrow><mn>2</mn></mrow><mrow><mn>2</mn></mrow></msubsup><mo>+</mo><mn>4</mn><msub><mi>x</mi><mrow><mn>1</mn></mrow></msub><msub><mi>x</mi><mrow><mn>2</mn></mrow></msub></math></p>
         <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>f</mi><mo>=</mo><mo stretchy="false">(</mo><msub><mi>x</mi><mrow><mn>1</mn></mrow></msub><mo>+</mo><mn>2</mn><msub><mi>x</mi><mrow><mn>2</mn></mrow></msub><msup><mo stretchy="false">)</mo><mrow><mn>2</mn></mrow></msup><mo>+</mo><mn>4</mn><msubsup><mi>x</mi><mrow><mn>2</mn></mrow><mrow><mn>2</mn></mrow></msubsup></math></p>
         <p>再换元</p>
