@@ -2,80 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Improper Integral Visualization</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>路径序列表示</title>
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
+        .path-table {
+            border-collapse: collapse;
+            margin: 10px;
         }
-        .container {
+        .path-table th, .path-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
             text-align: center;
         }
-        canvas {
-            max-width: 100%;
-            height: auto;
+        .path-table th {
+            background-color: #f2f2f2;
+        }
+        .path-table caption {
+            font-size: 18px;
+            margin: 5px 0 10px 0;
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>Improper Integral Visualization</h1>
-    <canvas id="myChart"></canvas>
-</div>
-<script>
-    // Generate data points for the improper integral y = 1/x
-    function generateData() {
-        const data = [];
-        for (let x = 0.1; x <= 10; x += 0.1) {
-            data.push({x: x, y: 1/x});
-        }
-        return data;
-    }
 
-    const ctx = document.getElementById('myChart').getContext('2d');
-    const chart = new Chart(ctx, {
-        type: 'scatter',
-        data: {
-            datasets: [{
-                label: 'y = 1/x',
-                data: generateData(),
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                showLine: true,
-                fill: false
-            }]
-        },
-        options: {
-            scales: {
-                x: {
-                    type: 'linear',
-                    position: 'bottom',
-                    title: {
-                        display: true,
-                        text: 'x'
-                    }
-                },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'y'
-                    }
-                }
-            },
-            plugins: {
-                title: {
-                    display: true,
-                    text: 'Graph of y = 1/x'
-                }
-            }
-        }
-    });
-</script>
+<h2>路径序列</h2>
+
+<table class="path-table">
+    <caption>Path(-1)</caption>
+    <tr>
+        <th>Step</th>
+        <th>Value</th>
+    </tr>
+    <tr><td>1</td><td>0</td></tr>
+    <tr><td>2</td><td>1</td></tr>
+    <tr><td>3</td><td>2</td></tr>
+    <!-- 根据需要添加更多行 -->
+    <!-- ... -->
+    <tr><td>9</td><td>2</td></tr>
+</table>
+
+<table class="path-table">
+    <caption>Path(-2)</caption>
+    <!-- 同上，复制相同的行结构 -->
+    <tr><td>1</td><td>0</td></tr>
+    <tr><td>2</td><td>1</td></tr>
+    <tr><td>3</td><td>2</td></tr>
+    <!-- ... -->
+    <tr><td>10</td><td>2</td></tr>
+</table>
+
 </body>
 </html>
