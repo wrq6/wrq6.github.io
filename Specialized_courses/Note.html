@@ -9,11 +9,20 @@
     <title>Code Notes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/default.min.css">
     <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #28fae6;
+            --background-color: #f0f0f0;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #f0f0f0;
+            background-color: var(--background-color);
+            color: var(--text-color);
         }
         header {
             background-color: #333;
@@ -25,10 +34,11 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
+            padding: 0 15px;
         }
         .block {
             background-color: #fff;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             margin-bottom: 20px;
             padding: 20px;
             border-radius: 5px;
@@ -38,17 +48,18 @@
             margin-top: 0;
             font-size: 20px;
             margin-bottom: 10px;
-            color: #333;
+            color: var(--text-color);
         }
         .block p {
             margin-bottom: 10px;
+            font-size: 16px;
         }
         .block pre {
             white-space: pre-wrap;
             word-wrap: break-word;
             background-color: #f9f9f9;
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             overflow-x: auto;
             border-radius: 5px;
             margin-top: 0;
@@ -67,7 +78,6 @@
             word-wrap: break-word;
             margin: 0;
             padding: 0;
-            color: #fff;
         }
         .console pre code::before {
             content: "$ ";
@@ -75,7 +85,7 @@
         }
         .btn {
             padding: 10px 20px;
-            background-color: #007bff;
+            background-color: var(--primary-color);
             color: #fff;
             border: none;
             cursor: pointer;
@@ -94,19 +104,21 @@
             width: 100%;
             padding: 10px;
             font-size: 16px;
-            border: 1px solid #ccc;
+            border: 1px solid var(--border-color);
             border-radius: 5px;
             box-sizing: border-box;
         }
-        h3{
+        h3 {
             color: #00aa44;
+            margin-bottom: 10px;
         }
-        h2{
-            color: #20ecac;
+        h2 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
         }
-        p{
-            color: red;
-            font-size: 25px;
+        p {
+            color: var(--text-color);
+            font-size: 16px;
         }
         .adjacency-list {
             margin: 20px;
@@ -119,7 +131,7 @@
             border-collapse: collapse;
         }
         th, td {
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             padding: 8px;
             text-align: left;
         }
@@ -127,7 +139,87 @@
             background-color: #f2f2f2;
         }
         td:first-child {
-            font-weight: bold; /* 突出显示邻接顶点 */
+            font-weight: bold;
+        }
+        .sidebar {
+            position: fixed;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #fff;
+            border-right: 1px solid var(--border-color);
+            padding: 20px;
+            overflow-y: auto;
+            transition: left 0.3s ease;
+            z-index: 1000;
+        }
+        .sidebar.open {
+            left: 0;
+        }
+        #toc-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        #toc-list li a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-size: 16px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        #toc-list li a:hover {
+            text-decoration: underline;
+        }
+        .toggle-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+        .toggle-btn:hover {
+            background-color: #0056b3;
+        }
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+            .search-box, .btn {
+                font-size: 14px;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                left: -100%;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .toggle-btn {
+                left: 10px;
+            }
+        }
+        @media print {
+            body {
+                background-color: #fff;
+            }
+            .sidebar, .toggle-btn {
+                display: none;
+            }
+            .container {
+                width: 100%;
+                max-width: none;
+                padding: 0;
+                margin: 0;
+            }
         }
     </style>
 </head>
@@ -138,7 +230,51 @@
         <input type="text" class="search-box" id="searchBox" placeholder="输入关键词进行搜索...">
     </div>
 </header>
+<button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+<div class="sidebar" id="sidebar">
+    <h3>目录</h3>
+    <ul id="toc-list">
+        <!-- Table of contents will be generated here -->
+    </ul>
+</div>
+<script>
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('open');
+        // Toggle body margin to push content after opening the sidebar
+        document.body.classList.toggle('margin-left');
+    }
+
+    function generateTableOfContents() {
+        const tocList = document.getElementById('toc-list');
+        tocList.innerHTML = ''; // Clear existing list items
+
+        const headings = document.querySelectorAll('h1, h2');
+
+        headings.forEach((heading, index) => {
+            const headingLevel = parseInt(heading.tagName[1], 10); // Get the level (1 for h1, 2 for h2)
+            const headingText = heading.textContent.trim();
+            const anchor = document.createElement('a');
+            const anchorId = headingText.toLowerCase().replace(/\s+/g, '-');
+            heading.id = anchorId;
+
+            anchor.href = '#' + anchorId;
+            anchor.textContent = headingText;
+            anchor.className = 'toc-link';
+
+            const li = document.createElement('li');
+            li.style.paddingLeft = `${(headingLevel - 1) * 20}px`; // Indent based on heading level
+            li.appendChild(anchor);
+            tocList.appendChild(li);
+        });
+    }
+
+    // Call generateTableOfContents on both DOMContentLoaded and window load events
+    document.addEventListener('DOMContentLoaded', generateTableOfContents);
+    window.addEventListener('load', generateTableOfContents);
+</script>
 <div class="container">
+
     <!--   ------------------------------------------------------------------------------------------------------          -->
     <div class="audio-container">
         <audio controls ontimeupdate="showLyrics()">
@@ -148,7 +284,7 @@
     </div>
     <div class="block">
 
-        <p>数据结构的三要素</p>
+        <h1>数据结构的三要素</h1>
         <h2>逻辑结构</h2>
         <pre>
             <code class="c">
@@ -180,7 +316,7 @@
     </div>
     <!--   ------------------------------------------------------------------------------------------------------          -->
     <div class="block">
-        <p>算法和算法的度量</p>
+        <h1>算法和算法的度量</h1>
         <h2>算法的基本概念</h2>
         <pre>
             <code class="c">
@@ -199,7 +335,7 @@
 n：问题规模
 T(n)：时间开销
 O(n)：时间复杂度
-推导大O阶：
+<span style="color: red">推导大O阶：</span>
     1.用常数1取代运行时间中所有的加法常数
     2.在修改后的运行次数函数中只保留最高阶项
     3.将最高阶项系数变为1
@@ -255,7 +391,7 @@ for (i = n - 1; i > 1; i--)
 再看<span style="color: red">内层循环</span>
 当i=n-1的时候，j从1开始，直到j < i  也就是j < n-1
 1到n-2 有几次？不知道？可去你的吧，n-2次啊😥
-同理，当i=n-2的时候，执行 n-3次
+同理，当i=n-3的时候，执行 n-3次
 i一直会到2，也就是内层最后一次是
 j<2，j从1开始，也就是执行1次
 好，我们捋一下
@@ -384,7 +520,7 @@ O(n)
     </div>
     <!--   ------------------------------------------------------------------------------------------------------          -->
     <div class="block">
-        <p>线性表</p>
+        <h1>线性表</h1>
         <h2>线性表基本概念</h2>
         <pre>
 线性表是具有<span style="color: red">相同</span>数据类型的n个数据元素的<span style="color: red">有限序列</span>，n=0时为空表
@@ -432,6 +568,8 @@ O(n)
 听着很熟悉吧，我们来看，如果这个链表带有头结点，那么每次新增的元素
 放到头节点之后，也就是说，每次新增的元素的下一指向先被赋为头结点的下一指向
 然后再将头结点的下一指向赋为这个元素
+等等，是不是把你搞晕了哈哈哈🤣🤣🤣🫵🏿，你傻吗？头结点->1，现在加入2
+你肯定让2->1,然后再让头结点->2啊
 L->next=NULL;
 p->next=L->next;
 L->next=p;
@@ -455,8 +593,8 @@ head=NULL;
 第一段代码，我们看到head是头指针，头指针被分配了指向
     这不是给head分配空间，是让head指向了一个地方，分配空间Lnode *head这句已经自动分配了
     好，头指针现在已经指向了一个地方，head->next是说头指针指向的这个地方的指针域指向下一个的地方赋为空
-    |头指针|->|头结点|->|NULL|
-第二段代码，我们看到head头指针直接被定义以后赋为NULL说明没有任何指向，也就是没有头指针。
+    |头指针|->|头结点|->|NULL|//通过这个你应该明白了，头结点是分配的地址
+第二段代码，我们看到head头指针直接被定义以后赋为NULL说明没有任何指向，也就是没有头结点。
 -------------------------
 然后我们讲讲头插法
     <code>
@@ -565,7 +703,7 @@ head->next=p;将头指针指向的头结点的指针域指向p
         </pre>
     </div>
     <div class="block">
-        <p>栈、队列和数组</p>
+        <h1>栈、队列和数组</h1>
         <h2>栈</h2>
         <pre>
 栈是一种线性表，只不过它的操作受到限制
@@ -633,12 +771,12 @@ typedef struct LinkNode{
 front 是指向对头，rear是指向队尾。
 一开始front和rear都是指向第一个元素，也就是空队
 当不断增加元素以后，rear不断后移。
-当是当我们有元素出队列的时候，front要后移
+当我们有元素出队列的时候，front要后移
 这个时候问题就是出来了，就是说数组的前几个是空的
 而rear回不到前面，也就是说，一个冰箱上下都装满了物品
 当上面的物品被清空的时候，你还要放物品，你只知道去下面放
 下面是满的，你就说你要重新买个冰箱，因为现有的冰箱不能放了
-这是不实在的
+这不是蠢吗，不是，有钱我也这么干，买两杯咖啡，一个倒一个扔，反正不爱喝
         </pre>
 <h2>顺序循环队列</h2>
         <pre>
@@ -1278,7 +1416,7 @@ Next: |0|1|2|1|2|<span style="color: red">3</span>|
         </pre>
     </div>
     <div class="block">
-<p>树和二叉树</p>
+<h1>树和二叉树</h1>
 <h2>树的基本概念</h2>
         <pre>
             <canvas id="myCanvas14" width="800" height="300"></canvas>
@@ -1377,7 +1515,7 @@ m叉数：所有结点的度小于等于m
 <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mo>高度为</mo><mi>h</mi><mo>，度为</mo><mi>m</mi><mo>的树至少有</mo><mi>h</mi><mo>+</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>个结点</mo></math>
             <span style="color: green">
 我来解释一下，
-第一个你随便画一个二叉树满的，是不是2的比层数低一次方的数
+第一个你随便画一个二叉树满的，是不是2的比层数低一次方的数（等比数列第n项公式）
 第二个它说了至多，也就是每个结点的度是m，每次都是上一次的m倍，也就是等比求和公式
 <span style="color: red">第三个</span>因为至少，所以我们把每一个结点满填m，因为是m叉树嘛，然后我们设高度为h
 <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>n</mi><mo>=</mo><mfrac><mrow><msup><mi>m</mi><mi>h</mi></msup><mo>−</mo><mn>1</mn></mrow><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></mfrac></math>
@@ -2715,7 +2853,7 @@ typedef struct{              //树结构
 </pre>
     </div>
     <div class="block">
-        <p>图</p>
+        <h1>图</h1>
         <h2>基本概念</h2>
         <pre>
 G=(V,E)//V是顶点，E是边，G是图，说白了都是英文单词首字母
@@ -2772,6 +2910,12 @@ G=(V,E)//V是顶点，E是边，G是图，说白了都是英文单词首字母
 <span style="color: red">有向树</span>
 一个顶点的入度为0，其余顶点的入度为1的有向图，是有向树
         </pre>
+<h2>有向图的强连通分量的求法</h2>
+<pre>
+1.找入度为0/出度为0的顶点（满足一个为0就行）
+2.依次删除这些顶点以及相连的弧，直到不存在入度/出度为0的顶点（为什么说依次呢，以为当你删除第一个顶点以后可能会造成别的顶点就为0了）
+3.删掉的顶点以及剩下的有向图就是强连通分量(每一个被你删掉的顶点就是一个单独的强连通分量)
+</pre>
         <h2>邻接矩阵</h2>
         <pre>
 <canvas id="myCanvas" width="400" height="200" style="border:1px solid #000;"></canvas>
@@ -6156,7 +6300,7 @@ edges.forEach(function(edge) {
 </pre>
     </div>
     <div class="block">
-        <p>查找</p>
+        <h1>查找</h1>
 <h2>顺序查找、折半查找、分块查找</h2>
 <pre>
 <span style="color: red;font-size: 20px">顺序查找</span>对<span style="color: green">顺序表</span>和<span style="color: green">链表</span>适用
@@ -8729,19 +8873,135 @@ B+树，除了叶子结点，都是索引，也就是说，还没有到叶子结
         </pre>
     </div>
     <div class="block">
-<p>排序</p>
+<h1>排序</h1>
 <h2>排序的基本概念</h2>
 <pre>
 除去我写的外部排序，本节所有排序都是属于内部排序
+<span style="color: red">算法的稳定性</span>
+    待排序表中两个元素如果对应关键字一样，在使用某一种排序方法后，相对位置不变，则算法稳定
+算法的稳定性不代表算法的好坏
+    <table>
+        <tbody>
+            <tr>
+                <td>呵呵，背吧哥们🤣🐒🫵🏿</td>
+                <td><span style="color: #6d02af">最好时间复杂度</span></td>
+                <td><span style="color: #6d02af">最坏时间复杂度</span></td>
+                 <td><span style="color: #6d02af">平均复杂度</span></td>
+                <td><span style="color: #6d02af">辅助空间复杂度</span></td>
+                <td><span style="color: #6d02af">稳定性</span></td>
+            </tr>
+            <tr>
+                <td>直接插入排序</td>
+                <td>O(n)</td>
+                <td>O(n²)</td>
+                <td>O(n²)</td>
+                <td>O(1)</td>
+                <td>稳定</td>
+            </tr>
+            <tr>
+                <td>折半插入排序</td>
+                <td>O(n)</td>
+                <td>O(n²)</td>
+                <td>O(n²)</td>
+                <td>O(1)</td>
+                <td>稳定</td>
+            </tr>
+          <tr>
+                <td>希尔</td>
+                <td>O(n)</td>
+                <td>O(n²)</td>
+                <td>O(n的1.3次方)</td>
+                <td>O(1)</td>
+                <td>不稳定</td>
+            </tr>
+         <tr>
+                <td>冒泡</td>
+                <td>O(n)</td>
+                <td>O(n²)</td>
+                <td>O(n²)</td>
+                <td>O(1)</td>
+                <td>稳定</td>
+            </tr>
+                 <tr>
+                <td>快排</td>
+                <td>O(nlog₂n)</td>
+                <td>O(n²)</td>
+                <td>O(nlog₂n)</td>
+                <td>O(1)</td>
+                <td>不稳定</td>
+            </tr>
+                         <tr>
+                <td>简单选择排序</td>
+                <td>O(n²)</td>
+                <td>O(n²)</td>
+                <td>O(n²)</td>
+                <td>O(1)</td>
+                <td>不稳定</td>
+            </tr>
+        <tr>
+                <td>堆排序</td>
+                <td>O(nlog₂n)</td>
+                <td>O(nlog₂n)</td>
+                <td>O(nlog₂n)</td>
+                <td>O(1)</td>
+                <td>不稳定</td>
+            </tr>
+        <tr>
+                <td>2路归并排序</td>
+                <td>O(nlog₂n)</td>
+                <td>O(nlog₂n)</td>
+                <td>O(nlog₂n)</td>
+                <td>O(n)</td>
+                <td>稳定</td>
+            </tr>
+        <tr>
+                <td>基数排序</td>
+                <td>O(d(n+r))</td>
+                <td>O(d(n+r))</td>
+                <td>O(d(n+r))</td>
+                <td>O(r)</td>
+                <td>稳定</td>
+            </tr>
+        </tbody>
+    </table>
 </pre>
 <h2>插入排序(直接插入、折半插入、希尔)</h2>
 <pre>
 <hr>
+<span style="color: red;font-size: 20px">直插</span>
+直插听起来简单，实际上确实简单
+给你一个序列
+{49，38，65，97，76，13，27，49}
+我们会每次选一个作为比较值，例如一开始我们选择第一个49作为已经排好的数字
+{<span style="color: red">（49）</span>，38，65，97，76，13，27，49}给它做上标记
+然后我们选38对比我们的49，发现38比49小，直接把49往后移动一位
+{，<span style="color: red">（49）</span>，65，97，76，13，27，49}因为我们是把38存放在temp临时变量中，即便49替代了原本的38也无所谓
+现在继续比较发现已经没有元素了，所以把38放入，并且标记排好的序列
+{<span style="color: red">（38，49）</span>，65，97，76，13，27，49}
+接下来我们把65放到临时变量temp中，依次从后比较已经排好的序列
+比49大，也就是比排好的序列最大都大，所以不动，将排好序列标记覆盖到65
+{<span style="color: red">（38，49，65）</span>，97，76，13，27，49}
+同样拿出97一样比所以大
+{<span style="color: red">（38，49，65，97）</span>，76，13，27，49}
+现在拿出76，发现比97小，97，往后退一位，占了76位置
+{<span style="color: red">（38，49，65，，97）</span>，13，27，49}
+然后比较76和65，发现比65大，所以放到65的位置+1处，也就是原本97的位置
+{<span style="color: red">（38，49，65，76，97）</span>，13，27，49}
+再比较13，比97小，97后退，76后退，65、49、38依次后退
+{<span style="color: red">（13，38，49，65，76，97）</span>，27，49}
+后面我就不说了，都是一样的，但是注意这最后一次
+{<span style="color: red">（13，27，38，49，65，76，97）</span>，49}
+到这里的时候，49按照以往的一样进行排序
+比97、76、65都小，他们都后退，但是到49的时候，两个相等怎么办？
+比它小的才后退，不然不动，也就是
+{<span style="color: red">（13，27，38，49，65，76，97）</span>，<span style="color: #00ebff">49</span>}
+{<span style="color: red">（13，27，38，49，<span style="color: #00ebff">49</span>，65，76，97）</span>}
+相信你也看出来了，算法稳定性是指关键字一样的元素使用排序后相对位置是否改变，这里49和49的相对位置没有改变
+所以直插排序是稳定算法
+<hr>
 <span style="color: red;font-size: 20px">折半</span>
 <span style="color: #00daff">对{5,13,17,29,37,41,61,79,89}利用折半查找值为29的元素</span>
 <svg width="400" height="150" xmlns="http://www.w3.org/2000/svg">
-
-
         <g id="loading-txt">
         <text x="60" y="50" font-size="12" text-anchor="middle" >_0_</text>
         <text x="85" y="50" font-size="12" text-anchor="middle" >_1_</text>
@@ -8900,6 +9160,14 @@ mid指向的是13，比29小，我们把low(小)指针改为mid(中间指针)的
     </svg>
     <span style="color: #00aa44"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>m</mi><mi>i</mi><mi>d</mi><mo>=</mo><mfrac><mrow><mi>l</mi><mi>o</mi><mi>w</mi><mo>+</mo><mi>h</mi><mi>i</mi><mi>g</mi><mi>h</mi></mrow><mn>2</mn></mfrac><mo>=</mo><mfrac><mrow><mn>3</mn><mo>+</mo><mn>3</mn></mrow><mn>2</mn></mfrac><mo>=</mo><mn>3</mn></mrow></math></span>
 bingo！mid指向29，刚好是我们要找的
+<span style="color: red;font-size: 20px">以上就是我们折半查找的思想</span>
+可是我们说的是折半排序啊，对没错，和直接插入排序一样，每次都会构建一个部分有序序列
+但是每次往后拿新的元素比较的时候，不再是从后往前一个个比，而且是采取折半查找方法定位元素位置
+定位以后，该元素+1位置直到我们新的元素位置的所有元素都后移一位
+然后把新的元素插入到该元素+1位置，是不是很抽象，我有时候挺无奈的
+因为我确实觉得这样说，是很清晰的，但是这是基于我本身是十分了解的前提下
+但是很多人是没有我这样的基础的，也就说，这是一种自我陶醉
+所以说这是一个稳定的算法，因为只有比它小的才会往前面放
 <hr>
 <span style="color: red;font-size: 20px">希尔</span>
 <span style="color: #00daff">利用希尔排序对关键字系列{40，24，80，39，43，18，20，10，90，70}从小到大排序(增量5，3，1)</span>
@@ -8921,12 +9189,33 @@ bingo！mid指向29，刚好是我们要找的
     18，20, 24，43，40，39，80，90，70
     18，20，24，39，40，43，70，80，90
     完成
+咋，我说完成就完成了？这就是你完全把自己托付给别人了
+算法稳定性呢？怎么看？这是一个不稳定的算法，因为你选取的比较有可能导致呢，两个相同元素的相对位置发生变换
+因为不是依次比较的，反正你知道大概原理就行
 <hr>
 </pre>
 <h2>交换排序(冒泡排序、快速排序)</h2>
 <pre>
 <hr>
 <span style="color: red;font-size: 20px">冒泡</span>
+每轮从前往后依次比较相邻两个元素大小，小放前大放后，相等不动，每轮可以选出一个最大的放在最后一个位置
+{36，27，20，60，55，7，28，36，52，44，16}
+比较36和27，27放前，36放后
+{27，36，20，60，55，7，28，36，52，44，16}
+比较36和20，20放前，36放后
+{27，20，36，60，55，7，28，36，52，44，16}
+比较36和60，60比36大，不动
+{27，20，36，60，55，7，28，36，52，44，16}
+比较60和55，55放前
+{27，20，36，55，60，7，28，36，52，44，16}
+然后不说了
+{27，20，36，55，7，60，28，36，52，44，16}
+{27，20，36，55，7，28，60，36，52，44，16}
+{27，20，36，55，7，28，36，60，52，44，16}
+{27，20，36，55，7，28，36，52，60，44，16}
+{27，20，36，55，7，28，36，52，44，60，16}
+{27，20，36，55，7，28，36，52，44，16，<span style="color: red">60</span>}
+以上就是第一轮比较次数 ，后面的几轮以此类推
 <hr>
 <span style="color: red;font-size: 20px">快排</span>
 <span style="color: #00daff">对{46，58，15，45，90，18，10，62}进行快速排序</span>
@@ -8939,7 +9228,7 @@ bingo！mid指向29，刚好是我们要找的
         10  58  15  45  90  18  ___  62
     <span style="color: #00aa44">这个时候比较的指向是从前面也就是10的后面开始</span>
         10  58<--  15  45  90  18  ___  62
-    <span style="color: #00aa44">58>45(将58移动到10原本的位置)</span>
+    <span style="color: #00aa44">58>46(将58移动到10原本的位置)</span>
         10  ___  15  45  90  18  58  62
     <span style="color: #00aa44">这时候再从后面也就是58的前面</span>
         10  ___  15  45  90  18<--  58  62
@@ -8967,12 +9256,35 @@ bingo！mid指向29，刚好是我们要找的
         <span style="color: red">10</span>  ___  15 45<--  <span style="color: red">46</span>  ___  58<--  <span style="color: red">90</span>
         <span style="color: red">10</span>  ___  15<-- 45  <span style="color: red">46</span>  58  ___  <span style="color: red">90</span>
         <span style="color: red">10</span>  <span style="color: red">15  18  45</span>  <span style="color: red">46</span>  <span style="color: red"> 58  62</span>  <span style="color: red">90</span>
+快速排序是内部排序中平均性能最好的
+快排最大递归深度是n，最小是log₂n
+怎样快速判断，快排第几趟是不可能的结果
+将序列完整排好，对比选项，看看是否至少有2个位置是对应上的
 <hr>
 </pre>
 <h2>选择排序(简单选择、堆排序)</h2>
 <pre>
 <hr>
 <span style="color: red;font-size: 20px">简单选择</span>
+如同名字一样，简单
+{60，27，20，36，55，77，28，36，52，44，16}
+每轮都在剩下的数中选最小的换到前面
+用一个temp临时变量存储数组中元素最小的下标，依次比较数组，找出最小的，然后和数组从前到后交换
+例如第一个
+我们记录假设最小就是数组开头k=0，然后我们比较第二个
+{60，<span style="color: #00ebff">27</span>，20，36，55，7，28，36，52，44，16}
+发现27更小，更新k=1，一定是数组下标，而不是本身数值，因为我们要交换
+{60，27，<span style="color: #00ebff">20</span>，36，55，7，28，36，52，44，16}
+20比存储的k=1（27）更小，再更新k=2
+以此类推
+{60，27，20，36，55，7，28，36，52，44，16}
+k最终的值是5，也就是元素7
+让数组[0]与数组[k]交换
+{<span style="color: #2193b0">7</span>，27，20，36，55，<span style="color: #2193b0">60</span>，28，36，52，44，16}
+第一个我们就确定了，第二趟我们让k假设第二个元素，也就是k=1最大，也就是让k=1，然后依次比较记录
+后面就不说了
+唯一需要注意的是，这个简单选择排序是不稳定的，因为假如有两个一样的，一个在前一个后
+由于最小的数在最后面，让第一个和最小的交换位置，所以第一个就跑第二个后面了
 <hr>
 <span style="color: red;font-size: 20px">堆排</span>
 <span style="color: #00daff">对{5,1,6,9,2}如何构造大/小根堆</span>
@@ -9413,7 +9725,7 @@ bingo！mid指向29，刚好是我们要找的
     });
 </script>
 OK，此时就是最大根堆了，哎呀呀，我想说的那种情况没有发生，
-    就是那种像最后一步的时候，9和43不是换了嘛，9到新位置以后如果它的左右孩子有比它小的，也要再调换
+    就是那种像最后一步的时候，9和43不是换了嘛，9到新位置以后如果它的左右孩子有比它大的，也要再调换
 
 然后就是仅仅这样不算是堆排序，这一步只是把最大值选出来了
 我们可以通过移除最大值，来继续排但这样多此一举
@@ -9621,6 +9933,7 @@ OK，此时就是最大根堆了，哎呀呀，我想说的那种情况没有发
 </pre>
 <h2>归并排序</h2>
 <pre>
+归并的含义是将两个或者两个以上的有序表合并成一个新的有序表
 <span style="color: #00daff">对{40，24，80，39，43，18，20，10，90，70} 进行从小到大排序过程(两两分组比较)</span>
     <svg width="500" height="300" xmlns="http://www.w3.org/2000/svg">
         <g>
@@ -9681,6 +9994,8 @@ OK，此时就是最大根堆了，哎呀呀，我想说的那种情况没有发
 </g>
     </svg>
     <span style="color: #00aa44">这应该看得懂吧？一目了然了都😏😏</span>
+趟数与元素以及归并路数之间关系
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>m</mi><mo>=</mo><mo stretchy="false">[</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mi>k</mi></msub><mi>N</mi><mo stretchy="false">]</mo><mrow><mo>/</mo></mrow><mrow><mo>/</mo></mrow><mi>m</mi><mo>趟，</mo><mi>k</mi><mo>路，</mo><mi>N</mi><mo>元素</mo></math>
 </pre>
 <h2>基数排序</h2>
 <pre>
@@ -9825,6 +10140,21 @@ OK，此时就是最大根堆了，哎呀呀，我想说的那种情况没有发
 <span style="color: #fa0a0a">接下来就是收集（从上到下，从左到右）：{137，219，315，350，392，475，481，674，815}</span>
 至此你也看出来了，它到底是怎么运作来实现排序的
 也不难，先个位数，再十位数，再百位数，一步步确保
+切记：基数排序不能对浮点以及双精度类型进行排序
+</pre>
+<h2>内部排序总结</h2>
+<pre>
+以上的各种排序都是内部排序
+========================================
+n较小，采用直接插入排序/简单排序，并且当记录本身信息量大的时候使用简单排序
+========================================
+n较大，采用快速排序、堆排序、归并排序，其中快速排序被认为是平均最好，快排、堆排不稳定，但是归并稳定
+========================================
+文件基本有序的时候，选择直接插入或冒泡
+========================================
+n巨大，关键字位数少的前提下，使用基数排序
+========================================
+当记录本身信息量巨大，采用链表，避免耗费大量时间移动记录
 </pre>
 <h2>外部排序</h2>
 <pre>
@@ -9834,165 +10164,328 @@ OK，此时就是最大根堆了，哎呀呀，我想说的那种情况没有发
 </pre>
     </div>
     <div class="block">
-        <p>算法</p>
+        <h1>算法</h1>
         <h2>代码示例</h2>
         <pre>
-            <code class="c">
-#include &lt;stdio.h>
 
-int main() {
-    printf("Hello, world!\n");
-    return 0;
-}
-            </code>
         </pre>
-        <h3>控制台输出</h3>
-        <div class="console">
-            <pre>
-                <code>
-$ ./a.out
-Hello, world!
-                </code>
-            </pre>
-        </div>
     </div>
     <div class="block">
-        <p>递归和分治</p>
+        <h1>递归和分治</h1>
         <h2>代码示例</h2>
         <pre>
-            <code class="c">
-#include &lt;stdio.h>
 
-int main() {
-    printf("Hello, world!\n");
-    return 0;
-}
-            </code>
         </pre>
-        <h3>控制台输出</h3>
-        <div class="console">
-            <pre>
-                <code>
-$ ./a.out
-Hello, world!
-                </code>
-            </pre>
-        </div>
     </div>
     <div class="block">
-        <p>动态规划</p>
+        <h1>动态规划</h1>
         <h2>代码示例</h2>
         <pre>
-            <code class="c">
-#include &lt;stdio.h>
 
-int main() {
-    printf("Hello, world!\n");
-    return 0;
-}
-            </code>
         </pre>
-        <h3>控制台输出</h3>
-        <div class="console">
-            <pre>
-                <code>
-$ ./a.out
-Hello, world!
-                </code>
-            </pre>
-        </div>
     </div>
     <div class="block">
-        <p>贪心算法</p>
+        <h1>贪心算法</h1>
         <h2>代码示例</h2>
         <pre>
-            <code class="c">
-#include &lt;stdio.h>
 
-int main() {
-    printf("Hello, world!\n");
-    return 0;
-}
-            </code>
         </pre>
-        <h3>控制台输出</h3>
-        <div class="console">
-            <pre>
-                <code>
-$ ./a.out
-Hello, world!
-                </code>
-            </pre>
-        </div>
     </div>
     <div class="block">
-        <p>回溯法和其他算法</p>
+        <h1>回溯和其他算法</h1>
         <h2>代码示例</h2>
         <pre>
-            <code class="c">
-#include &lt;stdio.h>
 
-int main() {
-    printf("Hello, world!\n");
-    return 0;
-}
-            </code>
         </pre>
-        <h3>控制台输出</h3>
-        <div class="console">
-            <pre>
-                <code>
-$ ./a.out
-Hello, world!
-                </code>
-            </pre>
-        </div>
     </div>
     <div class="block">
-        <p>数据结构经典题</p>
+        <h1>数据结构经典题</h1>
         <h2>代码示例</h2>
         <pre>
-            <code class="c">
-#include &lt;stdio.h>
+<code><strong>1.以下属于逻辑结构的是:</strong>
+A. 顺序表
+B. 哈希表
+C. 有序表
+D. 单链表
+<strong>答案:</strong> C &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+其实很不好理解，毕竟你的脑子不够聪明。顺序表顺序存储。哈希表散列存储。单链表链式存储。
+怎么？有序表，有序存储是吧，有序是指元素之间有序，不是说地址有序，所以只要涉及元素的关系就是逻辑
+</code>
+<code><strong>2.以下关于数据结构的说法中正确的是:</strong>
+A.数据的逻辑结构独立于其存储结构
+B.数据的存储结构独立于其逻辑结构
+C.数据的逻辑结构唯一决定其存储结构
+D.数据结构仅由其逻辑结构和存储结构决定
+<strong>答案:</strong> A &nbsp; &nbsp; &nbsp; &nbsp; &n
 
-int main() {
-    printf("Hello, world!\n");
-    return 0;
-}
-            </code>
+    bsp; &nbsp; &nbsp; &nbsp; &nbsp;
+这道题主要的任务就是说，逻辑结构其实是人先想出来，然后用计算机实现
+所以说逻辑结构独立存储结构
+但是存储结构是要靠逻辑结构作为支撑的
+数据结构的三要素：逻辑、存储、操作
+</code>
+<code><strong>3.若长度为n的非控股线性表采用顺序存储结构，在表的第i个位置插入一个数据元素，则i的合法值是:</strong>
+A.1≤i≤n
+B.1≤i≤n+1
+C.0≤i≤n-1
+D.0≤i≤n
+<strong>答案:</strong> B &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+我知道你可能会选C，第i个位置插入元素，你给我在第0个位置插入试试看？又不是数组下标，哦，喝杯咖啡就是程序员了？
+线性表的顺序存储，就是数组，动态分配，可以在最后追加一个元素的啊，反正重新创建数据，重新整体搬迁完事了
+</code>
+<code><strong>4.栈和队列具有相同的:</strong>
+A.抽象数据类型
+B.逻辑结构
+C.存储结构
+D.运算
+<strong>答案:</strong> B &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+栈和队列都是线性结构，是逻辑结构，是元素之间是有关系的，你前我后
+</code>
+<code><strong>5.若一个栈的输入序列为1，2，3...n,输出序列的第一个元素是n，则第i个输出元素是:</strong>
+A.不确定
+B.n-i
+C.n-i-1
+D.n-i+1
+<strong>答案:</strong> D &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+这题我选过B，以为第一个输出n，那第二个就是n-1,第i个不就是n-i了？
+哦哦哦，不对是我太蠢了，第i个应该是n-i+1,害，老了
+</code>
+<code><strong>5.最适合用作链队的链表是:</strong>
+A.带队首指针和队尾指针的循环单链表
+B.带队首指针和队尾指针的非循环单链表
+C.只带队首指针的非循环单链表
+D.只带队首指针的循环单链表
+<strong>答案:</strong> B &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+队列是要一头进行删除一头进行增加的，C、D不合适，因为只有队首，队尾进行操作是要遍历的
+A为什么不行？A和B差距就是循环两个字，看队列的性质，循环不循环是无所谓的，因为我们只通过两个指针的跳变
+完成我们首末的工作，还不清楚去看队列的相关知识
+</code>
+<code><strong>6.已知循环队列存储在一维数组A[0...n-1]中，且队列非空时，front和rear分别指向队头元素和队尾元素。
+    若初始时队列为空，且要求第一个进入队列的元素存储在A[0]处，则初始时front和rear的值分别是:</strong>
+A.0，0
+B.0，n-1
+C.n-1,0
+D.n-1,n-1
+<strong>答案:</strong> B &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+这道题的文本本身就是一个坎，进队操作就是rear=(rear+1)%MAXSIZE
+好，现在rear尾指针指向哪里？包是0啊
+我们在队列讲解中说的《约定空出一个不存储，也就是队尾+1就是队头的时候就是满,注意队尾指向的不是最后一个元素而是最后一个元素的下一个空位置》
+是指一种特殊的情况
+n%n=0,也就是(n-1+1)%n=0
+所以rear就是n-1，front不动，那就是0
+</code>
         </pre>
-        <h3>控制台输出</h3>
-        <div class="console">
-            <pre>
-                <code>
-$ ./a.out
-Hello, world!
-                </code>
-            </pre>
-        </div>
+    </div>
+    <script>
+        function toggleExplanation(button) {
+            var explanation = button.nextElementSibling;
+            if (explanation.style.display === 'none' || explanation.style.display === '') {
+                explanation.style.display = 'block';
+            } else {
+                explanation.style.display = 'none';
+            }
+        }
+    </script>
+    <div class="block">
+        <h1>算法经典题</h1>
+        <h2>代码示例</h2>
+        <pre>
+
+        </pre>
     </div>
     <div class="block">
-        <p>算法经典题</p>
-        <h2>代码示例</h2>
+        <h1>C语言总结</h1>
+        <h2>基本要点和易错点</h2>
         <pre>
-            <code class="c">
-#include &lt;stdio.h>
+函数是组成C程序的基本单位，语句是组成C程序的最小单位。
+-------------------------------------------------------------
+C程序总是从main开始，main结束
+-------------------------------------------------------------
+三种结构：顺序，选择，循环
+-------------------------------------------------------------
+开发C过程：编辑、编译(.obj)、连接(.exe)、执行。其中obj是在编译完后才有，exe同理
+-------------------------------------------------------------
+C的基本数据类型(5种)：整型、字符、单精度浮点、双精度浮点、枚举
+-------------------------------------------------------------
+变量定义以及变量声明：定义是创建，声明是告诉编译器别处存在，不需要重新创建，我要使用别处的。
+-------------------------------------------------------------
+空白字符不能出现在整数数字之间
+-------------------------------------------------------------
+字符常量(4种)：普通字符常量、字符串常量、转义字符、符号常量
+-------------------------------------------------------------
+实型常量：.前可以省略，e后必为整型
+-------------------------------------------------------------
+转义字符只能用小写
+-------------------------------------------------------------
+自增自减只能用于<span style="color: red">单个变量</span>
+-------------------------------------------------------------
+sizeof是单目运算符，而不是函数
+-------------------------------------------------------------
+运算符优先级口诀：成单乘加移等位辑赋//成员、单目、乘法、加减、移位、判等、位运算符、逻辑、赋值
+-------------------------------------------------------------
+printf中，从右向左计算出表达式的值//printf(，i++,i--),i++显示的值是i进行自减以后的
+-------------------------------------------------------------
+else与其前面最靠近的if配对
+-------------------------------------------------------------
+case后只能是整型或者字符型的常量或常量表达式
+-------------------------------------------------------------
+对数组不赋初值，那么会分配随机内存数，如果是static声明的，会自动分配0
+-------------------------------------------------------------
+static是静态变量的意思，只随着程序的销毁而销毁
+-------------------------------------------------------------
+数组定义时，只能省略后面的元素初始值，不能隔山大牛：[10,,3]
+-------------------------------------------------------------
+char s[5]={'a','b','c'}|char s[5]="abc"//这两种区别在于后者会被自动末尾添加一个'\0'
+-------------------------------------------------------------
+指针变量就是一个变量，就是指向double和指向int的指针本身大小是一样的，保存的就是地址
+-------------------------------------------------------------
+int a[10];a是指数组的首元素的地址，即a==&a[0],而"整个数组"的首地址是 &a
+-------------------------------------------------------------
+字符数组不能整体赋值，但是字符指针可以
+-------------------------------------------------------------
+void类型的函数，是可以使用return的。函数内部不能定义其他函数
+-------------------------------------------------------------
+函数定义出现在函数使用之前不会报错，也不需要函数声明，这个时候就是函数原型
+-------------------------------------------------------------
+函数参数的计算顺序是从右向左
+-------------------------------------------------------------
+auto是自动分配自动销毁，函数外部直接定义是全局，static是静态，与全局不同的是，它只能被本编译单位使用，extern使用的是直接声明，而不是static
+-------------------------------------------------------------
+编译预处理都以‘#’开头，每个预处理语句必须单独占一行
+-------------------------------------------------------------
+宏是在程序执行之前完成
+-------------------------------------------------------------
+文件中位置编号从1开始，第一个字节编号为1
+-------------------------------------------------------------
+输入数据的时候不能规定精度
+-------------------------------------------------------------
+\b是让光标位置回退一格，而不是向前删除一个字符
+-------------------------------------------------------------
+<hr>
+<span style="color: red;font-size: 20px">字符串处理函数</span>(#include< string.h >)
+<code type="c">puts(p);//其中p是字符指针，可以带有转义字符，并且puts会自动在末尾增加一个换行符
+</code>
+<code>char a[30] = {'\0'};//定义一个字符数组
+char* str = a;//初始化字符指针指向字符数组，必须初始化，一定要初始化
+gets(str);//从标准输入中读取整行，直到遇见换行符然后丢掉换行，然后在末尾加入一个空字符形成C字符串,它是有缺点是，因为不知道str可以存多少个，所以会造成越界
+puts(str);//打印一行，然后加上换行符。
+fgets(str,10,stdin)//它接受三个参数，第一个是str，第二个是读入的字符最大量，第三个是指明读取的源头，这里是标准输入(键盘)，当读到换行(回车),或者第9个字符停止，如果是换行，那么会将换行保存
+fputs(str,stdout)//接受两个参数，第二个是需要输出的地方，这里是标准输出，也就是屏幕，并且与pust不同的是，它不在末尾添加换行
+strlen(str)//计算字符长长度
+strcat(str1,str2)//拼接字符串,将第二个字符串拼接到第一个字符串后，形成的新串为第一个字符串，没错，可能会越界
+strncat(str1,str2,最大添加字符数)//是的，这不就改良版来了，为什么上面那个没有像gets一样被官方废除，因为gets是用户输入，这个函数只有程序员的操作
+strcmp(str1,str2)//比较两个字符串//相同返回0
+strcpy(str1,str2)//把str2复制到str1中
+strlwr(str)//大写变小写
+strupr(str)//小写变大写
+</code>
+<hr>
+</pre>
+        <h2>文件</h2>
+        <pre>
+<span style="color: red;font-size: 20px">文件操作</span>
+<table>
+    <tr>
+        <th>文件使用模式</th>
+        <th>处理方式</th>
+        <th>指定文件不存在</th>
+        <th>指定文件存在</th>
+    </tr>
+    <tr>
+        <td>r</td>
+        <td>读取（文本文件）</td>
+        <td>出错</td>
+        <td>正常</td>
+    </tr>
+    <tr>
+        <td>w</td>
+        <td>写入（文本文件）</td>
+        <td>建立新文件</td>
+        <td>原有内容丢失</td>
+    </tr>
+        <tr>
+        <td>a</td>
+        <td>添加（文本文件）</td>
+        <td>建立新文件</td>
+        <td>原有内容后添加</td>
+    </tr>
+        <tr>
+        <td>rb</td>
+        <td>读取（二进制文件）</td>
+        <td>出错</td>
+        <td>正常</td>
+    </tr>
+        <tr>
+        <td>wb</td>
+        <td>写入（二进制文件）</td>
+        <td>建立新文件</td>
+        <td>原有内容丢失</td>
+    </tr>
+        <tr>
+        <td>ab</td>
+        <td>添加（二进制文件）</td>
+        <td>建立新文件</td>
+        <td>在原有内容后添加</td>
+    </tr>
+        <tr>
+        <td>r+</td>
+        <td>可读取，又可写入</td>
+        <td>出错</td>
+        <td>打开文件时，文件指针位于文件开头，无论是读取内容还是写入内容，都可在文件中任意位置进行，且进行写入操作时，会覆盖原有位置的内容。</td>
+    </tr>
+    <tr>
+        <td>w+</td>
+        <td>写/读</td>
+        <td>建立新文件</td>
+        <td>打开文件时，文件指针位于文件开头，文件原有内容丢失，无论是读取内容还是写入内容，都可在文件中任意位置进行</td>
+    </tr>
+        <tr>
+        <td>a+</td>
+        <td>读/添加</td>
+        <td>建立新文件</td>
+        <td>打开文件时指针位于文件末尾，在文件原有末尾添加，读取内容时，可以在任意位置进行，但写入内容时，只会追加在文件尾部。</td>
+    </tr>
+        <tr>
+        <td>rb+</td>
+        <td>读写</td>
+        <td>出错</td>
+        <td>正常</td>
+    </tr>
+        <tr>
+        <td>wb+</td>
+        <td>写读</td>
+        <td>建立新文件</td>
+        <td>原有内容清除</td>
+    </tr>
+        <tr>
+        <td>ab+</td>
+        <td>读添加</td>
+        <td>建立新文件</td>
+        <td>文件末尾添加</td>
+    </tr>
 
-int main() {
-    printf("Hello, world!\n");
-    return 0;
-}
-            </code>
+
+</table>
+<code>
+FILE *p;//定义文件指针
+p=fopen(文件名，文件使用模式);打开文件
+fclose(文件指针)//关闭文件
+feof(文件指针)//判断文件结束，是末尾返回非0值
+ch = getc(p);//从文件流中读取一个字符赋给ch
+ch = fgetc(p);//从文件流中读取一个字符赋给ch
+putc(ch,p);//将ch写入到文件中
+fputc(ch,p);//将ch写入到文件中
+fgets(字符变量,n,p);//从p(文件流)中提取n-1个字符给字符变量
+fputs(字符变量,p);//将字符变量中字符写入到p(文件)中
+fprintf(p,格式串,输出项表);//写入，本质用法和printf一样例如fprintf(p,"这个是%d",10);
+fscanf(p,格式串,输入项表);//读取，本质和scanf一样
+fwrite(buf,size,count,p);//写入从buf提取count个size字节大小的数据到文件中
+fread(buf,size,count,p);//读取count个size字节大小的数据到buf中
+ftell(p);//获取指针当前位于文件的位置，返回相对于文件开头的位移量
+fseek(p,位移量,0);//0(SEEK_SET)文件开头、1(SEEK_CUR)当前、2(SEEK_END)文件结尾，让指针从文件开头位移《位移量》个位移量，《位移量》为负就是向文件头，为正就是向文件尾，0就是到第三个参数位置
+rewind(p);//重置指针位于文件开头
+</code>
         </pre>
-        <h3>控制台输出</h3>
-        <div class="console">
-            <pre>
-                <code>
-$ ./a.out
-Hello, world!
-                </code>
-            </pre>
-        </div>
     </div>
     <!-- 添加更多的块 -->
 </div>
@@ -10001,20 +10494,69 @@ Hello, world!
 <script>
     hljs.highlightAll();
 
+    let alreadyScrolled = false; // 记录是否已经滚动过
+
     document.getElementById('searchBox').addEventListener('input', function() {
         const searchKeyword = this.value.trim().toLowerCase();
         const blocks = document.querySelectorAll('.block');
+        let found = false;
+
         blocks.forEach(block => {
-            const content = block.textContent.toLowerCase();
-            if (content.includes(searchKeyword)) {
+            let match = false;
+            let elementToScroll = null;
+
+            // 检查 p 标签（最高优先级）
+            const p = block.querySelector('p');
+            if (p && p.textContent.toLowerCase().includes(searchKeyword)) {
                 block.style.display = 'block';
-                // 自动滚动到匹配内容位置
-                block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                match = true;
+                elementToScroll = p;
+            }
+
+            // 检查 h1 标签
+            const h1 = block.querySelector('h1');
+            if (!match && h1 && h1.textContent.toLowerCase().includes(searchKeyword)) {
+                block.style.display = 'block';
+                match = true;
+                elementToScroll = h1;
+            }
+
+            // 检查 h2 标签
+            const h2 = block.querySelector('h2');
+            if (!match && h2 && h2.textContent.toLowerCase().includes(searchKeyword)) {
+                block.style.display = 'block';
+                match = true;
+                elementToScroll = h2;
+            }
+
+            // 检查块级内容
+            if (!match && block.textContent.toLowerCase().includes(searchKeyword)) {
+                block.style.display = 'block';
+                match = true;
+            }
+
+            if (match) {
+                found = true;
+                if (!alreadyScrolled) {
+                    alreadyScrolled = true;
+                    if (elementToScroll) {
+                        elementToScroll.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } else {
+                        block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
             } else {
                 block.style.display = 'none';
             }
         });
+
+        // 如果没有找到匹配项，重置滚动状态
+        if (!found) {
+            alreadyScrolled = false;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     });
 </script>
+
 </body>
 </html>
