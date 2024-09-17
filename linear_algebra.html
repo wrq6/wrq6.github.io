@@ -13,6 +13,10 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--background-color);
+            color: var(--text-color);
         }
 
         .note-container {
@@ -104,6 +108,97 @@
         #toc ul li a:hover {
             text-decoration: underline;
         }
+        .sidebar {
+            position: fixed;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #fff;
+            border-right: 1px solid var(--border-color);
+            padding: 20px;
+            overflow-y: auto;
+            transition: left 0.3s ease;
+            z-index: 1000;
+        }
+        .sidebar.open {
+            left: 0;
+        }
+        #toc-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        #toc-list li a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-size: 16px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        #toc-list li a:hover {
+            text-decoration: underline;
+        }
+        .toggle-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: #00ffb4;
+            border: none;
+            border-radius: 5px;
+        }
+        .toggle-btn:hover {
+            background-color: #0056b3;
+        }
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+            .search-box, .btn {
+                font-size: 14px;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                left: -100%;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .toggle-btn {
+                left: 10px;
+            }
+        }
+        @media print {
+            body {
+                background-color: #fff;
+            }
+            .sidebar, .toggle-btn {
+                display: none;
+            }
+            .container {
+                width: 100%;
+                max-width: none;
+                padding: 0;
+                margin: 0;
+            }
+        }
+        .search-container {
+            margin-bottom: 20px;
+        }
+        .search-box {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -132,7 +227,20 @@
 
     </script>
 </head>
-
+<body>
+<header>
+<hr>
+    <hr>
+    <hr>
+    <hr>
+</header>
+<button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+<div class="sidebar" id="sidebar">
+    <h3>目录</h3>
+    <ul id="toc-list">
+        <!-- Table of contents will be generated here -->
+    </ul>
+</div>
 <!-- ------------------------------------------------------------------------------- -->
 <div class="note-container">
     <h1>线性代数笔记</h1>
@@ -145,44 +253,17 @@
         行列式<br>
         二阶与三阶行列式
     </p>
-    <div class="determinant">
-        <div class="matrix-row">
-            <div class="matrix-cell">a</div>
-            <div class="matrix-cell">b</div>
-            <div class="matrix-cell">c</div>
-        </div>
-        <div class="matrix-row">
-            <div class="matrix-cell">d</div>
-            <div class="matrix-cell">e</div>
-            <div class="matrix-cell">f</div>
-        </div>
-        <div class="matrix-row">
-            <div class="matrix-cell">g</div>
-            <div class="matrix-cell">h</div>
-            <div class="matrix-cell">i</div>
-        </div>
-
-    </div>
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">|</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd></mtd></mtr><mtr><mtd><mrow><mi mathvariant="bold">a</mi></mrow></mtd><mtd><mrow><mi mathvariant="bold">b</mi></mrow></mtd><mtd><mrow><mi mathvariant="bold">c</mi></mrow></mtd></mtr><mtr><mtd><mrow><mi mathvariant="bold">d</mi></mrow></mtd><mtd><mrow><mi mathvariant="bold">e</mi></mrow></mtd><mtd><mrow><mi mathvariant="bold">f</mi></mrow></mtd></mtr><mtr><mtd><mrow><mi mathvariant="bold">g</mi></mrow></mtd><mtd><mrow><mi mathvariant="bold">h</mi></mrow></mtd><mtd><mrow><mi mathvariant="bold">i</mi></mrow></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">|</mo></mrow></math>
     <p style="color: #556B2F">上面这个就是个三阶行列式，别问为什么是三阶，因为有三行三列</p>
     <pre>
 <div>
 以下是一个二元线性方程组<span style="color: #556B2F">（为什么是二元，单纯就是两个未知数x和y）（为什么是线性，单纯就是未知数的次幂是一次，在xoy坐标轴画出来是一条直线）</span>
-	<script type="math/tex">
-\begin{cases}
-  a_{11}x_{1} + a_{12}x_{2} = b_{1}     ①\\
-  a_{21}x_{1} + a_{22}x_{2} = b_{2}     ②\\
-\end{cases}
-	</script>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">{</mo><mtable columnalign="left left" columnspacing="1em" rowspacing=".2em"><mtr><mtd><msub><mi>a</mi><mrow><mn>11</mn></mrow></msub><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msub><mi>a</mi><mrow><mn>12</mn></mrow></msub><msub><mi>x</mi><mn>2</mn></msub><mo>=</mo><msub><mi>b</mi><mn>1</mn></msub><mrow><mo>①</mo></mrow></mtd></mtr><mtr><mtd><msub><mi>a</mi><mrow><mn>21</mn></mrow></msub><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msub><mi>a</mi><mrow><mn>22</mn></mrow></msub><msub><mi>x</mi><mn>2</mn></msub><mo>=</mo><msub><mi>b</mi><mn>2</mn></msub><mrow><mo>②</mo></mrow></mtd><mtd></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE" fence="true" stretchy="true" symmetric="true"></mo></mrow></math>
 <p style="color: #556B2F">为啥<script type="math/tex">a_{11}</script>,<script type="math/tex">a_{12}</script>,<script type="math/tex">a_{21}</script>,<script type="math/tex">a_{22}</script>这样取下标啊，这人是不是有毛病，跟Oracle为jdk版本取名有的一比啊（行吧，知道你看不懂这个笑话）</p>
 <p style="color: #556B2F">仔细看，<script type="math/tex">a_{11}</script>是说第一行第一个未知数的系数所以就是11，<script type="math/tex">a_{22}</script>就是第二行的第二个未知数的系数，其他的类比</p>
 <p style="color: #556B2F">行了，我们随便选择一个未知数消去，当一个方程只有一个未知数时便很好求出未知数的值</p>
 <p style="color: #556B2F">这样吧，知道你很2，我们就消去<script type="math/tex">x_{2}</script>,第一步就是用<script type="math/tex">a_{22}</script>和<script type="math/tex">a_{12}</script>分别乘上①和②方程的两端</p>
-<script type="math/tex">
-\begin{cases}
-  a_{11}a_{22}x_{1} + a_{12}a_{22}x_{2} = a_{22}b_{1}     ①\\
-  a_{12}a_{21}x_{1} + a_{12}a_{22}x_{2} = a_{12}b_{2}     ②\\
-\end{cases}
-</script>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">{</mo><mtable columnalign="left left" columnspacing="1em" rowspacing=".2em"><mtr><mtd><msub><mi>a</mi><mrow><mn>11</mn></mrow></msub><msub><mi>a</mi><mrow><mn>22</mn></mrow></msub><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msub><mi>a</mi><mrow><mn>12</mn></mrow></msub><msub><mi>a</mi><mrow><mn>22</mn></mrow></msub><msub><mi>x</mi><mn>2</mn></msub><mo>=</mo><msub><mi>a</mi><mrow><mn>22</mn></mrow></msub><msub><mi>b</mi><mn>1</mn></msub><mrow><mo>①</mo></mrow></mtd></mtr><mtr><mtd><msub><mi>a</mi><mrow><mn>12</mn></mrow></msub><msub><mi>a</mi><mrow><mn>21</mn></mrow></msub><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msub><mi>a</mi><mrow><mn>12</mn></mrow></msub><msub><mi>a</mi><mrow><mn>22</mn></mrow></msub><msub><mi>x</mi><mn>2</mn></msub><mo>=</mo><msub><mi>a</mi><mrow><mn>12</mn></mrow></msub><msub><mi>b</mi><mn>2</mn></msub><mrow><mo>②</mo></mrow></mtd><mtd></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE" fence="true" stretchy="true" symmetric="true"></mo></mrow></math>
 <p style="color:#556B2F">这个时候，上下方程的<script type="math/tex">x_{2}</script>前的系数一样就可以上下相减,于是乎：</p> 
 <script type="math/tex">
   a_{11}a_{22}x_{1} - a_{12}a_{21}x_{1}= a_{22}b_{1} - a_{12}b_{2}
@@ -221,7 +302,7 @@
 <p>因此我们的分母也就是主对角线之积<span style="color:blue">减去</span>副对角线之积</p>
 <p>-----------------------------------------------------------------------------</p>
 <p style="color:#556B2F">你讲这么多分母，那分子呢？分子又臭又长，毫无规律，怎么来的啊？</p>
-<img src="img/g.jpg" width="200px" height="150px"/>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>b</mi><mrow><mn>1</mn></mrow></msub><msub><mi>a</mi><mrow><mn>22</mn></mrow></msub><mo>−</mo><msub><mi>a</mi><mrow><mn>12</mn></mrow></msub><msub><mi>b</mi><mrow><mn>2</mn></mrow></msub><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">|</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><msub><mi>b</mi><mrow><mn>1</mn></mrow></msub></mtd><mtd><msub><mi>a</mi><mrow><mn>12</mn></mrow></msub></mtd></mtr><mtr><mtd><msub><mi>b</mi><mrow><mn>2</mn></mrow></msub></mtd><mtd><msub><mi>a</mi><mrow><mn>22</mn></mrow></msub></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">|</mo></mrow><mspace linebreak="newline"></mspace><msub><mi>a</mi><mrow><mn>11</mn></mrow></msub><msub><mi>b</mi><mrow><mn>2</mn></mrow></msub><mo>−</mo><msub><mi>b</mi><mrow><mn>1</mn></mrow></msub><msub><mi>a</mi><mrow><mn>21</mn></mrow></msub><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">|</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><msub><mi>a</mi><mrow><mn>11</mn></mrow></msub></mtd><mtd><msub><mi>b</mi><mrow><mn>1</mn></mrow></msub></mtd></mtr><mtr><mtd><msub><mi>a</mi><mrow><mn>21</mn></mrow></msub></mtd><mtd><msub><mi>b</mi><mrow><mn>2</mn></mrow></msub></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">|</mo></mrow></math>
 <p style="color:#556B2F">我滴妈，分子怎么就等于这个行列式了啊，你是不是随便凑的啊？</p>
 <p>-----------------------------------------------------------------------------</p>
 <p>其实不是，细看下面</p>
@@ -793,6 +874,12 @@ D=	<div class="determinant" style="line-height:5px">
         <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mo>解出</mo><msub><mi>λ</mi><mrow><mn>1</mn></mrow></msub><mo>和</mo><msub><mi>λ</mi><mrow><mn>2</mn></mrow></msub></math></p>
         <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mo>解出</mo><msub><mi>λ</mi><mrow><mn>1</mn></mrow></msub><mo>和</mo><msub><mi>λ</mi><mrow><mn>2</mn></mrow></msub><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">{</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><mo>△</mo><mo>&gt;</mo><mn>0</mn></mtd><mtd><msub><mi>D</mi><mrow><mi>n</mi></mrow></msub><mo>=</mo><mi>A</mi><msubsup><mi>λ</mi><mrow><mn>1</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msubsup><mo>+</mo><mi>B</mi><msubsup><mi>λ</mi><mrow><mn>2</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msubsup></mtd><mtd></mtd><mtd></mtd><mtd></mtd><mtd></mtd><mtd></mtd><mtd></mtd></mtr><mtr><mtd><mo>△</mo><mo>=</mo><mn>0</mn></mtd><mtd><msub><mi>D</mi><mrow><mi>n</mi></mrow></msub><mo>=</mo><mo stretchy="false">(</mo><mi>A</mi><mo>+</mo><mi>B</mi><mi>n</mi><mo stretchy="false">)</mo><msubsup><mi>λ</mi><mrow><mn>1</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msubsup></mtd><mtd></mtd><mtd></mtd><mtd></mtd><mtd></mtd><mtd></mtd><mtd></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE" fence="true" stretchy="true" symmetric="true"></mo></mrow></math></p>
         <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mo>代入</mo><msub><mi>D</mi><mrow><mn>1</mn></mrow></msub><mo>和</mo><msub><mi>D</mi><mrow><mn>2</mn></mrow></msub><mo>求</mo><mi>A</mi><mo>，</mo><mi>B</mi></math></p>
+        <h2>行列式计算经验总结</h2>
+        <pre>
+①利用求逆矩阵公式计算伴随，然后可以求解代数余子式的加和
+②重点区分一个点，代数余子式是不会乘上当前元素的，只是正负号+n-1阶行列式。只有当求行列式的时候，才会让元素乘上代数余子式。
+③要喜欢用分块来求解行列式
+        </pre>
     </div>
     <hr>
     值得一提的是，基础概念我这里不再赘述。只是将复杂的知识点串起来
@@ -958,6 +1045,17 @@ D=	<div class="determinant" style="line-height:5px">
         </div>
     </div>
     <div class="note-container">
+        <h1>矩阵的广义初等变换</h1>
+        这一块是针对分块来讲的（左行右列，左乘行变换，右乘列变换）
+        <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtable displaystyle="true" columnalign="right left right left right left right left right left right left" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt"><mtr><mtd></mtd><mtd><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mover><mo data-mjx-texclass="REL">→</mo><mpadded width="+0.611em" lspace="0.278em" voffset=".15em"><msub><mi>r</mi><mn>1</mn></msub><mo stretchy="false">↔</mo><msub><mi>r</mi><mn>2</mn></msub></mpadded></mover><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow></mtd></mtr><mtr><mtd></mtd><mtd><mtext>等价于</mtext><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>O</mi></mtd><mtd><mi>E</mi></mtd></mtr><mtr><mtd><mi>E</mi></mtd><mtd><mi>O</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mtext>(行变换需左乘)</mtext></mtd></mtr></mtable></math>
+        <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtable displaystyle="true" columnalign="right left right left right left right left right left right left" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt"><mtr><mtd></mtd><mtd><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mover><mo data-mjx-texclass="REL">→</mo><mpadded width="+0.611em" lspace="0.278em" voffset=".15em"><msub><mi>c</mi><mn>1</mn></msub><mo stretchy="false">↔</mo><msub><mi>c</mi><mn>2</mn></msub></mpadded></mover><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>B</mi></mtd><mtd><mi>A</mi></mtd></mtr><mtr><mtd><mi>D</mi></mtd><mtd><mi>C</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow></mtd></mtr><mtr><mtd></mtd><mtd><mtext>等价于</mtext><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>O</mi></mtd><mtd><mi>E</mi></mtd></mtr><mtr><mtd><mi>E</mi></mtd><mtd><mi>O</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>B</mi></mtd><mtd><mi>A</mi></mtd></mtr><mtr><mtd><mi>D</mi></mtd><mtd><mi>C</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mtext>(列变换需右乘)</mtext></mtd></mtr></mtable></math>
+        ------------------------------------------------------
+        <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtable displaystyle="true" columnalign="right left right left right left right left right left right left" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt"><mtr><mtd></mtd><mtd><mi></mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo><mtext>&nbsp;第2行左乘矩阵</mtext><mi>M</mi><mtext>后加到第1行</mtext><mo>:</mo></mtd></mtr><mtr><mtd></mtd><mtd></mtd><mtd></mtd><mtd><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mover><mo data-mjx-texclass="REL">→</mo><mpadded width="+0.611em" lspace="0.278em" voffset=".15em"><msub><mi>r</mi><mn>1</mn></msub><mo>+</mo><mi>M</mi><msub><mi>r</mi><mn>2</mn></msub></mpadded></mover><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi><mo>+</mo><mi>M</mi><mi>C</mi></mtd><mtd><mi>B</mi><mo>+</mo><mi>M</mi><mi>D</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow></mtd></mtr><mtr><mtd></mtd><mtd></mtd><mtd></mtd><mtd><mtext>一</mtext><mtext>等价于&nbsp;</mtext><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>E</mi></mtd><mtd><mi>M</mi></mtd></mtr><mtr><mtd><mi>O</mi></mtd><mtd><mi>E</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi><mo>+</mo><mi>M</mi><mi>C</mi></mtd><mtd><mi>B</mi><mo>+</mo><mi>M</mi><mi>D</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mtext>(行变换需左乘</mtext></mtd></mtr><mtr><mtd></mtd><mtd><mi></mi><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo><mtext>&nbsp;第1行左乘矩阵</mtext><mi>M</mi><mtext>后加到第2行</mtext><mo>:</mo></mtd></mtr><mtr><mtd></mtd><mtd></mtd><mtd></mtd><mtd><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mover><mo data-mjx-texclass="REL">→</mo><mpadded width="+0.611em" lspace="0.278em" voffset=".15em"><msub><mi>r</mi><mn>2</mn></msub><mo>+</mo><mi>M</mi><msub><mi>r</mi><mn>1</mn></msub></mpadded></mover><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi><mo>+</mo><mi>M</mi><mi>A</mi></mtd><mtd><mi>D</mi><mo>+</mo><mi>M</mi><mi>B</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow></mtd></mtr><mtr><mtd></mtd><mtd></mtd><mtd></mtd><mtd><mtext>等价于&nbsp;</mtext><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>E</mi></mtd><mtd><mi>O</mi></mtd></mtr><mtr><mtd><mi>M</mi></mtd><mtd><mi>E</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi><mo>+</mo><mi>M</mi><mi>A</mi></mtd><mtd><mi>D</mi><mo>+</mo><mi>M</mi><mi>B</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mtext>(行变换需左乘</mtext></mtd></mtr><mtr><mtd></mtd><mtd><mtext>(3)第2列右乘矩阵</mtext><mi>M</mi><mtext>后加到第1列</mtext><mo>:</mo></mtd></mtr><mtr><mtd></mtd><mtd></mtd><mtd></mtd><mtd><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mover><mo data-mjx-texclass="REL">→</mo><mpadded width="+0.611em" lspace="0.278em" voffset=".15em"><msub><mi>c</mi><mn>1</mn></msub><mo>+</mo><msub><mi>c</mi><mn>2</mn></msub><mi>M</mi></mpadded></mover><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi><mo>+</mo><mi>B</mi><mi>M</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi><mo>+</mo><mi>D</mi><mi>M</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow></mtd></mtr><mtr><mtd></mtd><mtd></mtd><mtd></mtd><mtd><mtext>等价于&nbsp;</mtext><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>E</mi></mtd><mtd><mi>O</mi></mtd></mtr><mtr><mtd><mi>M</mi></mtd><mtd><mi>E</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi><mo>+</mo><mi>B</mi><mi>M</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi><mo>+</mo><mi>D</mi><mi>M</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mtext>(列变换需右乘)</mtext></mtd></mtr><mtr><mtd></mtd><mtd><mtext>(4)第1列右乘矩阵</mtext><mi>M</mi><mtext>后加到第2列</mtext><mo>:</mo></mtd></mtr><mtr><mtd></mtd><mtd></mtd><mtd></mtd><mtd><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mover><mo data-mjx-texclass="REL">→</mo><mpadded width="+0.611em" lspace="0.278em" voffset=".15em"><msub><mi>c</mi><mn>2</mn></msub><mo>+</mo><msub><mi>c</mi><mn>1</mn></msub><mi>M</mi></mpadded></mover><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi><mo>+</mo><mi>A</mi><mi>M</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi><mo>+</mo><mi>C</mi><mi>M</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow></mtd></mtr><mtr><mtd></mtd><mtd></mtd><mtd></mtd><mtd><mtext>等价于&nbsp;</mtext><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>E</mi></mtd><mtd><mi>M</mi></mtd></mtr><mtr><mtd><mi>O</mi></mtd><mtd><mi>E</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi><mo>+</mo><mi>A</mi><mi>M</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi><mo>+</mo><mi>C</mi><mi>M</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mtext>(列变换需右乘)</mtext></mtd></mtr></mtable></math>
+        ------------------------------------------------------
+        <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtable displaystyle="true" columnalign="right left right left right left right left right left right left" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt"><mtr><mtd><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo><mtext>&nbsp;第1行左乘矩阵</mtext><mi>M</mi><mtext>(</mtext><mrow><mo stretchy="false">|</mo></mrow><mi>M</mi><mrow><mo stretchy="false">|</mo></mrow><mo>≠</mo><mn>0</mn><mtext>)</mtext><mo>:</mo></mtd></mtr><mtr><mtd><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mover><mo data-mjx-texclass="REL">→</mo><mpadded width="+0.611em" lspace="0.278em" voffset=".15em"><mi>M</mi><msub><mi>r</mi><mn>1</mn></msub></mpadded></mover><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>M</mi><mi>A</mi></mtd><mtd><mi>M</mi><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow></mtd></mtr><mtr><mtd><mtext>等价</mtext><mtext>于</mtext><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>M</mi></mtd><mtd><mi>O</mi></mtd></mtr><mtr><mtd><mi>O</mi></mtd><mtd><mi>E</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>M</mi><mi>A</mi></mtd><mtd><mi>M</mi><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mtext>(行变换需左乘)</mtext></mtd></mtr><mtr><mtd><mtext>(2)第2行左乘矩阵</mtext><mi>M</mi><mo stretchy="false">(</mo><mrow><mo stretchy="false">|</mo></mrow><mi>M</mi><mrow><mo stretchy="false">|</mo></mrow><mo>≠</mo><mn>0</mn><mo stretchy="false">)</mo><mo>:</mo></mtd></mtr><mtr><mtd><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mover><mo data-mjx-texclass="REL">→</mo><mpadded width="+0.611em" lspace="0.278em" voffset=".15em"><mi>M</mi><msub><mi>r</mi><mn>2</mn></msub></mpadded></mover><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>M</mi><mi>C</mi></mtd><mtd><mi>M</mi><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow></mtd></mtr><mtr><mtd><mtext>等</mtext><mtext>价于&nbsp;</mtext><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>E</mi></mtd><mtd><mi>O</mi></mtd></mtr><mtr><mtd><mi>O</mi></mtd><mtd><mi>M</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>M</mi><mi>C</mi></mtd><mtd><mi>M</mi><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mtext>(行变换需左乘)</mtext></mtd></mtr><mtr><mtd><mo stretchy="false">(</mo><mn>3</mn><mo stretchy="false">)</mo><mtext>&nbsp;第1列右乘矩阵</mtext><mi>M</mi><mtext>(</mtext><mrow><mo stretchy="false">|</mo></mrow><mi>M</mi><mrow><mo stretchy="false">|</mo></mrow><mo>≠</mo><mn>0</mn><mtext>)</mtext><mo>:</mo></mtd></mtr><mtr><mtd><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mover><mo data-mjx-texclass="REL">→</mo><mpadded width="+0.611em" lspace="0.278em" voffset=".15em"><msub><mi>c</mi><mn>1</mn></msub><mi>M</mi></mpadded></mover><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi><mi>M</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi><mi>M</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow></mtd></mtr><mtr><mtd><mtext>等价于</mtext><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>M</mi></mtd><mtd><mi>O</mi></mtd></mtr><mtr><mtd><mi>O</mi></mtd><mtd><mi>E</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi><mi>M</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi><mi>M</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mtext>(列变换需右乘)</mtext></mtd></mtr><mtr><mtd><mo stretchy="false">(</mo><mn>4</mn><mo stretchy="false">)</mo><mtext>&nbsp;第2列右乘矩阵</mtext><mi>M</mi><mtext>(</mtext><mrow><mo stretchy="false">|</mo></mrow><mi>M</mi><mrow><mo stretchy="false">|</mo></mrow><mo>≠</mo><mn>0</mn><mtext>)</mtext><mo>:</mo></mtd></mtr><mtr><mtd><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mover><mo data-mjx-texclass="REL">→</mo><mpadded width="+0.611em" lspace="0.278em" voffset=".15em"><msub><mi>c</mi><mn>2</mn></msub><mi>M</mi></mpadded></mover><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi><mi>M</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi><mi>M</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow></mtd></mtr><mtr><mtd><mtext>等价于&nbsp;</mtext><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>E</mi></mtd><mtd><mi>O</mi></mtd></mtr><mtr><mtd><mi>O</mi></mtd><mtd><mi>M</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnalign="center" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd><mtd><mi>B</mi><mi>M</mi></mtd></mtr><mtr><mtd><mi>C</mi></mtd><mtd><mi>D</mi><mi>M</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mtext>(列变换需右乘)</mtext></mtd></mtr></mtable></math>
+        M需要保证可逆，才能不改变原本矩阵的秩
+    </div>
+    <div class="note-container">
         <h1>矩阵等价</h1>
         <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>A</mi><mover><mrow><mo>有限次初等变换</mo></mrow><mo>→</mo></mover><mi>B</mi><mo stretchy="false">⟹</mo><mi>A</mi><mo>与</mo><mi>B</mi><mo>等价</mo><mo stretchy="false">(</mo><mi>A</mi><mo>≅</mo><mi>B</mi><mo stretchy="false">)</mo></math></p>
         <p>判定方法两种：</p>
@@ -992,7 +1090,7 @@ D=	<div class="determinant" style="line-height:5px">
         <p>局部相关整体就相关，整体无关局部就无关(好好品味一下这句话)</p>
         <p>其实很好理解，家里面有个盆，盆里面有花，那么家里面就有花，如果整个家没有花，当然盆里面也没有</p>
         <p>向量组的秩与极大线性无关组：向量组的秩就是极大现线性无关组中向量的个数</p>
-        <p>注意，向量组是由个个向量构成的，矩阵是一个数表</p>
+        <p>注意，向量组是由一个个向量构成的，矩阵是一个数表</p>
         <p>我们可以将向量组写成矩阵形式，并且求的秩也都是一样的结果，但是本质是不一样的</p>
         <p style="color: green">利用向量组的秩判断向量组的线性相关性</p>
         <p>向量秩、向量个数</p>
@@ -1001,6 +1099,10 @@ D=	<div class="determinant" style="line-height:5px">
         <p style="color: red">见到一个向量组被另一个向量组线性表出，立即写成矩阵相乘的形式</p>
         <p style="color: red">一个矩阵A乘上一个可逆矩阵不会改变A的秩</p>
         <p>向量组线性无关，伸长也无关，向量组线性相关，缩短也相关</p>
+        <p>向量组中的个数超过维数，该向量组必线性相关</p>
+        <p>向量组线性无关，若此时加入一个向量变成线性相关，那么新加的向量可由原来的向量组线性表出</p>
+        <p>向量组A可由向量组B线性表出，那么r(A)<=r(B)</p>
+        <p>具体数值的极大无关组判断：化行阶梯矩阵，任选列，看其行列式为0则相关，非0则无关</p>
     </div>
     <div class="note-container">
         <h1>线性方程组</h1>
@@ -1308,4 +1410,43 @@ D=	<div class="determinant" style="line-height:5px">
     <p>好啦，线性代数的部分就告一段落了</p>
     <p></p>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/highlight.min.js"></script>
+
+<script>
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('open');
+        // Toggle body margin to push content after opening the sidebar
+        document.body.classList.toggle('margin-left');
+    }
+
+    function generateTableOfContents() {
+        const tocList = document.getElementById('toc-list');
+        tocList.innerHTML = ''; // Clear existing list items
+
+        const headings = document.querySelectorAll('h1, h2');
+
+        headings.forEach((heading, index) => {
+            const headingLevel = parseInt(heading.tagName[1], 10); // Get the level (1 for h1, 2 for h2)
+            const headingText = heading.textContent.trim();
+            const anchor = document.createElement('a');
+            const anchorId = headingText.toLowerCase().replace(/\s+/g, '-');
+            heading.id = anchorId;
+
+            anchor.href = '#' + anchorId;
+            anchor.textContent = headingText;
+            anchor.className = 'toc-link';
+
+            const li = document.createElement('li');
+            li.style.paddingLeft = `${(headingLevel - 1) * 20}px`; // Indent based on heading level
+            li.appendChild(anchor);
+            tocList.appendChild(li);
+        });
+    }
+
+    // Call generateTableOfContents on both DOMContentLoaded and window load events
+    document.addEventListener('DOMContentLoaded', generateTableOfContents);
+    window.addEventListener('load', generateTableOfContents);
+</script>
+</body>
 </html>

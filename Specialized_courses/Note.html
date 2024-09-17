@@ -2017,7 +2017,7 @@ pre就是你想找的
 就是说把空链域指向它的前驱后继，保证利益最大化
 也就是说左孩子空的话就指向它的前面一个结点
 右孩子空的话就指向它的后一个结点
-都涉及前后了，那肯定是前后后序肯定是不一样的
+都涉及前后了，那肯定是前中后序肯定是不一样的
 <span style="color: red">我们就拿这幅图的前序来讲</span>
 <svg width="400" height="220" xmlns="http://www.w3.org/2000/svg">
   <!-- 定义箭头标记 -->
@@ -2831,6 +2831,8 @@ typedef struct{              //树结构
     E:1
     别觉得哈夫曼编码就是固定长度(🤣🫵)
 其次呢，构造过程中产生了n-1个点，那么总数就是n+n-1=2n-1个点
+哈夫曼树是没有度为1的结点的
+并且所有的编辑点都是叶子结点，其余的都是生成的
 ---------------------------------------------
 <span style="color: red;font-size: 20px">并查集</span>
 并查集说白了就是两个操作
@@ -2892,9 +2894,11 @@ G=(V,E)//V是顶点，E是边，G是图，说白了都是英文单词首字母
 强连通图至少有n条边
 ---------------------------------------------
 <span style="color: red">生成树、生成森林</span>
-连通图的<span style="color: red">生成树</span>是包含图中全部顶点的一个极小连通子图
-第一个是全部顶点，第二个是极小也就是边数最小，但是始终保存连通
-非连通图的连通分量的生成树构成了非连通图的生成森林
+<span style="color:magenta">连通图</span>的<span style="color: red">生成树</span>是包含图中全部顶点的一个极小连通子图
+第一个是<span style="color: red">全部顶点</span>，第二个是极小也就是<span style="color: red">边数最小</span>，但是始终<span style="color: red">保存连通</span>
+对生成树来说，减去一条边就是非连通，加上一条边就是回路
+
+<span style="color:magenta">非连通图</span>的连通分量的生成树构成了非连通图的<span style="color: red">生成森林</span>
 这句话很绕，但是你想想，非连通，但是我们的每一个连通分量是连通的
 连通的连通分量的生成树，也就是包含连通分量全部顶点，极小边
 这些生成树不是一棵，所以就是森林
@@ -3045,7 +3049,7 @@ edges.forEach(function(edge) {
 <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>1</mn></mtd></mtr><mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow></math>
 观察以上矩阵是不对称的
 每一个顶点的度是行列的加和，例如1的度是第一行+第一列，因为它的度=入度+出度
-整个图的图=矩阵*2(别想多了，就是1的个数*2)
+整个图的度=矩阵*2(别想多了，就是1的个数*2)
 <hr>
 邻接矩阵的空间复杂度是O(n²)
         </pre>
@@ -4876,7 +4880,7 @@ D表不更新，那么P表也对应不更新
     然后就剩下两个
     0通过1到2就是10+4=14是大于之前的13的，所以不动
     2通过1到0就是，你是不是回去看图了，你会发现，2->1没有路径，傻眼了
-    其实所以的计算都是基于上面一个表，2->1是15，然后1到0是6，就是15+6=21是大于原来的5的，所以不更新
+    其实所有的计算都是基于上面一个表，2->1是15，然后1到0是6，就是15+6=21是大于原来的5的，所以不更新
 <table>
     <tr>
         <th>D(<span style="color: red">1</span>)</th>
@@ -4932,7 +4936,7 @@ D表不更新，那么P表也对应不更新
 接下来再以2为中间点
 <table>
     <tr>
-        <th>D(<span style="color: red">1</span>)</th>
+        <th>D(<span style="color: red">2</span>)</th>
         <th>0</th>
         <th>1</th>
         <th>2</th>
@@ -4958,7 +4962,7 @@ D表不更新，那么P表也对应不更新
 </table>
         <table>
     <tr>
-        <th>Path(<span style="color: red">1</span>)</th>
+        <th>Path(<span style="color: red">2</span>)</th>
         <th>0</th>
         <th>1</th>
         <th>2</th>
@@ -4988,7 +4992,7 @@ D表不更新，那么P表也对应不更新
     所以
 <table>
     <tr>
-        <th>D(<span style="color: red">1</span>)</th>
+        <th>D(<span style="color: red">2</span>)</th>
         <th>0</th>
         <th>1</th>
         <th>2</th>
@@ -5014,7 +5018,7 @@ D表不更新，那么P表也对应不更新
 </table>
         <table>
     <tr>
-        <th>Path(<span style="color: red">1</span>)</th>
+        <th>Path(<span style="color: red">2</span>)</th>
         <th>0</th>
         <th>1</th>
         <th>2</th>
@@ -5043,7 +5047,7 @@ D表不更新，那么P表也对应不更新
     </table>
     <table>
     <tr>
-        <th>Path(<span style="color: red">1</span>)</th>
+        <th>Path(<span style="color: red">2</span>)</th>
         <th>0</th>
         <th>1</th>
         <th>2</th>
@@ -5434,7 +5438,7 @@ edges.forEach(function(edge) {
     <tr>
         <td>Ve</td>
         <td class="center">0</td>
-        <td>3</td>
+        <td>2</td>
         <td>5</td>
         <td>0</td>
     </tr>
@@ -5532,7 +5536,7 @@ edges.forEach(function(edge) {
     <tr>
         <td>Ve</td>
         <td class="center">0</td>
-        <td>3</td>
+        <td>2</td>
         <td>5</td>
         <td>5</td>
         <td>0</td>
@@ -5633,7 +5637,7 @@ edges.forEach(function(edge) {
     <tr>
         <td>Ve</td>
         <td class="center">0</td>
-        <td>3</td>
+        <td>2</td>
         <td>5</td>
         <td>8</td>
         <td>9</td>
@@ -5727,7 +5731,7 @@ edges.forEach(function(edge) {
     <tr>
         <td>Ve</td>
         <td class="center">0</td>
-        <td>3</td>
+        <td>2</td>
         <td>5</td>
         <td>8</td>
         <td>9</td>
@@ -5816,7 +5820,7 @@ V5到V6，V5本身是9，到V6就是9+1=10，没有12大，不更新
     <tr>
         <td>Ve</td>
         <td class="center">0</td>
-        <td>3</td>
+        <td>2</td>
         <td>5</td>
         <td>8</td>
         <td>9</td>
@@ -5920,7 +5924,7 @@ edges.forEach(function(edge) {
     <tr>
         <td>Ve</td>
         <td class="center">0</td>
-        <td>3</td>
+        <td>2</td>
         <td>5</td>
         <td>8</td>
         <td>9</td>
@@ -5950,7 +5954,7 @@ V6连接着V5，V4，V3，我们用12分别减去，然后比大小，更新小�
     <tr>
         <td>Ve</td>
         <td class="center">0</td>
-        <td>3</td>
+        <td>2</td>
         <td>5</td>
         <td>8</td>
         <td>9</td>
@@ -6048,7 +6052,7 @@ edges.forEach(function(edge) {
     <tr>
         <td>Ve</td>
         <td class="center">0</td>
-        <td>3</td>
+        <td>2</td>
         <td>5</td>
         <td>8</td>
         <td>9</td>
@@ -6589,7 +6593,7 @@ bingo！mid指向29，刚好是我们要找的，好吧，麻烦是麻烦了点
 第二层2个并且查找两次=2*2
 ....
 看不成功的
-第三层有4个不成功=4*4
+第三层有4个不成功=3*4
 第四层有8个不成功=4*8
 为什么它看起来失败的在第四层，而我说第三层呢？
 你是不是傻瓜，失败那个点需要找吗？你找到7，还比7小，往左子树走，没有东西了，不需要比较了，可不就是3层
@@ -7009,7 +7013,7 @@ bingo！mid指向29，刚好是我们要找的，好吧，麻烦是麻烦了点
 <hr>
 我们来看删除
 叶子结点直接pass无所谓，如果我们删除120这个结点怎么办？
-两中，让直接后继代替，或者直接前驱代替
+两种，让直接后继代替，或者直接前驱代替
 <canvas id="myCanvas68" width="400" height="200"></canvas>
     <script>
     var canvas = document.getElementById('myCanvas68');
@@ -8330,7 +8334,7 @@ m阶B树最少[m/2]个分支，[m/2]-1个元素，向上取整。注意根例外
             左合并：此点左父下移，此点右并过来
             右合并：此点右父下移，此点左并过去
 <span style="color: red;font-size: 20px">B+</span>
-其他和B一样，只是<span style="color: red">结点子树的个数与此结点关键字相同</span>
+其他和B一样，只是<span style="color: red">结点子树的个数与此结点里面关键字个数相同</span>
 B+树，除了叶子结点，都是索引，也就是说，还没有到叶子结点就找到一样的时候，并不是找到了
 还要继续向下，找到叶子结点以后，还要找，找到对应的以后，叶子结点本身也是一个对应的关键字，如同
 我们之前那个B树图，下面都是失败，而这个则是成功对应的记录
@@ -9168,6 +9172,7 @@ bingo！mid指向29，刚好是我们要找的
 因为我确实觉得这样说，是很清晰的，但是这是基于我本身是十分了解的前提下
 但是很多人是没有我这样的基础的，也就说，这是一种自我陶醉
 所以说这是一个稳定的算法，因为只有比它小的才会往前面放
+注意折半查找用在已经排好序的里面，从后面依次选一个进行查找，然后查找位置插入
 <hr>
 <span style="color: red;font-size: 20px">希尔</span>
 <span style="color: #00daff">利用希尔排序对关键字系列{40，24，80，39，43，18，20，10，90，70}从小到大排序(增量5，3，1)</span>
@@ -10172,9 +10177,34 @@ n巨大，关键字位数少的前提下，使用基数排序
     </div>
     <div class="block">
         <h1>递归和分治</h1>
-        <h2>代码示例</h2>
+        <h2>二分查找(基于递归分治)</h2>
         <pre>
+        <code type="c">
+/*问题：给定一个长度为n的有序数组nums，其中所有元素都是唯一，查找元素target*/
+#include< stdio.h >//基于分治递归的二分查找
+int dfs(int[], int, int, int);
+void main() {
+	int a[] = {1, 2, 3, 4, 5, 6, 7, 8};//定义一个数组
+	int b = dfs(a, 2, 0, sizeof(a)/sizeof(a[0])-1);
+	//第四个参数是计算数组大小，因为sizeof返回的是存储大小，所以总大小/一个大小就是个数
+	printf("这个元素是数组中的第%d个\n",b+1);
+	return 0;
+}
+int dfs(int a[], int target, int i, int j)
+{
+	if (i > j)
+		return -1;//如果左指针大于右指针说明查找失败，因为二分都分劈叉了，你说呢
+	int m = (i + j) / 2;//依据我们理论来讲，m中间指针是指向首尾/2，也就是一半，向下取整
+	if (target > a[m])//如果目标比中间大，我们将目光看向大的那一半
+		return dfs(a, target, m + 1, j);//进入大的一半
+	else if (target < a[m])//如果目标比中间小，将目光看向小的那一半
+		return dfs(a, target, i, m - 1);//进入小的一半
+	else
+		return m;//如果此时首尾指针指向一个元素，那么就是我们要找的
+}
+/*分治的体现，使用递归，每次割分，不断将问题化为一个个小问题，小问题之间无联系*/
 
+        </code>
         </pre>
     </div>
     <div class="block">
@@ -10274,8 +10304,613 @@ D.n-1,n-1
 n%n=0,也就是(n-1+1)%n=0
 所以rear就是n-1，front不动，那就是0
 </code>
+<code><strong>7.设二叉树有2n个结点，且m < n,则不可能存在的结点是:</strong>
+A.n个度为0
+B.2m个度为0
+C.2m个度为1
+D.2m个度为2
+<strong>答案:</strong> C &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+这道题最好的办法就是判断奇偶性，我们知道n0=n2+1
+而且2n=n0+n1+n2，代入结合一下
+2n=2n2+n1+1
+n1=2n-2n2-1
+n1=2(n-n2)-1
+说明n1是奇数，所以C不对
+</code>
+<hr>
+<strong>8.高度为h的完全二叉树最少有多少个结点:</strong>
+A.<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mn>2</mn><mi>h</mi></msup></math>
+B.<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mn>2</mn><mi>h</mi></msup><mo>+</mo><mn>1</mn></math>
+C.<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mn>2</mn><mrow><mi>h</mi><mo>−</mo><mn>1</mn></mrow></msup></math>
+D.<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mn>2</mn><mi>h</mi></msup><mo>−</mo><mn>1</mn></math>
+<strong>答案:</strong> C &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+想象一下，如果我们的第h层只有一个结点，是不是就是最少的情况
+那前面的h-1层就是满的，我们用等比数列算<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mn>2</mn><mrow><mi>h</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow><mrow><mn>1</mn><mo>−</mo><mn>2</mn></mrow></mfrac><mo>=</mo><msup><mn>2</mn><mrow><mi>h</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>−</mo><mn>1</mn></math>
+然后我们第h层有一个，加上这一个
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mn>2</mn><mrow><mi>h</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>−</mo><mn>1</mn><mo>+</mo><mn>1</mn><mo>=</mo><msup><mn>2</mn><mrow><mi>h</mi><mo>−</mo><mn>1</mn></mrow></msup></math>
+<hr>
+<strong>9.已知一棵完全二叉树的第6层(根为第一层)有8个叶结点，则该完全二叉树的结点个数最多是:</strong>
+A.39
+B.52
+C.111
+D.119
+<strong>答案:</strong> C &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+想象一下完全二叉树第6层如果有叶结点，那么就是第七层没有满，也有可能是第六层就是这几个叶子结点了
+我们要算最多，那不就是存在第七层的嘛
+我们前6层都满，算一下<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mn>2</mn><mn>6</mn></msup></mrow><mrow><mn>1</mn><mo>−</mo><mn>2</mn></mrow></mfrac><mo>=</mo><mn>63</mn></math>
+我们第七层什么情况？我们第6层有8个叶子，也就是第7层少了16个结点，我们把第七层算一下减去16就行
+第七层的结点用等比第n项公式
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mn>2</mn><mn>6</mn></msup><mo>=</mo><mn>64</mn><mo>,</mo><mn>64</mn><mo>−</mo><mn>16</mn><mo>=</mo><mn>48</mn><mo>,</mo><mn>48</mn><mo>+</mo><mn>63</mn><mo>=</mo><mn>111</mn></math>
+<hr>
+<strong>10.在二叉树中有两个结点m和n，若m是n的祖先，则使用什么可以找到从m到n的路径:</strong>
+A.先序遍历
+B.中序遍历
+C.后序遍历
+D.层次遍历
+<strong>答案:</strong> C &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+二叉树的代码实现中，是递归的，递归就是说先深入再回退，那么就是左右根可以不断的输入从n到m的路径
+相当于可以找到从m到n的路径
+<hr>
+<strong>11.线索二叉树是一种什么结构:</strong>
+A.逻辑
+B.逻辑和存储
+C.物理
+D.线性
+<strong>答案:</strong> C &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+烦死了，这种题目
+<hr>
+<strong>12.二叉树在线索化后，仍不能有效求解的问题是:</strong>
+A.先序线索二叉树中求先序后继
+B.中序线索二叉树中求中序后继
+C.中序线索二叉树中求中序前驱
+D.后序线索二叉树中求后序后继
+<strong>答案:</strong> D &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+根左右，右的线索前驱是左，要找右的前驱根，显然不太行
+<hr>
+<strong>13.在有n个叶结点的哈夫曼树中，非叶结点的总数是:</strong>
+A.n-1
+B.n
+C.2n-1
+D.2n
+<strong>答案:</strong> A &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+哈夫曼树中只有度为0和2的结点，根据度为0和度为2的公式
+n0=n2+1
+n2=n0-1
+<hr>
+<strong>14.对n个互不相同的符号进行哈夫曼编码，若生成的哈夫曼树共有115个结点，则n的值是:</strong>
+A.56
+B.57
+C.58
+D.60
+<strong>答案:</strong> C &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+n个符号共新建了n-1个结点，2n-1=115
+2n=116
+n=58
+<hr>
+<strong>15.若从无向图的任意顶点出发进行一次深度优先搜索即可访问所有顶点，则该图一定是:</strong>
+A.强连通图
+B.连通图
+C.有回路
+D.一棵树
+<strong>答案:</strong> B &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+A是有向图的东西
+B对
+C有回路不一定是连通图，因为可能是单独一个顶点，其他剩下的有回路
+D一棵树是不可能有环的，而这个连通图是可能有的
+<hr>
+<strong>16.一个28条边的非连通无向图至少有多少个顶点:</strong>
+A.7
+B.8
+C.9
+D.10
+<strong>答案:</strong> C
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+我们知道边数和顶点的关系，也就是<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>e</mi><mo>=</mo><mfrac><mrow><mi>n</mi><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mn>2</mn></mfrac></math>
+以上的完全图的边对应点的关系，我们如果再增加一个点，这个点就是单独的点，也就是构成非连通图
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mn>28</mn><mo>=</mo><mfrac><mrow><mi>n</mi><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mn>2</mn></mfrac></math>
+算出n=8，此时再加一个顶点就是非连通
+所有就是9
+<hr>
+<strong>17.无向图G有23条边，度为4的顶点有5个，度为3的顶点有4个，其余都是度为2的顶点，则图G有多少个顶点:</strong>
+A.11
+B.12
+C.15
+D.16
+<strong>答案:</strong> D
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+分析题目，只有度4度3度2，也就是总度=n4+n3+n2
+我们又知道无向图度与边的关系，就是总度数=边数*2
+23*2=n4+n3+n2
+46=20+12+n2
+n2=14
+那度为2的顶点个数就是12/2=7
+所有总的顶点个数=7+4+5=16
+<hr>
+<strong>18.在有n个顶点的有向图中，顶点的度最大可达:</strong>
+A.n
+B.n-1
+C.2n
+D.2n-2
+<strong>答案:</strong> D
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+有向图的度=入度+出度
+我们看题目，问的是一个顶点的度
+这个顶点可以与n-1个有来往
+来是n-1
+往是n-1
+总是2n-2
+<hr>
+<strong>19.具有6个顶点的无向图，当有多少条边时能确保是一个连通图:</strong>
+A.8
+B.9
+C.10
+D.11
+<strong>答案:</strong> D
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+考虑我们的知识点，n个顶点的完全图对应有多少条边？
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>e</mi><mo>=</mo><mfrac><mrow><mi>n</mi><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mn>2</mn></mfrac></math>
+假如5个顶点组成是一个完全图，现在加入一个顶点就是非连通，但是再加入一条边就是连通的了，因为完全图里面加不了边了
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mn>10</mn><mo>=</mo><mfrac><mrow><mn>5</mn><mo stretchy="false">(</mo><mn>5</mn><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mn>2</mn></mfrac></math>
+5个顶点完全图需要10条边，再加入一条不就是让6个顶点连通的了，所以就是11
+<hr>
+<strong>20.若具有n个顶点的图是一个环，则它有多少棵生成树:</strong>
+A.n方
+B.n
+C.n-1
+D.1
+<strong>答案:</strong> B
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+n个顶点是一个环，环去掉任意一条边都是一个生成树
+所以可以有n种
+<hr>
+<strong>21.若一个具有n个顶点、e条边的无向图是一个森林，则该森林中必有多少棵树:</strong>
+A.n
+B.e
+C.n-e
+D.1
+<strong>答案:</strong> C
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+对于任意一棵树而言，e=n-1 ,就是边数等于顶点数-1
+假设有x棵数
+那么就是e=(n1-1)+(n2-1)+...+(nx-1)
+e=n-x
+x=n-e
+<hr>
+<strong>22.n个顶点的无向图的邻接表最多有多少个边表结点:</strong>
+A.n方
+B.n(n-1)
+C.n(n+1)
+D.[n(n-1)]/2
+<strong>答案:</strong> B
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+对于一个具有n 个顶点的无向图：
+每个顶点都至少有一个边表节点，即使它不与任何其他顶点相连（这种情况下，该顶点的链表只有一个节点，代表一个孤立顶点）。
+在无向图中，每条边在邻接表中会出现两次，因为无向图的边是双向的。因此，如果顶点
+A与顶点B相连，那么在顶点A的链表中会有一个边表节点指向B，在顶点B的链表中也会有一个边表节点指向A。
+因此，对于一个具有n个顶点的无向图：最多有n个顶点，每个顶点都与其他个顶点相连(n-1)（除了它自己）。
+因此，最多有n×(n−1) 个边表节点，因为每条边贡献了两个边表节点（每个顶点的链表中各一个）。
+但是，由于每条边被计算了两次（一次在每个顶点的链表中），实际的边数是边表节点数的一半，即边数=[n×(n−1)]/2
+<hr>
+<strong>23.在有向图的邻接表存储结构中，顶点v在边表中出现的次数是:</strong>
+A.顶点v的度
+B.顶点v的出度
+C.顶点v的入度
+D.依附于顶点v的边数
+<strong>答案:</strong> C
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+邻接表有向图，连接的一定是向有路径的方向，这个点被上一个点过来，一定是入度
+<hr>
+<strong>24.设有向图G=(V，E)，顶点集V={V0,V1,V2,V3},边集={< V0 , V1>,< V0,V2 >,< V0,V3 >,< V1,V3 >}若从顶点V0开始对图进行深度优先遍历，则可能得到的不同遍历序列个数是:</strong>
+A.2
+B.3
+C.4
+D.5
+<strong>答案:</strong> D
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+嗯，我知道你可能会有疑问，我想告诉你的是，你设想到的所有可能是存在的，分岔路口是包括的。
+<hr>
+只有缩短所有关键路径上的至少一个关键活动可以缩短整个工程工期
+<hr>
+<strong>25.用Prim算法和Kruskal算法构造图的最小生成树，所得到的最小生成树:</strong>
+A.相同
+B.不相同
+C.可能相同、可能不同
+D.无法比较
+<strong>答案:</strong> C
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+嗯，我知道你可能会有疑问，我想告诉你的是，你设想到的所有可能是存在的，分岔路口是包括的。
+<hr>
+<strong>26.为提高查找效率，对65025个元素的有序顺序表建立索引结构，在最好情况下查找到表中已有元素最多需要执行多少次2关键字比较:</strong>
+A.10
+B.14
+C.16
+D.21
+<strong>答案:</strong> C
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+首先最好是建立的索引表求开方<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msqrt><mn>65025</mn></msqrt><mo>=</mo><mn>255</mn></math>
+也就是说索引表有255个，索引块中也有255，分别采用折半查找
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mn>2</mn><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mn>255</mn><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mo>=</mo><mn>16</mn></math>
+<hr>
+<strong>27.含有n个非叶结点的m阶B树中至少包含多少个关键字:</strong>
+A.n(m+1)
+B.n
+C.n([m/2]-1)
+D.(n-1)([m/2]-1)+1
+<strong>答案:</strong> D
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+至少，根至少一个关键字
+其他结点至少[m/2]-1个关键字
+所以就是(n-1)([m/2]-1)+1个
+<hr>
+<strong>28.已知一棵五阶B树中共有53个关键字，则树的最大高度为，最小高度为:</strong>
+A.2
+B.3
+C.4
+D.5
+<strong>答案:</strong> C B
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+树的高度要最高，也就是分支最少，每一个结点的关键字最少
+套用等比数列求和公式<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mn>3</mn><mi>h</mi></msup></mrow><mrow><mn>1</mn><mo>−</mo><mn>3</mn></mrow></mfrac><mo>=</mo><mfrac><mn>53</mn><mn>2</mn></mfrac></math>
+树的高度要求最低，也就是每一个结点关键字最多，分支最多
+套用等比数列公式就是<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mn>5</mn><mi>h</mi></msup></mrow><mrow><mn>1</mn><mo>−</mo><mn>5</mn></mrow></mfrac><mo>=</mo><mfrac><mn>53</mn><mn>4</mn></mfrac></math>
+分别得出4和3
+<hr>
+<strong>29.依次将关键字5，6，9，13，8，2，12，15插入初始为空的4阶B树后，根结点中包含的关键字是:</strong>
+A.8
+B.6，9
+C.8，13
+D.9，12
+<strong>答案:</strong> B
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+我们插入
+            5 6 9 13
+这个时候超过了元素可以容忍的最大个数，我们从m/2也就是4/2第二个分开，第二个成根，其他分为左右
+            6
+       5         9 13
+8入
+            6
+       5         8 9 13
+2入
+              | 6 |
+     |2  5|           |8 9 13|
+12入
+              | 6 |
+     |2  5|           |8 9 12 13|
+超了，我们还是以9为分割
+               |6 9|
+     |2  5|     |8|     |12 13|
+再加入15
+               |6 9|
+     |2  5|     |8|     |12 13 15|
+所以根结点就是6 9
+<hr>
+<strong>30.现有长度为11且初始为空的散列表HT，散列函数是H(Key)=Key%7,采用线性探测法解决冲突，将关键字序列87，40，30，6，11，22，98，20依次插入HT后，HT查找失败的平均查找长度为:</strong>
+A.4
+B.5.25
+C.6
+D.6.29
+<strong>答案:</strong> C
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+我们把数装进去
+散列地址    |0 | 1 |2 | 3 | 4 | 5 | 6 | 7 | 8 ||||
+关键字     |98 |22 |30|87| 11 |40 | 6 |20|
+我们查找第一个失败肯定是从0到7然后再到8然后失败，也就是9次
+第二个从1到7再到8然后失败，也就是8次
+以此类推
+注意什么时候停止，肯定是到6，3次的时候
+因为%7是不可能出现余数为7的
+(9+8+7+6+5+4+3)/7=6
+<hr>
+<strong>31.对n个关键字进行快速排序，最大递归深度为，最小递归深度为:</strong>
+A.1
+B.n
+C.log2n
+D.nlog2n
+<strong>答案:</strong> B C
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+最大深度就是一条路到黑，那就是n，最小如果递归化为一棵树，那就是树高
+<hr>
+<strong>二叉树的创建，以及前中后序</strong>
+<code>
+/*二叉树的创建和遍历*/
+#include< stdio.h>
+#include< stdlib.h>
+//二叉树的创建
+typedef struct TreeNode {
+	char data;
+	struct TreeNode *lchild;
+	struct TreeNode *rchild;
+}TreeNode;
+void creatTree(TreeNode**T)
+{
+	char ch;
+	scanf_s("%c\n", &ch);
+	//这里为什么放一个换行符？
+	//因为你喜欢回车，回车也是字符被读入，所以会导致一直进行下去
+	if (ch == '#')
+	{
+		*T = NULL;
+	}
+	else
+	{
+		*T = (TreeNode*)malloc(sizeof(TreeNode));
+		(*T)->data = ch;
+		creatTree(&((*T)->lchild));
+		creatTree(&((*T)->rchild));
+	}
+}
+void pre(TreeNode *T)
+{
+	if (T == NULL)
+	{
+		return;
+	}
+	else{
+		if(T!=NULL)
+		printf("%c", T->data);
+		pre(T->lchild);
+		pre(T->rchild);
+	}
+
+}
+void in(TreeNode* T)
+{
+	if (T == NULL)
+	{
+		return;
+	}
+	else {
+
+		in(T->lchild);
+		printf("%c", T->data);
+		in(T->rchild);
+	}
+
+}
+void le(TreeNode* T)
+{
+	if (T == NULL)
+	{
+		return;
+	}
+	else {
+
+		le(T->lchild);
+		le(T->rchild);
+		printf("%c", T->data);
+	}
+}
+int main()
+{
+	printf("这是树的创建\n");
+	TreeNode *T;
+	creatTree(&T);//测试使用ABD##E##CF##G###，多出来的一个#是C的缺陷
+	//之所以有#是因为二叉树空后代都要标出来
+	//这是使用前序遍历创建二叉树
+	printf("\n前序遍历为：\n");
+	pre(T);
+	printf("\n中序遍历为：\n");
+	in(T);
+	printf("\n后序遍历为：\n");
+	le(T);
+	return 0;
+}
+</code>
+<hr>
+<strong>二叉树的层序遍历</strong>
+<code type="c">
+/*二叉树的层序遍历*/
+#include< stdio.h>
+#include< stdlib.h>
+//二叉树的创建
+typedef struct TreeNode {
+	char data;
+	struct TreeNode *lchild;
+	struct TreeNode *rchild;
+}TreeNode;
+typedef struct Queue
+{
+	TreeNode* data;
+	struct Queue* pre;
+	struct Queue* next;
+}Queuel;
+void creatTree(TreeNode**T,char*str,int*index)
+{
+	char ch;
+	ch = str[*index];
+	(*index)++;
+	if (ch == '#')
+	{
+		*T = NULL;
+	}
+	else
+	{
+		*T = (TreeNode*)malloc(sizeof(TreeNode));
+		(*T)->data = ch;
+		creatTree(&((*T)->lchild),str,index);
+		creatTree(&((*T)->rchild),str,index);
+	}
+}
+void pre(TreeNode *T)//前序遍历
+{
+	if (T == NULL)
+	{
+		return;
+	}
+	else{
+		if(T!=NULL)
+		printf("%c", T->data);
+		pre(T->lchild);
+		pre(T->rchild);
+	}
+
+}
+void in(TreeNode* T)//中序遍历
+{
+	if (T == NULL)
+	{
+		return;
+	}
+	else {
+
+		in(T->lchild);
+		printf("%c", T->data);
+		in(T->rchild);
+	}
+
+}
+void le(TreeNode* T)//后序遍历
+{
+	if (T == NULL)
+	{
+		return;
+	}
+	else {
+
+		le(T->lchild);
+		le(T->rchild);
+		printf("%c", T->data);
+	}
+}
+Queuel* initQueue()//初始化队列
+{
+	Queuel* Qnead = (Queuel*)malloc(sizeof(Queuel));
+	Qnead->data = NULL;
+	Qnead->next = Qnead;
+	Qnead->pre = Qnead;
+	return Qnead;
+}
+void addQueue(TreeNode* T,Queuel*Qhead)//队尾增加元素
+{
+	Queuel *node = (Queuel*)malloc(sizeof(Queuel));
+	node->data = T;//将树结点存储结点
+	node->pre = Qhead;//让新结点的前驱指向头
+	node->next = Qhead;//让新结点的后继指向头
+	Qhead->pre->next = node;//让最后一个结点指向新结点
+	Qhead->pre = node;//让头的前一个指向新结点
+}
+Queuel* deleteQueue(Queuel* Qhead)//队头删除元素
+{
+	if (isEmpty(Qhead))//如果链表为空则删除失败
+	{
+		return NULL;
+	}
+	else {
+		Queuel * Qnode = Qhead->next;//建立一个结点存储我们要删除的
+		Qhead->next->next->pre = Qhead;//让头结点的后继的后继的前驱指向头
+		Qhead->next = Qhead->next->next;//让头的后继指向后继的后继
+		return Qnode;//返回删除的结点
+	}
+}
+int isEmpty(Queuel* Q)
+{
+	if (Q->next==Q)//队列判空
+	{
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+void level(TreeNode* T,Queuel *Qhead)//层序遍历
+{
+
+		addQueue(T, Qhead);//进入第一个结点
+		while (!isEmpty(Qhead))//判断队列是否为空
+		{
+			Queuel* outnode = deleteQueue(Qhead);//建立一个结点存储出队列的结点
+			printf("%c", outnode->data->data);//打印这个结点
+			if (outnode->data->lchild)//如果结点有左子树
+			{
+				addQueue(outnode->data->lchild, Qhead); //就让左子树进入
+			}
+			if (outnode->data->rchild)//如果结点有右子树
+			{
+				addQueue(outnode->data->rchild, Qhead);//就让右子树进入
+			}
+
+	}
+
+}
+int main()
+{
+	printf("这是树的创建\n");
+	TreeNode *T;
+	char * str = "ABD##E##CF##G###";
+	int index = 0;
+	creatTree(&T,str,&index);
+	printf("\n前序遍历为：\n");
+	pre(T);
+	printf("\n中序遍历为：\n");
+	in(T);
+	printf("\n后序遍历为：\n");
+	le(T);
+	printf("\n层序遍历为：\n");
+	Queuel * Qhead = initQueue();
+	level(T, Qhead);
+	return 0;
+}
+</code>
         </pre>
     </div>
+<pre>
+<code>
+    快来看这有个美女摔倒啦！🫵🏿🤣
+                      _ _-^^"-,---,
+              _-""./  ||//_  /
+            _< _../    <-"__)'
+    _..--'''         _.-"  \
+  .'         _..--""' `  ` \
+  `,    _..-" ' /      `   |
+    \  ' \   ' |  //||\    \
+     \  /"|      // -- |   /
+      \/ \|   |""   G>/  ,/`.
+     ,'   `   '. -  .;-""    |
+    <'     \""\ \_"  /  _.-_"
+     `\      _ "//-.'.-" --."\
+       \    (c`//// /  /"   \ |
+        "-___/| U |  ,/      \|
+             "|  /  ,'        \
+              / /   | |  .     ,
+             (  (   ) J /      |
+              \  \   \."   .   /
+               '  "-_/   /'   /
+                `.   \==.    """-._
+                  \      `+-'./~   ".
+              ,.   "-_   /  //'   .- \
+         _.--"  ""--_-"-/       /"    `,
+       /"        \           |-<--""-  |
+       |  -.__..--""""""'-->'`         |
+       /  |      .-")/"  ,'   \        J
+      |   \   .-"  ..-"""  _.-'        J
+       \   \  ' <"/     ./"         ./'/
+        \.  \_.-,'`\   /    _      ((  |
+          \    /    \        \      '\/,
+           \ ,'      \_       \      / _\
+            /        _/--""""\_'(   ""' /
+           /      _/'/        /\_    _-"
+          /      <-"/       <'   "\ /
+         /         /      ." "-"=-""     __.
+         \,       /      /_   |   """-/""   `.
+           `-----Y       " ""-_         \    |
+                 (             ". __     +   |
+                  `-___          `\.""-/\|   |
+                       `--._       /  <.  \) `,
+                            ""-._ /     "\    |
+                                 "._       ""-\C.-.
+                                    "-._      /ryt|
+                                        "-   )    '
+                                        < \_ /   /
+                                         `\ ",  /
+                                           )|,  |
+                                           |    '
+                                           '   /
+                                          |   '
+                                          \ ,'
+                                           "
+
+</code>
+</pre>
     <script>
         function toggleExplanation(button) {
             var explanation = button.nextElementSibling;
@@ -10360,6 +10995,12 @@ auto是自动分配自动销毁，函数外部直接定义是全局，static是�
 输入数据的时候不能规定精度
 -------------------------------------------------------------
 \b是让光标位置回退一格，而不是向前删除一个字符
+-------------------------------------------------------------
+两指针相加没有意义
+-------------------------------------------------------------
+在二维数组中a[3][3],a[2]是一个地址，而不是a[2][0]这个值，但是a和a[0]指向的地址是一样的
+-------------------------------------------------------------
+-------------------------------------------------------------
 -------------------------------------------------------------
 <hr>
 <span style="color: red;font-size: 20px">字符串处理函数</span>(#include< string.h >)
@@ -10485,6 +11126,41 @@ ftell(p);//获取指针当前位于文件的位置，返回相对于文件开头
 fseek(p,位移量,0);//0(SEEK_SET)文件开头、1(SEEK_CUR)当前、2(SEEK_END)文件结尾，让指针从文件开头位移《位移量》个位移量，《位移量》为负就是向文件头，为正就是向文件尾，0就是到第三个参数位置
 rewind(p);//重置指针位于文件开头
 </code>
+        </pre>
+        <h2>语义“贪心”法</h2>
+        <pre>
+请看这个代码<code>a---b</code>
+恶心吧🤣🫵🏿，我们如果碰到怎么办？我们当然是问问更加头疼的编译器，看看它怎么做
+它说：该死的程序员
+好，正话不多说，我们开始废话：
+C语言中使用这个规则：从左到右一个字符一个字符读入，如果该字符可以组成一个符号，那么就读入下一个字符，然后判断是否能够组成一个符号
+如果可以并且这两个字符可能是另外符号的组成就再继续读入，直到读入的字符不可能组成有意义的符号。
+上面的代码a---b
+读入a，接着-
+-可以组成自减--，所以继续读入
+a--，此时--已经不可能和别的组成有意义的符号了，于是
+保持再读入-，再读入b
+也就是(a--)-b//这段代码执行是a-b，然后a自减，为什么？因为这是a--,使用a然后a才能自减
+        </pre>
+        <h2>深度理解函数声明</h2>
+        <pre>
+请看这个代码<code type="c">(*(void(*)())0)()</code>
+爽吗？
+要回答这个问题，真傻逼，不知道谁天天研究这些恶心的东西
+行吧
+float a;//就是定义一个浮点变量
+float *g();//()优先级最高，所以g和()结合，也就是说g()，g是一个函数，然后才是float *，也就是返回类型为浮点指针的函数g
+float (*g)();//现在*g表明g是一个指针，float表明返回类型为float,()表明是一个函数，结合起来，g是一个指向返回类型为浮点的函数，也就说g是一个函数指针
+接下来一步步分析
+(
+*//此时*与后面最近的()形成一个解引用的目的
+(void(*)())//首先是*表明指针,是匿名指针，然后和()结合就是匿名指针函数，指向没有返回值的函数,加上括号表明是一个强制转换
+注意*不是和(void(*)())先结合，因为这样没有意义，应该是(void(*)())和0结合
+(void(*)())0表示，将0强制转换为指针函数，指向无返回值的函数
+然后才是与*结合*(void(*)())0，表示解引用0，解出来就是0指向的函数本身可以想象成f
+然后(f)()
+也就是调用f这个函数
+(*(void(*)())0)()//也就是调用一个函数，这个函数是被强制转的0，0指向的是一个无返回值的函数
         </pre>
     </div>
     <!-- 添加更多的块 -->

@@ -142,7 +142,31 @@
     .ipInfo {
        display: none;
      }
-
+    #audioPlayer {
+      border: 2px solid #4CAF50;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: #f9f9f9;
+      padding: 10px;
+      width: 300px;
+      opacity: 0.2;
+    }
+    #audioPlayer:hover {
+      background-color: #f0f0f0;
+      cursor: pointer;
+    }
+    #audioPlayer .custom-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      margin: 5px;
+      cursor: pointer;
+    }
+    #audioPlayer .custom-button:hover {
+      background-color: #45a049;
+    }
   </style>
 </head>
 
@@ -193,7 +217,9 @@
       </span>
       <span class="location-text animate-slide-in-down"> </span>
     </div>
-	<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=854041&auto=1&height=66"></iframe>
+  <audio id="audioPlayer" controls style="font-size:300px;">
+    <source src="music/sundaland_on_mind.mp3" type="audio/mp3">
+  </audio>
   <div class="vi">
     <div class="quote">
       <span class="quote-line quote-line-start animate-slide-in-left"></span>
