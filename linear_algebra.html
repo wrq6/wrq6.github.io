@@ -880,7 +880,18 @@ D=	<div class="determinant" style="line-height:5px">
 ②重点区分一个点，代数余子式是不会乘上当前元素的，只是正负号+n-1阶行列式。只有当求行列式的时候，才会让元素乘上代数余子式。
 ③要喜欢用分块来求解行列式
         </pre>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mstyle mathcolor="#00A64F"><mo>设</mo><mi>A</mi><mo>、</mo><mi>B</mi><mo>均为</mo><mi>n</mi><mo>阶正交矩阵，且</mo><mrow><mo stretchy="false">|</mo></mrow><mi>A</mi><mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mo>−</mo><mrow><mo stretchy="false">|</mo></mrow><mi>B</mi><mrow><mo stretchy="false">|</mo></mrow><mo>，则行列式</mo><mrow><mo stretchy="false">|</mo></mrow><mi>A</mi><mo>+</mo><mi>B</mi><mrow><mo stretchy="false">|</mo></mrow><mo>=</mo></mstyle></mrow></math></p>
+        <p style="color: red">交换使用一对单位阵</p>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mstyle mathcolor="#00A64F"><mo stretchy="false">|</mo><mi>A</mi><mo>+</mo><mi>B</mi><mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mrow><mo stretchy="false">|</mo></mrow><mi>E</mi><mi>A</mi><mo>+</mo><mi>B</mi><mi>E</mi><mo stretchy="false">|</mo></mstyle></mrow></math></p>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mstyle mathcolor="#00A64F"><mo>=</mo><mrow><mo stretchy="false">|</mo></mrow><mi>B</mi><msup><mi>B</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mi>A</mi><mo>+</mo><mi>B</mi><msup><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mi>A</mi><mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mrow><mo stretchy="false">|</mo></mrow><mi>B</mi><mo stretchy="false">(</mo><msup><mi>B</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>+</mo><msup><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo stretchy="false">)</mo><mi>A</mi><mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mrow><mo stretchy="false">|</mo></mrow><mi>B</mi><mo stretchy="false">(</mo><msup><mi>B</mi><mi>T</mi></msup><mo>+</mo><msup><mi>A</mi><mi>T</mi></msup><mo stretchy="false">)</mo><mi>A</mi><mo stretchy="false">|</mo></mstyle></mrow></math></p>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mstyle mathcolor="#00A64F"><mo stretchy="false">|</mo><mi>A</mi><mo>+</mo><mi>B</mi><mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mo>−</mo><mrow><mo stretchy="false">|</mo></mrow><mi>A</mi><msup><mrow><mo stretchy="false">|</mo></mrow><mn>2</mn></msup><mrow><mo stretchy="false">|</mo></mrow><mi>A</mi><mo>+</mo><mi>B</mi><mo stretchy="false">|</mo></mstyle></mrow></math></p>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mstyle mathcolor="#00A64F"><mo stretchy="false">|</mo><mi>A</mi><mo>+</mo><mi>B</mi><mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mo>−</mo><mrow><mo stretchy="false">|</mo></mrow><mi>A</mi><mo>+</mo><mi>B</mi><mo stretchy="false">|</mo></mstyle></mrow></math></p>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mstyle mathcolor="#00A64F"><mo stretchy="false">|</mo><mi>A</mi><mo>+</mo><mi>B</mi><mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mn>0</mn></mstyle></mrow></math></p>
+<code>这道题题目呢，主要用到两个知识点，第一个使用一对单位阵构造新矩阵
+第二个就是正交矩阵的知识，正交矩阵就是自身乘上转置为单位阵就是正交，并且转置是等于逆矩阵的
+    A的行列式乘上A的转置的行列式是单位阵的行列式就是1，注意是A行列式的平方是1，A行列式是-1或1</code>
     </div>
+
     <hr>
     值得一提的是，基础概念我这里不再赘述。只是将复杂的知识点串起来
     <hr>
