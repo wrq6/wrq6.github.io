@@ -2,78 +2,113 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>汇款进度</title>
+    <title>Text Selection and Comment</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        .highlight {
+            background-color: yellow; /* Highlight color */
+            cursor: pointer;
         }
-        .container {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgb(0, 0, 0);
-            width: 90%; /* Adjusted width to be responsive */
-            max-width: 100%; /* Ensure it does not exceed the screen width */
-            margin: auto; /* Center the container */
-            overflow: auto; /* Enable scrolling if content overflows */
-        }
-        pre {
-            white-space: pre-wrap; /* Ensures the content wraps correctly */
-            word-wrap: break-word; /* Breaks words as needed */
-            background-color: rgba(255, 0, 0, 0.16); /* Dark background for better contrast */
-            color: #020202; /* Light text color for contrast */
+        .comment-box {
+            display: none;
+            position: absolute;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            padding: 10px;
             border-radius: 5px;
-            padding: 20px;
-            font-family: 'Courier New', Courier, monospace; /* Fixed-width font */
-            font-size: 16px; /* Adjust font size as needed */
-            display: block; /* Make sure it is block to take full width */
-            width: fit-content; /* Adjust width to fit content */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 100;
         }
-        code {
-            display: block; /* Make sure it is block to take full width */
-        }
+
     </style>
 </head>
 <body>
-<div class="elfjS" data-track-load="description_content"><p>给定两个整数 <code>n</code> 和 <code>k</code>，返回范围 <code>[1, n]</code> 中所有可能的 <code>k</code> 个数的组合。</p>
-
-    <p>你可以按 <strong>任何顺序</strong> 返回答案。</p>
-
-    <p>&nbsp;</p>
-
-    <p><strong>示例 1：</strong></p>
-
-    <pre><strong>输入：</strong>n = 4, k = 2
-<strong>输出：</strong>
-[
-  [2,4],
-  [3,4],
-  [2,3],
-  [1,2],
-  [1,3],
-  [1,4],
-]</pre>
-
-    <p><strong>示例 2：</strong></p>
-
-    <pre><strong>输入：</strong>n = 1, k = 1
-<strong>输出：</strong>[[1]]</pre>
-
-    <p>&nbsp;</p>
-
-    <p><strong>提示：</strong></p>
-
-    <ul>
-        <li><code>1 &lt;= n &lt;= 20</code></li>
-        <li><code>1 &lt;= k &lt;= n</code></li>
-    </ul>
+<p>这是一段示例文本。请在这里选择一些文字，然后进行标记和评论。</p>
+<div id="commentBox" class="comment-box">
+    评论内容：<input type="text" id="commentInput"><br>
+    <button id="saveComment">保存评论</button>
 </div>
+
+<script>
+    let selectedRange = null;
+    let selectedText = '';
+    let highlightElements = [];
+
+    document.addEventListener('mouseup', function(event) {
+        const selection = window.getSelection();
+        if (selection.toString().length > 0) {
+            selectedText = selection.toString();
+            selectedRange = selection.getRangeAt(0);
+            showHighlight(selectedRange);
+            showCommentBox(event.pageX, event.pageY);
+        }
+    });
+
+    function showHighlight(range) {
+        const highlight = document.createElement('span');
+        highlight.className = 'highlight';
+        highlight.textContent = selectedText;
+        highlightElements.push(highlight);
+
+        range.insertNode(highlight);
+    }
+
+    function showCommentBox(x, y) {
+        const commentBox = document.getElementById('commentBox');
+        commentBox.style.display = 'block';
+        commentBox.style.left = `${x}px`;
+        commentBox.style.top = `${y}px`;
+
+        const commentInput = document.getElementById('commentInput');
+        commentInput.value = localStorage.getItem(selectedText) || '';
+    }
+
+    document.getElementById('saveComment').addEventListener('click', function() {
+        const comment = document.getElementById('commentInput').value;
+        localStorage.setItem(selectedText, comment);
+
+        // Update highlights with comments
+        highlightElements.forEach(highlight => {
+            highlight.title = comment;
+        });
+        hideCommentBox();
+    });
+
+    document.addEventListener('click', function(event) {
+        if (!event.target.classList.contains('highlight')) {
+            hideCommentBox();
+        }
+    });
+
+    function hideCommentBox() {
+        const commentBox = document.getElementById('commentBox');
+        commentBox.style.display = 'none';
+        window.getSelection().removeAllRanges();
+    }
+
+    document.addEventListener('keyup', function(event) {
+        if (event.key === 'Escape') {
+            hideCommentBox();
+            window.getSelection().removeAllRanges();
+        }
+    });
+
+    // Initialize highlights on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        const textElements = document.querySelectorAll('p');
+        textElements.forEach(function(paragraph) {
+            const texts = paragraph.innerText.split(' ');
+            texts.forEach((text) => {
+                const comments = localStorage.getItem(text);
+                if (comments) {
+                    const highlight = document.createElement('span');
+                    highlight.className = 'highlight';
+                    highlight.textContent = text + ' ';
+                    highlight.title = comments;
+                    paragraph.innerHTML += highlight.outerHTML;
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
