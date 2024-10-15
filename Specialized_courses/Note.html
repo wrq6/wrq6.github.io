@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Notes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.1.0/styles/default.min.css">
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css">
     <style>
         :root {
             --primary-color: #007bff;
@@ -235,7 +236,53 @@
                 margin-left: 20px;
             }
         }
+        #editor-container {
+            height: 300px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        #submit-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        #submit-button:hover {
+            background-color: #0056b3;
+        }
+        #comments {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .comment {
+            border-left: 4px solid #007bff;
+            background-color: #f8f9fa;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        .comment small {
+            display: block;
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
     </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simplemde/dist/simplemde.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplemde/dist/simplemde.min.css">
 </head>
 <body>
 <header>
@@ -243,7 +290,13 @@
     <div class="search-container">
         <input type="text" class="search-box" id="searchBox" placeholder="输入关键词进行搜索...(没用，这个搜索算法太难，我不会，就是个输入框，我也不是故意的啊，不这样你又不高兴🤨)">
     </div>
+
 </header>
+<div id="editor-container"></div>
+
+<button onclick="submitComment()">提交评论</button>
+
+<div id="comments"></div>
 <button id="toggle-btn-h1">☰ 主</button>
 <button id="toggle-btn-h2">☰ 副</button>
 <div id="sidebar-h1">
@@ -256,6 +309,76 @@
         <!-- Dynamic content for H2 will be inserted here -->
     </ul>
 </div>
+<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+<!--88923a1f75811f5928e2df6ea0af4978-->
+<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+<script>
+    var repoOwner = 'wrq6'; // 替换为你的用户名
+    var repoName = 'wrq6'; // 替换为你的仓库名
+    var issueNumber = 'IAXCHK'; // 替换为你要用于保存留言的Issue编号
+    var accessToken = 'bd05e71d5885839b05bff7c0fdc8d8d8'; // 替换为你的 Gitee 访问令牌
+
+    var editor = new toastui.Editor({
+        el: document.querySelector('#editor-container'),
+        height: '300px',
+        initialEditType: 'markdown',
+        previewStyle: 'vertical'
+    });
+
+    function submitComment() {
+        var content = editor.getMarkdown();
+
+        createComment(content)
+            .then(function() {
+                editor.setMarkdown(''); // 清空评论内容
+                fetchComments(); // 重新加载评论
+            })
+            .catch(function(error) {
+                console.error('提交评论时出错:', error);
+            });
+    }
+
+    function createComment(content) {
+        var formData = new FormData();
+        formData.append('access_token', accessToken);
+        formData.append('body', content);
+
+        return fetch(`https://gitee.com/api/v5/repos/${repoOwner}/${repoName}/issues/${issueNumber}/comments`, {
+            method: 'POST',
+            body: formData
+        })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                console.log('Comment created:', data);
+            });
+    }
+
+    function fetchComments() {
+        fetch(`https://gitee.com/api/v5/repos/${repoOwner}/${repoName}/issues/${issueNumber}/comments`)
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(comments) {
+                var commentsElement = document.getElementById('comments');
+                commentsElement.innerHTML = ''; // 清空现有评论
+
+                comments.forEach(function(comment) {
+                    var commentElement = document.createElement('div');
+                    commentElement.className = 'comment';
+                    commentElement.innerHTML = comment.body + '<br><small>提交时间：' + new Date(comment.created_at).toLocaleString() + '</small>';
+                    commentsElement.appendChild(commentElement);
+                });
+            })
+            .catch(function(error) {
+                console.error('获取评论时出错:', error);
+            });
+    }
+
+    // 初始化时加载评论
+    fetchComments();
+</script>
 
 <script>
     window.onload = function() {
@@ -1969,7 +2092,8 @@ E滚蛋，如果就是D，D也有左右孩子，也就E滚，D左右孩子入，
             <text x="180" y="120" font-size="12" text-anchor="middle">I</text>
         </g>
     </svg>
-完结，撒花❀，等等，还没有说代码，算了，反正你也不看
+完结，撒花❀，等等，还没有说代码，算了，反正你也不看，哦对了，那不是个栈，笑死我了哈哈哈哈哈
+其实是队列啦☝🏻☝🏿🫰🏿
 <code type="c">
     void  LevelOrder(BiTree T) {
 	InitQueue(Q);
