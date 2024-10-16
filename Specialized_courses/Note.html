@@ -245,18 +245,23 @@
             margin-bottom: 20px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        #submit-button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-bottom: 20px;
+        /* 按钮样式 */
+        .submit-comment-button {
+            padding: 10px 20px; /* 按钮内边距 */
+            font-size: 16px; /* 字体大小 */
+            color: #fff; /* 字体颜色 */
+            background-color: #007bff; /* 背景颜色 */
+            border: none; /* 无边框 */
+            border-radius: 5px; /* 圆角边框 */
+            cursor: pointer; /* 鼠标悬停时显示指针 */
+            transition: background-color 0.3s; /* 背景颜色渐变 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 添加阴影 */
+            right: 20px;
         }
-        #submit-button:hover {
-            background-color: #0056b3;
+
+        /* 按钮悬停时的样式 */
+        .submit-comment-button:hover {
+            background-color: #0056b3; /* 悬停时的背景颜色 */
         }
         #comments {
             background-color: #fff;
@@ -294,7 +299,7 @@
 </header>
 <div id="editor-container"></div>
 
-<button onclick="submitComment()">提交评论</button>
+<button class="submit-comment-button" onclick="submitComment()">提交评论</button>
 
 <div id="comments"></div>
 <button id="toggle-btn-h1">☰ 主</button>
@@ -309,9 +314,11 @@
         <!-- Dynamic content for H2 will be inserted here -->
     </ul>
 </div>
-<script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+
 <!--88923a1f75811f5928e2df6ea0af4978-->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
 <script>
     var repoOwner = 'wrq6'; // 替换为你的用户名
     var repoName = 'wrq6'; // 替换为你的仓库名
@@ -343,7 +350,7 @@
         formData.append('access_token', accessToken);
         formData.append('body', content);
 
-        return fetch(`https://gitee.com/api/v5/repos/${repoOwner}/${repoName}/issues/${issueNumber}/comments`, {
+        return fetch(`https://gitee.com/api/v5/repos/${repoOwner}/${repoName}/issues/${issueNumber}/comments`,  {
             method: 'POST',
             body: formData
         })
@@ -365,9 +372,11 @@
                 commentsElement.innerHTML = ''; // 清空现有评论
 
                 comments.forEach(function(comment) {
+                    var converter = new showdown.Converter();
                     var commentElement = document.createElement('div');
                     commentElement.className = 'comment';
-                    commentElement.innerHTML = comment.body + '<br><small>提交时间：' + new Date(comment.created_at).toLocaleString() + '</small>';
+                    commentElement.innerHTML = converter.makeHtml(comment.body);
+                    commentElement.innerHTML += `<br><small>提交时间：${new Date(comment.created_at).toLocaleString()}</small>`;
                     commentsElement.appendChild(commentElement);
                 });
             })
@@ -379,7 +388,6 @@
     // 初始化时加载评论
     fetchComments();
 </script>
-
 <script>
     window.onload = function() {
         var sidebarH1Content = document.getElementById('sidebar-h1-content');
