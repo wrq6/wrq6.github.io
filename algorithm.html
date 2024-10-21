@@ -107,7 +107,7 @@
         <button class="button" onclick="showAlgorithm(2)">两数相加</button>
         <button class="button" onclick="showAlgorithm(3)">无重复字符的最长子串</button>
         <button class="button" onclick="showAlgorithm(4)">寻找两个正序数组的中位数</button>
-        <button class="button" onclick="showAlgorithm(2)">Algorithm 5</button>
+        <button class="button" onclick="showAlgorithm(5)">寻找公共的第一个点</button>
         <button class="button" onclick="showAlgorithm(2)">Algorithm 6</button>
         <button class="button" onclick="showAlgorithm(2)">Algorithm 7</button>
         <button class="button" onclick="showAlgorithm(2)">Algorithm 8</button>
@@ -438,6 +438,81 @@ int main()
                 '\treturn 0;\n' +
                 '}';
         }else if(algorithmNumber ===5)
+        {
+            title = "寻找第一个公共开始的点";
+            description = "某教练同时带教两位学员，分别以链表 l1、l2 记录了两套核心肌群训练计划，节点值为训练项目编号。两套计划仅有前半部分热身项目不同，后续正式训练项目相同。请设计一个程序找出并返回第一个正式训练项目编号。如果两个链表不存在相交节点，返回 null 。\n" +
+                "\n" +
+                "作者：Krahets\n" +
+                "链接：https://leetcode.cn/leetbook/read/illustration-of-algorithm/7fvoq2/\n" +
+                "来源：力扣（LeetCode）\n" +
+                "著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。";
+            solutioncontent = "走到尽头见不到你，于是走过你来时的路，等到相遇时才发现，你也走过我来时的路。\n期待遇到我命中相遇的另一个指针，遇到我双向奔赴的节点";
+            code = '/**\n' +
+                ' * Definition for singly-linked list.\n' +
+                ' * struct ListNode {\n' +
+                ' *     int val;\n' +
+                ' *     struct ListNode *next;\n' +
+                ' * };\n' +
+                ' */\n' +
+                'struct ListNode* getIntersectionNode(struct ListNode* headA, struct ListNode* headB) {\n' +
+                '\tstruct ListNode* p1 = headA;\n' +
+                '\tstruct ListNode* p2 = headB;\n' +
+                '\twhile (p1 != p2)\n' +
+                '\t{\n' +
+                '\t\tp1 = p1!=NULL ? p1->next : headB;\n' +
+                '\t\tp2 = p2!=NULL ? p2->next : headA;\n' +
+                '\t}\n' +
+                '\treturn p1;\n' +
+                '}';
+        }else if(algorithmNumber ===6)
+        {
+            title = "";
+            description = "";
+            solutioncontent = "";
+            code = '';
+        }else if(algorithmNumber ===7)
+        {
+            title = "";
+            description = "";
+            solutioncontent = "";
+            code = '';
+        }else if(algorithmNumber ===8)
+        {
+            title = "";
+            description = "";
+            solutioncontent = "";
+            code = '';
+        }else if(algorithmNumber ===9)
+        {
+            title = "";
+            description = "";
+            solutioncontent = "";
+            code = '';
+        }else if(algorithmNumber ===10)
+        {
+            title = "";
+            description = "";
+            solutioncontent = "";
+            code = '';
+        }else if(algorithmNumber ===11)
+        {
+            title = "";
+            description = "";
+            solutioncontent = "";
+            code = '';
+        }else if(algorithmNumber ===12)
+        {
+            title = "";
+            description = "";
+            solutioncontent = "";
+            code = '';
+        }else if(algorithmNumber ===13)
+        {
+            title = "";
+            description = "";
+            solutioncontent = "";
+            code = '';
+        }else if(algorithmNumber ===14)
         {
             title = "";
             description = "";

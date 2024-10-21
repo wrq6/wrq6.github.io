@@ -2,297 +2,208 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>C语言编程题</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>C</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css">
 	<style>
 		body {
 			font-family: Arial, sans-serif;
 			background-color: #f4f4f4;
 			margin: 0;
-			padding: 20px;
+			padding: 0;
 		}
-		.container {
-			max-width: 800px;
-			margin: auto;
+		.algorithm-container {
 			background-color: #fff;
+			border-radius: 8px;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			margin: 20px auto;
 			padding: 20px;
-			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			max-width: 800px;
 		}
-		h1 {
-			color: #333;
+		.algorithm-title {
+			font-size: 24px;
+			margin-top: 0;
 		}
-		pre {
+		.algorithm-description {
+			font-size: 16px;
+			color: #666;
+		}
+		.algorithm-code {
 			background-color: #f9f9f9;
-			border: 1px solid #ddd;
+			border-radius: 4px;
 			padding: 10px;
-			border-radius: 5px;
+			overflow-x: auto;
 		}
-		code {
-			font-family: 'Courier New', Courier, monospace;
+		#button-container {
+			overflow: hidden;
+			width: 300px; /* 设置按钮区域的宽度 */
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			margin: 20px auto;
 		}
-		.question {
-			margin-bottom: 20px;
+		#buttons {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			transition: transform 0.3s ease;
+			padding-bottom: 40px; /* 留出滚动条的空间 */
+		}
+		.button {
+			flex: 0 0 auto;
+			width: 100px; /* 设置每个按钮的宽度 */
+			height: 40px;
+			background-color: #007bff;
+			color: #fff;
+			border: none;
+			border-radius: 4px;
+			margin: 10px;
+			cursor: pointer;
+		}
+		.slider {
+			width: 100%;
+			margin-top: 10px;
+		}
+		.solution-container {
+			background-color: #fff;
+			border-radius: 8px;
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			margin: 20px auto;
+			padding: 20px;
+			max-width: 800px;
+		}
+		.solution-title {
+			font-size: 20px;
+			margin-top: 0;
+		}
+		.solution-content {
+			font-size: 16px;
+			color: #666;
 		}
 	</style>
 </head>
 <body>
-<div class="container">
-	<h1>C语言编程题</h1>
-	<div class="question">
-		<h2>题目1: 矩阵主对角线元素之和</h2>
-		<pre><code>
-//输入3x3矩阵，求该矩阵主对角线上的元素之和
-#include&lt;stdio.h&gt;
-int main() {
-    int a[3][3] = { 0 }; //初始化3x3矩阵
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            printf("请输入第%d行，第%d列的元素\n",i+1,j+1);
-            scanf_s("%d",&amp;a[i][j]);
-        }
-    }
-    int sum = 0;
-    for (int i = 0; i < 3; i++) {
-        sum += a[i][i];
-    }
-    printf("3x3矩阵的主对角线元素和为:%d\n",sum);
+<div class="algorithm-container">
+	<h1 class="algorithm-title">编程痛点-<span style="color: green">指针和数组</span></h1>
+	<p class="algorithm-description">指针和数组到底什么情况？🫤</p>
+	<pre  class="language-javascript">
+      <code class="code-block">
+#include< stdio.h>
+void value(int* a)
+{
+	printf("%d", *a);
 }
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>三个数最大者</h2>
-		<pre><code>
-//用函数实现求三个数中的最大者
-#include< stdio.h >
-int max(int,int,int);
 int main()
 {
-	int a = 0, b = 0, c = 0;
-	printf("请输入三个数：\n");
-	scanf_s("%d%d%d", &a, &b, &c);
-	printf("三个数中最大的为：%d",max(a,b,c));
-	return 0;
+	int a = 10;
+	value(&a);
 }
-int max(int a, int b, int c)
+/*
+这段代码结果不重要，重要的是今天写一段代码的时候
+脑袋突然想不通
+value接受的是int *的参数
+也就是接受的是地址
+但是int *又可以是数组，一维数组
+那到底是数组还是地址？
+后来仔细捣鼓了一下
+int * a中的a是指针变量，既不是数组也不是地址
+指针变量就是个变量，是变量存有值，值就是地址
+无论是数组也好，单个数的地址也罢
+传的都是地址就够了，函数也不在意是什么东西
+只要是一个地址就行
+*/
+      </code>
+		<hr>
+		      <code>
+#include< stdio.h>
+void value(int* a)
 {
-	if (a > b)
-		if (a > c)
-			return a;
-		else return c;
-	else if(b > a)
-		if (b > c)
-			return b;
-		else return c;
-	return -1;
+	for(int i=0;i<10;i++)
+	printf("%d",*(a+i));
 }
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>判断水仙花数</h2>
-		<pre><code>
-//写一个函数，判断一个数是否为“水仙花”，各位数字的立方和等于本身
-#include<stdio.h>
 int main()
 {
-	int a = 0;
-	printf("请输入数(三位数)：\n");
-	scanf_s("%d",&a);
-	int temp = 0;
-	temp = (a % 10) * (a % 10) * (a % 10) + (a / 100) * (a / 100) * (a / 100) + (a % 100 / 10) * (a % 100 / 10) * (a % 100 / 10);
-	if (temp == a&&temp!=0&&a!=0)
-		printf("%d是水仙花数\n",a);
-	else
-		printf("%d不是水仙花数\n", a);
-	return 0;
+	int a[10] = {1,2,3,4,5,6,7,8,9,10};
+	value(a);
 }
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>	<div class="question">
-	<h2>矩阵主对角线元素之和</h2>
-	<pre><code>
-        </code></pre>
+//输出结果12345678910
+/*
+* 我想表达的是数组名是一个指针常量
+* 但是当传给形参以后，函数内部使用的就不是指针常量了
+* 是形参是指针变量
+*/
+
+      </code>
+		<hr>
+    </pre>
 </div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>	<div class="question">
-	<h2>矩阵主对角线元素之和</h2>
-	<pre><code>
-        </code></pre>
+<div class="solution-container">
+	<h2 class="solution-title">解决思路和难点</h2>
+	<div class="solution-content">这里是描述解决思路的</div>
 </div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>	<div class="question">
-	<h2>矩阵主对角线元素之和</h2>
-	<pre><code>
-        </code></pre>
+<hr>
+<hr>
+<hr>
+<hr>
+<div class="algorithm-container">
+	<h1 class="algorithm-title">编程痛点-<span style="color: green">const位置</span></h1>
+	<p class="algorithm-description">🫤</p>
+	<pre class="language-javascript">
+      <code class="code-block">
+#include< stdio.h>
+int main()
+{
+	int long a = 10;
+	long int b = 10;
+	printf("%d,%d",a,b);
+
+	unsigned int c=10;
+	int unsigned d = 10;
+	printf(",%d,%d", c, d);
+}
+/*以上程序结果是10,10,10,10
+* 没错long在前和在后是一样的
+*/
+
+const int* p;
+int const* p;
+//同理首先这两个是一个意思
+
+//接下来看
+int* const p;
+const int * p;
+//第一个修饰的是p，p是指针
+//保持的内容是地址，也就是说保存的地址不能变了
+//通俗讲就变成了指针常量
+//也就是说p = &a;这种是不给通过了
+/*
+第二个修饰的是*p
+记住
+const int * p;
+int const * p;
+是一个意思
+*p是解引用，也就是地址上存放的数据
+也就是说
+*p = 10;这样不给通过了
+*/
+//我知道你想说什么
+const int* const p;//是的。双重枷锁
+      </code>
+		<hr>
+    </pre>
 </div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>	<div class="question">
-	<h2>矩阵主对角线元素之和</h2>
-	<pre><code>
-        </code></pre>
+<div class="solution-container">
+	<h2 class="solution-title">解决思路和难点</h2>
+	<div class="solution-content">这里是描述解决思路的</div>
 </div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>	<div class="question">
-	<h2>矩阵主对角线元素之和</h2>
-	<pre><code>
-        </code></pre>
-</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
-	<div class="question">
-		<h2>矩阵主对角线元素之和</h2>
-		<pre><code>
-        </code></pre>
-	</div>
+<hr>
+<hr>
+<hr>
+<hr>
 	<!-- 你可以在这里添加更多的题目 -->
-</div>
 
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/prism.min.js"></script>
+<script>
+	Prism.highlightAll();
+</script>
 </html>
