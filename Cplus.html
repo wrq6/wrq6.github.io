@@ -7,133 +7,245 @@
     <meta charset="UTF-8">
     <title>C++</title>
     <style>
-    body {
-    font-family: Consolas, monospace;
-    background-color: #f5f5f5;
-    padding: 20px;
-    }
+        :root {
+            --background-color: rgba(52, 219, 60, 0.34);
+            --text-color: #000;
+        }
 
-    h1 {
-    color: #333;
-    font-size: 24px;
-    margin-bottom: 20px;
-    }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
 
-    h2 {
-    color: #666;
-    font-size: 20px;
-    margin-top: 40px;
-    margin-bottom: 10px;
-    }
+        .algorithm-container, .note-container {
+            background-color: rgba(64, 231, 113, 0.29);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 800px;
+        }
 
-    pre {
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 14px;
-    line-height: 1.5;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    }
+        .note-container:not(:last-child) {
+            margin-bottom: 40px;
+        }
 
-    code {
-    display: block;
-    color: #000;
-    }
+        h1, h2 {
+            margin-bottom: 20px;
+        }
 
-    .hljs {
-    display: block;
-    overflow-x: auto;
-    padding: 0.5em;
-    color: #abb2bf;
-    background: #282c34;
-    }
+        h2 {
+            margin-top: 40px;
+        }
 
-    .hljs-keyword,
-    .hljs-selector-tag,
-    .hljs-section,
-    .hljs-title,
-    .hljs-built_in,
-    .hljs-literal,
-    .hljs-template-tag,
-    .hljs-template-variable,
-    .hljs-type,
-    .hljs-addition {
-    color: #e06c75;
-    }
+        p {
+            margin-bottom: 10px;
+        }
 
-    .hljs-string,
-    .hljs-quote,
-    .hljs-meta,
-    .hljs-tag .hljs-value .hljs-string,
-    .hljs-regexp,
-    .hljs-symbol,
-    .hljs-bullet,
-    .hljs-link,
-    .hljs-deletion {
-    color: #98c379;
-    }
+        pre, code {
+            background-color: rgba(255, 255, 255, 0.3);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
 
-    .hljs-number,
-    .hljs-selector-class,
-    .hljs-selector-attr,
-    .hljs-selector-pseudo,
-    .hljs-template-tag,
-    .hljs-template-variable,
-    .hljs-variable,
-    .hljs-type .hljs-tag,
-    .hljs-typename {
-    color: #d19a66;
-    }
+        code {
+            display: block;
+            color: #000;
+        }
 
-    .hljs-comment,
-    .hljs-quote {
-    color: #5c6370;
-    font-style: italic;
-    }
+        .hljs {
+            display: block;
+            overflow-x: auto;
+            padding: 0.5em;
+            color: #abb2bf;
+            background: #282c34;
+        }
 
-    .hljs-doctag,
-    .hljs-meta .hljs-keyword,
-    .hljs-meta .hljs-string {
-    color: #c678dd;
-    }
+        /* Highlight.js styles */
+        .hljs-keyword, .hljs-selector-tag, .hljs-section, .hljs-title, .hljs-built_in, .hljs-literal, .hljs-template-tag, .hljs-template-variable, .hljs-type, .hljs-addition { color: #e06c75; }
+        /* ... other .hljs-* styles ... */
 
-    .hljs-attribute {
-    color: #56b6c2;
-    }
+        .audio-wrapper {
+            display: flex;
+            justify-content: center;
+        }
 
-    .hljs-keyword {
-    font-weight: bold;
-    }
+        @media print {
+            body {
+                background-color: rgb(38, 165, 8);
+            }
+            .sidebar, .toggle-btn {
+                display: none;
+            }
+            .container {
+                width: 100%;
+                max-width: none;
+                padding: 0;
+                margin: 0;
+            }
+        }
 
-    .hljs-selector-tag,
-    .hljs-title,
-    .hljs-section,
-    .hljs-selector-id {
-    font-weight: 700;
-    }
-    .audio-wrapper {
-    display: flex;
-    justify-content: center;
-    }
+        /* Sidebar styles */
+        #sidebar-h1, #sidebar-h2 {
+            position: fixed;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #2c3e50;
+            color: white;
+            transition: left 0.3s;
+            overflow-y: auto;
+            padding: 20px;
+            z-index: 1000;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+        }
+
+        #sidebar-h1 {
+            left: -500px;
+        }
+
+        #sidebar-h2 {
+            left: -500px;
+        }
+
+        #sidebar-h1.active, #sidebar-h2.active {
+            left: 0;
+        }
+
+        #toggle-btn-h1 {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(52, 73, 94, 0.55);
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            z-index: 1001;
+            transition: background-color 0.3s;
+        }
+
+        #toggle-btn-h1:hover, #toggle-btn-h2:hover {
+            background-color: #1abc9c;
+        }
+
+        #content {
+            margin-left: 270px;
+            margin-right: 20px;
+            padding: 20px;
+            background: #fff;
+            border-left: 5px solid #34495e;
+            min-height: 100vh;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-bottom: 1px solid #34495e;
+            transition: background-color 0.3s;
+        }
+
+        ul li a:hover {
+            background-color: #1abc9c;
+        }
+
+        @media (max-width: 768px) {
+            #sidebar-h1, #sidebar-h2 {
+                width: 100%;
+                left: -200%;
+            }
+            #toggle-btn-h1 {
+                left: 10px;
+            }
+        }
     </style>
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/atom-one-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
+    <script>
+        window.onload = function() {
+            var sidebarH1Content = document.getElementById('sidebar-h1-content');
+            var headingsH1 = document.querySelectorAll(' h1');
+            var headingsH2 = document.querySelectorAll(' h2');
+            var toggleBtnH1 = document.getElementById('toggle-btn-h1');
+            var sidebarH1 = document.getElementById('sidebar-h1');
+            var autoId = 1;
+
+            function generateSidebar(headingElements, sidebarElement, sidebarButton) {
+                var sidebarContent = document.getElementById(sidebarElement);
+                sidebarContent.innerHTML = ''; // Clear previous content
+                headingElements.forEach(function(heading) {
+                    var text = heading.textContent.trim();
+                    var id = 'auto-gen-id-' + autoId++;
+                    heading.id = id;
+                    var li = document.createElement('li');
+                    var a = document.createElement('a');
+                    a.href = '#' + id;
+                    a.textContent = text;
+                    li.appendChild(a);
+                    sidebarContent.appendChild(li);
+                });
+            }
+
+            generateSidebar(headingsH1, 'sidebar-h1-content', toggleBtnH1);
+
+            function toggleSidebar(sidebar, button) {
+                sidebar.classList.toggle('active');
+                if (sidebar.classList.contains('active')) {
+                    button.textContent = '✖ Close';
+                } else {
+                    button.textContent = '☰';
+                }
+            }
+
+            toggleBtnH1.onclick = function() {
+                toggleSidebar(sidebarH1, toggleBtnH1);
+            };
+            toggleBtnH2.onclick = function() {
+                toggleSidebar(sidebarH2, toggleBtnH2);
+            };
+        };
+    </script>
 </head>
 <body>
+<div class="note-container">
+<button id="toggle-btn-h1">☰ 主</button>
+<div id="sidebar-h1">
+    <ul id="sidebar-h1-content">
+        <!-- Dynamic content for H1 will be inserted here -->
+    </ul>
+</div>
+    <div class="algorithm-container">
 <pre>
-    <span style="color: red">C++:中级语言</span>
+    <h1>C++:中级语言</h1>
 	<code>
             ------------直接与计算机内部硬件交互的代码
             ------------面向对象
             ------------1997年在贝尔实验室开始设计开发
     </code>
 </pre>
+</div>
+    <div class="algorithm-container">
 <!------------------------------------------------------------------------------------------------------------------->
 <pre>
-    <span style="color: red">C++的特性</span>
+    <h1>C++的特性</h1>
 	<code>
             ------------速度
             ------------静态类型
@@ -142,9 +254,11 @@
             ------------标准库
     </code>
 </pre>
+</div>
+    <div class="algorithm-container">
 <!------------------------------------------------------------------------------------------------------------------->
 <pre>
-    <span style="color: red">C++的变量</span>
+    <h1>C++的变量</h1>
 	<code>
         命名规则
             ------------只能由大小写字母与数字与下划线组成
@@ -164,9 +278,11 @@
         }
     </code>
 </pre>
+</div>
+    <div class="algorithm-container">
 <!------------------------------------------------------------------------------------------------------------------->
 <pre>
-    <span style="color: red">C++的字面量</span>
+    <h1>C++的字面量</h1>
 	<code>
             ------------用来表示固定的数值
         1>整数字面量（具有分数形式或指数）
@@ -186,16 +302,20 @@
         3>字符串字面量（双引号）
     </code>
 </pre>
+</div>
+    <div class="algorithm-container">
 <!------------------------------------------------------------------------------------------------------------------->
 <pre>
-    <span style="color: red">C++常量</span>
+    <h1>C++常量</h1>
 	<code>
         Const int a = 298;//声明a为常量（即不可更改的）
     </code>
 </pre>
+</div>
+    <div class="algorithm-container">
 <!------------------------------------------------------------------------------------------------------------------->
 <pre>
-    <span style="color: red">C++基本数据类型</span>
+    <h1>C++基本数据类型</h1>
 	<code>
                                 字节
         布尔          bool        1
@@ -214,9 +334,11 @@
         bool f = false;
     </code>
 </pre>
+</div>
+    <div class="algorithm-container">
 <!------------------------------------------------------------------------------------------------------------------->
 <pre>
-    <span style="color: red">C++类型修饰符</span>
+    <h1>C++类型修饰符</h1>
 	<code>
             ------------signed
             ------------unsigned
@@ -241,9 +363,11 @@
         wchat_t                 2或4     ~(这些不想写了，根本写不完太大了，我反正懒得写)
     </code>
 </pre>
+</div>
+    <div class="algorithm-container">
 <!------------------------------------------------------------------------------------------------------------------->
 <pre>
-    <span style="color: red">C++输出</span>
+    <h1>C++输出</h1>
 	<code>
         #include< iostream >
         using namespace std;
@@ -278,9 +402,11 @@
         //2>在单语句中打印不同变量，字符串等，可以多次使用<< 运算符
     </code>
 </pre>
+</div>
+    <div class="algorithm-container">
 <!------------------------------------------------------------------------------------------------------------------->
 <pre>
-    <span style="color: red">C++输入</span>
+    <h1>C++输入</h1>
 	<code>
         #include< iostream >
         using namespace std;
@@ -296,9 +422,11 @@
         1>如果不包含using namespace std;则需要std:: cin代替cin
     </code>
 </pre>
+</div>
+    <div class="algorithm-container">
 <!------------------------------------------------------------------------------------------------------------------->
 <pre>
-    <span style="color: red">C++接受多个输入</span>
+    <h1>C++接受多个输入</h1>
 	<code>
         #include< iostream >
         using namespace std;
@@ -316,9 +444,11 @@
         输入多个不同类型值时通过回车来输入
     </code>
 </pre>
+</div>
+    <div class="algorithm-container">
 <!------------------------------------------------------------------------------------------------------------------->
 <pre>
-    <span style="color: red">C++类型转换</span>
+    <h1>C++类型转换</h1>
 	<code>
         类型转换分为：
             1>隐式转换（自动转换）
@@ -365,10 +495,11 @@
         当然是因为double包含小数，int有小数吗？
     </code>
 </pre>
-
+</div>
+    <div class="algorithm-container">
 <!------------------------------------------------------------------------------------------------------------------->
 <pre>
-    <span style="color: red">C++运算符</span>
+    <h1>C++运算符</h1>
 	<code>
         不行了，太多了，我不想打出来
         不是，你complain什么啊？
@@ -376,19 +507,22 @@
         没事，武懒蛋不想打出来
     </code>
 </pre>
-
+</div>
+    <div class="algorithm-container">
 <!------------------------------------------------------------------------------------------------------------------->
 <pre>
-    <span style="color: red">C++运算符优先级</span>
+    <h1>C++运算符优先级</h1>
 	<code>
         什么？这个也不想打？
         yes
         反正也不会看
     </code>
 </pre>
+</div>
+    <div class="algorithm-container">
 <!------------------------------------------------------------------------------------------------------------------->
 <pre>
-    <span style="color: red">C++注释</span>
+    <h1>C++注释</h1>
 	<code>
         单行 //
         多行 /* */
@@ -396,9 +530,11 @@
         因为这个少啊
     </code>
 </pre>
+</div>
+    <div class="algorithm-container">
 <!------------------------------------------------------------------------------------------------------------------->
 <pre>
-    <span style="color: red">C++分支控制</span>
+    <h1>C++分支控制</h1>
 	<code>
         跟C一样
         1>if....else
@@ -415,9 +551,11 @@
         }
     </code>
 </pre>
+</div>
+    <div class="algorithm-container">
 <!------------------------------------------------------------------------------------------------------------------->
 <pre>
-    <span style="color: red">C++goto语句</span>
+    <h1>C++goto语句</h1>
 	<code>
         goto jump;
         .....
@@ -426,9 +564,11 @@
         .....
     </code>
 </pre>
+</div>
+    <div class="algorithm-container">
 <!------------------------------------------------------------------------------------------------------------------->
 <pre>
-    <span style="color: red">C++函数</span>
+    <h1>C++函数</h1>
 	<code>
         #include< iostream >
         #include< cmath >
@@ -465,9 +605,11 @@
         }
     </code>
 </pre>
+</div>
+    <div class="algorithm-container">
 <!------------------------------------------------------------------------------------------------------------------->
 <pre>
-    <span style="color: red">C++内联函数</span>
+    <h1>C++内联函数</h1>
 	<code>
         #include< iostream >
         #include< ctime >
@@ -487,9 +629,12 @@
         //其次内联函数应当简小，递归调用函数无法成为内联函数
     </code>
 </pre>
+</div>
+    <div class="algorithm-container">
+
 <!------------------------------------------------------------------------------------------------------------------->
 <pre>
-    <span style="color: red">C++函数重载</span>
+    <h1>C++函数重载</h1>
 	<code>
         1>int test(){}
         2>int test(int a){}
@@ -508,9 +653,11 @@
         编译器在注意到用户输入为字符串后自动在同名的函数中选择接收字符串的函数来处理请求
     </code>
 </pre>
+</div>
+    <div class="algorithm-container">
 <!------------------------------------------------------------------------------------------------------------------->
 <pre>
-    <span style="color: red">C++默认参数(实参)</span>
+    <h1>C++默认参数(实参)</h1>
 	<code>
         -------------------先看下面的程序---------------------------
         void temp(int = 10,float = 8.8);//函数声明
@@ -548,10 +695,11 @@
         或者你从傻瓜入手，让他一定输入你想看到的东西（这样你就赚不到傻子的钱了😒）
     </code>
 </pre>
-
+</div>
+    <div class="algorithm-container">
 <!------------------------------------------------------------------------------------------------------------------->
 <pre>
-    <span style="color: red">C++存储类</span>
+    <h1>C++存储类</h1>
 	<code>
         ---------------------------------了解就行，反正你也看不懂------------------------------
         1>auto（自动存储型）
@@ -585,10 +733,11 @@
             ——变量仅在线程创建时存在
     </code>
 </pre>
-
+</div>
+    <div class="algorithm-container">
 <!------------------------------------------------------------------------------------------------------------------->
 <pre>
-    <span style="color: red">C++的类型限定符</span>
+    <h1>C++的类型限定符</h1>
 	<code>
         ---------------------------------必须认识，就这几个而已🤤------------------------------
         1>const
@@ -600,10 +749,11 @@
         ---------------------------------是不是头大了🤣--------------------------------------
     </code>
 </pre>
-
+</div>
+    <div class="algorithm-container">
 <!------------------------------------------------------------------------------------------------------------------->
 <pre>
-    <span style="color: red">C++返回引用</span>
+    <h1>C++返回引用</h1>
 	<code>
 --------------------------先来看一段代码----------------------------------
         #include< iostream >//输入输出流头文件
@@ -647,11 +797,11 @@
         恭喜你，是可以的，它并没有在函数调用后被销毁，看来你不蠢啊（如果你没有想到这一点，看来还是我聪明点嘿）
     </code>
 </pre>
-
-
+</div>
+    <div class="algorithm-container">
 <!------------------------------------------------------------------------------------------------------------------->
 <pre>
-    <span style="color: red">C++数组</span>
+    <h1>C++数组</h1>
 	<code>
         ---------------------------------🤤------------------------------
         1>声明数组
@@ -718,8 +868,10 @@
 
     </code>
 </pre>
+</div>
+    <div class="algorithm-container">
 <pre>
-    <span style="color: red">C++字符串</span>
+    <h1>C++字符串</h1>
 	<code>
         1>定义一个字符串
         char str[] = "C++";
@@ -754,8 +906,10 @@
         5.面向对象的设计
     </code>
 </pre>
+</div>
+    <div class="algorithm-container">
 <pre>
-    <span style="color: red">C++结构体</span>
+    <h1>C++结构体</h1>
 	<code>
         struct Person/声明结构体
         {
@@ -781,8 +935,10 @@
         或者可以使用P->name;//一步到位
     </code>
 </pre>
+</div>
+    <div class="algorithm-container">
 <pre>
-<span style="color: red">C++枚举</span>
+<h1>C++枚举</h1>
 <code>
     enum sea{sp,su,st,win};
     sea是枚举名，从sp开始，他们的逻辑值为0，1，2，3(默认是如此)
@@ -805,8 +961,10 @@
     Status status = OK;
 </code>
 </pre>
+</div>
+    <div class="algorithm-container">
 <pre>
-<span style="color: red">C++定义类</span>
+<h1>C++定义类</h1>
 <code>
     1.使用关键字class及其后面跟随的类名定义一个类
     2.类的主体在大括号内，并在末尾以分号结束
@@ -892,8 +1050,10 @@
     }
 </code>
 </pre>
+</div>
+    <div class="algorithm-container">
 <pre>
-<span style="color: red">C++中的类的继承</span>
+<h1>C++中的类的继承</h1>
 <code>
     class Person//基类
     {
@@ -980,8 +1140,10 @@
     }
 </code>
 </pre>
+</div>
+    <div class="algorithm-container">
 <pre>
-<span style="color: red">C++友元函数和友元类</span>
+<h1>C++友元函数和友元类</h1>
 <code>
     OOD(面向对象的设计)的重要概念之一就是数据隐藏
     也就是非成员函数无法访问对象的私有或受保护数据
@@ -1046,6 +1208,111 @@
     互为友
     </code>
 </pre>
-
+    </div>
+    <div class="algorithm-container">
+<pre>
+    <h1>类成员指针</h1>
+    <code>
+#include< iostream>
+class Sample
+{
+public:
+	void disp()
+	{
+		std::cout << "m=" << m << std::endl;
+	}
+	int m, n;
+	Sample(int a, int b)
+	{
+		this->m = a;
+		this->n = b;
+	}
+};
+int main()
+{
+	int Sample::* p = & Sample::m;//定义类数据成员指针并赋值
+	void (Sample:: * ph) () = 0;//类成员函数指针
+	ph = & Sample::disp;//赋值，不需要加函数的括号
+	Sample a(10,20);
+	a.*p = 10;//==>a.m = 10
+	(a.*ph)();//==>a.disp();
+}
+    </code>
+</pre>
+    </div>
+    <div class="algorithm-container">
+        <h1>子对象的构造以及销毁顺序</h1>
+        <pre>
+            <code>
+#include< iostream>
+class B1
+{
+public:
+	B1()
+	{
+		std::cout << "B1 创建" << std::endl;
+	}
+	~B1()
+	{
+		std::cout << "B1 销毁" << std::endl;
+	}
+};
+class B2
+{
+public:
+	B2()
+	{
+		std::cout << "B2 创建" << std::endl;
+	}
+	~B2()
+	{
+		std::cout << "B2 销毁" << std::endl;
+	}
+};
+class B3
+{
+public:
+	B3()
+	{
+		std::cout << "B3 创建" << std::endl;
+	}
+	~B3()
+	{
+		std::cout << "B3 销毁" << std::endl;
+	}
+};
+class A
+{
+	B1 b1;//子对象
+	B2 b2;//子对象
+	B3 b3;//子对象
+public:
+	A() :b3(), b2(), b1() //打个冒号是初始化列表
+	{
+		std::cout << "A 创建" << std::endl;
+	}
+	~A()
+	{
+		std::cout << "A 销毁" << std::endl;
+	}
+};
+int main()
+{
+	A a;
+}
+/*程序过程如下：类比栈来思考
+B1 创建
+B2 创建
+B3 创建
+A 创建
+A 销毁
+B3 销毁
+B2 销毁
+B1 销毁
+*/
+            </code>
+        </pre>
+    </div>
+</div>
 </body>
 </html>

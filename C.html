@@ -174,7 +174,7 @@ const int * p;
 //第一个修饰的是p，p是指针
 //保持的内容是地址，也就是说保存的地址不能变了
 //通俗讲就变成了指针常量
-//也就是说p = &a;这种是不给通过了
+//也就是说p = & a;这种是不给通过了
 /*
 第二个修饰的是*p
 记住
@@ -187,6 +187,70 @@ int const * p;
 */
 //我知道你想说什么
 const int* const p;//是的。双重枷锁
+      </code>
+		<hr>
+    </pre>
+</div>
+<div class="solution-container">
+	<h2 class="solution-title">解决思路和难点</h2>
+	<div class="solution-content">这里是描述解决思路的</div>
+</div>
+<hr>
+<hr>
+<hr>
+<hr>
+<div class="algorithm-container">
+	<h1 class="algorithm-title">文件编程-<span style="color: green">基础的搬运工</span></h1>
+	<p class="algorithm-description">🤨将一个txt文本内容搬运到另一个文本当中</p>
+	<pre class="language-javascript">
+      <code class="code-block">
+#include < stdio.h>
+#include< string.h>
+
+//VS2022 WIN11环境测试
+int main()
+{
+	errno_t err1,err2;// 错误处理的类型定义，它是一个整数类型
+	const char* filename1 = "C:/Users/16201/Desktop/input_1..txt";//定义文件地址，是常量
+	const char* filename2 = "C:/Users/16201/Desktop/output_1.txt";
+	FILE* p1 = NULL;//初始化文件指针
+	FILE* p2 = NULL;
+	err1 = fopen_s(&p1,filename1,"r");//当文件打开成功的时候，返回0
+	err2 = fopen_s(&p2,filename2, "w");//之所以不使用fopen是因为已经被抛弃了，是不安全的函数
+	if (err1 == 0)
+	{
+		printf("文件打开成功\n");
+	}
+	else {
+		printf("文件打开失败\n");
+		return 1;//打开失败就结束程序
+	}
+	if (err2 == 0)
+	{
+		printf("文件打开成功\n");
+	}
+	else {
+		printf("文件打开失败\n");
+		return 1;
+	}
+	char ch = 0;//定义一个字符变量，用于每次的读取缓冲区的一个字符
+	while (1)
+	{
+		ch = fgetc(p1);//获取缓冲区的一个字符
+		if (ch == EOF)//如果读到了文件末尾就结束
+		{
+			break;//结束了
+		}
+		fputc(ch, p2);//将字符依次存入目标文件
+	}
+	printf("成功");
+	fclose(p1);//一定要关闭文件
+	fclose(p2);
+	p1 = NULL;
+	p2 = NULL;
+	return 0;
+}
+
       </code>
 		<hr>
     </pre>
