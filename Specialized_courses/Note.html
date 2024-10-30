@@ -462,7 +462,11 @@
         </audio>
     </div>
     <div class="block">
-上面这首曲子是“All That We Are”
+上面这首曲子是“All That We Are”<br>
+        <strong>学习本笔记三个建议</strong><br>
+        1.无需做笔记<br>
+        2.短阅读，长做题，多周期<br>
+        3.唯一真神：重复的力量<br>
         <h1>数据结构的三要素</h1>
         <h2>逻辑结构</h2>
         <pre>
@@ -680,14 +684,14 @@ T(n) = O(1) + T(n-1)
 T(n-1) = O(1) + T(n-2)
 ...
 总的时间复杂度就是
-(1) + T(n-1)第一次
+1×O(1) + T(n-1)第一次
 2xO(1) + T (n-2)到第二个函数时
 3xO(1) + T (n-3)到第三个函数时
 ...
 有没有发现规律
 yes
 O(1)的系数，就是后面T(n-系数)
-程序什么3时候停止？就是当T(1)的时候
+程序什么时候停止？就是当T(1)的时候
 我们要让T(n-1)、T(n-2)、、、、变为T(1)
 那不就是T(n-(n-1))      n-1就是系数
 于是
@@ -943,7 +947,7 @@ typedef struct LinkNode{
 <h2>队列</h2>
         <pre>
 队列简称队，与栈一样是一种受到限制的线性表，只不过只能在一端插入，一端删除。
-队列的顺序存储，很简单与线性表顺序村粗无异，我们给定两个指针
+队列的顺序存储，很简单与线性表顺序存储无异，我们给定两个指针
             <code>
  #define MaxSize 50;
  typedef struct{
@@ -951,7 +955,7 @@ typedef struct LinkNode{
      int front,rear;
  }SqQueue;
             </code>
-front 是指向对头，rear是指向队尾。
+front 是指向队头，rear是指向队尾。
 一开始front和rear都是指向第一个元素，也就是空队
 当不断增加元素以后，rear不断后移。
 当我们有元素出队列的时候，front要后移
@@ -1385,6 +1389,7 @@ aababcbdaabacbbbd
 不是，既然计算机大拿说了麻烦咱就认行吗？
 于是开头字母分别为KMP的三个人设计了一个算法叫KMP算法（具体思路自己百度，以下只解释最重要也是最难理解的Next数组该怎么求）
 Next数组说白了就是求子串中每一个最长相等前后缀（听不懂没关系，往下看）
+//别傻不愣登的去求主串的，那么长求到地老天荒啊，别问我怎么知道，因为我傻
 这里声明一个规则：
 前缀：不包含未元素的串
 后缀：不包含首元素的串
@@ -1831,7 +1836,8 @@ you know what
 </script>
 如同以上这棵树，我们如果以先序遍历来遍历这棵树该怎么办？
 以我们的理论来说，先序就是根左右，也就是ABEFGDHIC
-没问题吧，这都是很简单的(不明白的去看《数据结构部分》)
+没问题吧，这都是很简单的(不明白的点开右上角的目录《二叉树的遍历》)
+            //哈哈哈，我发现就是这一节啊，行吧，我把它(动物它☝🏻)放到这一节的最后部分了
 好，二叉树的实现是利用链表，也就是它有两个指针域
 指向左孩子和右孩子，我们从A开始
 A可以找到B和C，我们怎样实现先把B以及B的子孙都访问完再访问C？
@@ -2306,6 +2312,247 @@ pre就是你想找的
 右空链域原本指向后继，但是后继没了，所以也是指向空
 所以，不是你写了不过50个字用了这么多所以？
 🫰🏿🫰🏿🫰🏿🫰🏿
+<hr>
+ <span style="font-size: 50px" id="6">二叉树的前中后序遍历</span>
+这类题目一般给前中/后中，来确定后/前序遍历，因为只有前中/后中才能确定唯一的二叉树，而前后序不能确定
+    <hr class="hr-shadow">
+    （1）给定前序ABDGHCEFI与中序GDHBAECIF，写出后序遍历。
+    什么？我前中后序遍历都不知道是什么？
+    接下来我们来学习，前中后，简单来说，前中后描述的是根所在的位置
+    前（根左右）中（左根右）后（左右根）
+   <canvas id="myCanvas144" width="800" height="300"></canvas>
+    <script>
+    var canvas = document.getElementById('myCanvas144');
+    var context = canvas.getContext('2d');
+
+    // 定义图的顶点
+    var vertices = [
+        { x: 250, y: 50, label:'A' },
+        { x: 150, y: 100,label:'B' },
+        { x: 400, y: 100,label:'C' },
+        { x: 250, y: 175,label:'D' },
+        { x: 75, y: 175, label:'E' },
+        { x: 50, y: 250, label:'F' },
+        { x: 120, y: 250,label:'G' },
+        { x: 235, y: 250,label:'H' },
+        { x: 300, y: 250,label:'I' }
+
+    ];
+
+    // 定义图的边
+    var edges = [
+        { start: vertices[0], end: vertices[1] },
+        { start: vertices[0], end: vertices[2] },
+        { start: vertices[1], end: vertices[3] },
+        { start: vertices[1], end: vertices[4] },
+        { start: vertices[4], end: vertices[5] },
+        { start: vertices[4], end: vertices[6] },
+        { start: vertices[3], end: vertices[7] },
+        { start: vertices[3], end: vertices[8] },
+    ];
+
+
+    // 绘制顶点
+    vertices.forEach(function(vertex) {
+        context.beginPath();
+        context.arc(vertex.x, vertex.y, 20, 0, 2 * Math.PI);
+        context.fillStyle = 'lightblue';
+        context.fill();
+        context.stroke();
+
+        // 绘制顶点标签
+        context.fillStyle = 'black';
+        context.font = '14px Arial';
+        context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+    });
+
+
+    // 绘制边和权重
+    edges.forEach(function(edge) {
+        context.beginPath();
+        context.moveTo(edge.start.x, edge.start.y);
+        context.lineTo(edge.end.x, edge.end.y);
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // 绘制边权重标签
+        if (edge.weight !== undefined) {
+            var weightX = (edge.start.x + edge.end.x) / 2;
+            var weightY = (edge.start.y + edge.end.y) / 2;
+            context.fillStyle = 'red';
+            context.font = '12px Arial';
+            context.fillText(edge.weight, weightX, weightY);
+        }
+    });
+</script>
+    上图中，前序遍历，也就是根左右，我们一步步来看
+    首先根：A
+    其次左：B <span style="color: #00aa44">//很好，接下来并不是右C，而是E，因为B也是一棵子树二叉树的根</span>
+    也就是根B的左：E <span style="color: #00aa44">//接下开E又是一棵子树的根</span>
+    也就是根E的左：F <span style="color: #00aa44">//因为F不再是任何树的根，这时候就可以到右</span>
+    也就是根E的右：G <span style="color: #00aa44">//完成以后，我们回退到E？不，因为E的左右都写完了，于是我们再回退B，根B写了左但还没写右</span>
+    也就是根B的右：D <span style="color: #00aa44">//此时D又是根，于是再写D的左</span>
+    也就是根D的左：H <span style="color: #00aa44">//此时H不是根了，就可以写右</span>
+    也就是根D的右：I <span style="color: #00aa44">//这时候，根D左右写完，回退B，B的左右也写完了，回退A，A只写完了左，右还没有写，于是</span>
+    也就是根A的右：C <span style="color: #00aa44">//到此为止，我们的前序遍历就算写完了</span>
+    <span style="color: #aa0000">前序：ABEFGDHIC</span>
+<hr class="hr-shadow">
+本来我想图省事，直接说，中后序同理的😏😏😏
+   <canvas id="myCanvas155" width="800" height="300"></canvas>
+    <script>
+    var canvas = document.getElementById('myCanvas155');
+    var context = canvas.getContext('2d');
+
+    // 定义图的顶点
+    var vertices = [
+        { x: 250, y: 50, label:'A' },
+        { x: 150, y: 100,label:'B' },
+        { x: 400, y: 100,label:'C' },
+        { x: 250, y: 175,label:'D' },
+        { x: 75, y: 175, label:'E' },
+        { x: 50, y: 250, label:'F' },
+        { x: 120, y: 250,label:'G' },
+        { x: 235, y: 250,label:'H' },
+        { x: 300, y: 250,label:'I' }
+
+    ];
+
+    // 定义图的边
+    var edges = [
+        { start: vertices[0], end: vertices[1] },
+        { start: vertices[0], end: vertices[2] },
+        { start: vertices[1], end: vertices[3] },
+        { start: vertices[1], end: vertices[4] },
+        { start: vertices[4], end: vertices[5] },
+        { start: vertices[4], end: vertices[6] },
+        { start: vertices[3], end: vertices[7] },
+        { start: vertices[3], end: vertices[8] },
+    ];
+
+
+    // 绘制顶点
+    vertices.forEach(function(vertex) {
+        context.beginPath();
+        context.arc(vertex.x, vertex.y, 20, 0, 2 * Math.PI);
+        context.fillStyle = 'lightblue';
+        context.fill();
+        context.stroke();
+
+        // 绘制顶点标签
+        context.fillStyle = 'black';
+        context.font = '14px Arial';
+        context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+    });
+
+
+    // 绘制边和权重
+    edges.forEach(function(edge) {
+        context.beginPath();
+        context.moveTo(edge.start.x, edge.start.y);
+        context.lineTo(edge.end.x, edge.end.y);
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // 绘制边权重标签
+        if (edge.weight !== undefined) {
+            var weightX = (edge.start.x + edge.end.x) / 2;
+            var weightY = (edge.start.y + edge.end.y) / 2;
+            context.fillStyle = 'red';
+            context.font = '12px Arial';
+            context.fillText(edge.weight, weightX, weightY);
+        }
+    });
+</script>
+    上图中，中序（左根右）一步步来
+    左：F <span style="color: #00aa44">//这个左是整个树的左</span>
+    根：E <span style="color: #00aa44">//这应该能理解吧？不能理解？废了，重开吧</span>
+    右：G <span style="color: #00aa44">//此时，一棵子树以及遍历完了，按理说是返回到B，但是B是根，把B看成根，也就是E子树为左，D子树为右</span>
+    也就是根：B <span style="color: #00aa44">现在你肯定想说，接下来不就是D了吗？no、no、no，时刻谨记D是根，我们优先左再根再右，也就是根D树的左H</span>
+    左：H
+    根：D
+    右：I <span style="color: #00aa44">现在D树完成，回退到B，B树的左右也完成了，回退到A，A左完成，根据左根右，也就是左完成，现在是根，于是</span>
+    根：A
+    右：C <span style="color: #00aa44">这还用我说？🤏🤏🤏</span>
+        <span style="color: #aa0000">中序：FEGBHDIAC</span>
+    <hr class="hr-shadow">
+   <canvas id="myCanvas166" width="800" height="300"></canvas>
+    <script>
+    var canvas = document.getElementById('myCanvas166');
+    var context = canvas.getContext('2d');
+
+    // 定义图的顶点
+    var vertices = [
+        { x: 250, y: 50, label:'A' },
+        { x: 150, y: 100,label:'B' },
+        { x: 400, y: 100,label:'C' },
+        { x: 250, y: 175,label:'D' },
+        { x: 75, y: 175, label:'E' },
+        { x: 50, y: 250, label:'F' },
+        { x: 120, y: 250,label:'G' },
+        { x: 235, y: 250,label:'H' },
+        { x: 300, y: 250,label:'I' }
+
+    ];
+
+    // 定义图的边
+    var edges = [
+        { start: vertices[0], end: vertices[1] },
+        { start: vertices[0], end: vertices[2] },
+        { start: vertices[1], end: vertices[3] },
+        { start: vertices[1], end: vertices[4] },
+        { start: vertices[4], end: vertices[5] },
+        { start: vertices[4], end: vertices[6] },
+        { start: vertices[3], end: vertices[7] },
+        { start: vertices[3], end: vertices[8] },
+    ];
+
+
+    // 绘制顶点
+    vertices.forEach(function(vertex) {
+        context.beginPath();
+        context.arc(vertex.x, vertex.y, 20, 0, 2 * Math.PI);
+        context.fillStyle = 'lightblue';
+        context.fill();
+        context.stroke();
+
+        // 绘制顶点标签
+        context.fillStyle = 'black';
+        context.font = '14px Arial';
+        context.fillText(vertex.label, vertex.x - 5, vertex.y + 5);
+    });
+
+
+    // 绘制边和权重
+    edges.forEach(function(edge) {
+        context.beginPath();
+        context.moveTo(edge.start.x, edge.start.y);
+        context.lineTo(edge.end.x, edge.end.y);
+        context.strokeStyle = 'black';
+        context.stroke();
+
+        // 绘制边权重标签
+        if (edge.weight !== undefined) {
+            var weightX = (edge.start.x + edge.end.x) / 2;
+            var weightY = (edge.start.y + edge.end.y) / 2;
+            context.fillStyle = 'red';
+            context.font = '12px Arial';
+            context.fillText(edge.weight, weightX, weightY);
+        }
+    });
+</script>
+    上图中，后序（左右根），一步步来说
+    左：F <span style="color: #00aa44"></span>
+    右：G
+    根：E <span style="color: #00aa44">//现在B的左树已经写完，根据左右根规则，我们看B的右边的树，也就是以D为根的树，但是我们肯定不是先写D，要先左</span>
+    左：H
+    右：I
+    根：D <span style="color: #00aa44">//好了，左右子树都写完，就写根了</span>
+    根：B <span style="color: #00aa44">现在总体看，A树的左子树写完了，再看A的右树</span>
+    右：C
+    根：A <span style="color: #00aa44">完结撒花😃😃😃😃😃</span>
+    <span style="color: #aa0000">后序：FGEHIDBCA</span>
+    <hr class="hr-shadow">
+我了个天，扫盲结束。
         </pre>
 <h2>已知前/后和中序遍历构造二叉树</h2>
         <pre>
@@ -3351,6 +3598,11 @@ edges.forEach(function(edge) {
         <pre>
 十字链表是有向图的一种链式存储结构
 邻接多重表是无向图的一种链式存储结构
+            《不以为意？》
+            我看你碰见题目出现了这两个词语的时候懵不懵
+            十字链表和邻接多重表
+            很像邻接表，我真不想画了，网上随便找两个看看就行
+            很简单，甚至比要你画一个喜羊羊还简单
 <hr>
 十字链表的空间复杂度O(|V|+|E|)
 邻接多重表的空间复杂度O(|V|+|E|)
@@ -9079,7 +9331,7 @@ B+树，除了叶子结点，都是索引，也就是说，还没有到叶子结
 <h1>排序</h1>
 <h2>排序的基本概念</h2>
 <pre>
-除去我写的外部排序，本节所有排序都是属于内部排序
+除去我写的外部排序，本节所有排序都是属于内部排序，注意区别二路归并和多路归并
 <span style="color: red">算法的稳定性</span>
     待排序表中两个元素如果对应关键字一样，在使用某一种排序方法后，相对位置不变，则算法稳定
 算法的稳定性不代表算法的好坏
@@ -9130,7 +9382,7 @@ B+树，除了叶子结点，都是索引，也就是说，还没有到叶子结
                 <td>O(nlog₂n)</td>
                 <td>O(n²)</td>
                 <td>O(nlog₂n)</td>
-                <td>O(1)</td>
+                <td>O(log₂n)</td>
                 <td>不稳定</td>
             </tr>
                          <tr>
@@ -10370,9 +10622,10 @@ n巨大，关键字位数少的前提下，使用基数排序
     </div>
     <div class="block">
         <h1>算法</h1>
-        <h2>代码示例</h2>
         <pre>
-
+觉得页面太小点击下面链接
+<a href="https://www.hello-algo.com/" target="_blank">算法</a>
+<iframe src="https://www.hello-algo.com/" title="算法"></iframe>
         </pre>
     </div>
     <div class="block">
@@ -11342,7 +11595,7 @@ A、LL    B、LR    C、RL    D、RR
 然后右子树上平衡因子是1，也就是右子树的左-右=1，也就是右子树的左子树比右子树高一棵
 然后总结就是-1，1，也就是右左=RL
 为什么-1是右，正数1是左？
-我真的要骂你，你比我还傻瓜，平衡因子是左子树高度右子树高度
+我真的要骂你，你比我还傻瓜，平衡因子是左子树高度-右子树高度
 是负数不就是右子树多
 <hr>
 <strong>42.设有一个10阶的对称矩阵A，采用压缩存储方式，以行序为主存储，a11为第一个元素，其存储地址为1，每元素占1个地址空间，则a85的地址为（   ）。</strong>
@@ -11401,7 +11654,7 @@ A. 入边 B. 出边 C. 入边和出边    D. 不是出边也不是入边
 邻接表每一个节点后面连接的是它的出边
 逆邻接表不就是入边了
 <hr>
-<strong>44.设对n(n>1)个元素的线性表的运算只有四种：（1）删除第一个元素；（2）删除最后一个元素；（3）在第一个元素之前插入新元素；（4）在最后一个元素之前插入新元素，则最好使用（ ）。</strong>
+<strong>44.设对n(n>1)个元素的线性表的运算只有四种：（1）删除第一个元素；（2）删除最后一个元素；（3）在第一个元素之前插入新元素；（4）在最后一个元素之后插入新元素，则最好使用（ ）。</strong>
 A、只有尾结点指针没有头结点指针的循环单链表
 B、只有尾结点指针没有头结点指针的非循环双链表
 C、只有头结点指针没有尾结点指针的循环双链表
@@ -11418,8 +11671,8 @@ nononono，想想看，这是个循环的链表，最后一个删除了，尾指
 所以时间复杂度是O（n）
 （3）在第一个元素之前插入新元素：这很好办，因为是循环所以尾指针的下一个就是第一个节点
 直接让新节点next=尾的next，再把尾的next=新节点，所以是O（1）
-（4）在最后一个元素之前插入新元素，O（n），因为还是要遍历到倒数第二个元素
-A：O(1) O(n) O(1) O(n)
+（4）在最后一个元素之后插入新元素，O（1）
+A：O(1) O(n) O(1) O(1)
 依次排出A B C D 然后选最优
 剩下的选项我就不讲了
             <hr>
@@ -11468,15 +11721,64 @@ D. 拉链法的缺点是：指针需要额外的空间，故当结点规模较�
 开放定址法和拉链法，类比数组和链表
 所以你就知道为什么选B了，你见过数组可以未卜先知吗？
 <hr>
-<strong></strong>
+<strong>49.对10TB的数据文件进行排序，应使用的方法是（）</strong>
+A. 希尔排序
+B. 堆排序
+C. 快速排序
+D. 归并排序
+答案：D
+内部排序不适合数据较大的排序
+使用外部排序，注意区别二路归并和多路归并，一个是内部一个是外部
 <hr>
-<strong></strong>
+<strong>50.先序序列为 a,b,c,d 的不同二叉树的个数是（）。</strong>
+A．13    B．14    C．15    D．16
+答案：B
+我是蛮讨厌的，你选项要是最大6，7个我还可能自己画画
+10几个，我画鸡毛啊
+但是我也不知道咋办，突然间我想到了一个东西，但是
+我不敢用，因为挺虚的，我就知道卡特兰数是求什么什么来着
+嗯，上面就是求出栈次序，啊呀我想啊想，是不是呢
+出栈为先序abcd的次数，哎呀呀呀呀呀，好像有点道理
+不对，先序和中序确定一棵二叉树
+先序为入栈，然后出栈次序为中序
+出栈次序有多少个就有多少棵树
+但是问题来了，出栈为后序怎么办？
+按我目前的水平来讲，这有点自己绕自己了
+先序是确定的，中序和后序，是我自己规定的
+又不是题目说的，你管呢？
+我说中序就是中序，就是每一个不同出栈次序就是一棵不同的树
 <hr>
-<strong></strong>
+<strong>51.已知一个长度为16的有序顺序表R[1..16]，采用折半查找方法查找一个存在的元素，则比较的次数最多</strong>
+答案是5次
+我一开始一直以为是四次
+1-16 -》（1+16）/2=8，第一次
+1-7-》 （1+7）/2=4 第二次
+1-3-》 （1+3）/2=2第三次
+1-1-》（1+1）/2 = 1 第四次
+后面我发现不是这样
+16个元素，以中构建二叉排序树
+其实就是树的深度就是比较次数
+利用公式
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mn>2</mn><mi>h</mi></msup><mo>−</mo><mn>1</mn><mo>=</mo><mn>16</mn></math>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>h</mi><mo>=</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mn>17</mn></math>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>h</mi><mo>=</mo><mn>5</mn></math>
 <hr>
-<strong></strong>
+<strong>52.若将关键字 1,2,3,4,5,6,7 依次插入到初始为空的平衡二叉树 T 中，则 T 中平衡因子为 0 的分支结点的个数是（ ）。</strong>
+A. 0
+B. 1
+C. 2
+D. 3
+答案是：D
+这道题可以回顾一下平衡二叉树构造过程
+以及我认为最难的是题目的分支节点这个词语
+天天玩这种，直接给我们背名词定义算了呗
+分支节点是指除叶子节点外的所有节点
 <hr>
-<strong></strong>
+<strong>53.若无向图 G=（V, E）中含有 7 个顶点，要保证图 G 在任何情况下都是连通的，则需要的边数最少是（）。</strong>
+A. 6     B. 15     C. 16     D. 21
+答案：C
+公式秒了
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mo stretchy="false">|</mo><mi>E</mi><mrow><mo stretchy="false">|</mo></mrow><mo>=</mo><mfrac><mrow><mo stretchy="false">(</mo><mrow><mo stretchy="false">|</mo></mrow><mi>V</mi><mrow><mo stretchy="false">|</mo></mrow><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mrow><mo stretchy="false">|</mo></mrow><mi>V</mi><mrow><mo stretchy="false">|</mo></mrow><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo></mrow><mn>2</mn></mfrac><mo>+</mo><mn>1</mn></math>
 <hr>
 <strong></strong>
 <hr>
@@ -12381,7 +12683,7 @@ case后只能是整型或者字符型的常量或常量表达式
 -------------------------------------------------------------
 static是静态变量的意思，只随着程序的销毁而销毁
 -------------------------------------------------------------
-数组定义时，只能省略后面的元素初始值，不能隔山大牛：[10,,3]
+数组定义时，只能省略后面的元素初始值，不能隔山打牛：[10,,3]
 -------------------------------------------------------------
 char s[5]={'a','b','c'}|char s[5]="abc"//这两种区别在于后者会被自动末尾添加一个'\0'
 -------------------------------------------------------------
@@ -12502,9 +12804,59 @@ void*可以转化为任何类型指针，当任何类型指针也可以转化为
 -------------------------------------------------------------
 类似于*和++这样的一元运算符遵循从右至左的结合顺序
 -------------------------------------------------------------
+有以下程序
+#include < stdio.h >
+main( ) { int a,b;
+for (a=0; a<3; a++)
+{ scanf("%d", &b);
+switch(b)
+{
+default: printf("%d,", b++);
+case 1: printf("%d,", b++);
+case 2: printf("%d,", b++);
+} } }
+程序运行时输入：1 2 3< 回车 >，则输出结果是
+答案是：1,2,2,3,4,5,
+switch...case的三个规则：
+（1）既无成功匹配，又无default子句，那么swtich语句块什么也不做；
+（2）无成功匹配，但有default，那么swtich语句块做default语句块的事；
+（3）有成功匹配，没有break，那么成功匹配后，一直执行，直到遇到break。
+通俗一点说，就是：
+我只找我想要的case，其他的都不管（直接注释掉这个case前面的所有语句）。
+找到我想要的case后，我就不再看其他case了（直接注释掉这个case后面的其他"case"关键字）。
+找到我想要的case后，我只管执行后面代码，直到遇到break后跳出switch语句块。
 -------------------------------------------------------------
+以下程序中c的二进制值是（  ）。
+char a=3,b=6,c;
+c=a^b<<2;
+A. 00011011       B. 00010100     C. 00011100       D. 00011000
+答案：A
+选B的请别放过自己
+<< 优先级比^高
+把看函数先看定义域和看表达式结果先看符号优先级抄100遍
 -------------------------------------------------------------
+求输出结果
+#include< stdio.h >
+int a[2][2][3] = {{{1, 2, 3}, {4, 5, 6}}, {{7, 8, 9}, {10, 11, 12}}};
+int *ptr = (int *)(&a + 1);
+int main(){
+printf("%d %d", *(int*)(a + 1), *(ptr - 1));
+}
+a是三级指针，代表整个数组首地址，a+1=>{{7, 8, 9}, {10, 11, 12}}的首地址
+*(int*)(a + 1)。首先(int*)强制为一维数组，然后解引用，也就是7
+&a是四级指针，&a+1，代表的是{{{1, 2, 3}, {4, 5, 6}}, {{7, 8, 9}, {10, 11, 12}}}  ->{{{ }}}
+跳出去了
+(int *)(&a + 1)就是跳出去以后的数组强制到一维,ptr此时就是一维
+ptr - 1,只能移动1维数组的移动量，也就是指向了a数组的最后一个元素
+*(ptr - 1)解引用就是12
+所以就是7和12
 -------------------------------------------------------------
+<strong>四舍五入或直接取整</strong>
+1.强制转化成int，直接取整
+2.保留精度(四舍五入)
+printf("%.2f",3.1475926)//输出的是3.15,保留二位，只看第三位，四舍五入
+3.round()函数，四舍五入，并且round是将小数部分全部取到整数部分
+4.浮点除法运算
 -------------------------------------------------------------
 -------------------------------------------------------------
 -------------------------------------------------------------
@@ -13596,14 +13948,76 @@ delete可以用于空指针
 delete[] ptr;无论ptr指向的是什么，是多少维，都是这样一个[]
 delete删除对象的时候是需要调用析构函数的，对象数组有几个就调用几次
 --------------------------------------------------------------
+析构函数本身并不收回之前分配的内存空间
 --------------------------------------------------------------
+成员函数在类体内默认是内联函数，但是在类体外定义时不是内联函数
 --------------------------------------------------------------
+protected声明的数据，只能被类的成员函数访问，即创建对象，通过对象.变量是不允许的
 --------------------------------------------------------------
+析构函数不能有参数，以及返回值类型
+构造函数不能有返回值类型
 --------------------------------------------------------------
+构造函数在声明时给出了默认值的话，定义时不能再设定默认值
 --------------------------------------------------------------
+函数在类中声明时指定了类型，那么在类外定义时也需要指定类型，如果不指定默认为int，并且C++不支持默认int
+别想了，定义指定，声明不指定，也不行
+除非你声明以及定义都不指定，不过这样有些地方不行，2022的vs就报错
 --------------------------------------------------------------
+<strong>引用</strong>
+1.对void进行引用不允许
+2.不能建立引用的数组
+3.没有引用的引用
+4.引用不能用类型初始化 int &a = int;不行
+5.没有空引用
+6.引用能够使用任何合法变量
+7.引用不是变量，引用必须初始化，以后不能修改
+8.引用不占内存，只有说明无定义，并且只有说明时带&
+9.引用做函数形参的时候具有指针的效果
+<strong>引用返回值</strong>
+int &f(int x)
+{
+    ....
+}
+一个函数返回引用，此函数可以直接当做左值来运算
+例如 f(3)+=10;//因为函数返回值是一个引用，引用是一个变量本身，其实就是一个变量在做运算
+返回的时候一定要注意不是本函数的局部变量时可以返回一个引用
+而且只有变量才能成为引用的返回
+<strong>常引用</strong>
+const int & n =x;
+不能通过n来修改x的值
+但是x自己是可以修改的
+其次，只有常成员函数才能操作常数据成员
 --------------------------------------------------------------
+<strong>友元（函数和类）</strong>
+需要类体内声明，friend为关键字,可以访问类的私有成员，但不是类的成员函数
+友元的作用：提高程序的运行效率，但是破坏了类的封装性和隐蔽性
+其次调用友元函数的时候不需要加上对象前缀
+友元函数可以是多个类的友元
+类的成员函数可以成为另一个类的友元函数，但是声明要加上前缀
+class B
+{
+    friend void A::f();
+}
+<strong>友元类</strong>
+一个类的友元类，其友元类的所有成员函数都是这个类的友元函数
+友元函数如果重载，重载的也必须一个个声明，不可能声明一个，定义重载的时候好几个
 --------------------------------------------------------------
+(1)"."（类成员访问运算符）
+(2)" .*"（类成员指针访问运算符）
+(3) "::"（域运算符）
+(4)"siezof"（长度运算符）
+(5) " ?:"（条件运算符）
+以上运算符不能重载
+运算符的重载就是函数的重载
+运算符的重载有4个不能改变
+1.运算符操作个数
+2.运算符原有优先级
+3.运算符原有的结合性
+4.运算符原有的语法结构
+运算符重载有两种形式
+1.成员函数
+2.友元函数
+利用成员函数对双目运算符重载，其左操作数为this指针，右操作数为成员函数参数
 --------------------------------------------------------------
 --------------------------------------------------------------
 --------------------------------------------------------------

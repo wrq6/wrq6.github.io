@@ -1313,6 +1313,284 @@ B1 销毁
             </code>
         </pre>
     </div>
+    <div class="algorithm-container">
+        <h1>构造与析构的顺序，析构的本质</h1>
+        <pre>
+            <code>
+#include< iostream>
+class B
+{
+	int x, y;
+public:
+	B()
+	{
+		x = y = 0;
+		std::cout << "创建一" << std::endl;
+	}
+	B(int i)
+	{
+		x = i; y = 0;
+		std::cout << "创建二" << std::endl;
+	}
+	B(int i, int j)
+	{
+		x = i; y = j;
+		std::cout << "创建三" << std::endl;
+	}
+	~B()
+	{
+		std::cout << "销毁" << std::endl;
+	}
+	void print();
+};
+void B::print()//类体外定义
+{
+	std::cout << "x=" << x << ",y=" << y << std::endl;
+}
+int main()
+{
+	B* ptr;
+	ptr = new B[3];//这里已经创建了对象数组，数组里面有三个对象，没有初始化就是默认构造
+	ptr[0] = B();
+	ptr[1] = B(5);
+	ptr[2] = B(2, 3);
+	for (int i = 0; i < 3; i++)
+	{
+		ptr[i].print();
+	}
+	delete[] ptr;
+}
+/*
+创建一
+创建一
+创建一
+创建一
+销毁
+创建二
+销毁
+创建三
+销毁
+x=0,y=0
+x=5,y=0
+x=2,y=3
+销毁
+销毁
+销毁
+
+我们来研究一下为什么会是这个结果
+	B* ptr;//对象指针
+	ptr = new B[3];
+	ptr[0] = B();
+	ptr[1] = B(5);
+	ptr[2] = B(2, 3);
+	创建了一个对象指针
+	然后给指针new，也就是堆的方式，动态分配了一个对象数组
+	此时数组有三个对象，且没有说明参数
+	所以调用的是无参构造，调用三次
+	紧接着
+	ptr[0] = B();
+	赋值运算是从右到左，我们看B()
+	创建一个对象并且不带参数，但是对象没有名字，但是也是要调用第一个构造函数
+	也就是无名对象，然后ptr[0]=B();
+	让ptr[0]指向这个无名参数
+	为什么会调用析构呢？
+	回顾我们的析构函数定义，其功能是释放对象，并不是删除内存
+	所以这里无名对象，其实是一个对象，虽然没有名字，但是确确实实是一个对象
+	这个无名对象被人抢了，所以自己就没有存在必要，就会析构
+	剩下的没什么了
+*/
+            </code>
+        </pre>
+    </div>
+    <div class="algorithm-container">
+        <h1>构造函数有关细节</h1>
+        <pre>
+            <code>
+#include< iostream>
+class point
+{
+	int x1, x2;
+public:
+	point(int x, int y);
+	//这样是不行的，只有说明，没有定义
+};
+int main()
+{
+	point data(4, 4);//所以在这里有参构造的时候，系统找不到有参构造函数会报错
+	std::cout<<"cg" << std::endl;
+}
+============================================================================
+#include< iostream>
+class point
+{
+	int x1, x2;
+public:
+	point(int x, int y) { };
+	//这样是可以的，只要有函数体了，就算定义了
+};
+int main()
+{
+	point data(4, 4);//所以在这里有参构造的时候，系统找到有参构造函数
+	std::cout << "cg" << std::endl;
+}
+============================================================================
+#include< iostream>
+class point
+{
+	int x1, x2;
+public:
+	point(int x, int y) { }
+	//没错 我把分号去掉以后，竟然还是可以运行
+};
+int main()
+{
+	point data(4, 4);
+	std::cout << "cg" << std::endl;
+}
+============================================================================
+#include< iostream>//函数定义也可以在类体外进行
+class point
+{
+	int x1, x2;
+public:
+	point(int x, int y);
+};
+point::point()
+{
+
+}
+int main()
+{
+	point data(4, 4);
+	std::cout << "cg" << std::endl;
+}
+============================================================================
+#include< iostream>//函数定义也可以在类体外进行
+class point
+{
+	int x1, x2;
+public:
+	point(int x, int y);
+};
+int main()
+{
+	point data(4, 4);
+	std::cout << "cg" << std::endl;
+}
+//回过头总结一下
+/*
+如果只声明没有定义，并且是有参构造
+那么在创建对象的时候会报错，因为系统找不到，并且不会退化到默认的无参构造
+那可能问题来了，那我创建对象用无参构造呢？
+也不行，因为你只要定义了有参构造，系统默认的无参构造就会消失
+那我就要无参构造怎么办？自己加一个无参构造函数就行
+例如下面的
+*/
+============================================================================
+#include< iostream>
+class point
+{
+	int x1, x2;
+public:
+	point(int x, int y);
+	point() {};
+};
+int main()
+{
+	point data();
+	std::cout << "cg" << std::endl;
+}
+            </code>
+        </pre>
+    </div>
+    <div class="algorithm-container">
+        <h1>运算符重载</h1>
+        <pre>
+            <code>
+//运算符重载有两种
+//第一种是重载为类的成员函数
+//第二种是重载为类的友元函数
+#include< iostream>
+class Point
+{
+private:
+	int x, y;
+public:
+	Point() {};
+	Point(int a, int b) { x = a; y = b; };
+	void print() { std::cout << x << "," << y << std::endl; };
+	Point operator+(Point& a)//本质就是个成员函数，成员函数可以访问私有变量
+	{
+		return Point(x + a.x, y + a.y);
+	};
+	//没错，重载这个+号，其实就是将两个Point对象的+法得以实现
+	//它的左值+右值，右值就是参数，左值呢？是this指针，这里x本质是this.x
+};
+int main()
+{
+	Point p1(1, 1), p2(2, 2), p3;
+	p3 = p1 + p2;
+	p3.print();
+
+}//输出3,3
+==========================================================================
+#include< iostream>
+class Point
+{
+private:
+	int x, y;
+public:
+	Point() {};
+	Point(int a, int b) { x = a; y = b; };
+	void print() { std::cout << x << "," << y << std::endl; };
+	friend Point operator+(Point& a, Point& b)//本质就是个友元函数，可以访问私有变量
+	{
+		return Point(a.x + b.x, a.y + b.y);
+	};
+	//没错，重载这个+号，其实就是将两个Point对象的+法得以实现
+	//值得注意的是，友元没有this指针，所以,它访问左值的时候
+	//是通过参数，也就是说友元是传两个参数
+};
+int main()
+{
+	Point p1(1, 1), p2(2, 2), p3;
+	p3 = p1 + p2;//既然是重载，这里的+号，编译器会自动判断+左右对象来执行我们重载的+
+	p3.print();
+
+}//输出3,3
+//所以思考一下，p1+p2和p2+p1一样吗？是一样的，但是不可交换对于重载为成员函数来讲
+//但是重载为友元函数就可以交换，因为是两个形参,不需要this指针
+==========================================================================
+//一元自加和自减重载
+#include< iostream>
+class Point
+{
+private:
+	int x, y;
+public:
+	Point() {};
+	Point(int a, int b) { x = a; y = b; };
+	void print() { std::cout << x << "," << y << std::endl; };
+	void operator++()//这是重载前置++，别管我函数体内怎么写，那是我重载的操作
+	{
+		x++; y++;
+	};
+	void operator++(int)//括号里面有int，说明是重载后置++
+	{
+		x++; y++;
+	}
+
+};
+int main()
+{
+	Point p1(1, 1), p2(2, 2), p3;
+	p1++;
+	++p2;
+
+}
+            </code>
+        </pre>
+    </div>
 </div>
 </body>
 </html>
