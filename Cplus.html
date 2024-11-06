@@ -1591,6 +1591,392 @@ int main()
             </code>
         </pre>
     </div>
+    <div class="algorithm-container">
+        <h1>模板</h1>
+        <pre>
+            <code>
+#include< iostream>
+template< class T>//函数模板
+T min(T x, T y)
+{
+	if (x < y)
+		return x;
+	else
+		return y;
+}//这里的T实际上是占位符，系统根据传入的参数判断类型，然后用类型替换T
+int main()
+{
+	int n1 = 2, n2 = 10;
+	double d1 = 1.5, d2 = 5.6;
+	std::cout << "交小者为" << min(n1, n2) << std::endl;//min调用的时候是生成了模板函数,注意区分
+	std::cout << "较小者为" << min(d1, d2) << std::endl;//这个过程就是函数模板的实例化
+}//模板函数的说明和定义必须是全局作用域，并且不能被说明为类的成员函数
+//其次模板函数不具备类型隐式转换-》int变double，char变int
+==========================================================================
+#include< iostream>
+using namespace std;
+template < class T>//类模板
+class Sample
+{
+    T d;
+public:
+    Sample(T i)
+    {
+        d = i;
+    };
+    void disp()
+    {
+        cout << "d=" << d << endl;
+    };
+};
+
+int main() // 更改返回类型为int
+{
+    Sample < int> obj1(10);
+    Sample< char> obj2('a'); // 确保Sample模板类能够处理char类型的参数
+    Sample< const char*> obj3("China");
+    //这里我一开始是按照书本上敲的是 Sample< char *>obj3("China");
+    //一直报错，原来是"China"是字符字面量，就是不可修改的，也就是对应的应该是
+    //const char *类型
+    //字符字面量就是字面上的量，就是写的是什么就是什么
+    obj1.disp();
+    obj2.disp();
+    obj3.disp();
+    return 0; // 添加返回值
+}
+==========================================================================
+            </code>
+        </pre>
+    </div>
+    <div class="algorithm-container">
+    <h1>继承与派生</h1>
+        <pre>
+        <code>
+#include< iostream>
+using namespace std;
+class x
+{
+protected:
+	int a;
+public:
+	x()//构造函数
+	{
+		a = 10;
+	}
+};
+class x1 :public x//公有继承
+{
+public:
+	x1()
+	{
+		cout << a << endl;
+	}
+};
+class x2 :public x //公有继承
+{public:
+	x2()
+	{
+		cout << a << endl;
+	}
+};
+class y :x1, x2
+{
+public:
+	y()
+	{
+		cout << a << endl;//这里报错，程序指明了y::a不明确
+	}//也就是二义性，它不知道是x1的a还是x2的a
+	//x1,x2的a都是通过继承x得来的，也就是说x1和x2都会得到x1关于a的一个新物体
+};
+void main()
+{
+	y obj;
+}
+//怎么办？？？
+======================================================================
+//虚继承要求同一个子类的多个父类继承自同一个间接父类
+//其它的情况，即便是虚继承也就是普通继承
+#include< iostream>
+using namespace std;
+class x
+{
+protected:
+	int a;
+public:
+	x()//构造函数
+	{
+		a = 10;
+	}
+};
+class x1 :virtual public x//虚公有继承
+{
+public:
+	x1()
+	{
+		cout << a << endl;
+	}
+};
+class x2 :virtual public x //虚公有继承
+{
+public:
+	x2()
+	{
+		cout << a << endl;
+	}
+};
+class y :x1, x2
+{
+public:
+	y()
+	{
+		cout << a << endl; //这里程序指明的是x的a
+		//其实原理是这样的，x1 ，x2中继承的x的a是指向一个的
+		//是公有的一个，实现方式是虚指针，指向虚表，虚指针是存放偏移量
+		//偏移量是a到类的偏移
+		//也就是说a成为了单独的一个了
+		//你在x1中修改a，那么x2中的a也会改变
+	}
+};
+void main()
+{
+	y obj;
+}
+========================================================================
+#include< iostream>
+using namespace std;
+class base1
+{
+public:
+	base1()
+	{
+		cout << "base1" << endl;
+	}
+};
+class base2
+{
+public:
+	base2()
+	{
+		cout << "base2" << endl;
+	}
+};
+class level1 :public base2, virtual public base1//我知道可能这里会出现一点疑点
+{//为什么base1没有再被构造？以为前面已经构造了，虚继承的这里就不需要再构造，共用前面的
+public:
+	level1()
+	{
+		cout << "level1" << endl;
+	}
+};
+class level2 :public level1, virtual public base1
+{
+public:
+	level2()
+	{
+		cout << "level2" << endl;
+	}
+};
+class top :public level1, virtual public level2
+{
+public:
+	top()
+	{
+		cout << "top" << endl;
+	}
+};
+void main()
+{
+	top obj;
+}
+/*打印结果
+*
+base1
+base2
+level1
+level2
+base2
+level1
+top
+*/
+        </code>
+    </pre>
+    </div>
+    <div class="algorithm-container">
+        <h1>多态性和虚函数</h1>
+        <pre>
+            <code>
+#include< iostream>
+using namespace std;
+class Point
+{
+	int x, y;
+public:
+	Point(int x1,int y1)
+	{
+		x = x1;
+		y = y1;
+	}
+	int area()
+	{
+		return 0;
+	}
+};
+class Rect :public Point
+{
+	int l, w;
+public:
+	Rect(int x1, int y1, int l1, int w1) :Point(x1, y1)
+	{
+		l = l1;
+		w = w1;
+	}
+	int area()
+	{
+		return l * w;
+	}
+};
+void fun(Point& p)//静态联编这里是默认到Point的，程序只有在运行的时候才知道是束缚到Rect上
+{
+	cout << p.area() << endl;
+}
+void main()
+{
+	Rect rec(2, 4, 10, 6);
+	fun(rec);
+}//程序输出为0
+//因为是静态联编
+//C++规定动态联编是在虚函数支持下实现的
+//静态联编和动态联编属于多态性
+//虚函数是动态联编的基础，虚函数是成员函数，且为非static
+//一个类中的成员函数被说明为虚函数，就意味着派生类中可能有不一样的定义
+//让其在运行时进行关联或束定
+//当派生类虚函数与基类虚函数的参数不同时，派生类的虚函数讲将丢失虚特性，变成重载函数
+class a {
+	virtual int m(int x) = 0;// 纯虚函数，就是基类没有对虚函数进行定义，是一种特殊的虚函数
+	//子类定义以后，自动选择动态联编
+};
+//像这种带有纯虚函数的类a是抽象类
+//不能建立抽象类对象
+//抽象类不能用作参数类型、函数返回值、显示转换
+//可以说明指向抽象类的指针和引用，此指针可以指向它的派生类，实现多态
+===============================================================================
+#include< iostream>
+using namespace std;
+class Point
+{
+	int x, y;
+public:
+	Point(int x1,int y1)
+	{
+		x = x1;
+		y = y1;
+	}
+	virtual int area()
+	{
+		return 0;
+	}
+};
+class Rect :public Point
+{
+	int l, w;
+public:
+	Rect(int x1, int y1, int l1, int w1) :Point(x1, y1)
+	{
+		l = l1;
+		w = w1;
+	}
+	virtual int area()//这里即便不说明virtual也是虚函数
+	{
+		return l * w;
+	}
+};
+void fun(Point& p)
+{
+	cout << p.area() << endl;
+}
+void main()
+{
+	Rect rec(2, 4, 10, 6);
+	fun(rec);
+}
+//还有虚析构函数
+======================================================================
+#include< iostream>
+using namespace std;
+class A
+{
+public:
+	virtual void fun1(){cout << "A fun1" << endl;}
+	virtual void fun2() { cout << "A fun2" << endl;}
+	void fun3() { cout << "A fun3" << endl; }
+	void fun4() { cout << "A fun4" << endl; }
+};
+class B :public A
+{
+public:
+	virtual void fun1() { cout << "B fun1" << endl; }
+	virtual void fun2(int x) { cout << "B fun2" << endl; }
+	virtual void fun3() { cout << "B fun3" << endl; }
+	void fun4() { cout << "B fun4" << endl; }
+};
+void main()
+{
+	A* p;
+	B b;
+	p = & b;
+	p->fun1();//虚函数动态联编
+	p->fun2();//由于基类和派生类虚函数参数类型不一致，执行静态联编
+	p->fun3();//基类并没有说明虚函数，子类说明了，但是子类只能和它的子类，也就是子类的子类形成动态
+	p->fun4();
+}
+/*输出
+B fun1
+A fun2
+A fun3
+A fun4
+*/
+            </code>
+        </pre>
+</div>
+    <div class="algorithm-container">
+        <h1>异常处理</h1>
+        <pre>
+            <code>
+#include< iostream>
+using namespace std;
+class Sample
+{
+public:
+	Sample()//构造函数
+	{
+		cout << "创建" << endl;
+		throw 1;//throw就像一个打棒球的投手，投出一个球
+	}
+	~Sample()//析构函数
+	{
+		cout << "销毁" << endl;
+	}
+};
+int main()
+{
+	try//try就是这个球场，棒球只有在棒球场中才能发挥作用
+	{
+		Sample s;
+	}
+	catch (int)//这是拿棒子准备打球的，但是它不会看具体的求的型号，只会知道这个球是棒球
+	{
+		cout << "出现异常" << endl;//这里是棒球接到以后执行的动作
+	}
+}
+//输出
+/*
+创建
+出现异常
+*/
+//为什么析构没有被调用？因为对象还没有创建完成，只是在构造函数这一步抛出了异常停止了对象创建
+            </code>
+        </pre>
+    </div>
 </div>
 </body>
 </html>
