@@ -1287,6 +1287,41 @@ D=	<div class="determinant" style="line-height:5px">
     </div>
     <hr>
     <div class="note-container">
+        <h1>秩</h1>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>r</mi><mo stretchy="false">(</mo><msub><mi>α</mi><mn>1</mn></msub><msub><mi>α</mi><mn>2</mn></msub><msub><mi>α</mi><mn>3</mn></msub><msub><mi>α</mi><mn>4</mn></msub><msub><mi>α</mi><mn>5</mn></msub><mo stretchy="false">)</mo><mo>=</mo><mn>2</mn></math></p>
+        <p>以上这个式子意味着什么？</p>
+        <p>秩：极大线性无关个数</p>
+        <p>也就是说有2个是极大无关，用这两个可以表示其他所有</p>
+        <p>类似平面的二维坐标，可以表示所有平面上的向量</p>
+        <p>其次如果2个无关再多一个就是线性相关的了</p>
+        <p>当r=3的时候，也就是极大无关是3个，3个坐标系就是三维空间</p>
+        <p>最多三个线性无关，多一个都是线性相关</p>
+        <p>3个线性无关向量可以表示三维向量中的所有向量</p>
+        <p>---------------------------------------</p>
+        <p>AX=0是齐次方程</p>
+        <p>我们有一个公式</p>
+        <p>S=n-r</p>
+        <p>就是说自由未知数=总未知数-独立未知数</p>
+        <p>S我们说自由未知数，也就是线性无关的</p>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>X</mi><mo>=</mo><msub><mi>k</mi><mn>1</mn></msub><msub><mi>α</mi><mn>1</mn></msub><mo>+</mo><msub><mi>k</mi><mn>2</mn></msub><msub><mi>α</mi><mn>2</mn></msub></math></p>
+        <p>一般我们解齐次方程是解出以上这种东西，我们一开始就是通过s=n-r=2推断出有两个自由未知数，于是就两个k</p>
+        <p>为什么两个k，因为这两个向量线性无关</p>
+        <p>既然线性无关是不是声明秩是2？毕竟秩是极大线性无关组个数</p>
+        <p>确实是的，秩是2，那是谁的秩？是公式里面的r？</p>
+        <p>不是的，r是系数矩阵的秩，也就是AX=0中的A的秩，即r(A)=2</p>
+        <p>那这个s是谁的？是X的秩</p>
+        <p>s等于多少，说明了解齐次解X的解系中有多少个线性无关向量，也就是k的个数是多少个</p>
+        <p>以上都是齐次解</p>
+        <p>非齐次解的公式是</p>
+        <p>s+1 = n - r + 1</p>
+        <p>请注意这里只是单纯的公式，不要化简，不要把1两边去掉</p>
+        <p>s+1=5，说明非齐次解X的秩就是5</p>
+        <p>非齐次解的构成是=齐次解+一个特解</p>
+        <p>也就是s本身是齐次解的个数=4，+一个特解，这个特解是不能用齐次解表示，所以就是非齐次解的秩就是齐次解的秩+1</p>
+        <p>也就是为什么非齐次解要用s+1了，也就是非齐次解最多s+1个线性无关向量</p>
+    </div>
+    <hr>
+    <div class="note-container">
      <h1>矩阵方程</h1>
         <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>A</mi><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd></mtd><mtd></mtd></mtr><mtr><mtd></mtd><mtd></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">[</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><msub><mi>b</mi><mrow><mn>11</mn></mrow></msub></mtd><mtd><msub><mi>b</mi><mrow><mn>12</mn></mrow></msub></mtd></mtr><mtr><mtd><msub><mi>b</mi><mrow><mn>21</mn></mrow></msub></mtd><mtd><msub><mi>b</mi><mrow><mn>22</mn></mrow></msub></mtd></mtr><mtr><mtd><msub><mi>b</mi><mrow><mn>31</mn></mrow></msub></mtd><mtd><msub><mi>b</mi><mrow><mn>32</mn></mrow></msub></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">]</mo></mrow></math></p>
         <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>A</mi><mi>X</mi><mo>=</mo><mi>B</mi></math></p>
