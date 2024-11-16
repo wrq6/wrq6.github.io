@@ -990,6 +990,29 @@ D=	<div class="determinant" style="line-height:5px">
         <p>逆矩阵可逆的充要条件</p>
         <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">|</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">|</mo></mrow><mo>=</mo><mn>0</mn><mo stretchy="false">⇔</mo><mi>A</mi><mo>不可逆</mo></math>    </p>
         <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">|</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><mi>A</mi></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">|</mo></mrow><mo>≠</mo><mn>0</mn><mo stretchy="false">⇔</mo><mi>A</mi><mo>可逆</mo></math></p>
+        <p style="color: magenta">矩阵的逆是什么东西？</p>
+        <p>我们说E是单位矩阵，单位矩阵意味着如同我们数学里面的1</p>
+        <p>而我们的</p>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>A</mi><mo>⋅</mo><msup><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo><mi>E</mi></math></p>
+        <p>相当于</p>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mn>8</mn><mo>⋅</mo><mfrac><mn>1</mn><mn>8</mn></mfrac><mo>=</mo><mn>1</mn></math></p>
+        <p>但是也只是相当于，矩阵是没有除法的</p>
+        <p>我们知道，当行列式不为0的时候，矩阵可逆</p>
+        <p>为什么？</p>
+        <p>一种解释是</p>
+        <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo><mfrac><msup><mi>A</mi><mo>∗</mo></msup><mrow><mo stretchy="false">|</mo><mi>A</mi><mo stretchy="false">|</mo></mrow></mfrac></math></p>
+        <p>当然其实使用这个记住当矩阵可逆行列式不为0其实也ok</p>
+        <p>在二维矩阵中矩阵的行列式是一个面积</p>
+        <p>在三维矩阵中矩阵的行列式是一个体积</p>
+        <p>...</p>
+        <p>因此在每一个维数行列式=0时代表，组成当前物质的线（向量）都是共线</p>
+        <p>满秩代表着组成这个矩阵的所有向量都是线性无关的，也就是这些向量都可以成为空间中的坐标系</p>
+        <p>既然可以组成坐标系也就是不共线，于是这个矩阵的行列式绝对不为0，因为不共线</p>
+        <p>并且我们知道可逆就是倍数，缩小与放大，如果是行列式=0，也就是共线，我们将它缩小一个点，此时这个点不能通过可逆，变回原来的线</p>
+        <p>与此同时，如果行列式不为0，也就是这些向量组成一个坐标系并且行列式为其中的一个物质（二维面，三维体）</p>
+        <p>我们将它缩小，也可以通过可逆变换，将它回放为原来的</p>
+        <p>因此总结以上</p>
+        <p>可逆=行列式不为0，满秩=可逆=行列式不为0</p>
     </div>
     <hr>
     <div class="note-container">
