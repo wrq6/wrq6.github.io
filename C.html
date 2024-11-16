@@ -259,6 +259,819 @@ int main()
 	<h2 class="solution-title">解决思路和难点</h2>
 	<div class="solution-content">这里是描述解决思路的</div>
 </div>
+<div class="algorithm-container">
+	<h1 class="algorithm-title">文件编程-<span style="color: green">基础</span></h1>
+	<p class="algorithm-description"></p>
+	<pre class="language-javascript">
+      <code class="code-block">
+#include< stdio.h>
+#include< string.h>
+int main()
+{
+	char buff[255];
+	const char* filename = "C:/Users/16201/desktop/test1.txt";
+	FILE* fp = NULL;
+	fp = fopen(filename, "w+");//第二个一定是双引号，而不是单引号
+	fprintf(fp, "this is test for fprintf\n");//将文本输入到文本文件中
+	//printf是从后向前输出，输入输出是相对于计算机内存而言
+	fputs("this is test for fputs\n",fp);//将文本输入到文本文件中
+	//puts是从前向后输出
+	fclose(fp);
+	fp = NULL;
+	fp = fopen(filename, "r+");
+	char c = fgetc(fp);
+	putc(c,stdout);
+	fscanf(fp, "%s", buff);//遇到回车或者空格停止读取
+	//scanf是从前向后输入，文件可以看作是另一种形式的键盘
+	printf("%s ",buff);
+	fgets(buff, 255, fp);//遇到换行符或者结尾，就停止，并在末尾添加换行符
+	//get是从后向前输入
+	//fgets和fputs的文件指针都位于最后
+	//fprintf和fscanf文件指针都位于最前
+	printf("%s ",buff);
+	fclose(fp);
+}
+      </code>
+		<hr>
+    </pre>
+</div>
+<div class="solution-container">
+	<h2 class="solution-title">解决思路和难点</h2>
+	<div class="solution-content">这里是描述解决思路的</div>
+</div>
+<hr>
+<hr>
+<hr>
+<hr>
+<div class="algorithm-container">
+	<h1 class="algorithm-title">经典例题-<span style="color: green">1</span></h1>
+	<p class="algorithm-description">请编写一个函数fn，它的功能是:将一个数字字符串转换为一个整数(不得调用C语言提供的将字符串转换为整数的函数)。例如，若输入字符串"-1234",则 函数把它转换为整数值 -1234。函数 fun 中给出的语句仅供参考。</p>
+	<pre class="language-javascript">
+      <code class="code-block">
+#include< stdio.h>
+#include< string.h>
+int fun(char* s)
+{
+	int a = strlen(s);//不使用这个的话，得加个循环遍历求得字符串长度
+	int b = 1;
+	int sum = 0;
+	for (int i = 0; i < a; i++)//遍历整个字符串
+	{
+		if (s[0] == '-')//如果字符为-号，那么我们将记录并且最终乘上
+		{
+			b = -1;
+		}
+		if ('0' <= s[i] && s[i] <= '9')//如果字符位于0到9之间就记录
+		{
+			sum = sum * 10;//先让sum递增一位
+			sum = sum + (s[i] - '0');//再将新加入的放入个位
+		}
+	}
+	return sum*b;//返回乘上符号的数字
+}
+int main()
+{
+	char s [40];
+	scanf("%s",s);
+	printf("%d",fun(s));
+	return 0;
+}
+      </code>
+		<hr>
+    </pre>
+</div>
+<div class="solution-container">
+	<h2 class="solution-title">解决思路和难点</h2>
+	<div class="solution-content">这里是描述解决思路的</div>
+</div>
+<hr>
+<hr>
+<hr>
+<hr>
+<div class="algorithm-container">
+	<h1 class="algorithm-title">经典例题-<span style="color: green">2</span></h1>
+	<p class="algorithm-description">请编写函数 fn,函数的功能是: 将M行N列的二维数组中的字符数据，按列的顺序依次放到一个字符串中。</p>
+	<pre>
+例如二维数组中是这样的
+W W W W
+S S S S
+H H H H
+则字符串中的内容应是:WSHWSHWSH。
+	</pre>
+	<pre class="language-javascript">
+      <code class="code-block">
+#include< stdio.h>
+#include< string.h>
+#define M 30//#define M 30;你没看错，我竟然在宏定义后面加分号
+#define N 30
+char * fun(char s[M][N])
+{
+	int m = 0;
+	char result[N * M] = {0};
+	for (int i = 0; i < M; i++)//遍历行
+	{
+		for (int j = 0; j < N; j++)//遍历列
+		{
+			if (s[j][i])//如果这个位置存储了就执行我们的存入
+				result[m++] = s[j][i];//存入
+			else
+				continue;//如果这个位置没有东西我们就跳过
+		}
+	}
+	result[m] = '\0';//然后加入我们字符串的标准结束标志
+	return result;//刚开始忘记加上返回了，卧槽了
+}
+int main()
+{
+	char s[M][N] = { { 'W','W','W','W' }, { 'S','S','S','S' }, { 'H','H','H','H' } };
+	char* p = fun(s);
+	printf("%s",p);
+	return 0;
+}
+      </code>
+		<hr>
+    </pre>
+</div>
+<div class="solution-container">
+	<h2 class="solution-title">解决思路和难点</h2>
+	<div class="solution-content">这里是描述解决思路的</div>
+</div>
+<hr>
+<hr>
+<hr>
+<hr>
+<div class="algorithm-container">
+	<h1 class="algorithm-title">经典例题-<span style="color: green">3</span></h1>
+	<p class="algorithm-description">请编写函数fun，函数的功能是:统计一行字符串中单词的个数,作为函数值返回。一行字符串在主函数中输入，规定所有单词由小写字母组成。单词之间由若干个空格隔开，一行的开始没有空格</p>
+	<pre>
+	</pre>
+	<pre class="language-javascript">
+      <code class="code-block">
+#include< stdio.h>
+#include< string.h>
+int fun(char *s)
+{
+	int i = 0;//遍历游标
+	int j = 1;//单词间空格开始标志
+	int res = 0;//结果
+	while (s[i] != '\0')//当不到字符串末尾就不停止
+	{
+		if (s[i] == ' '&&j==1)//如果当前为空格，并且空格如果是许多空格的第一个
+		{
+			i++;//游标加1
+			res++;//结果+1，因为我们只记录第一个空格代表第一个单词结束
+			j = 0;//我们让j=0说明接下来如果还有空格就不记录了
+		}
+		else
+		if (s[i] == ' ' && j == 0)//当前是空格，且不是单词间的第一个空格了
+		{
+			i++;//单纯让游标向后
+		}
+		if (s[i] != ' ')//如果当前不为空格，也就是单词开始了
+		{
+			i++;//游标还是向后
+			j = 1;//我们将空格标记归为初始
+			continue;
+		}
+
+	}
+	return res+1;
+}
+int main()
+{
+	char s[30] = { 0 };
+	gets(s);
+	printf("这个字符串一共有%d个单词",fun(s));
+	return 0;
+}
+      </code>
+		<hr>
+    </pre>
+</div>
+<div class="solution-container">
+	<h2 class="solution-title">解决思路和难点</h2>
+	<div class="solution-content">这里是描述解决思路的</div>
+</div>
+<hr>
+<hr>
+<hr>
+<hr>
+<div class="algorithm-container">
+	<h1 class="algorithm-title">经典例题-<span style="color: green">4</span></h1>
+	<p class="algorithm-description">请编写函数fun，函数的功能是：统计各年龄段的人数。N个年龄通过调用随机函数获得，并放在主函数的age数组中；要求函数把0至9岁年龄段的人数放在d[0]中，把10至19岁年龄段的人数放在d[1]中，把20至29岁年龄段的人数放在d[2]中，其余依此类推，把100岁（含100）以上年龄的人数都放在d[10]中。结果在主函数中输出。</p>
+	<pre>
+	</pre>
+	<pre class="language-javascript">
+      <code class="code-block">
+#include< stdio.h>
+#include< stdlib.h>
+#define N 10000
+
+int* fun(int* a,int *d)//统计各个年龄段的人数
+{
+
+	for (int i = 0; i < N; i++)//遍历数组
+	{
+		switch (a[i] / 10)//让这个岁数缩小到0~10
+		{
+		case 0:
+			d[0]+=1;
+			//d[0]++;我一开始每一个都是这样写的，不知道为什么明明加了，还是0
+			//后来发现不是这里的问题，好像是从外面传进来的d数组的问题
+			break;
+		case 1:
+			d[1]+=1;
+			break;
+		case 2:
+			d[2]+=1;
+			break;
+		case 3:
+			d[3]+=1;
+			break;
+		case 4:
+			d[4]+=1;
+			break;
+		case 5:
+			d[5]+=1;
+			break;
+		case 6:
+			d[6]+=1;
+			break;
+		case 7:
+			d[7]+=1;
+			break;
+		case 8:
+			d[8]+=1;
+			break;
+		case 9:
+			d[9]+=1;
+			break;
+		case 10:
+			d[10]+=1;
+			break;
+		}
+	}
+	return d;//返回结果
+}
+int main()
+{
+	int d[11] = { 0 };//定义一个结果数组
+	//int* d[11] = { 0 };原来是我一开始是这样写的，老糊涂了，指针数组都写出来了
+	int age[N] = {0};
+	for (int i = 0; i < N; i++)
+	{
+		age[i] = rand() % 100;
+	}
+	for (int z = 0; z < N; z++)
+	{
+		printf("岁数为%d\n",age[z]);
+	}
+	int *d1=fun(age,d);//我一开始直接用d来输出，不知道为什么老是11140000000
+	for (int j = 0; j < 11; j++)
+	{
+		printf("%d ",d[j]);
+	}
+	for (int j = 0; j < 11; j++)
+	{
+		printf("\n%d岁到%d岁的人数有%d个\n", j * 10, (j + 1) * 10 - 1, d[j]);
+	}
+}
+      </code>
+		<hr>
+    </pre>
+</div>
+<div class="solution-container">
+	<h2 class="solution-title">解决思路和难点</h2>
+	<div class="solution-content">这里是描述解决思路的</div>
+</div>
+<hr>
+<hr>
+<hr>
+<hr>
+<div class="algorithm-container">
+	<h1 class="algorithm-title">经典例题-<span style="color: green">5</span></h1>
+	<p class="algorithm-description">请编写函数fn，函数的功能是:删去一维数组中所有相同的数，使之只剩一个。数组中的数已按由小到大的顺序排列,函数返回删除后数组中数据的个数。 例如，一维数组中的数据是:2223445666677899101010。删除后,数组中的内容应该是:2 3 4 5 6 7 8 9 10</p>
+	<pre>
+	</pre>
+	<pre class="language-javascript">
+      <code class="code-block">
+#include< stdio.h>
+int fun(int *a,int array_size)
+{
+	int c=0, d=0;//定义一个当前下标，以及一个跳标
+	for (int i =0;i< array_size;i++)//遍历数组
+	{
+		if(a[i] != a[d])//如果遍历的不等于跳标
+		{
+			a[c] = a[i - 1];//就让结果记录跳标的前一个
+			//也就是222333444第一次3不等于2的时候，记录2，也就是最后一个2
+			d = i;//让跳标指向当前i，也就是记录2以后让标指向3
+			c++;//记录+1
+		}
+	}
+	a[c] = a[array_size-1];//因为数组最后一个始终无法记录，因为它后面没有参考，所以手动记录
+	return c+1;//返回大小
+}
+int main()
+{
+	int a[] = { 2,2,2,3,4,4,5,6,6,6,6,7,7,8,9,9,10,10,10 };
+	printf("%d\n", sizeof(a) / sizeof(int));//计算数组大小
+	int res = fun(a,sizeof(a)/sizeof(int));//返回新的数组大小
+	for (int i =0;i< res;i++)
+	{
+		printf("%d ",a[i]);//循环打印
+	}
+}
+      </code>
+		<hr>
+    </pre>
+</div>
+<div class="solution-container">
+	<h2 class="solution-title">解决思路和难点</h2>
+	<div class="solution-content">这里是描述解决思路的</div>
+</div>
+<hr>
+<hr>
+<hr>
+<hr>
+<div class="algorithm-container">
+	<h1 class="algorithm-title">经典例题-<span style="color: green">6</span></h1>
+	<p class="algorithm-description">请编写函数fun，函数的功能是：移动字符串中的内容，移动的规则如下：把第1到第m个字符，平移到字符串的最后，把第m+1到最后的字符移到字符串的前部。例如，字符串中原有的内容为：ABCDEFGHIJK，m的值为3，则移动后，字符串中的内容应该是：DEFGHIJKABC。</p>
+	<pre>
+	</pre>
+	<pre class="language-javascript">
+      <code class="code-block">
+#include< stdio.h>
+#include< stdlib.h>
+char * fun(char *s,int m)
+{
+	int a = m,b=0;//定义一个a用来将后m-1个移到前面
+	int i = 0,j=0;
+	char* p = (char*)malloc(sizeof(char)*m);
+	while (i < m)//将前m个放到临时数组
+		//一开始写的是i!=m，始终少存一个
+		//改成i< m 还是少
+				  {
+				  p[i] = s[i];//打断点发现，这里确确实实是存到了的ABC
+				  i++;
+				  }
+				  while (s[a])//将m后面的m-1个移动到前面
+	{
+		s[b++] = s[a++];
+	}
+	while (j!=i)//原来是这个，我一开始条件是j!=i-1
+		//i本身才是那个终止的值，i-1反而会造成缺少一个
+	{
+		s[b++] = p[j++];//将临时数组的放进后面去
+	}
+	s[b] = '\0';//添加字符串结束标志
+	return s;//返回我们的字符串
+}
+int main()
+{
+	int m=0;
+	printf("输入需要平移的量\n");
+	scanf("%d",&m);
+	char s[] = "ABCDEFGHIJK";
+	char * p =fun(s, m);
+	while(*p)
+	{
+		printf("%c",*p);
+		p++;
+	}
+}
+      </code>
+		<hr>
+    </pre>
+</div>
+<div class="solution-container">
+	<h2 class="solution-title">解决思路和难点</h2>
+	<div class="solution-content">这里是描述解决思路的</div>
+</div>
+<hr>
+<hr>
+<hr>
+<hr>
+<div class="algorithm-container">
+	<h1 class="algorithm-title">经典例题-<span style="color: green">7</span></h1>
+	<p class="algorithm-description">要求编写一个函数，该函数的功能是删除字符串中的所有空格。例如，如果输入字符串是 "asd af aa z67"，那么输出应该是 "asdafaaz67"。</p>
+	<pre>
+	</pre>
+	<pre class="language-javascript">
+      <code class="code-block">
+#include< stdio.h>
+#include< string.h>
+#define N 10
+void fun(char * s)
+{
+	int i = 0;
+	int j = 0;
+	while (s[i]!='\0')//遍历字符串
+	{
+		if (s[i] != ' ')//当不为空格的记录字符
+		{
+			s[j++] = s[i++];
+		}
+		else//当为空格的时候略过它
+		{
+			i++;
+			continue;
+		}
+	}
+	s[j] = '\0';//最后添加一个字符串的结束标志
+}
+int main()
+{
+	char s[20] = {0};
+	printf("请输入一串字符\n");
+	gets(s);
+	puts(s);
+	fun(s);
+	printf("%s",s);
+	return 0;
+}
+      </code>
+		<hr>
+    </pre>
+</div>
+<div class="solution-container">
+	<h2 class="solution-title">解决思路和难点</h2>
+	<div class="solution-content">这里是描述解决思路的</div>
+</div>
+<hr>
+<hr>
+<hr>
+<hr>
+<div class="algorithm-container">
+	<h1 class="algorithm-title">经典例题-<span style="color: green">8</span></h1>
+	<p class="algorithm-description">请编写函数fun，函数的功能是：将放在字符串数组中的M个字符串（每串的长度不超过N），按顺序合并组成一个新的字符串。函数fun中给出的语句仅供参考。例如，字符串数组中的M个字符串为：</p>
+	<pre>
+		AAAA
+		BBBBBB
+		CC
+		则合并后的字符串的内容应是：AAAABBBBBBCC。
+	</pre>
+	<pre class="language-javascript">
+      <code class="code-block">
+#include< stdio.h>
+#include< stdlib.h>//分配内存函数的头文件
+#define N 10
+char* fun(char s[][N], int M,char *p)
+//char* fun(char* s[][N], int M)我一开始是这样写的让结果返回
+//但是发现打印不出来，我就想会不会是函数内部分配的内存也是出了函数就不存在了
+//但是后面发现还是不行
+{
+	int z = 0;
+	// 分配足够的空间，包括每个字符串的结束符
+
+	for (int i = 0; i < M; i++)
+	{
+		int j = 0;
+		while (s[i][j] != '\0')
+		{
+			p[z++] = s[i][j];//p[z++] = s[i][j];第一次这里内存出错
+			//原来是s[0][0]其实是一个字符串，而不是一个字符
+			//我想了半天我日，为什么呢
+			//原来是主函数数组定义char* s[N][N]
+			//定义成这玩意了，唉
+			//还是不行，原来是函数参数声明我写的是
+			//char* fun(char* s[][N], int M,char *p)
+			//char*s[][N]你说这不是傻逼吗卧槽，三维了干
+			j++;
+		}
+	}
+	p[z] = '\0';
+	return p;
+}
+int main()
+{
+	char s[N][N] = { "aasaaaa" , "bbbbb"  ,"ccccc" ,  "ddddd" , "eeeee"  , "fff"  , "gg"  , "hh"  , "ii"  , "kkkkk"  };
+	int M = 0;
+	printf("请输入需要将前几个字符串组合？\n");
+	scanf("%d", &M);
+	char* p = (char*)malloc(sizeof(char) * (N * M + M));
+	fun(s, M,p);
+	printf("%s", p);
+}
+      </code>
+		<hr>
+    </pre>
+</div>
+<div class="solution-container">
+	<h2 class="solution-title">解决思路和难点</h2>
+	<div class="solution-content">这里是描述解决思路的</div>
+</div>
+<hr>
+<hr>
+<hr>
+<hr>
+<div class="algorithm-container">
+	<h1 class="algorithm-title">经典例题-<span style="color: green">9</span></h1>
+	<p class="algorithm-description">要求编写一个函数 fun，其功能是将一个 M 行 N 列的二维数组中的数据按列的顺序依次放入一个一维数组中。给出的例子展示了一个 3 行 3 列的二维数组，以及按列顺序排列后一维数组的内容。</p>
+	<pre>
+33 33 33 33
+44 44 44 44
+55 55 55 55
+33 44 55 33 44 55 33 44 55 33 44 55
+	</pre>
+	<pre class="language-javascript">
+      <code class="code-block">
+#include< stdio.h>
+#include< stdlib.h>
+#define N 4//我一开始写的是3，结果定义数组的时候报错，初始值定义太多
+#define M 3
+fun(int a[][N],int *b)
+{
+	int z = 0;
+	for (int i = 0; i < N; i++)
+	{
+		for (int j = 0; j < M; j++)
+		{
+			b[z++] = a[j][i];
+		}
+	}
+}
+int main()
+{
+	int a[M][N] = { {33,33,33,33},{44,44,44,44},{55,55,55,55} };
+	int b[M * N] = { 0 };
+	fun(a, b);
+	for (int i = 0; i < M * N; i++)
+	{
+		printf("%d ",b[i]);
+	}
+}
+      </code>
+		<hr>
+    </pre>
+</div>
+<div class="solution-container">
+	<h2 class="solution-title">解决思路和难点</h2>
+	<div class="solution-content">这里是描述解决思路的</div>
+</div>
+<hr>
+<hr>
+<hr>
+<hr>
+<div class="algorithm-container">
+	<h1 class="algorithm-title">经典例题-<span style="color: green">10</span></h1>
+	<p class="algorithm-description">编写一个函数 fun，用于判断一个字符串是否为回文。回文是指顺读和倒读都一样的字符串。
+		如果字符串是回文，函数返回 1，并在主函数中输出 "YES"；如果不是回文，函数返回 0，并在主函数中输出 "NO"。</p>
+	<pre>
+字符串 "LEVEL" 是回文，所以函数返回 1，主函数输出 "YES"。
+字符串 "123312" 不是回文，所以函数返回 0，主函数输出 "NO"。
+	</pre>
+	<pre class="language-javascript">
+      <code class="code-block">
+#include< stdio.h>
+#include< stdlib.h>
+int fun(char* s)
+{
+	int isture = 0;
+	int a = 0;
+	while (s[a] != '\0')
+	{
+		a++;
+	}
+	a = a - 1;
+	for (int i = 0; i < a / 2; i++)
+	{
+		if (s[i] == s[a - i])
+		{
+			isture = 1;
+			continue;
+		}
+		if (s[i] != s[a - i])
+		{
+			isture = 0;
+			break;
+		}
+	}
+	return isture;
+}
+int main()
+{
+	char s[20] = { 0 };
+	scanf("%s", s);
+	if (fun(s))
+	{
+		printf("YES");
+	}
+	else
+	{
+		printf("NO");
+	}
+}
+      </code>
+		<hr>
+    </pre>
+</div>
+<div class="solution-container">
+	<h2 class="solution-title">解决思路和难点</h2>
+	<div class="solution-content">这里是描述解决思路的</div>
+</div>
+<hr>
+<hr>
+<hr>
+<hr>
+<div class="algorithm-container">
+	<h1 class="algorithm-title">经典例题-<span style="color: green">11</span></h1>
+	<p class="algorithm-description">N名学生的成绩已在主函数中放入一个带头节点的链表结构中，h指向链表的头节点。请编写函数fun，它的功能是：找出学生的最高分，由函数值返回。</p>
+	<pre>
+	</pre>
+	<pre class="language-javascript">
+      <code class="code-block">
+#include< stdio.h>
+#include< stdlib.h>
+#include< time.h>
+#define N 10
+typedef struct SlistNode
+{
+	int data;
+	struct SListNode* Next;
+}Student,*S;
+int fun(Student* s)//当然S s也是可以的，不必拘泥
+{
+	Student* p = s;//定义我们的傀儡
+	p = p->Next;//因为有头节点，所以我们跳过它
+	int Max = p->data;//假设第一个为最大
+	for (int i = 0; i < N; i++)//遍历数组
+	{
+		if (p->data > Max)
+		{
+			Max = p->data;
+			p = p->Next;
+		}
+		else
+		{
+			p = p->Next;
+		}
+	}
+	return Max;
+}
+int main()
+{
+	S s=NULL;//S是结构体指针 类型声明相当于（int*）
+	S p = (S)malloc(sizeof(Student));
+	p->Next = NULL;
+	s = p;
+	for (int i = 0; i < N; i++)
+	{
+		srand(time(0)+rand());//以时间为种子
+		int a = rand() % 100;//每一秒都是随机且平均的
+		p = (S)malloc(sizeof(Student));//分配空间
+		p->data = a;
+		p->Next = s->Next;
+		s->Next = p;//s=p，我一开始这样写，完全s本身是头结点，下一个才是加入的新节点
+	}
+	p = s->Next;
+	for (int i = 0; i < N; i++)
+	{
+		printf("%d ",p->data);
+		p = p->Next;
+	}
+	printf("\n");
+
+	printf("成绩最高的为%d\n",fun(s));
+}
+
+      </code>
+		<hr>
+    </pre>
+</div>
+<div class="solution-container">
+	<h2 class="solution-title">解决思路和难点</h2>
+	<div class="solution-content">这里是描述解决思路的</div>
+</div>
+<hr>
+<hr>
+<hr>
+<hr>
+<div class="algorithm-container">
+	<h1 class="algorithm-title">经典例题-<span style="color: green">12</span></h1>
+	<p class="algorithm-description">请编写函数fun，对长度为7个字符的字符串，除首、尾字符外，将其余5个字符按ASCII码降序排列。例如，原来的字符串为CEAedca，排序后输出为CedceEAa。</p>
+	<pre>
+	</pre>
+	<pre class="language-javascript">
+      <code class="code-block">
+#include< stdio.h>
+#define N 8
+void fun(char *s)
+{
+
+	for (int i=1;i< N-2;i++)//使用简单选择排序
+	//为什么-2，因为字符串结束符，以及第7字符都不排序
+	//第一个也不参与排序
+	{
+		int M = i;
+		for (int j = i; j < N-2; j++)
+		{
+			if (s[j] > s[M])
+			{
+				M = j;
+			}
+		}
+		char temp = s[i];
+		s[i] = s[M];
+		s[M] = temp;
+	}
+}
+int main()
+{
+	char s[N] = "CEAedca";
+	fun(s);
+	printf("%s",s);
+}
+      </code>
+		<hr>
+    </pre>
+</div>
+<div class="solution-container">
+	<h2 class="solution-title">解决思路和难点</h2>
+	<div class="solution-content">这里是描述解决思路的</div>
+</div>
+<hr>
+<hr>
+<hr>
+<hr>
+<div class="algorithm-container">
+	<h1 class="algorithm-title">经典例题-<span style="color: green">13</span></h1>
+	<p class="algorithm-description">学生的记录由学号和成绩组成，N名学生的数据已在主函数中放入结构体数组s中，请编写函数fun，它的功能是：把指定分数范围内的学生数据放在b所指的数组中，分数范围内的学生人数由函数值返回。</p>
+	<pre>
+例如，输入的分数是60 69，则应当把分数在60到69的学生数据进行输出，包含60分和69分的学生数据。主函数中将把60放在low中，把69放在heigh中。
+	</pre>
+	<pre class="language-javascript">
+      <code class="code-block">
+#include< stdio.h>
+#include< stdlib.h>
+#include< time.h>
+#define N 20
+typedef struct List
+{
+	char num[12] ;//学号
+	int ag;
+	struct List *next;
+}*Student,S;
+int fun(Student s, S* b,int c,int d)
+{
+	int i = 0;
+	Student p = s->next;
+	while (p != NULL)
+	{
+		if (p->ag > c && p->ag < d)
+		{
+			b[i++] = *p;
+			p = p->next;
+		}
+		else
+		{
+			p = p->next;
+		}
+	}
+	return i - 1;
+}
+int main()
+{
+	Student p = (Student)malloc(sizeof(S));
+	p->next=NULL;
+	Student s = p;
+	int a = 0;
+	for (int i = 0; i < N; i++)
+	{
+		srand(time(0)+rand());
+		a = rand() % 100;
+		p = (Student)malloc(sizeof(S));
+		p->ag = a;
+		sprintf(p->num, "2024%d", i);
+		p->next = s->next;
+		s->next = p;
+	}
+	p = s->next;
+	for (int j = 0; j < N; j++)
+	{
+		printf("学号为%s的学生的成绩为%d\n", p->num, p->ag);
+		p = p->next;
+	}
+	printf("请输入分数范围：\n");
+	int b = 0, c = 0;
+	scanf("%d%d",&b,&c);
+	S e[N];
+	int d= fun(s, e, b, c);
+	printf("这个分数段的人数共有%d人\n分别是\n",d);
+	for (int i = 0; i < d; i++)
+	{
+		printf("学号%s\t分数%d\n",e[i].num,e[i].ag);
+	}
+	return 1;
+}
+      </code>
+		<hr>
+    </pre>
+</div>
+<div class="solution-container">
+	<h2 class="solution-title">解决思路和难点</h2>
+	<div class="solution-content">这里是描述解决思路的</div>
+</div>
 <hr>
 <hr>
 <hr>
