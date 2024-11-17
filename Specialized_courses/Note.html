@@ -264,7 +264,9 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             padding: 20px;
+            height: 400px; /* 指定高度 */
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow-y: auto; /* 添加滚动条 */
         }
         .comment {
             border-left: 4px solid #007bff;
@@ -305,7 +307,7 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
     <!-- 在 HTML 文件的<head>部分或<body>结束标签之前引入showdown库 -->
-    <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
+    <script src="../js/showdown.js"></script>
 </head>
 <body>
 <header>
@@ -11956,6 +11958,25 @@ A. 2k-1    B. 2k    C. k^2    D. 2^k-1
 对我一直怀疑题目是不是错了，后来才知道，第一层的根节点，我们没有算，度为2的×2只是把除根节点外的所有节点加和了
 于是n=2k-1
 <hr>
+<strong>63.若一棵完全二叉树有768个结点，则该二叉树中叶结点的个数是（）</strong>
+A．257
+B．258
+C．384
+D．385
+答案：C
+首先我知道你肯定能够强算，反正就推嘛，倒数第一层到底是第几层，然后这一层没有满，用满的减去现有的
+然后倒数第二层绝对有叶子节点，这些叶子节点也是通过计算倒是第一层有多少个，然后除2，得出倒数第二层有多少个是有子节点的剩下的就是叶子
+但是有一个更简单的方法
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>n</mi><mn>0</mn></msub><mo>+</mo><msub><mi>n</mi><mn>1</mn></msub><mo>+</mo><msub><mi>n</mi><mn>2</mn></msub><mo>=</mo><mn>768</mn></math>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>n</mi><mn>2</mn></msub><mo>=</mo><msub><mi>n</mi><mn>0</mn></msub><mo>−</mo><mn>1</mn></math>
+并且度为1的节点只能是1个或者0个，因为是完全二叉树
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mn>2</mn><msub><mi>n</mi><mn>0</mn></msub><mo>+</mo><msub><mi>n</mi><mn>1</mn></msub><mo>=</mo><mn>769</mn></math>
+假如度为0的节点个数是0个，那么怎么可能一个偶数=奇数
+所以度为0的个数为1，于是
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>n</mi><mn>0</mn></msub><mo>=</mo><mn>384</mn></math>
+            <hr>
+<strong>路径是由顶点组成的序列，而不是由边组成的序列。</strong>
+            <hr>
 <strong>二叉树的创建，以及前中后序</strong>
 <code>
 /*二叉树的创建和遍历*/
@@ -13049,6 +13070,8 @@ A）一对多关系        B）多对多关系      C）多对一关系     D）
 全局变量将作用于整个程序文件，所以不能在 main() 函数中定义该变量。（X）
 这句话是错的，区分声明和定义，声明在外面就行了，定义在哪里都可以
 -------------------------------------------------------------
+continue在switch里面使用，一定是外部有while或者for包含
+并且continue是作用于外部的循环，而不是switch。
 -------------------------------------------------------------
 -------------------------------------------------------------
 -------------------------------------------------------------
