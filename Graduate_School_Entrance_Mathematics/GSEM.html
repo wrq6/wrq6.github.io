@@ -215,20 +215,6 @@
                 <p>上面是趋向无穷的时候，那么趋向0的时候也是同理，大收小收，小发大发</p>
                 <p>其次，这里需要捣鼓的就是，你不能本末倒置，就是说，存在使得等式成立，而不是等式成立使得p存在范围</p>
                 <p>所以你可以随便举例子，也就是在p符合的范围内都成立</p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
-                <p></p>
             </div>
         </div>
     </div>
@@ -246,6 +232,23 @@
             <div class="reflection">
                 <h3>心得：</h3>
                 <p>后面没答案了，不需要了，懂思路就行，直接化简求出来f(x),然后两边套个极限</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="problem">
+        <h1></h1>
+        <h2>线性代数-<span style="color: red">二次型可逆变换搭桥法</span></h2>
+        <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtable columnalign="left" columnspacing="1em" rowspacing="4pt"><mtr><mtd><mtext>设二次型</mtext><mstyle scriptlevel="0"><mspace width="1em"></mspace></mstyle><mi>f</mi><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo><msub><mi>x</mi><mn>3</mn></msub><mo data-mjx-texclass="CLOSE">)</mo></mrow><mo>=</mo><msubsup><mi>x</mi><mn>1</mn><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>x</mi><mn>2</mn><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>x</mi><mn>3</mn><mn>2</mn></msubsup><mo>+</mo><mn>2</mn><mi>a</mi><msub><mi>x</mi><mn>1</mn></msub><msub><mi>x</mi><mn>2</mn></msub><mo>+</mo><mn>2</mn><mi>a</mi><msub><mi>x</mi><mn>1</mn></msub><msub><mi>x</mi><mn>3</mn></msub><mo>+</mo><mn>2</mn><mi>a</mi><msub><mi>x</mi><mn>2</mn></msub><msub><mi>x</mi><mn>3</mn></msub></mtd></mtr><mtr><mtd><mtext>经可逆线性变换</mtext><mstyle scriptlevel="0"><mspace width="1em"></mspace></mstyle><mi>P</mi><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">{</mo><mtable columnspacing="1em" rowspacing="4pt"><mtr><mtd><msub><mi>y</mi><mn>1</mn></msub></mtd></mtr><mtr><mtd><msub><mi>y</mi><mn>2</mn></msub></mtd></mtr><mtr><mtd><msub><mi>y</mi><mn>3</mn></msub></mtd></mtr></mtable><mo data-mjx-texclass="CLOSE">}</mo></mrow></mtd></mtr><mtr><mtd><mtext>得</mtext><mstyle scriptlevel="0"><mspace width="1em"></mspace></mstyle><mi>g</mi><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><msub><mi>y</mi><mn>1</mn></msub><mo>,</mo><msub><mi>y</mi><mn>2</mn></msub><mo>,</mo><msub><mi>y</mi><mn>3</mn></msub><mo data-mjx-texclass="CLOSE">)</mo></mrow><mo>=</mo><msubsup><mi>y</mi><mn>1</mn><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>y</mi><mn>2</mn><mn>2</mn></msubsup><mo>+</mo><mn>4</mn><msubsup><mi>y</mi><mn>3</mn><mn>2</mn></msubsup><mo>+</mo><mn>2</mn><msub><mi>y</mi><mn>1</mn></msub><msub><mi>y</mi><mn>2</mn></msub><mo>.</mo></mtd></mtr><mtr><mtd><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo><mo>求</mo><mi>a</mi><mo>的值</mo></mtd></mtr><mtr><mtd><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo><mo>求可逆矩阵</mo><mi>P</mi></mtd></mtr></mtable></math>
+        <button class="toggle-btn" onclick="toggleVisibility(this)">显示答案</button>
+        <div class="answer">
+            <h3>答案：</h3>
+            <p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><merror data-mjx-error="Unknown environment 'document'"><mtext>\documentclass{article} \usepackage{amsmath} \begin{document}  \begin{eqnarray} &amp;&amp; \text{(22) 解 (I) 二次型 } f \text{ 经坐标变换 } x = P y \text{ 成二次型 } g, \text{ 故 } f \text{ 和 } g \text{ 有相同的正、负惯性指数。} \\ &amp;&amp; \text{因} \quad g = (y_1 + y_2)^2 + 4y_3^2 \text{ 知 } p = 2, q = 0. \\ &amp;&amp; \text{于是二次型 } f \text{ 的正惯性指数 } p = 2, \text{ 负惯性指数为 } 0. \\ &amp;&amp; \text{因二次型 } f \text{ 的矩阵} \\ &amp;&amp; A = \left[\begin{array}{ccc} 1 &amp; a &amp; a \\ a &amp; 1 &amp; a \\ a &amp; a &amp; 1 \end{array}\right] \\ &amp;&amp; \text{由 } |\lambda E - A| = (\lambda - 1 - 2a)(\lambda - 1 + a)^2. \text{ 矩阵 } A \text{ 的特征值: } 1 - a, 1 - a, 1 + 2a. \\ &amp;&amp; \text{从而 } \left\{\begin{array}{l} 1 - a &gt; 0, \\ 1 + 2a = 0, \end{array}\right. \text{ 故 } a = -\frac{1}{2}. \\ &amp;&amp; \text{(II) 由配方法 } \\ &amp;&amp; f = x_1^2 + x_2^2 + x_3^2 - x_1 x_2 - x_1 x_3 - x_2 x_3 \\ &amp;&amp; = \left[x_1^2 - 2x_1\left(\frac{1}{2}x_2 + \frac{1}{2}x_3\right) + \frac{1}{4}(x_2 + x_3)^2\right] + x_2^2 + x_3^2 - x_2 x_3 - \frac{1}{4}(x_2 + x_3)^2 \\ &amp;&amp; = \left(x_1 - \frac{1}{2}x_2 - \frac{1}{2}x_3\right)^2 + \frac{3}{4}(x_2 - x_3)^2 \\ &amp;&amp; \left\{\begin{array}{l} z_1 = x_1 - \frac{1}{2}x_2 - \frac{1}{2}x_3 \\ z_2 = \frac{\sqrt{3}}{2}x_2 - \frac{\sqrt{3}}{2}x_3 \end{array}\right., \text{ 即 } \left(\begin{array}{c} x_1 \\ x_2 \\ x_3 \end{array}\right) = \left[\begin{array}{ccc} 1 &amp; \frac{1}{\sqrt{3}} &amp; 1 \\ 0 &amp; \frac{2}{\sqrt{3}} &amp; 1 \\ 0 &amp; 0 &amp; 1 \end{array}\right]\left(\begin{array}{c} z_1 \\ z_2 \\ z_3 \end{array}\right) \\ &amp;&amp; \left\{\begin{array}{l} z_3 = \frac{\sqrt{3}}{2}x_2 - \frac{\sqrt{3}}{2}x_3 \end{array}\right., \text{ 即 } \left(\begin{array}{c} x_1 \\ x_2 \\ x_3 \end{array}\right) = \left[\begin{array}{ccc} 1 &amp; \frac{1}{\sqrt{3}} &amp; 1 \\ 0 &amp; \frac{2}{\sqrt{3}} &amp; 1 \\ 0 &amp; 0 &amp; 1 \end{array}\right]\left(\begin{array}{c} z_1 \\ z_2 \\ z_3 \end{array}\right) \\ &amp;&amp; \text{有 } f = z_1^2 + z_2^2. \\ &amp;&amp; \text{再令 } \left\{\begin{array}{l} z_1 = y_1 + y_2 \\ z_2 = 2y_3, \text{ 即 } \left(\begin{array}{c} z_1 \\ z_2 \\ z_3 \end{array}\right) = \left[\begin{array}{ccc} 1 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 2 \\ 1 &amp; 0 &amp; 0 \end{array}\right]\left(\begin{array}{c} y_1 \\ y_2 \\ y_3 \end{array}\right) \right. \\ &amp;&amp; \text{则有 } f \text{ 经坐标变换 } x = P y, \\ &amp;&amp; P = \left[\begin{array}{ccc} 1 &amp; \frac{1}{\sqrt{3}} &amp; 1 \\ 0 &amp; \frac{2}{\sqrt{3}} &amp; 1 \\ 0 &amp; 0 &amp; 1 \end{array}\right]\left[\begin{array}{ccc} 1 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 2 \\ 1 &amp; 0 &amp; 0 \end{array}\right] = \left[\begin{array}{ccc} 2 &amp; 1 &amp; \frac{2}{\sqrt{3}} \\ 1 &amp; 0 &amp; \frac{4}{\sqrt{3}} \\ 1 &amp; 0 &amp; 0 \end{array}\right] \\ &amp;&amp; \text{得 } g = y_1^2 + y_2^2 + 4y_3^2 + 2y_1 y_2. \end{eqnarray}  \end{document} </mtext></merror></math></p>
+            <button class="toggle-btn" onclick="toggleVisibility(this)">显示心得</button>
+            <div class="reflection">
+                <h3>心得：</h3>
+                <p></p>
             </div>
         </div>
     </div>

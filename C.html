@@ -1587,6 +1587,131 @@ int main()
 <hr>
 <hr>
 <hr>
+	<div class="algorithm-container">
+		<h1 class="algorithm-title">23年真题第一题-<span style="color: green">14</span></h1>
+		<p>1.某公司二进制文件falicity.data保存有公司设备库存的数量,文件中保存的设备的信息有ID、Name、Num,结构如下:</p>
+
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Num</th>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>Switch</td>
+				<td>24</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>Hub</td>
+				<td>80</td>
+			</tr>
+			<tr>
+				<td>...</td>
+				<td>...</td>
+				<td>...</td>
+			</tr>
+			<!-- 可以根据需要添加更多行 -->
+		</table>
+
+		<h2>任务要求：</h2>
+		<ol>
+			<li>请用C语言编写该数据的结构体，并实现信息的输入与输出。</li>
+			<li>当用户输入ID和对应的Num时，修改对应设备的数量，并写回二进制文件中。(给出测试函数)</li>
+		</ol>
+		<pre class="language-javascript">
+      <code class="code-block">
+#include< stdio.h>
+#include< stdlib.h>
+#include< string.h>//无所谓，用与不用，都写上，当贡品
+#define NAME_SIZE 50
+#define RECODE_SIZE 100
+typedef struct
+{
+	int ID;
+	char Name[NAME_SIZE];
+	int Num;
+}Recode;
+//从二进制流中读取文件
+int readfalicity(Recode recode[], const char* filename)
+{
+	FILE* fp = fopen(filename,"r");
+	if (!fp)//如果fp为空，那么!fp就永久为真
+	{
+		perror("打开文件失败\n");
+		return 0;
+	}
+	int count = 0;
+	while (fread(&recode[count], sizeof(Recode), 1, fp))//fread返回成功读入的元素个数，如果为0就停止
+	{
+		count++;//每次记录读入的个数
+	}
+	fclose(fp);
+	return count;
+}
+//显示信息
+void displayRecode(const Recode* recode)
+{
+	printf("ID is %d,NAME is %s,Num is %d\n", recode->ID, recode->Name, recode->Num);
+}
+//输入对于ID,Num时，修改对于设备数量，并写回二进制文件中
+void update(Recode recode[], int count, const char* filename)
+{
+	int ID, Num;
+	long position;
+	printf("输入ID和Num\n");
+	scanf("%d%d", &ID, &Num);
+	for (int i = 0; i < count; i++)
+	{
+		if (recode[i].ID == ID)
+		{
+			recode[i].Num = Num;
+			position = i;
+			break;
+		}
+	}
+	FILE* fp = fopen(filename, "wb");//直接重写，免得定位
+	if (!fp)
+	{
+		perror("打开文件出错\n");
+		return;
+	}
+	//更新记录
+	if (fwrite(recode, sizeof(Recode), 1, fp))//fwrite成功返回写入的个数
+	{
+		printf("文件写入失败\n");
+	}
+	fclose(fp);
+}
+
+
+int main()
+{
+	Recode recode[RECODE_SIZE];
+	int count = readfalicity(recode, "falicity.data");
+	printf("输入ID用来修改Num\n");
+	int ID;
+	scanf("%d", &ID);
+	for (int i = 0; i < count; i++)
+	{
+		displayRecode(&recode[i]);
+	}
+	update(recode, count, "falicity.data");
+	return 0;
+}
+      </code>
+		<hr>
+    </pre>
+	</div>
+	<div class="solution-container">
+		<h2 class="solution-title">解决思路和难点</h2>
+		<div class="solution-content">这里是描述解决思路的</div>
+	</div>
+	<hr>
+	<hr>
+	<hr>
+	<hr>
 </div>
 	<!-- 你可以在这里添加更多的题目 -->
 </body>
